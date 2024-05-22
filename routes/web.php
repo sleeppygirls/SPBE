@@ -1,0 +1,54 @@
+<?php
+
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BantuanController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\IndikatorController;
+use App\Http\Controllers\JawabanController;
+use App\Http\Controllers\PenilaianController;
+use App\Http\Controllers\PenjelasanController;
+use App\Http\Controllers\UserController;
+use App\Models\Jawaban;
+use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/', [AuthController::class, 'dashboard'])->middleware('is.auth');
+
+// Route::get('/', function () {
+//     return view('dashboard');
+// });
+
+// Route::get('/penja', function () {
+//     return view('penjelasanjawaban');
+// });
+
+Route::get('login', [AuthController::class, 'showlogin'])->middleware('is.not.auth');
+Route::post('login', [AuthController::class, 'actionLogin'])->middleware('is.not.auth');
+
+Route::middleware(['is.auth'])->group(function() {
+
+    Route::get('logout', [AuthController::class, 'actionLogout']);
+
+    Route::resource('penilaian', PenilaianController::class);
+    Route::resource('indikator', IndikatorController::class)->except('show');
+    Route::get('indikator/{indikator}/{username}', [IndikatorController::class, 'show']);
+    Route::post('indikator/task', [IndikatorController::class, 'task'])->name('indikator.task');
+    Route::get('indikator/task/{id_task}/{username}', [IndikatorController::class, 'test']);
+    // Route::get('indikator/task/{task}/{user}', [IndikatorController::class, 'user']);
+    // Route::post('jawaban', [JawabanController::class,'store']);
+    Route::post('jawaban', [JawabanController::class,'store']);
+    Route::resource('jawaban', JawabanController::class)->except('store');
+    Route::resource('bantuan', BantuanController::class);
+    Route::resource('profil', UserController::class);
+});

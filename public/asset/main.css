@@ -1,0 +1,54 @@
+.logoutama {
+    height: 50px;
+    position: relative;
+    margin-left: 45px!important;
+    margin-top: 7px!important;
+}
+
+.navbar {
+    background-color: #ad323a;
+}
+
+a.active {
+    background-color: #85232a!important;
+}
+
+.footer {
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #ad323a;
+    position: relative;
+}
+
+.lonceng {
+    padding-right: 15px!important;
+}
+.spbe {
+    height: auto;
+    width: 30px;
+    margin-top: 5px;
+    margin-left: 8px;
+}
+
+.ket {
+    height: 28px;
+    width: 110px;
+    margin-top: 9px;
+    margin-left: 2px;
+    margin-right: 15px;
+}
+
+.back {
+    background-image: url(/asset/bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 180px;
+}
+
+.teks:focus {
+    /* border: 0 none #FFF; */
+    overflow: hidden;
+    outline:none;
+    border-bottom: 5px black;
+}

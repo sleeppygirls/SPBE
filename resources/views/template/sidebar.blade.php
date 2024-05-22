@@ -26,21 +26,29 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/penilaian" class="nav-link {{ @$page == 'penilaian' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-tasks" style="color: #B5565D;"></i>
-                        <p>
-                            Tugas Penilaian Mandiri
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/bantuan" class="nav-link {{ @$page == 'bantuan' ? 'active' : '' }}">
-                        <i class="nav-icon far fa-question-circle" style="color: #B5565D;"></i>
-                        <p>
-                            Bantuan
-                        </p>
-                    </a>
-                </li>
+                      <a href="/penilaian" class="nav-link {{ @$page == 'penilaian' ? 'active' : '' }}">
+                          <i class="nav-icon fas fa-tasks" style="color: #B5565D;"></i>
+                          <p>
+                              Tugas Penilaian Mandiri
+                          </p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="/bagians" class="nav-link {{ @$page == 'bagians' ? 'active' : '' }}">
+                          <i class="nav-icon fas fa-tasks" style="color: #B5565D;"></i>
+                          <p>
+                              Bagian
+                          </p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="/bantuan" class="nav-link {{ @$page == 'bantuan' ? 'active' : '' }}">
+                          <i class="nav-icon far fa-question-circle" style="color: #B5565D;"></i>
+                          <p>
+                              Bantuan
+                          </p>
+                      </a>
+                  </li>
                   {{-- <li class="nav-item">
                       <a href="/bantuan" class="nav-link {{ @$page == 'bantuan' ? 'active' : '' }}">
                         <i class="nav-icon far fa-question-circle" style="color: #B5565D;"></i>

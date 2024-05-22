@@ -26,6 +26,7 @@ class User extends Authenticatable
         'nama_instansi',
         'kategori_instansi',
         'pass_view',
+        'id_bagian',
     ];
 
     /**

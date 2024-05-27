@@ -45,7 +45,7 @@ Route::middleware(['is.auth'])->group(function() {
     Route::get('logout', [AuthController::class, 'actionLogout']);
 
     Route::resource('penilaian', PenilaianController::class);
-    Route::resource('tasks', TaskController::class);
+    Route::resource('task', TaskController::class);
     Route::resource('indikator', IndikatorController::class)->except('show');
     Route::resource('jawaban', JawabanController::class)->except('store');
     Route::resource('bantuan', BantuanController::class);

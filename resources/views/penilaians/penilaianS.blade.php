@@ -81,7 +81,7 @@
                                                                     @if (Auth::user()->level == 'user')
                                                                         <button class="btn btn-primary" type="button"
                                                                             style="margin-bottom: 10px;"><a
-                                                                                href="/indikator/task/{{ $item->id }}/{{Auth::user()->username}}"
+                                                                                href="/task/{{ $item->id }}"
                                                                                 style="color: white">Kerjakan</a></button>
                                                                         <button class="btn btn-primary" type="button"><a
                                                                                 href="/indikator/task/{{ $item->id }}"

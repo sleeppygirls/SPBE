@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Monolog\Level;
 use App\Models\Task;
@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreIndikatorRequest;
 use App\Http\Requests\UpdateIndikatorRequest;
 use App\Models\Aspek;
+use App\Http\Controllers\Controller;
 
 class IndikatorController extends Controller
 {

@@ -123,7 +123,7 @@
                                         <button type="button"
                                             class="ml-5 btn btn-{{ $item->exist != null ? 'danger' : 'primary' }}"
                                             style="padding-top: 0px;padding-bottom: 0px; margin-left: 20px"><a
-                                                href="/indikator/{{ $item->id }}/{{ $username }}"
+                                                href="/indikator/{{ $item->id }}"
                                                 style="color: white">Indikator
                                                 {{ $item->no }}</a></button>
                                     </div>

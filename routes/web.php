@@ -16,6 +16,9 @@ use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\PenjelasanController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
+
+use App\Http\Controllers\Admin\IndikatorController as IndikatorAdminController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,8 +49,8 @@ Route::middleware(['is.auth'])->group(function() {
 
     Route::resource('penilaian', PenilaianController::class);
     Route::resource('task', TaskController::class);
-    Route::resource('indikator', IndikatorController::class)->except('show');
-    Route::resource('jawaban', JawabanController::class)->except('store');
+    Route::resource('indikator', IndikatorController::class);
+    Route::resource('jawaban', JawabanController::class);
     Route::resource('bantuan', BantuanController::class);
     Route::resource('profil', ProfilController::class);
     Route::resource('bagians', BagianController::class);
@@ -55,10 +58,9 @@ Route::middleware(['is.auth'])->group(function() {
     Route::resource('skors', SkorController::class);
 
     // custom uri
-    Route::post('jawaban', [JawabanController::class,'store']);
-    Route::get('indikator/{indikator}/{username}', [IndikatorController::class, 'show']);
-    Route::post('indikator/task', [IndikatorController::class, 'task'])->name('indikator.task');
-    Route::get('indikator/task/{id_task}/{username}', [IndikatorController::class, 'test']);
+    // Route::get('indikator/{indikator}/{username}', [IndikatorController::class, 'show']);
+    // Route::post('indikator/task', [IndikatorController::class, 'task'])->name('indikator.task');
+    // Route::get('indikator/task/{id_task}/{username}', [IndikatorController::class, 'test']);
     // Route::get('indikator/task/{task}/{user}', [IndikatorController::class, 'user']);
     // Route::post('jawaban', [JawabanController::class,'store']);
 });

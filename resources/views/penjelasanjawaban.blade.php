@@ -25,11 +25,11 @@
                                             </tr>
                                             <tr>
                                                 <td style="width: 250px; color: grey">Domain</td>
-                                                <td style="color: grey">Kebijakan SPBE</td>
+                                                <td style="color: grey">{{ $domain->domain }}</td>
                                             </tr>
                                             <tr>
                                                 <td style="width: 250px; color: grey">Aspek</td>
-                                                <td style="color: grey">Kebijakan Internal terkait Tata Kelola SPBE</td>
+                                                <td style="color: grey">{{ $aspek->aspek }}</td>
                                             </tr>
                                             <tr>
                                                 <td style="width: 250px; color: grey; padding-bottom: 5px;">Indikator</td>

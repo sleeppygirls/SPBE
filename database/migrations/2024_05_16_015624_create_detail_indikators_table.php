@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('detail_indikators', function (Blueprint $table) {
             $table->id();
-            $table->string('file');
-            $table->string('username');
-            $table->string('id_indikator');
+            $table->string('file')->nullable();
+            $table->string('username')->nullable();
+            $table->string('id_indikator')->nullable();
+            $table->string('capaian')->nullable();
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

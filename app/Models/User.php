@@ -24,7 +24,6 @@ class User extends Authenticatable
         'password',
         'level',
         'nama_instansi',
-        'kategori_instansi',
         'pass_view',
         'id_bagian',
     ];

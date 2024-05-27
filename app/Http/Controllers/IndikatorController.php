@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreIndikatorRequest;
 use App\Http\Requests\UpdateIndikatorRequest;
+use App\Models\Aspek;
 
 class IndikatorController extends Controller
 {
@@ -36,9 +37,6 @@ class IndikatorController extends Controller
             ]
         );
 
-        // dd($indikators);
-
-        // dd($indikator);
 
         $data = [
             'indikator' => $indikators,
@@ -48,7 +46,7 @@ class IndikatorController extends Controller
         ];
 
         // dd($data);
-        return view('indikator', $data);
+        return view('indikators.indikator', $data);
     }
 
     public function test($id_task,$username)
@@ -78,7 +76,7 @@ class IndikatorController extends Controller
         ];
 
         // dd($data);
-        return view('indikator', $data);
+        return view('indikators.indikator', $data);
     }
 
     
@@ -86,15 +84,17 @@ class IndikatorController extends Controller
     {
         $indikator = Indikator::all();
         $task = Task::all();
+        $aspek = Aspek::all();
 
 
         $data = [
             'indikator' => $indikator,
             "page" => "penilaian",
-            'task' => $task
+            'task' => $task,
+            'aspek' => $aspek
         ];
 
-        return view('indikator', $data);
+        return view('indikators.indikator', $data);
     }
 
     /**
@@ -102,7 +102,7 @@ class IndikatorController extends Controller
      */
     public function create()
     {
-        //
+        return view('indikators.add');
     }
 
     /**
@@ -110,7 +110,13 @@ class IndikatorController extends Controller
      */
     public function store(StoreIndikatorRequest $request)
     {
-        //
+        Indikator::create($request->all());
+        Task::create($request->all());
+        Penjelasan::create($request->all());
+
+        return redirect('/indikator/task')->with([
+            'mess' => 'Data Berhasil Disimpan',
+        ]);
     }
 
     /**
@@ -127,14 +133,34 @@ class IndikatorController extends Controller
             ]);
 
             $detail_indikator = DetailIndikator::where('username', $username)->where('id_indikator', $indikator->id)->first();
+            // $id = Aspek::all();
+            // $aspek = DB::table('indikators')
+            // ->join('aspeks', 'indikators.aspek', '=', 'aspeks.id')
+            // ->where('indikators.aspek', $indikator->aspek)
+            // ->select('aspeks.aspek as aspek')
+            // ->get();
+
+            $ket = DB::table('indikators')
+            ->join('aspeks', 'indikators.domain', '=', 'aspeks.id')
+            ->where('indikators.domain', $indikator->domain)
+            ->select('indikators.*', 'aspeks.domain as domain', 'aspeks.aspek as aspek')
+            ->get();
+
+            $domain = Aspek::where('id', $indikator->domain)->first();
+            $aspek = Aspek::where('id', $indikator->aspek)->first();
 
             $data = [
                 'indikator' => $indikator,
                 "page" => "penilaian",
                 "data" => $jawabans,
                 "detail_indikator" => $detail_indikator,
-                'username' => $username
+                'username' => $username,
+                // 'ket' => $ket,
+                'aspek' => $aspek,
+                'domain' => $domain,
             ];
+            // dd([$domain, $aspek]); 
+            // dd($domain, $aspek);
             return view("penjelasanjawaban", $data);
         // }
     }

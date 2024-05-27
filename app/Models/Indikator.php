@@ -19,9 +19,14 @@ class Indikator extends Model
         'name',
         'id_task',
         'aspek',
+        'domain',
     ];
     
     public function penjelasan() {
         return $this->hasMany(Penjelasan::class, 'id_indikator', 'id');
     }
+
+    // public function aspek() {
+    //     return $this->hasMany(Aspek::class);
+    // }
 }

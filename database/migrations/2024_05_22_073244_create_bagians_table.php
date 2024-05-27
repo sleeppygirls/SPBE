@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('bagians', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->text('indikators')->nullable();
             $table->timestamps();
         });
     }

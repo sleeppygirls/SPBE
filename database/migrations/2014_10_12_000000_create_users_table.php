@@ -16,12 +16,9 @@ return new class extends Migration
             $table->string('username', 190)->unique();
             $table->string('password');
             $table->enum('level', ['superadmin','admin','user']);
-            $table->string('kd_instansi');
-            $table->string('nama_instansi');
-            $table->string('kategori_instansi');
-            $table->string('akronim');
-            $table->integer('status')->default(0);
-            $table->string('nm_pengguna');
+            $table->string('nama_instansi')->nullable();
+            $table->string('pass_view')->nullable();
+            $table->integer('id_bagian')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

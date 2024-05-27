@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 
+use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
     /**
@@ -15,9 +16,11 @@ class UserController extends Controller
     {
         $user = User::all();
 
-        return view('profil', [
-            'data' => $user
-        ]);
+        $data = [
+            'data' => $user,
+            "page" => "user",
+        ];
+        return view('daftaruser.data', $data);
     }
 
     /**
@@ -25,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('daftaruser.add');
     }
 
     /**
@@ -33,7 +36,14 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        //
+        $user = User::create($request->all());
+        $user['pass_view'] = $request->password;
+        $user->save();
+
+
+        return redirect('/users')->with([
+            'mess' => 'Data Berhasil Disimpan',
+        ]);
     }
 
     /**
@@ -41,41 +51,28 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $data = [
-            'data' => $user,
-        ];
-        return view("editpass",$data);
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $profil)
+    public function edit(User $user)
     {
-        // dd($profil->id); 
-        $data = [
-            'data' => $profil,
-        ];
-        return view("editpass",$data);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $profil)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        // dd([
-        //     'request' => $request->all(),
-        //     'profil' => $profil
-        // ]);
-        $data = $request->all();
-        $data['pass_view'] = $request->password;
-        $profil->fill($data);
-        $profil->save();
+        // $user->fill($request->all());
+        // $user->save();
 
-        return redirect('/profil')->with([
-            'mess' => 'Data Berhasil Disimpan',
-        ]);
+        // return redirect('/users')->with([
+        //     'mess' => 'Data Berhasil Disimpan',
+        // ]);
     }
 
     /**
@@ -83,6 +80,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect('/users')->with([
+            'mess' => 'Data Berhasil Dihapus',
+        ]);
     }
 }

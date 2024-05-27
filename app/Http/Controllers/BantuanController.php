@@ -16,7 +16,7 @@ class BantuanController extends Controller
         $data = [
             "page" => "bantuan"
         ];
-        return view("bantuan",$data);
+        return view("menu.bantuan",$data);
     }
 
     /**

@@ -16,7 +16,10 @@ class BagianController extends Controller
     public function index()
     {
         $data = [
+
+            'indikators' => Indikator::all(),
             'bagians' => Bagian::all(),
+            "page" => "bagian",
         ];
 
         return view('bagians.data', $data);
@@ -27,7 +30,12 @@ class BagianController extends Controller
      */
     public function create()
     {
-        //
+
+        $data = [
+            'indikators' => Indikator::all(),
+            "page" => "bagian",
+        ];
+        return view('bagians.add', $data);
     }
 
     /**
@@ -55,17 +63,26 @@ class BagianController extends Controller
         // Mengonversi array menjadi string
         $indicatorsString = json_encode($indicatorsArray);
 
-        Bagian::updateOrCreate(
-            [
-                'id' => $request->input('id'),
-            ],
-            [
-                'name' => $request->input('name'),
-                'indikators' => $indicatorsString,
-            ]
-        );
+        $bagian = Bagian::create($request->all());
+        $bagian['id'] = $request->input('id');
+        $bagian['name'] = $request->input('name');
+        $bagian['indikators'] = $indicatorsString;
+        $bagian->save();
 
-        return redirect()->back();
+        return redirect('/bagians')->with([
+            'mess' => 'Data Berhasil Disimpan',
+        ]);
+
+        // Bagian::updateOrCreate(
+        //     [
+        //         'id' => $request->input('id'),
+        //     ],
+        //     [
+        //         'name' => $request->input('name'),
+        //         'indikators' => $indicatorsString,
+        //     ]
+        // );
+        // return redirect()->back();
     }
 
     /**
@@ -94,7 +111,7 @@ class BagianController extends Controller
             'bagian' => $bagian,
             'indikators' => $indikators,
         ];
-        return view('bagians.show', $data);
+        return view('bagians.add', $data);
     }
 
     /**
@@ -110,7 +127,35 @@ class BagianController extends Controller
      */
     public function update(UpdateBagianRequest $request, Bagian $bagian)
     {
-        //
+        // Mengambil semua data indikator dari database
+        $dbIndikators = Indikator::pluck('id')->toArray();
+
+        // Mengambil data dari form
+        $formData = $request->all();
+
+        // Mengonversi data menjadi array angka tanpa kunci, hanya nilainya saja
+        $indicatorsArray = [];
+        foreach ($dbIndikators as $indikator) {
+            if (isset($formData["indikator-{$indikator}"])) {
+                $indicatorsArray[] = $formData["indikator-{$indikator}"];
+            }
+        }
+
+        // Mengonversi array menjadi string angka yang dipisahkan oleh koma
+        // $indicatorsString = implode(',', $indicatorsArray);
+
+        // Mengonversi array menjadi string
+        $indicatorsString = json_encode($indicatorsArray);
+
+        $bagian->fill($request->all());
+        $bagian['id'] = $request->input('id');
+        $bagian['name'] = $request->input('name');
+        $bagian['indikators'] = $indicatorsString;
+        $bagian->save();
+
+        return redirect('/bagians')->with([
+            'mess' => 'Data Berhasil Disimpan',
+        ]);
     }
 
     /**
@@ -118,6 +163,10 @@ class BagianController extends Controller
      */
     public function destroy(Bagian $bagian)
     {
-        //
+        $bagian->delete();
+
+        return redirect('/bagians')->with([
+            'mess' => 'Data Berhasil Dihapus',
+        ]);
     }
 }

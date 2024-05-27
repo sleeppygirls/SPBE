@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('d_jawaban');
             $table->integer('id_penjelasan');
             $table->string('username');
-            $table->string('id_detail');
+            $table->string('id_indikator');
             $table->timestamps();
         });
     }

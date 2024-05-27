@@ -3,7 +3,7 @@
 @section('title', 'Home')
 
 @section('content')
-{{-- @dd($username); --}}
+    {{-- @dd($username); --}}
     <div class="content-wrapper">
         <div class="content-header p-0">
             <div class="container-fluid back">
@@ -21,8 +21,9 @@
                                         Detail Form</p>
                                 </div>
                                 <div class="col-2">
-                                    <button type="button" class="btn" style="margin-top: 35px;background-color: #ad323a"><a
-                                            href="/penilaian" style="color: white">Kembali</a></button>
+                                    <button type="button" class="btn"
+                                        style="margin-top: 35px;background-color: #ad323a"><a href="/penilaian"
+                                            style="color: white">Kembali</a></button>
                                 </div>
                             </div>
                             <div class="row" style="margin-top: 20px; margin-bottom: 20px">
@@ -30,19 +31,19 @@
                                     <tbody>
                                         <tr>
                                             <td style="width: 250px; color: grey">Tahun</td>
-                                            <td style="color: grey">{{$task->tahun}}</td>
+                                            <td style="color: grey">{{ $task->tahun }}</td>
                                         </tr>
                                         <tr>
                                             <td style="width: 250px; color: grey">Nama Form</td>
-                                            <td style="color: grey">{{$task->name}}</td>
+                                            <td style="color: grey">{{ $task->name }}</td>
                                         </tr>
                                         <tr>
                                             <td style="width: 250px; color: grey">Deskripsi</td>
-                                            <td style="color: grey">{{$task->name}}</td>
+                                            <td style="color: grey">{{ $task->name }}</td>
                                         </tr>
                                         <tr>
                                             <td style="width: 250px; color: grey">Status Evaluasi</td>
-                                            <td style="color: grey">{{$task->status}}</td>
+                                            <td style="color: grey">{{ $task->status }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -54,10 +55,33 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-4">
-                                    <button type="button" class="btn" style="margin-left: 40px; background-color: #ad323a"><a
-                                        href="#" style="color: white">Lihat Skor Index</a></button></button>
-                                </div>
+                                @if (Auth::user()->level == 'admin')
+                                    <div class="col-4">
+                                        <button type="button" class="btn"
+                                            style="margin-left: 40px; background-color: #ad323a">
+                                            <a href="/skors" style="color: white">
+                                                Lihat Skor Index
+                                            </a>
+                                        </button>
+                                    </div>
+                                    <div class="col-4">
+                                        <button type="button" class="btn"
+                                            style="margin-left: 40px; background-color: #ad323a">
+                                            <a href="/indikator/create" style="color: white">
+                                                Tambah Indikator
+                                            </a>
+                                        </button>
+                                    </div>
+                                @else
+                                    <div class="col-4">
+                                        <button type="button" class="btn"
+                                            style="margin-left: 40px; background-color: #ad323a">
+                                            <a href="/skors" style="color: white">
+                                                Lihat Skor Index
+                                            </a>
+                                        </button>
+                                    </div>
+                                @endif
                             </div>
 
                             <div class="row">
@@ -89,15 +113,19 @@
                                 <hr style=" margin-top: 0px; margin-left:35px; margin-right:33px;">
                                 <div class="row" style="height: 50px">
                                     <div class="col-2">
-                                        <p style="margin-bottom: 0px; margin-left: 55px; margin-right: 30px;">{{$item->no}}</p>
+                                        <p style="margin-bottom: 0px; margin-left: 55px; margin-right: 30px;">
+                                            {{ $loop->iteration }}</p>
                                     </div>
                                     <div class="col-7">
-                                        <p style="margin-bottom: 0px">{{@$item->name}}</p>
+                                        <p style="margin-bottom: 0px">{{ @$item->name }}</p>
                                     </div>
                                     <div class="col-3">
-                                        <button type="button" class="ml-5 btn btn-{{$item->exist != null ? 'danger' : 'primary'}}"
-                                            style="padding-top: 0px;padding-bottom: 0px; margin-left: 20px"><a href="/indikator/{{ $item->id }}/{{$username}}" style="color: white">Indikator
-                                            {{$item->no}}</a></button>
+                                        <button type="button"
+                                            class="ml-5 btn btn-{{ $item->exist != null ? 'danger' : 'primary' }}"
+                                            style="padding-top: 0px;padding-bottom: 0px; margin-left: 20px"><a
+                                                href="/indikator/{{ $item->id }}/{{ $username }}"
+                                                style="color: white">Indikator
+                                                {{ $item->no }}</a></button>
                                     </div>
                                 </div>
                             @endforeach

@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('tahap');
-            $table->date('batas');
-            $table->year('tahun');
-            $table->string('status');
-            $table->string('desc');
+            $table->string('name')->nullable();
+            $table->string('tahap')->nullable();
+            $table->date('batas')->nullable();
+            $table->year('tahun')->nullable();
+            $table->string('status')->nullable();
+            $table->string('desc')->nullable();
             $table->timestamps();
         });
     }

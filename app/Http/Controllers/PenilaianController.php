@@ -24,7 +24,7 @@ class PenilaianController extends Controller
             "data" => $task
         ];
         // dd($data);
-        return view("penilaianS",$data);
+        return view("penilaians.penilaianS",$data);
     }
 
     public function indikator()

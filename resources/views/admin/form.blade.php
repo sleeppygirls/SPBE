@@ -46,17 +46,6 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                    @if (Auth::user()->level == 'admin')
-                                        <div class="row" style="margin-top: 30px">
-                                            <div class="col-12" style="text-align: right">
-                                                <button data-id="{{ $item->id }}" class="btn btn-primary btn-default"
-                                                    id="user_pilih" data-toggle="modal" data-target="#modal-xl"
-                                                    type="button"
-                                                    style="background-color: rgb(56, 141, 215); color: white">Pilih User
-                                                </button>
-                                            </div>
-                                        </div>
-                                    @endif
                                     <div class="card-body" style="margin-left: 13px">
                                         <table id="example2" class="table table-bordered table-hover" style="width: 890px">
                                             <thead>

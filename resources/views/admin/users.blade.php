@@ -1,0 +1,166 @@
+@extends('template.index')
+
+@section('title', 'Home')
+
+@section('content')
+    <div class="content-wrapper">
+        <div class="content-header p-0">
+            <div class="container-fluid back">
+                <div class="row">
+                    <div class="col-sm-12 mt-3">
+                        <h1 style="color: white; padding-left: 11px" class="m-0 dashboard fw-bold">Tugas Penilaian Mandiri
+                        </h1>
+                    </div>
+                    <div style="padding-left: 20px;padding-right: 20px;" class="col-12">
+                        <div style="min-height: 1010px; margin-bottom: 5px" class="card">
+                            <div class="row">
+                                <div class="col-11">
+                                    {{-- <button style="padding-top: 20px;padding-bottom: 0px;" class="btn dropdown-toggle"
+                                        type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        <a class="nav-item d-none d-sm-inline-block" style="margin-right: 840px">
+                                            <p
+                                                style="color: black; margin-top: 10px; margin-bottom: 2px; margin-left: 25px">
+                                                2022
+                                            </p>
+                                        </a>
+                                    </button> --}}
+                                    {{-- <div style="margin-left: 40px; min-width: 80px;" class="dropdown-menu"
+                                        aria-labelledby="dropdownMenuButton">
+                                        @foreach ($data as $item)
+                                            <a style="margin-right: 20px" class="dropdown-item" href="#">{{ $item->tahun }}</a>
+                                        @endforeach
+                                    </div> --}}
+                                    @php
+                                        $tahunini = '';
+                                        $tahunini = @$_GET['tahun'];
+                                    @endphp
+                                    <select class="form-control" title="Choose Plan" id="tahun"
+                                        onchange="window.location = this.options[this.selectedIndex].value"
+                                        style="margin-top: 20px; margin-left: 30px; margin-right: 30px">
+                                        <option value="{{ url('penilaian') }}" {{ $tahunini == '' ? 'selected' : '' }}>Pilih
+                                            Tahun</option>
+                                        @foreach ($data as $item)
+                                            <option value="{{ url('penilaian?tahun=' . $item->tahun) }}"
+                                                {{ $item->tahun == $tahunini ? 'selected' : '' }}>{{ $item->tahun }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <div class="card-body" style="margin-left: 13px">
+                                        <table id="example2" class="table table-bordered table-hover" style="width: 890px">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 5px;padding-right: 0px;padding-left: 5px;">No.</th>
+                                                    <th>Tahun</th>
+                                                    <th>nama Form</th>
+                                                    <th>Tahap Form</th>
+                                                    <th>Batas Waktu </th>
+                                                    <th>Kemajuan</th>
+                                                    <th>aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($data as $item)
+                                                    @if ($tahunini == $item->tahun)
+                                                        <tr>
+                                                            <td
+                                                                style="padding-top: 70px; padding-bottom: 70px; padding-right: 45px; background-color:silver">
+                                                                1</td>
+                                                            <td style="padding-top: 70px; padding-bottom: 70px;">
+                                                                {{ $item->tahun }}</td>
+                                                            <td style="padding-top: 70px; padding-bottom: 70px;">
+                                                                {{ $item->name }}</td>
+                                                            <td style="padding-top: 70px; padding-bottom: 70px;">
+                                                                {{ $item->tahap }}</td>
+                                                            <td style="padding-top: 70px; padding-bottom: 70px;">
+                                                                {{ $item->batas }}</td>
+                                                            <td style="padding-top: 70px; padding-bottom: 70px;"></td>
+                                                            <td>
+                                                                <div class="d-grid gap-2 col-6 mx-auto"
+                                                                    style="margin-top: 35px;">
+                                                                    @if (Auth::user()->level == 'user')
+                                                                        <button class="btn btn-primary" type="button"
+                                                                            style="margin-bottom: 10px;"><a
+                                                                                href="/indikator/task/{{ $item->id }}/{{Auth::user()->username}}"
+                                                                                style="color: white">Kerjakan</a></button>
+                                                                        <button class="btn btn-primary" type="button"><a
+                                                                                href="/indikator/task/{{ $item->id }}"
+                                                                                style="color: white">Lihat</a></button>
+                                                                    @else
+                                                                        <form action="{{ url('indikator/task') }}"
+                                                                            method="post">
+                                                                            @csrf
+                                                                            <input type="hidden" id="txtusername"
+                                                                                name="username">
+                                                                            <input type="hidden" name="id_task"
+                                                                                value="{{ $item->id }}">
+                                                                            <button class="btn btn-primary"
+                                                                                type="submit">Lihat</button>
+                                                                            {{-- <button data-id="{{ $item->id }}"
+                                                                            class="btn btn-primary btn-default" id="user_pilih"
+                                                                            data-toggle="modal" data-target="#modal-xl"
+                                                                            type="button" style="background-color: blue">Lihat</button> --}}
+                                                                        </form>
+                                                                    @endif
+                                                                    {{-- <button class="btn btn-primary" type="button" style="margin-bottom: 10px;"><a href="/indikator/task/{{$item->id}}" style="color: white">Kerjakan</a></button>
+                                                            <button class="btn btn-primary" type="button"><a href="/indikator/task/{{$item->id}}" style="color: white">Lihat</a></button> --}}
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-xl">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content" style="background-color: rgb(255, 195, 195)">
+                <div class="modal-header">
+                    <h4 class="modal-title">Daftar User</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered" style="background-color: white">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Username</th>
+                                <th>Nama Instansi</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (@$user as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->username }}</td>
+                                    <td>{{ $item->nama_instansi }}</td>
+                                    <td><button onclick="pilih_user('{{ $item->id }}','{{ $item->username }}')"
+                                            class="btn btn-primary" type="button">Pilih</button></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+@endsection

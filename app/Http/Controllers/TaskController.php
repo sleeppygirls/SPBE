@@ -20,7 +20,7 @@ class TaskController extends Controller
             "page" => "penilaian",
             "data" => $task,
         ];
-        return view('penilaianS', $data);
+        return view('penilaians.data', $data);
     }
 
     /**
@@ -28,7 +28,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return view('penilaians.add');
     }
 
     /**
@@ -36,7 +36,11 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        //
+        Task::create($request->all());
+
+        return redirect('/tasks')->with([
+            'mess' => 'Data Berhasil Disimpan',
+        ]);
     }
 
     /**
@@ -44,17 +48,9 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        $indikator = DB::table('indikators')->where('id_task','=',$task->id);
-
-        // dd($indikator);
-
-        $data = [
-            'indikator' => $indikator,
-            "page" => "penilaian",
-            'task' => $task
-        ];
-
-        return view('indikator', $data);
+        return view('penilaians.add', [
+            'data' => $task
+        ]);
     }
 
     /**
@@ -70,7 +66,12 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        //
+        $task->fill($request->all());
+        $task->save();
+
+        return redirect('/tasks')->with([
+            'mess' => 'Data Berhasil Disimpan',
+        ]);
     }
 
     /**
@@ -78,6 +79,10 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $task->delete();
+
+        return redirect('/tasks')->with([
+            'mess' => 'Data Berhasil Dihapus',
+        ]);
     }
 }

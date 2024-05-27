@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('indikators', function (Blueprint $table) {
             $table->id();
+            $table->integer('no');
             $table->string('name');
             $table->string('id_task');
+            $table->string('username');
+            $table->integer('aspek');
+            $table->integer('domain');
             $table->timestamps();
         });
     }

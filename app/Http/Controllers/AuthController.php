@@ -49,7 +49,7 @@ class AuthController extends Controller
         $data = [
             "page" => "dashboard"
         ];
-        return view("dashboard", $data);
+        return view("menu.dashboard", $data);
     }
     // function prof()
     // {

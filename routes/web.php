@@ -1,16 +1,19 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BagianController;
-use App\Http\Controllers\BantuanController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\IndikatorController;
-use App\Http\Controllers\JawabanController;
-use App\Http\Controllers\PenilaianController;
-use App\Http\Controllers\PenjelasanController;
-use App\Http\Controllers\UserController;
 use App\Models\Jawaban;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SkorController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\BagianController;
+use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\BantuanController;
+use App\Http\Controllers\JawabanController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\IndikatorController;
+use App\Http\Controllers\PenilaianController;
+use App\Http\Controllers\PenjelasanController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -42,11 +45,14 @@ Route::middleware(['is.auth'])->group(function() {
     Route::get('logout', [AuthController::class, 'actionLogout']);
 
     Route::resource('penilaian', PenilaianController::class);
+    Route::resource('tasks', TaskController::class);
     Route::resource('indikator', IndikatorController::class)->except('show');
     Route::resource('jawaban', JawabanController::class)->except('store');
     Route::resource('bantuan', BantuanController::class);
-    Route::resource('profil', UserController::class);
+    Route::resource('profil', ProfilController::class);
     Route::resource('bagians', BagianController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('skors', SkorController::class);
 
     // custom uri
     Route::post('jawaban', [JawabanController::class,'store']);

@@ -20,7 +20,5 @@ class DetailIndikator extends Model
         'id_indikator',
         'capaian',
         'note',
-        'created_at',
-        'updated_at',
     ];
 }

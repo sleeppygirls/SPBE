@@ -38,8 +38,6 @@ class JawabanController extends Controller
      */
     public function store(StoreJawabanRequest $req)
     {
-        // dd($req);
-
         $username = $req->username;
 
         DetailIndikator::updateOrCreate(
@@ -71,7 +69,7 @@ class JawabanController extends Controller
             );
         }
 
-        return redirect('indikator/task/'.$req->id_task.'/'.$req->username);
+        return redirect('/task/'.$req->id_task);
     }
 
     /**

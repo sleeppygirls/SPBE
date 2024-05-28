@@ -16,7 +16,7 @@
                         <div style="padding-bottom: 30px ; margin-bottom: 5px" class="card">
                             <div class="row">
                                 <div class="col-11">
-                                    <form action="/tasks/{{ @$data->id }}" method="POST">
+                                    <form action="/task/{{ @$data->id }}" method="POST">
                                         @if (@$data)
                                             @method('PUT')
                                         @endif

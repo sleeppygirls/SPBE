@@ -2,10 +2,11 @@ $(document).on("click", "#user_pilih", function() {
     var eventId = $(this).data('id');
     console.log(eventId);
 });
-function pilih_user(id_user, username) {
-    $("#user_pilih").html('Dipilih : ' + username);
+function pilih_user(id_user, username, nama_instansi) {
+    $("#user_pilih").html(nama_instansi);
     $('#modal-xl').modal('hide');
-    $("#txtusername").val(username);
+    $("#txtnama_username").val(username);
+    $("#txtnama_instansi").val(nama_instansi);
 }
 
 // document.getElementById('year').addEventListener('input', function (e) {

@@ -41,7 +41,7 @@
                                                         <td>
                                                             <div class="row">
                                                                 <div class="col-4" style="margin-left: 10px">
-                                                                    <a href="/bagians/{{ $bagian->id }}">
+                                                                    <a href="/bagians/{{ $bagian->id }}/edit">
                                                                         <button type="button" class="btn btn-warning btn-sm">
                                                                             <i class="far fa-edit"></i></button>
                                                                     </a>

@@ -8,7 +8,8 @@
             <div class="container-fluid back">
                 <div class="row">
                     <div class="col-sm-12 mt-3">
-                        <h1 style="color: white; padding-left: 11px" class="m-0 dashboard fw-bold">Daftar Tugas Penilaian Mandiri</h1>
+                        <h1 style="color: white; padding-left: 11px" class="m-0 dashboard fw-bold">Daftar Tugas Penilaian
+                            Mandiri</h1>
                     </div>
                     <div style="padding-left: 20px;padding-right: 20px;" class="col-12">
                         <div style="min-height: 1010px; margin-bottom: 5px" class="card">
@@ -42,16 +43,18 @@
                                                         <td>
                                                             <div class="row">
                                                                 <div class="col-4" style="margin-left: 10px">
-                                                                    <a href="/tasks/{{ $item->id }}/edit">
-                                                                        <button type="button" class="btn btn-warning btn-sm">
+                                                                    <a href="/task/{{ $item->id }}/edit">
+                                                                        <button type="button"
+                                                                            class="btn btn-warning btn-sm">
                                                                             <i class="far fa-edit"></i></button>
                                                                     </a>
                                                                 </div>
                                                                 <div class="col-4" style="margin-left: 10px">
-                                                                    <form action="/tasks/{{ $item->id }}" method="POST">
+                                                                    <form action="/task/{{ $item->id }}" method="POST">
                                                                         @csrf
                                                                         @method('DELETE')
-                                                                        <button type="submit" class="btn btn-danger btn-sm">
+                                                                        <button type="submit"
+                                                                            class="btn btn-danger btn-sm">
                                                                             <i class="far fa-trash-alt"></i></button>
                                                                     </form>
                                                                 </div>
@@ -69,4 +72,5 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Bagian;
-use App\Http\Requests\StoreBagianRequest;
-use App\Http\Requests\UpdateBagianRequest;
 use App\Models\Indikator;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StoreBagianRequest;
+use App\Http\Requests\UpdateBagianRequest;
 
 class BagianController extends Controller
 {
@@ -17,6 +18,7 @@ class BagianController extends Controller
     {
         $data = [
 
+            'user' => User::all(),
             'indikators' => Indikator::all(),
             'bagians' => Bagian::all(),
             "page" => "bagian",
@@ -32,6 +34,8 @@ class BagianController extends Controller
     {
 
         $data = [
+
+            'user' => User::all(),
             'indikators' => Indikator::all(),
             "page" => "bagian",
         ];
@@ -65,24 +69,13 @@ class BagianController extends Controller
 
         $bagian = Bagian::create($request->all());
         $bagian['id'] = $request->input('id');
-        $bagian['name'] = $request->input('name');
+        $bagian['name'] = $request->input('nama_instansi');
         $bagian['indikators'] = $indicatorsString;
         $bagian->save();
 
         return redirect('/bagians')->with([
             'mess' => 'Data Berhasil Disimpan',
         ]);
-
-        // Bagian::updateOrCreate(
-        //     [
-        //         'id' => $request->input('id'),
-        //     ],
-        //     [
-        //         'name' => $request->input('name'),
-        //         'indikators' => $indicatorsString,
-        //     ]
-        // );
-        // return redirect()->back();
     }
 
     /**
@@ -90,6 +83,15 @@ class BagianController extends Controller
      */
     public function show(Bagian $bagian)
     {
+        
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Bagian $bagian)
+    {
+        $user = User::all();
         // Data string yang akan diubah menjadi array
         $stringData = $bagian->indikators;
 
@@ -108,6 +110,9 @@ class BagianController extends Controller
 
 
         $data = [
+
+            "page" => "bagian",
+            'user' => $user,
             'bagian' => $bagian,
             'indikators' => $indikators,
         ];
@@ -115,18 +120,11 @@ class BagianController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Bagian $bagian)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateBagianRequest $request, Bagian $bagian)
     {
+
         // Mengambil semua data indikator dari database
         $dbIndikators = Indikator::pluck('id')->toArray();
 
@@ -149,8 +147,9 @@ class BagianController extends Controller
 
         $bagian->fill($request->all());
         $bagian['id'] = $request->input('id');
-        $bagian['name'] = $request->input('name');
+        // $bagian['name'] = $request->input('nama_instansi');
         $bagian['indikators'] = $indicatorsString;
+        // dd($bagian); 
         $bagian->save();
 
         return redirect('/bagians')->with([

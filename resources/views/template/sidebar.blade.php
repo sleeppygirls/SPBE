@@ -2,7 +2,7 @@
   <aside class="main-sidebar sidebar-light-primary elevation-4">
       <!-- Logo -->
       <a href="index3.html" class="brand-link">
-          <img class="logoutama" src="/asset/logo.png" alt="logo panrb">
+          <img class="logoutama" src="/asset/logokabupaten.png" alt="logo panrb">
       </a>
 
       <!-- Sidebar -->
@@ -82,13 +82,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/tasks" class="nav-link">
+                                <a href="/task" class="nav-link">
                                     <i class="fas fa-eye fa-fw nav-icon" style="color: #B5565D;"></i>
                                     <p>Daftar Tugas</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/tasks/create" class="nav-link">
+                                <a href="/task/create" class="nav-link">
                                     <i class="fas fa-plus-circle fa-fw nav-icon" style="color: #B5565D;"></i>
                                     <p>Tambah Tugas</p>
                                 </a>

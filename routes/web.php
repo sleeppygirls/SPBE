@@ -59,7 +59,7 @@ Route::middleware(['is.auth'])->group(function() {
 
     // custom uri
     // Route::get('indikator/{indikator}/{username}', [IndikatorController::class, 'show']);
-    // Route::post('indikator/task', [IndikatorController::class, 'task'])->name('indikator.task');
+    Route::post('indikator/task', [IndikatorController::class, 'task'])->name('indikator.task');
     // Route::get('indikator/task/{id_task}/{username}', [IndikatorController::class, 'test']);
     // Route::get('indikator/task/{task}/{user}', [IndikatorController::class, 'user']);
     // Route::post('jawaban', [JawabanController::class,'store']);

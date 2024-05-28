@@ -21,14 +21,14 @@ class SkorController extends Controller
                 'user' => $user,
                 "page" => "penilaian",
             ];
-            return view('skor index.admin', $data);
+            return view('skorindex.admin', $data);
         } else {
             $user = User::where('level', '=', 'user')->get();
             $data = [
                 'user' => $user,
                 "page" => "penilaian",
             ];
-            return view('skor index.user', $data);
+            return view('skorindex.user', $data);
         }
     }
 

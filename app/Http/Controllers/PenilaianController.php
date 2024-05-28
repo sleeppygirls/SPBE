@@ -16,7 +16,7 @@ class PenilaianController extends Controller
     public function index()
     {
         $task = Task::all();
-        $user = User::where('level','=','user')->get();
+        $user = User::all();
 
         $data = [
             'user' => $user,

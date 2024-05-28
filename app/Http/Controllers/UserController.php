@@ -28,7 +28,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('daftaruser.add');
+        $data = [
+            "page" => "user",
+        ];
+        return view('daftaruser.add', $data);
     }
 
     /**

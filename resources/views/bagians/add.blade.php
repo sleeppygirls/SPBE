@@ -31,8 +31,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="nama_instansi">Nama Instansi</label>
-                                                <input type="text" class="form-control" name="name" placeholder="Nama Instansi"
-                                                    value="{{ @$bagian->name }}" {{ @$bagian->name ? 'readonly' : '' }}>
+                                                <select id="nama_instansi" name="nama_instansi" required {{ @$bagian->id ? 'disabled' : '' }} style="margin-left: 20px;height: 40px; color: black; background-color: lightgray; font-weight: bold">
+                                                    @foreach ($user as $item)
+                                                        <option value="{{ $item->nama_instansi }}" {{ @$bagian->name == @$item->nama_instansi ? 'selected' : '' }}>{{ $item->nama_instansi }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             @foreach ($indikators as $key => $indikator)
                                                 <div class="form-check">

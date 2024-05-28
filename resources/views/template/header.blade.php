@@ -19,7 +19,7 @@
               <button style="padding-top: 0px;padding-bottom: 0px; color: #ad323a;" class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
                   <a class="nav-item d-none d-sm-inline-block">
-                      <img class="spbe" src="/asset/spbe.png" alt="logo spbe">
+                      <img class="spbe" style="width: 15px; height: 10px;" src="/asset/logoorang.png" alt="logo spbe">
                       <img class="ket" src="/asset/Ket.png" alt="Pelaksana Entri Data">
                   </a>
               </button>

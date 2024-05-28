@@ -30,7 +30,10 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('penilaians.add');
+        $data = [
+            "page" => "penilaian",
+        ];
+        return view('penilaians.add', $data);
     }
 
     /**
@@ -40,7 +43,7 @@ class TaskController extends Controller
     {
         Task::create($request->all());
 
-        return redirect('/tasks')->with([
+        return redirect('/task')->with([
             'mess' => 'Data Berhasil Disimpan',
         ]);
     }
@@ -116,7 +119,7 @@ class TaskController extends Controller
         $task->fill($request->all());
         $task->save();
 
-        return redirect('/tasks')->with([
+        return redirect('/task')->with([
             'mess' => 'Data Berhasil Disimpan',
         ]);
     }
@@ -128,7 +131,7 @@ class TaskController extends Controller
     {
         $task->delete();
 
-        return redirect('/tasks')->with([
+        return redirect('/task')->with([
             'mess' => 'Data Berhasil Dihapus',
         ]);
     }

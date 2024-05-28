@@ -14,201 +14,219 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Dumping data for table spbe.detail_indikators: ~0 rows (approximately)
+
+-- Dumping database structure for spbe
+DROP DATABASE IF EXISTS `spbe`;
+CREATE DATABASE IF NOT EXISTS `spbe` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `spbe`;
+
+-- Dumping structure for table spbe.aspeks
+DROP TABLE IF EXISTS `aspeks`;
+CREATE TABLE IF NOT EXISTS `aspeks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `aspek` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table spbe.aspeks: ~8 rows (approximately)
+DELETE FROM `aspeks`;
+INSERT INTO `aspeks` (`id`, `aspek`, `created_at`, `updated_at`) VALUES
+	(1, 'Kebijakan Internal Tata Kelola SPBE', NULL, NULL),
+	(2, 'Perencanaan Strategis SPBE', NULL, NULL),
+	(3, 'Teknologi Informasi dan Komunikasi', NULL, NULL),
+	(4, 'Penyelenggara SPBE', NULL, NULL),
+	(5, 'Penerapan Manajemen SPBE', NULL, NULL),
+	(6, 'Audit TIK', NULL, NULL),
+	(7, 'Layanan Pemerintahan Berbasis Elektronik\r\n', NULL, NULL),
+	(8, 'Layanan Publik Berbasis Elektronik', NULL, NULL);
+
+-- Dumping structure for table spbe.bagians
+DROP TABLE IF EXISTS `bagians`;
+CREATE TABLE IF NOT EXISTS `bagians` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(225) DEFAULT NULL,
+  `indikators` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table spbe.bagians: ~13 rows (approximately)
+DELETE FROM `bagians`;
+INSERT INTO `bagians` (`id`, `name`, `indikators`, `created_at`, `updated_at`) VALUES
+	(1, 'Admin', '["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47"]', NULL, '2024-05-23 00:50:33'),
+	(2, 'Dinas Komunikasi dan Informatika', '["1","2","4","5","6","7","8","11","12","15","16","17","18","19","20","22","23","28","30","31","42","43"]', '2024-05-23 01:14:02', '2024-05-23 01:14:55'),
+	(3, 'Bagian Hukum Sekretariat Daerah', '["1","2","3","4","5","6","7","8","9","10","44"]', '2024-05-23 01:16:16', '2024-05-23 01:16:16'),
+	(4, 'Badan Perencanaan dan Pembangunan, Riset dan Inovasi Daerah', '["3","13","23","32"]', '2024-05-23 23:10:31', '2024-05-23 23:10:31'),
+	(5, 'Inspektorat', '["9","21","29","30","31","39"]', '2024-05-23 23:11:21', '2024-05-23 23:11:21'),
+	(6, 'Bagian Organisasi Sekretariat Daerah', '["10","14","19","20","27","40"]', '2024-05-23 23:12:05', '2024-05-23 23:12:05'),
+	(7, 'Badan Pengelolaan Keuangan dan Aset Daerah', '["13","24","33","34","38"]', '2024-05-23 23:12:58', '2024-05-23 23:12:58'),
+	(8, 'Badan Kepegawaian dan Pengembangan Sumber Daya Manusia', '["25","26","36","41"]', '2024-05-23 23:13:51', '2024-05-23 23:13:51'),
+	(9, 'Bagian Pengadaan Barang dan Jasa Sekretariat Daerah', '["25"]', '2024-05-23 23:15:07', '2024-05-23 23:15:08'),
+	(10, 'Dinas Perpustakaan dan Kearsipan', '["37"]', '2024-05-23 23:21:48', '2024-05-23 23:21:48'),
+	(11, 'Rumah Sakit Umum Daerah Dolopo', '["45"]', '2024-05-23 23:22:58', '2024-05-26 21:18:18'),
+	(12, 'Dinas Kesehatan', '["46"]', '2024-05-26 21:18:56', '2024-05-26 21:18:56'),
+	(13, 'Dinas Pengendalian Penduduk, KB dan PPPA', '["47"]', '2024-05-26 21:19:12', '2024-05-27 19:02:44');
+
+-- Dumping structure for table spbe.detail_indikators
+DROP TABLE IF EXISTS `detail_indikators`;
+CREATE TABLE IF NOT EXISTS `detail_indikators` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `file` varchar(255) DEFAULT NULL,
+  `username` varchar(255) NOT NULL,
+  `id_indikator` varchar(255) NOT NULL,
+  `capaian` int(11) NOT NULL DEFAULT 0,
+  `note` mediumtext DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table spbe.detail_indikators: ~4 rows (approximately)
 DELETE FROM `detail_indikators`;
+INSERT INTO `detail_indikators` (`id`, `file`, `username`, `id_indikator`, `capaian`, `note`, `created_at`, `updated_at`) VALUES
+	(8, '', 'user1', '9', 2, NULL, '2024-05-26 20:08:23', '2024-05-26 20:13:33'),
+	(9, '', 'user1', '21', 5, NULL, '2024-05-26 20:13:55', '2024-05-26 20:13:55'),
+	(10, '', 'user1', '29', 1, NULL, '2024-05-27 00:24:08', '2024-05-27 00:24:20'),
+	(11, '', 'user1', '30', 1, NULL, '2024-05-27 00:35:21', '2024-05-27 00:35:21'),
+	(12, '', 'user1', '31', 3, NULL, '2024-05-27 02:07:43', '2024-05-27 02:07:53');
 
--- Dumping data for table spbe.indikators: ~186 rows (approximately)
+-- Dumping structure for table spbe.domains
+DROP TABLE IF EXISTS `domains`;
+CREATE TABLE IF NOT EXISTS `domains` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `domain` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table spbe.domains: ~4 rows (approximately)
+DELETE FROM `domains`;
+INSERT INTO `domains` (`id`, `domain`, `created_at`, `updated_at`) VALUES
+	(1, 'Kebijakan Internal SPBE', NULL, NULL),
+	(2, 'Tata Kelola SPBE', NULL, NULL),
+	(3, 'Manajemen SPBE', NULL, NULL),
+	(4, 'Layanan SPBE', NULL, NULL);
+
+-- Dumping structure for table spbe.indikators
+DROP TABLE IF EXISTS `indikators`;
+CREATE TABLE IF NOT EXISTS `indikators` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `no` int(11) NOT NULL DEFAULT 0,
+  `name` varchar(255) NOT NULL,
+  `id_task` varchar(255) NOT NULL,
+  `username` varchar(50) DEFAULT NULL,
+  `aspek` int(11) DEFAULT NULL,
+  `domain` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1178 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table spbe.indikators: ~47 rows (approximately)
 DELETE FROM `indikators`;
-INSERT INTO `indikators` (`id`, `no`, `name`, `id_task`, `aspek`, `note`, `created_at`, `updated_at`) VALUES
-	(1, 1, 'Tingkat Kematangan Kebijakan Internal Arsitektur SPBE', '1', 1, NULL, NULL, NULL),
-	(2, 2, 'Tingkat Kematangan Kebijakan Internal Peta Rencana', '1', 1, NULL, NULL, NULL),
-	(3, 3, 'Tingkat Kematangan Kebijakan Internal Manajemen Data', '1', 1, NULL, NULL, NULL),
-	(4, 4, 'Tingkat Kematangan Kebijakan Internal Pembangunan Aplikasi SPBE', '1', 1, NULL, NULL, NULL),
-	(5, 5, 'Tingkat Kematangan Kebijakan Internal Layanan Pusat Data', '1', 1, NULL, NULL, NULL),
-	(6, 0, 'Tingkat Kematangan Kebijakan Internal Layanan', '1', 1, NULL, NULL, NULL),
-	(7, 0, 'Tingkat Kematangan Kebijakan Internal Penggunaan Sistem', '1', 1, NULL, NULL, NULL),
-	(8, 0, 'Tingkat Kematangan Kebijakan Internal Manajemen Keamanan Informasi', '1', 1, NULL, NULL, NULL),
-	(9, 0, 'Tingkat Kematangan Kebijakan Internal Audit TIK', '1', 1, NULL, NULL, NULL),
-	(10, 0, 'Tingkat Kematangan Kebijakan Internal Tim Koordinasi', '1', 1, NULL, NULL, NULL),
-	(11, 0, 'Tingkat Kematangan Arsitektur SPBE Instansi Pusat/Pemerintah Daerah', '1', 2, NULL, NULL, NULL),
-	(12, 0, 'Tingkat Kematangan Peta Rencana SPBE Instansi Pusat/Pemerintah Daerah', '1', 2, NULL, NULL, NULL),
-	(13, 0, 'Tingkat Kematangan Keterpaduan Rencana dan Anggaran SPBE', '1', 2, NULL, NULL, NULL),
-	(14, 0, 'Tingkat Kematangan Inovasi Proses Bisnis SPBE', '1', 2, NULL, NULL, NULL),
-	(15, 0, 'Tingkat Kematangan Pembangunan Aplikasi SPBE', '1', 2, NULL, NULL, NULL),
-	(16, 0, 'Tingkat Kematangan Layanan Pusat Data', '1', 2, NULL, NULL, NULL),
-	(17, 0, 'Tingkat Kematangan Layanan Jaringan Intra Instansi Pusat/Pemerintah Daerah', '1', NULL, NULL, NULL, NULL),
-	(18, 0, 'Tingkat Kematangan Penggunaan Sistem Penghubung Layanan Instansi Pusat/Pemerintah Daerah', '1', NULL, NULL, NULL, NULL),
-	(19, 0, 'Tingkat Kematangan Pelaksanaan Tim Koordinasi SPBE Instansi Pusat/Pemerintah Daerah', '1', NULL, NULL, NULL, NULL),
-	(20, 0, 'Tingkat Kematangan Kolaborasi Penerapan SPBE', '1', NULL, NULL, NULL, NULL),
-	(21, 0, 'Tingkat Kematangan Penerapan Manajemen Risiko SPBE', '1', NULL, NULL, NULL, NULL),
-	(22, 0, 'Tingkat Kematangan Penerapan Manajemen Keamanan Informasi', '1', NULL, NULL, NULL, NULL),
-	(23, 0, 'Tingkat Kematangan Penerapan Manajemen Data', '1', NULL, NULL, NULL, NULL),
-	(24, 0, 'Tingkat Kematangan Penerapan Manajemen Aset TIK', '1', NULL, NULL, NULL, NULL),
-	(25, 0, 'Tingkat Kematangan Penerapan Kompetensi Sumber Daya', '1', NULL, NULL, NULL, NULL),
-	(26, 0, 'Tingkat Kematangan Penerapan Manajemen Pengetahuan', '1', NULL, NULL, NULL, NULL),
-	(27, 0, 'Tingkat Kematangan Penerapan Manajemen Perubahan', '1', NULL, NULL, NULL, NULL),
-	(28, 0, 'Tingkat Kematangan Penerapan Manajemen Layanan SPBE', '1', NULL, NULL, NULL, NULL),
-	(29, 0, 'Tingkat Kematangan Pelaksanaan Audit Infrastruktur SPBE', '1', NULL, NULL, NULL, NULL),
-	(30, 0, 'Tingkat Kematangan Pelaksanaan Audit Aplikasi SPBE', '1', NULL, NULL, NULL, NULL),
-	(31, 0, 'Tingkat Kematangan Pelaksanaan Audit Keamanan SPBE', '1', NULL, NULL, NULL, NULL),
-	(32, 0, 'Tingkat Kematangan Layanan Perencanaan', '1', NULL, NULL, NULL, NULL),
-	(33, 0, 'Tingkat Kematangan Layanan Penganggaran', '1', NULL, NULL, NULL, NULL),
-	(34, 0, 'Tingkat Kematangan Layanan Keuangan', '1', NULL, NULL, NULL, NULL),
-	(35, 0, 'Tingkat Kematangan Layanan Pengadaan Barang dan Jasa', '1', NULL, NULL, NULL, NULL),
-	(36, 0, 'Tingkat Kematangan Layanan Kepegawaian', '1', NULL, NULL, NULL, NULL),
-	(37, 0, 'Tingkat Kematangan Layanan Kearsipan Dinamis', '1', NULL, NULL, NULL, NULL),
-	(38, 0, 'Tingkat Kematangan Layanan Pengelolaan Barang Milik', '1', NULL, NULL, NULL, NULL),
-	(39, 0, 'Tingkat Kematangan Layanan Pengawasan Internal', '1', NULL, NULL, NULL, NULL),
-	(40, 0, 'Tingkat Kematangan Layanan Akuntabilitas Kinerja Organisasi', '1', NULL, NULL, NULL, NULL),
-	(41, 0, 'Tingkat Kematangan Layanan Kinerja Pegawai', '1', NULL, NULL, NULL, NULL),
-	(42, 0, 'Tingkat Kematangan Layanan Pengaduan Pelayanan Publik', '1', NULL, NULL, NULL, NULL),
-	(43, 0, 'Tingkat Kematangan Layanan Data Terbuka', '1', NULL, NULL, NULL, NULL),
-	(44, 0, 'Tingkat Kematangan Jaringan Dokumentasi dan Informasi', '1', NULL, NULL, NULL, NULL),
-	(45, 0, 'Tingkat Kematangan Layanan Publik Sektor 1', '1', NULL, NULL, NULL, NULL),
-	(46, 0, 'Tingkat Kematangan Layanan Publik Sektor 2', '1', NULL, NULL, NULL, NULL),
-	(47, 0, 'Tingkat Kematangan Layanan Publik Sektor 3', '1', NULL, NULL, NULL, NULL),
-	(50, 0, 'Tingkat Kematangan Kebijakan Internal Arsitektur SPBE', '2', NULL, NULL, NULL, NULL),
-	(51, 0, 'Tingkat Kematangan Kebijakan Internal Peta Rencana', '2', NULL, NULL, NULL, NULL),
-	(52, 0, 'Tingkat Kematangan Kebijakan Internal Manajemen Data', '2', NULL, NULL, NULL, NULL),
-	(53, 0, 'Tingkat Kematangan Kebijakan Internal Pembangunan Aplikasi SPBE', '2', NULL, NULL, NULL, NULL),
-	(54, 0, 'Tingkat Kematangan Kebijakan Internal Layanan Pusat Data', '2', NULL, NULL, NULL, NULL),
-	(55, 0, 'Tingkat Kematangan Kebijakan Internal Layanan', '2', NULL, NULL, NULL, NULL),
-	(56, 0, 'Tingkat Kematangan Kebijakan Internal Penggunaan Sistem', '2', NULL, NULL, NULL, NULL),
-	(57, 0, 'Tingkat Kematangan Kebijakan Internal Manajemen Keamanan Informasi', '2', NULL, NULL, NULL, NULL),
-	(58, 0, 'Tingkat Kematangan Kebijakan Internal Audit TIK', '2', NULL, NULL, NULL, NULL),
-	(59, 0, 'Tingkat Kematangan Kebijakan Internal Tim Koordinasi', '2', NULL, NULL, NULL, NULL),
-	(60, 0, 'Tingkat Kematangan Arsitektur SPBE Instansi Pusat/Pemerintah Daerah', '2', NULL, NULL, NULL, NULL),
-	(61, 0, 'Tingkat Kematangan Peta Rencana SPBE Instansi Pusat/Pemerintah Daerah', '2', NULL, NULL, NULL, NULL),
-	(62, 0, 'Tingkat Kematangan Keterpaduan Rencana dan Anggaran SPBE', '2', NULL, NULL, NULL, NULL),
-	(63, 0, 'Tingkat Kematangan Inovasi Proses Bisnis SPBE', '2', NULL, NULL, NULL, NULL),
-	(64, 0, 'Tingkat Kematangan Pembangunan Aplikasi SPBE', '2', NULL, NULL, NULL, NULL),
-	(65, 0, 'Tingkat Kematangan Layanan Pusat Data', '2', NULL, NULL, NULL, NULL),
-	(66, 0, 'Tingkat Kematangan Layanan Jaringan Intra Instansi Pusat/Pemerintah Daerah', '2', NULL, NULL, NULL, NULL),
-	(67, 0, 'Tingkat Kematangan Penggunaan Sistem Penghubung Layanan Instansi Pusat/Pemerintah Daerah', '2', NULL, NULL, NULL, NULL),
-	(68, 0, 'Tingkat Kematangan Pelaksanaan Tim Koordinasi SPBE Instansi Pusat/Pemerintah Daerah', '2', NULL, NULL, NULL, NULL),
-	(69, 0, 'Tingkat Kematangan Kolaborasi Penerapan SPBE', '2', NULL, NULL, NULL, NULL),
-	(70, 0, 'Tingkat Kematangan Penerapan Manajemen Risiko SPBE', '2', NULL, NULL, NULL, NULL),
-	(71, 0, 'Tingkat Kematangan Penerapan Manajemen Keamanan Informasi', '2', NULL, NULL, NULL, NULL),
-	(72, 0, 'Tingkat Kematangan Penerapan Manajemen Data', '2', NULL, NULL, NULL, NULL),
-	(73, 0, 'Tingkat Kematangan Penerapan Manajemen Aset TIK', '2', NULL, NULL, NULL, NULL),
-	(74, 0, 'Tingkat Kematangan Penerapan Kompetensi Sumber Daya', '2', NULL, NULL, NULL, NULL),
-	(75, 0, 'Tingkat Kematangan Penerapan Manajemen Pengetahuan', '2', NULL, NULL, NULL, NULL),
-	(76, 0, 'Tingkat Kematangan Penerapan Manajemen Perubahan', '2', NULL, NULL, NULL, NULL),
-	(77, 0, 'Tingkat Kematangan Penerapan Manajemen Layanan SPBE', '2', NULL, NULL, NULL, NULL),
-	(78, 0, 'Tingkat Kematangan Pelaksanaan Audit Infrastruktur SPBE', '2', NULL, NULL, NULL, NULL),
-	(79, 0, 'Tingkat Kematangan Pelaksanaan Audit Aplikasi SPBE', '2', NULL, NULL, NULL, NULL),
-	(80, 0, 'Tingkat Kematangan Pelaksanaan Audit Keamanan SPBE', '2', NULL, NULL, NULL, NULL),
-	(81, 0, 'Tingkat Kematangan Layanan Perencanaan', '2', NULL, NULL, NULL, NULL),
-	(82, 0, 'Tingkat Kematangan Layanan Penganggaran', '2', NULL, NULL, NULL, NULL),
-	(83, 0, 'Tingkat Kematangan Layanan Keuangan', '2', NULL, NULL, NULL, NULL),
-	(84, 0, 'Tingkat Kematangan Layanan Pengadaan Barang dan Jasa', '2', NULL, NULL, NULL, NULL),
-	(85, 0, 'Tingkat Kematangan Layanan Kepegawaian', '2', NULL, NULL, NULL, NULL),
-	(86, 0, 'Tingkat Kematangan Layanan Kearsipan Dinamis', '2', NULL, NULL, NULL, NULL),
-	(87, 0, 'Tingkat Kematangan Layanan Pengelolaan Barang Milik', '2', NULL, NULL, NULL, NULL),
-	(88, 0, 'Tingkat Kematangan Layanan Pengawasan Internal', '2', NULL, NULL, NULL, NULL),
-	(89, 0, 'Tingkat Kematangan Layanan Akuntabilitas Kinerja Organisasi', '2', NULL, NULL, NULL, NULL),
-	(90, 0, 'Tingkat Kematangan Layanan Kinerja Pegawai', '2', NULL, NULL, NULL, NULL),
-	(91, 0, 'Tingkat Kematangan Layanan Pengaduan Pelayanan Publik', '2', NULL, NULL, NULL, NULL),
-	(92, 0, 'Tingkat Kematangan Layanan Data Terbuka', '2', NULL, NULL, NULL, NULL),
-	(93, 0, 'Tingkat Kematangan Jaringan Dokumentasi dan Informasi', '2', NULL, NULL, NULL, NULL),
-	(94, 0, 'Tingkat Kematangan Layanan Publik Sektor 1', '2', NULL, NULL, NULL, NULL),
-	(95, 0, 'Tingkat Kematangan Layanan Publik Sektor 2', '2', NULL, NULL, NULL, NULL),
-	(96, 0, 'Tingkat Kematangan Layanan Publik Sektor 3', '2', NULL, NULL, NULL, NULL),
-	(97, 0, 'Tingkat Kematangan Kebijakan Internal Arsitektur SPBE', '3', NULL, NULL, NULL, NULL),
-	(98, 0, 'Tingkat Kematangan Kebijakan Internal Peta Rencana', '3', NULL, NULL, NULL, NULL),
-	(99, 0, 'Tingkat Kematangan Kebijakan Internal Manajemen Data', '3', NULL, NULL, NULL, NULL),
-	(100, 0, 'Tingkat Kematangan Kebijakan Internal Pembangunan Aplikasi SPBE', '3', NULL, NULL, NULL, NULL),
-	(101, 0, 'Tingkat Kematangan Kebijakan Internal Layanan Pusat Data', '3', NULL, NULL, NULL, NULL),
-	(102, 0, 'Tingkat Kematangan Kebijakan Internal Layanan', '3', NULL, NULL, NULL, NULL),
-	(103, 0, 'Tingkat Kematangan Kebijakan Internal Penggunaan Sistem', '3', NULL, NULL, NULL, NULL),
-	(104, 0, 'Tingkat Kematangan Kebijakan Internal Manajemen Keamanan Informasi', '3', NULL, NULL, NULL, NULL),
-	(105, 0, 'Tingkat Kematangan Kebijakan Internal Audit TIK', '3', NULL, NULL, NULL, NULL),
-	(106, 0, 'Tingkat Kematangan Kebijakan Internal Tim Koordinasi', '3', NULL, NULL, NULL, NULL),
-	(107, 0, 'Tingkat Kematangan Arsitektur SPBE Instansi Pusat/Pemerintah Daerah', '3', NULL, NULL, NULL, NULL),
-	(108, 0, 'Tingkat Kematangan Peta Rencana SPBE Instansi Pusat/Pemerintah Daerah', '3', NULL, NULL, NULL, NULL),
-	(109, 0, 'Tingkat Kematangan Keterpaduan Rencana dan Anggaran SPBE', '3', NULL, NULL, NULL, NULL),
-	(110, 0, 'Tingkat Kematangan Inovasi Proses Bisnis SPBE', '3', NULL, NULL, NULL, NULL),
-	(111, 0, 'Tingkat Kematangan Pembangunan Aplikasi SPBE', '3', NULL, NULL, NULL, NULL),
-	(112, 0, 'Tingkat Kematangan Layanan Pusat Data', '3', NULL, NULL, NULL, NULL),
-	(113, 0, 'Tingkat Kematangan Layanan Jaringan Intra Instansi Pusat/Pemerintah Daerah', '3', NULL, NULL, NULL, NULL),
-	(114, 0, 'Tingkat Kematangan Penggunaan Sistem Penghubung Layanan Instansi Pusat/Pemerintah Daerah', '3', NULL, NULL, NULL, NULL),
-	(115, 0, 'Tingkat Kematangan Pelaksanaan Tim Koordinasi SPBE Instansi Pusat/Pemerintah Daerah', '3', NULL, NULL, NULL, NULL),
-	(116, 0, 'Tingkat Kematangan Kolaborasi Penerapan SPBE', '3', NULL, NULL, NULL, NULL),
-	(117, 0, 'Tingkat Kematangan Penerapan Manajemen Risiko SPBE', '3', NULL, NULL, NULL, NULL),
-	(118, 0, 'Tingkat Kematangan Penerapan Manajemen Keamanan Informasi', '3', NULL, NULL, NULL, NULL),
-	(119, 0, 'Tingkat Kematangan Penerapan Manajemen Data', '3', NULL, NULL, NULL, NULL),
-	(120, 0, 'Tingkat Kematangan Penerapan Manajemen Aset TIK', '3', NULL, NULL, NULL, NULL),
-	(121, 0, 'Tingkat Kematangan Penerapan Kompetensi Sumber Daya', '3', NULL, NULL, NULL, NULL),
-	(122, 0, 'Tingkat Kematangan Penerapan Manajemen Pengetahuan', '3', NULL, NULL, NULL, NULL),
-	(123, 0, 'Tingkat Kematangan Penerapan Manajemen Perubahan', '3', NULL, NULL, NULL, NULL),
-	(124, 0, 'Tingkat Kematangan Penerapan Manajemen Layanan SPBE', '3', NULL, NULL, NULL, NULL),
-	(125, 0, 'Tingkat Kematangan Pelaksanaan Audit Infrastruktur SPBE', '3', NULL, NULL, NULL, NULL),
-	(126, 0, 'Tingkat Kematangan Pelaksanaan Audit Aplikasi SPBE', '3', NULL, NULL, NULL, NULL),
-	(127, 0, 'Tingkat Kematangan Pelaksanaan Audit Keamanan SPBE', '3', NULL, NULL, NULL, NULL),
-	(128, 0, 'Tingkat Kematangan Layanan Perencanaan', '3', NULL, NULL, NULL, NULL),
-	(129, 0, 'Tingkat Kematangan Layanan Penganggaran', '3', NULL, NULL, NULL, NULL),
-	(130, 0, 'Tingkat Kematangan Layanan Keuangan', '3', NULL, NULL, NULL, NULL),
-	(131, 0, 'Tingkat Kematangan Layanan Pengadaan Barang dan Jasa', '3', NULL, NULL, NULL, NULL),
-	(132, 0, 'Tingkat Kematangan Layanan Kepegawaian', '3', NULL, NULL, NULL, NULL),
-	(133, 0, 'Tingkat Kematangan Layanan Kearsipan Dinamis', '3', NULL, NULL, NULL, NULL),
-	(134, 0, 'Tingkat Kematangan Layanan Pengelolaan Barang Milik', '3', NULL, NULL, NULL, NULL),
-	(135, 0, 'Tingkat Kematangan Layanan Pengawasan Internal', '3', NULL, NULL, NULL, NULL),
-	(136, 0, 'Tingkat Kematangan Layanan Akuntabilitas Kinerja Organisasi', '3', NULL, NULL, NULL, NULL),
-	(137, 0, 'Tingkat Kematangan Layanan Kinerja Pegawai', '3', NULL, NULL, NULL, NULL),
-	(138, 0, 'Tingkat Kematangan Layanan Pengaduan Pelayanan Publik', '3', NULL, NULL, NULL, NULL),
-	(139, 0, 'Tingkat Kematangan Layanan Data Terbuka', '3', NULL, NULL, NULL, NULL),
-	(140, 0, 'Tingkat Kematangan Jaringan Dokumentasi dan Informasi', '3', NULL, NULL, NULL, NULL),
-	(141, 0, 'Tingkat Kematangan Layanan Publik Sektor 1', '3', NULL, NULL, NULL, NULL),
-	(142, 0, 'Tingkat Kematangan Layanan Publik Sektor 2', '3', NULL, NULL, NULL, NULL),
-	(143, 0, 'Tingkat Kematangan Layanan Publik Sektor 3', '3', NULL, NULL, NULL, NULL),
-	(144, 0, 'Tingkat Kematangan Kebijakan Internal Arsitektur SPBE', '4', NULL, NULL, NULL, NULL),
-	(145, 0, 'Tingkat Kematangan Kebijakan Internal Peta Rencana', '4', NULL, NULL, NULL, NULL),
-	(146, 0, 'Tingkat Kematangan Kebijakan Internal Manajemen Data', '4', NULL, NULL, NULL, NULL),
-	(147, 0, 'Tingkat Kematangan Kebijakan Internal Pembangunan Aplikasi SPBE', '4', NULL, NULL, NULL, NULL),
-	(148, 0, 'Tingkat Kematangan Kebijakan Internal Layanan Pusat Data', '4', NULL, NULL, NULL, NULL),
-	(149, 0, 'Tingkat Kematangan Kebijakan Internal Layanan', '4', NULL, NULL, NULL, NULL),
-	(150, 0, 'Tingkat Kematangan Kebijakan Internal Penggunaan Sistem', '4', NULL, NULL, NULL, NULL),
-	(151, 0, 'Tingkat Kematangan Kebijakan Internal Manajemen Keamanan Informasi', '4', NULL, NULL, NULL, NULL),
-	(152, 0, 'Tingkat Kematangan Kebijakan Internal Audit TIK', '4', NULL, NULL, NULL, NULL),
-	(153, 0, 'Tingkat Kematangan Kebijakan Internal Tim Koordinasi', '4', NULL, NULL, NULL, NULL),
-	(154, 0, 'Tingkat Kematangan Arsitektur SPBE Instansi Pusat/Pemerintah Daerah', '4', NULL, NULL, NULL, NULL),
-	(155, 0, 'Tingkat Kematangan Peta Rencana SPBE Instansi Pusat/Pemerintah Daerah', '4', NULL, NULL, NULL, NULL),
-	(156, 0, 'Tingkat Kematangan Keterpaduan Rencana dan Anggaran SPBE', '4', NULL, NULL, NULL, NULL),
-	(157, 0, 'Tingkat Kematangan Inovasi Proses Bisnis SPBE', '4', NULL, NULL, NULL, NULL),
-	(158, 0, 'Tingkat Kematangan Pembangunan Aplikasi SPBE', '4', NULL, NULL, NULL, NULL),
-	(159, 0, 'Tingkat Kematangan Layanan Pusat Data', '4', NULL, NULL, NULL, NULL),
-	(160, 0, 'Tingkat Kematangan Layanan Jaringan Intra Instansi Pusat/Pemerintah Daerah', '4', NULL, NULL, NULL, NULL),
-	(161, 0, 'Tingkat Kematangan Penggunaan Sistem Penghubung Layanan Instansi Pusat/Pemerintah Daerah', '4', NULL, NULL, NULL, NULL),
-	(162, 0, 'Tingkat Kematangan Pelaksanaan Tim Koordinasi SPBE Instansi Pusat/Pemerintah Daerah', '4', NULL, NULL, NULL, NULL),
-	(163, 0, 'Tingkat Kematangan Kolaborasi Penerapan SPBE', '4', NULL, NULL, NULL, NULL),
-	(164, 0, 'Tingkat Kematangan Penerapan Manajemen Risiko SPBE', '4', NULL, NULL, NULL, NULL),
-	(165, 0, 'Tingkat Kematangan Penerapan Manajemen Keamanan Informasi', '4', NULL, NULL, NULL, NULL),
-	(166, 0, 'Tingkat Kematangan Penerapan Manajemen Data', '4', NULL, NULL, NULL, NULL),
-	(167, 0, 'Tingkat Kematangan Penerapan Manajemen Aset TIK', '4', NULL, NULL, NULL, NULL),
-	(168, 0, 'Tingkat Kematangan Penerapan Kompetensi Sumber Daya', '4', NULL, NULL, NULL, NULL),
-	(169, 0, 'Tingkat Kematangan Penerapan Manajemen Pengetahuan', '4', NULL, NULL, NULL, NULL),
-	(170, 0, 'Tingkat Kematangan Penerapan Manajemen Perubahan', '4', NULL, NULL, NULL, NULL),
-	(171, 0, 'Tingkat Kematangan Penerapan Manajemen Layanan SPBE', '4', NULL, NULL, NULL, NULL),
-	(172, 0, 'Tingkat Kematangan Pelaksanaan Audit Infrastruktur SPBE', '4', NULL, NULL, NULL, NULL),
-	(173, 0, 'Tingkat Kematangan Pelaksanaan Audit Aplikasi SPBE', '4', NULL, NULL, NULL, NULL),
-	(174, 0, 'Tingkat Kematangan Pelaksanaan Audit Keamanan SPBE', '4', NULL, NULL, NULL, NULL),
-	(175, 0, 'Tingkat Kematangan Layanan Perencanaan', '4', NULL, NULL, NULL, NULL),
-	(176, 0, 'Tingkat Kematangan Layanan Penganggaran', '4', NULL, NULL, NULL, NULL),
-	(177, 0, 'Tingkat Kematangan Layanan Keuangan', '4', NULL, NULL, NULL, NULL),
-	(178, 0, 'Tingkat Kematangan Layanan Pengadaan Barang dan Jasa', '4', NULL, NULL, NULL, NULL),
-	(179, 0, 'Tingkat Kematangan Layanan Kepegawaian', '4', NULL, NULL, NULL, NULL),
-	(180, 0, 'Tingkat Kematangan Layanan Kearsipan Dinamis', '4', NULL, NULL, NULL, NULL),
-	(181, 0, 'Tingkat Kematangan Layanan Pengelolaan Barang Milik', '4', NULL, NULL, NULL, NULL),
-	(182, 0, 'Tingkat Kematangan Layanan Pengawasan Internal', '4', NULL, NULL, NULL, NULL),
-	(183, 0, 'Tingkat Kematangan Layanan Akuntabilitas Kinerja Organisasi', '4', NULL, NULL, NULL, NULL),
-	(184, 0, 'Tingkat Kematangan Layanan Kinerja Pegawai', '4', NULL, NULL, NULL, NULL),
-	(185, 0, 'Tingkat Kematangan Layanan Pengaduan Pelayanan Publik', '4', NULL, NULL, NULL, NULL),
-	(186, 0, 'Tingkat Kematangan Layanan Data Terbuka', '4', NULL, NULL, NULL, NULL),
-	(187, 0, 'Tingkat Kematangan Jaringan Dokumentasi dan Informasi', '4', NULL, NULL, NULL, NULL),
-	(188, 0, 'Tingkat Kematangan Layanan Publik Sektor 1', '4', NULL, NULL, NULL, NULL);
+INSERT INTO `indikators` (`id`, `no`, `name`, `id_task`, `username`, `aspek`, `domain`, `created_at`, `updated_at`) VALUES
+	(1, 1, 'Tingkat Kematangan Kebijakan Internal Arsitektur SPBE', '1', NULL, 1, 1, NULL, '2024-05-20 01:40:44'),
+	(2, 2, 'Tingkat Kematangan Kebijakan Internal Peta Rencana', '1', NULL, 1, 1, NULL, '2024-05-19 22:30:15'),
+	(3, 3, 'Tingkat Kematangan Kebijakan Internal Manajemen Data', '1', NULL, 1, 1, NULL, '2024-05-19 22:33:37'),
+	(4, 4, 'Tingkat Kematangan Kebijakan Internal Pembangunan Aplikasi SPBE', '1', NULL, 1, 1, NULL, '2024-05-19 22:39:17'),
+	(5, 5, 'Tingkat Kematangan Kebijakan Internal Layanan Pusat Data', '1', NULL, 1, 1, NULL, NULL),
+	(6, 6, 'Tingkat Kematangan Kebijakan Internal Layanan', '1', NULL, 1, 1, NULL, NULL),
+	(7, 7, 'Tingkat Kematangan Kebijakan Internal Penggunaan Sistem', '1', NULL, 1, 1, NULL, NULL),
+	(8, 8, 'Tingkat Kematangan Kebijakan Internal Manajemen Keamanan Informasi', '1', NULL, 1, 1, NULL, NULL),
+	(9, 9, 'Tingkat Kematangan Kebijakan Internal Audit TIK', '1', NULL, 1, 1, NULL, NULL),
+	(10, 10, 'Tingkat Kematangan Kebijakan Internal Tim Koordinasi', '1', NULL, 1, 1, NULL, NULL),
+	(11, 11, 'Tingkat Kematangan Arsitektur SPBE Instansi Pusat/Pemerintah Daerah', '1', NULL, 2, 2, NULL, NULL),
+	(12, 12, 'Tingkat Kematangan Peta Rencana SPBE Instansi Pusat/Pemerintah Daerah', '1', NULL, 2, 2, NULL, NULL),
+	(13, 13, 'Tingkat Kematangan Keterpaduan Rencana dan Anggaran SPBE', '1', NULL, 2, 2, NULL, NULL),
+	(14, 14, 'Tingkat Kematangan Inovasi Proses Bisnis SPBE', '1', NULL, 2, 2, NULL, NULL),
+	(15, 15, 'Tingkat Kematangan Pembangunan Aplikasi SPBE', '1', NULL, 3, 2, NULL, NULL),
+	(16, 16, 'Tingkat Kematangan Layanan Pusat Data', '1', NULL, 3, 2, NULL, NULL),
+	(17, 17, 'Tingkat Kematangan Layanan Jaringan Intra Instansi Pusat/Pemerintah Daerah', '1', NULL, 3, 2, NULL, NULL),
+	(18, 18, 'Tingkat Kematangan Penggunaan Sistem Penghubung Layanan Instansi Pusat/Pemerintah Daerah', '1', NULL, 3, 2, NULL, NULL),
+	(19, 19, 'Tingkat Kematangan Pelaksanaan Tim Koordinasi SPBE Instansi Pusat/Pemerintah Daerah', '1', NULL, 4, 2, NULL, NULL),
+	(20, 20, 'Tingkat Kematangan Kolaborasi Penerapan SPBE', '1', NULL, 4, 2, NULL, NULL),
+	(21, 21, 'Tingkat Kematangan Penerapan Manajemen Risiko SPBE', '1', NULL, 5, 3, NULL, NULL),
+	(22, 22, 'Tingkat Kematangan Penerapan Manajemen Keamanan Informasi', '1', NULL, 5, 3, NULL, NULL),
+	(23, 23, 'Tingkat Kematangan Penerapan Manajemen Data', '1', NULL, 5, 3, NULL, NULL),
+	(24, 24, 'Tingkat Kematangan Penerapan Manajemen Aset TIK', '1', NULL, 5, 3, NULL, NULL),
+	(25, 25, 'Tingkat Kematangan Penerapan Kompetensi Sumber Daya', '1', NULL, 5, 3, NULL, NULL),
+	(26, 26, 'Tingkat Kematangan Penerapan Manajemen Pengetahuan', '1', NULL, 5, 3, NULL, NULL),
+	(27, 27, 'Tingkat Kematangan Penerapan Manajemen Perubahan', '1', NULL, 5, 3, NULL, NULL),
+	(28, 28, 'Tingkat Kematangan Penerapan Manajemen Layanan SPBE', '1', NULL, 5, 3, NULL, NULL),
+	(29, 29, 'Tingkat Kematangan Pelaksanaan Audit Infrastruktur SPBE', '1', NULL, 6, 3, NULL, NULL),
+	(30, 30, 'Tingkat Kematangan Pelaksanaan Audit Aplikasi SPBE', '1', NULL, 6, 3, NULL, NULL),
+	(31, 31, 'Tingkat Kematangan Pelaksanaan Audit Keamanan SPBE', '1', NULL, 6, 3, NULL, NULL),
+	(32, 32, 'Tingkat Kematangan Layanan Perencanaan', '1', NULL, 7, 4, NULL, NULL),
+	(33, 33, 'Tingkat Kematangan Layanan Penganggaran', '1', NULL, 7, 4, NULL, NULL),
+	(34, 34, 'Tingkat Kematangan Layanan Keuangan', '1', NULL, 7, 4, NULL, NULL),
+	(35, 35, 'Tingkat Kematangan Layanan Pengadaan Barang dan Jasa', '1', NULL, 7, 4, NULL, NULL),
+	(36, 36, 'Tingkat Kematangan Layanan Kepegawaian', '1', NULL, 7, 4, NULL, NULL),
+	(37, 37, 'Tingkat Kematangan Layanan Kearsipan Dinamis', '1', NULL, 7, 4, NULL, NULL),
+	(38, 38, 'Tingkat Kematangan Layanan Pengelolaan Barang Milik', '1', NULL, 7, 4, NULL, NULL),
+	(39, 39, 'Tingkat Kematangan Layanan Pengawasan Internal', '1', NULL, 7, 4, NULL, NULL),
+	(40, 40, 'Tingkat Kematangan Layanan Akuntabilitas Kinerja Organisasi', '1', NULL, 7, 4, NULL, NULL),
+	(41, 41, 'Tingkat Kematangan Layanan Kinerja Pegawai', '1', NULL, 7, 4, NULL, NULL),
+	(42, 42, 'Tingkat Kematangan Layanan Pengaduan Pelayanan Publik', '1', NULL, 8, 4, NULL, NULL),
+	(43, 43, 'Tingkat Kematangan Layanan Data Terbuka', '1', NULL, 8, 4, NULL, NULL),
+	(44, 44, 'Tingkat Kematangan Jaringan Dokumentasi dan Informasi', '1', NULL, 8, 4, NULL, NULL),
+	(45, 45, 'Tingkat Kematangan Layanan Publik Sektor 1', '1', NULL, 8, 4, NULL, NULL),
+	(46, 46, 'Tingkat Kematangan Layanan Publik Sektor 2', '1', NULL, 8, 4, NULL, NULL),
+	(47, 47, 'Tingkat Kematangan Layanan Publik Sektor 3', '1', NULL, 8, 4, NULL, NULL);
 
--- Dumping data for table spbe.jawabans: ~0 rows (approximately)
+-- Dumping structure for table spbe.jawabans
+DROP TABLE IF EXISTS `jawabans`;
+CREATE TABLE IF NOT EXISTS `jawabans` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `d_jawaban` varchar(255) DEFAULT NULL,
+  `id_penjelasan` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `id_indikator` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table spbe.jawabans: ~24 rows (approximately)
 DELETE FROM `jawabans`;
+INSERT INTO `jawabans` (`id`, `d_jawaban`, `id_penjelasan`, `username`, `id_indikator`, `created_at`, `updated_at`) VALUES
+	(57, 'rdxh', 41, 'user1', '9', '2024-05-26 20:08:23', '2024-05-26 20:08:23'),
+	(58, 'rtxdhu', 42, 'user1', '9', '2024-05-26 20:08:23', '2024-05-26 20:08:23'),
+	(59, 'xdth', 43, 'user1', '9', '2024-05-26 20:08:23', '2024-05-26 20:08:23'),
+	(60, 'tfxh', 44, 'user1', '9', '2024-05-26 20:08:23', '2024-05-26 20:08:23'),
+	(61, 'fh', 45, 'user1', '9', '2024-05-26 20:08:23', '2024-05-26 20:08:23'),
+	(62, 'fh', 101, 'user1', '21', '2024-05-26 20:13:55', '2024-05-26 20:13:55'),
+	(63, 'fgh', 102, 'user1', '21', '2024-05-26 20:13:55', '2024-05-26 20:13:55'),
+	(64, 'fh', 103, 'user1', '21', '2024-05-26 20:13:55', '2024-05-26 20:13:55'),
+	(65, 'fh', 104, 'user1', '21', '2024-05-26 20:13:55', '2024-05-26 20:13:55'),
+	(66, 'xv', 105, 'user1', '21', '2024-05-26 20:13:55', '2024-05-26 20:13:55'),
+	(67, 'gj', 141, 'user1', '29', '2024-05-27 00:24:08', '2024-05-27 00:24:08'),
+	(68, 'fg', 142, 'user1', '29', '2024-05-27 00:24:08', '2024-05-27 00:24:08'),
+	(69, 'fg', 143, 'user1', '29', '2024-05-27 00:24:08', '2024-05-27 00:24:08'),
+	(70, 'fd', 144, 'user1', '29', '2024-05-27 00:24:08', '2024-05-27 00:24:08'),
+	(71, 'sdfx', 145, 'user1', '29', '2024-05-27 00:24:08', '2024-05-27 00:24:08'),
+	(72, 'qwr', 146, 'user1', '30', '2024-05-27 00:35:21', '2024-05-27 00:35:21'),
+	(73, 'rwa', 147, 'user1', '30', '2024-05-27 00:35:21', '2024-05-27 00:35:21'),
+	(74, 'af', 148, 'user1', '30', '2024-05-27 00:35:21', '2024-05-27 00:35:21'),
+	(75, 'faw', 149, 'user1', '30', '2024-05-27 00:35:21', '2024-05-27 00:35:21'),
+	(76, 'awf', 150, 'user1', '30', '2024-05-27 00:35:21', '2024-05-27 00:35:21'),
+	(77, 'gh', 151, 'user1', '31', '2024-05-27 02:07:43', '2024-05-27 02:07:43'),
+	(78, 'gh', 152, 'user1', '31', '2024-05-27 02:07:43', '2024-05-27 02:07:43'),
+	(79, 'gh', 153, 'user1', '31', '2024-05-27 02:07:43', '2024-05-27 02:07:43'),
+	(80, 'gh', 154, 'user1', '31', '2024-05-27 02:07:43', '2024-05-27 02:07:43'),
+	(81, 'chg', 155, 'user1', '31', '2024-05-27 02:07:43', '2024-05-27 02:07:43');
+
+-- Dumping structure for table spbe.migrations
+DROP TABLE IF EXISTS `migrations`;
+CREATE TABLE IF NOT EXISTS `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table spbe.migrations: ~7 rows (approximately)
 DELETE FROM `migrations`;
@@ -220,6 +238,17 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(5, '2024_05_14_003311_create_jawabans_table', 1),
 	(6, '2024_05_16_015624_create_detail_indikators_table', 1),
 	(7, '2024_05_16_015651_create_tasks_table', 1);
+
+-- Dumping structure for table spbe.penjelasans
+DROP TABLE IF EXISTS `penjelasans`;
+CREATE TABLE IF NOT EXISTS `penjelasans` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `text` longtext NOT NULL,
+  `id_indikator` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=315 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table spbe.penjelasans: ~233 rows (approximately)
 DELETE FROM `penjelasans`;
@@ -460,30 +489,80 @@ INSERT INTO `penjelasans` (`id`, `text`, `id_indikator`, `created_at`, `updated_
 	(234, 'Kriteria tingkat 3 telah terpenuhi dan Layanan Publik Sektoral Berbasis Elektronik memberikan layanan kolaborasi dengan layanan elektronik lain, misalnya Layanan Publik Sektoral Berbasis Elektronik Instansi Pusat/Pemerintah Daerah lain, dan/atau layanan SPBE Instansi Pusat/Pemerintah Daerah lain.', '47', NULL, NULL),
 	(235, 'Kriteria tingkat 4 telah terpenuhi dan Layanan Publik Sektoral Berbasis Elektronik telah dilakukan perbaikan berdasarkan hasil reviu dan evaluasi terhadap perubahan lingkungan, peraturan perundang-undangan, teknologi dan kebutuhan Instansi Pusat/Pemerintah Daerah.', '47', NULL, NULL);
 
+-- Dumping structure for table spbe.personal_access_tokens
+DROP TABLE IF EXISTS `personal_access_tokens`;
+CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_id` bigint(20) unsigned NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Dumping data for table spbe.personal_access_tokens: ~0 rows (approximately)
 DELETE FROM `personal_access_tokens`;
 
--- Dumping data for table spbe.tasks: ~1 rows (approximately)
+-- Dumping structure for table spbe.tasks
+DROP TABLE IF EXISTS `tasks`;
+CREATE TABLE IF NOT EXISTS `tasks` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `tahap` varchar(255) NOT NULL,
+  `batas` date NOT NULL,
+  `tahun` year(4) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `desc` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table spbe.tasks: ~2 rows (approximately)
 DELETE FROM `tasks`;
 INSERT INTO `tasks` (`id`, `name`, `tahap`, `batas`, `tahun`, `status`, `desc`, `created_at`, `updated_at`) VALUES
-	(1, 'testing', 'penilaian mandiri', '2024-04-30', '2024', 'pemantauan', 'testing', NULL, NULL);
+	(1, 'testing', 'penilaian mandiri', '2024-04-30', '2024', 'pemantauan', 'testing', NULL, '2024-05-26 20:20:22');
+
+-- Dumping structure for table spbe.users
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(190) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `level` enum('admin','user') NOT NULL,
+  `nama_instansi` varchar(255) NOT NULL,
+  `pass_view` varchar(50) DEFAULT NULL,
+  `id_bagian` int(11) DEFAULT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_username_unique` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table spbe.users: ~13 rows (approximately)
 DELETE FROM `users`;
-INSERT INTO `users` (`id`, `username`, `password`, `level`, `nama_instansi`, `remember_token`, `created_at`, `updated_at`, `pass_view`) VALUES
-	(1, 'Admin', '$2y$12$gu1Pjp5W7GBW2bb7M3zE7eXby9zJ0tTfIBCcreTZhPcTPpzQu4ZrK', 'admin', 'Admin', 'Rb2Dt464TT70Ktbg6JkdnmcdvizVH8bLQH5X6UN71VusM8dcUvYIvg2CmcH0', '2024-05-17 00:48:08', '2024-05-19 20:12:30', 'admin2'),
-	(2, 'user1', '$2y$12$rCGzlEN4CK3oyv/RP2XR/esD9FHxShZzJKB/VWVMhNpvr0WHTPAz.', 'user', 'Inspektorat', 'Mh3FiyRWVlzueGsd', '2024-05-17 00:48:08', '2024-05-19 20:13:07', 'user1'),
-	(3, 'user2', '$2y$12$qg5m3GJ5QUPNT/rlY9PCtuuci2IpytA6xWo41Xt6SkEr52WK26ozu', 'user', 'Badan Perencanaan dan Pembangunan, Riset dan Inovasi Daerah', 'CgDq80T8ASKj0XK2', '2024-05-17 00:48:09', '2024-05-17 00:48:09', 'user'),
-	(4, 'user3', '$2y$12$oSC/qxXt6jpPkIo4bqXfqORg0wBXCdunLLSgrs8NnxOSFKlbuS5z2', 'user', 'Badan Pengelolaan Keuangan dan Aset Daerah', 'HeT4A4SS9RsYTpCv', '2024-05-17 00:48:09', '2024-05-17 00:48:09', 'user'),
-	(5, 'user4', '$2y$12$x87n5QNSVWyw1Zq4JKm39eVioqQO212GPwrAwMNC2IAnXt.eFuZIC', 'user', 'Badan Kepegawaian dan Pengembangan Sumber Daya Manusia', 'tH1kKe8d9D2xP5Px', '2024-05-17 00:48:09', '2024-05-17 00:48:09', 'user'),
-	(6, 'user5', '$2y$12$aTk6FZCQTWo6/KuWzrUiWuIPfivSSOt4S9XzxRVkFQ9qNoB4Ropw.', 'user', 'Dinas Komunikasi dan Informatika', 'a2HT8D34lb1vsBIv', '2024-05-17 00:48:10', '2024-05-17 00:48:10', 'user'),
-	(7, 'user6', '$2y$12$4VNZhxnGOKWV/QRmstU4JO0SQTnWEIf35gN9Etb4opJfRfbUsRszS', 'user', 'Dinas Kesehatan', '8KOdhnsQc46BUE3K', '2024-05-17 00:48:10', '2024-05-17 00:48:10', 'user'),
-	(8, 'user7', '$2y$12$0tqT5khxAHa61b5e6e38ruCmc.Q14OVvPaQWbq22UbceiXHSgWZw6', 'user', 'Dinas Pengendalian Penduduk, KB dan PPPA', 'PQloRE2Xkjd1aZ12', '2024-05-17 00:48:11', '2024-05-17 00:48:11', 'user'),
-	(9, 'user8', '$2y$12$mj1g2JFnopK9JuYJ0D5b6O3Qe4TNS0dEVD6AN/596oo2WtHtM0smq', 'user', 'Dinas Perpustakaan dan Kearsipan', 'qlFfJeXPIGMNVoWB', '2024-05-17 00:48:11', '2024-05-17 00:48:11', 'user'),
-	(10, 'user9', '$2y$12$CMU.MnL.AV1aaTa4rVJZeOctBIMihUOIL.wCDK08TMbjX1Jz9U/Ye', 'user', 'Rumah Sakit Umum Daerah', '99RWLoPcIH9j4Xkn', '2024-05-17 00:48:11', '2024-05-17 00:48:11', 'user'),
-	(11, 'user10', '$2y$12$vIcQavX0EUhCxtRK4hKkJuoBcoNnkpOzbiRNinZpnGDyqiXFNgtES', 'user', 'Bagian Organisasi Sekretariat Daerah', 'iPQIRYpQ7XLxNXVO', '2024-05-17 00:48:11', '2024-05-17 00:48:11', 'user'),
-	(12, 'user11', '$2y$12$9qyNcDBlBlv26Z/wc0AqC.vI.DysCAP/nQ2a.EoCltt.JI78MQixC', 'user', 'Bagian Hukum Sekretariat Daerah', '6rogojNlRSiTRCUE', '2024-05-17 00:48:12', '2024-05-17 00:48:12', 'user'),
-	(26, 'user12', '$2y$12$D6Dw7LbbEzBxkdJt2lljT.MYbxUSFvnLl57mOE.zYYJdJFoqMsSFG', 'user', 'Bagian Pengadaan Barang dan Jasa Sekretariat Daerah', '9bOZQMPtUePPt4uk', '2024-05-17 00:48:12', '2024-05-17 00:48:12', 'user');
+INSERT INTO `users` (`id`, `username`, `password`, `level`, `nama_instansi`, `pass_view`, `id_bagian`, `remember_token`, `created_at`, `updated_at`) VALUES
+	(1, 'Admin', '$2y$12$dslC.jPtJmnBuc.JGrj4.OjkVUet9qo222HHUlt.XX.rlE4FOZ59i', 'admin', 'Admin', 'admin', 1, '6NfRfTolugUqnWAiWbUcaEp0Yus9KmHRtAXa6eLSglADz6fy3ty5BNPjBU0L', '2024-05-17 00:48:08', '2024-05-24 01:11:59'),
+	(2, 'user1', '$2y$12$leDj.TPRQQyUgVHIDQJW9O83t7HwQQmUQNiqOWKdkJCy0CtuZ5mmG', 'user', 'Inspektorat', 'user', 5, 'BCJv7oxg1rMYSubGzsNzq8xJWLtAmEXx5Zz6avXRGFEouPqpQfZYFA1m767J', '2024-05-17 00:48:08', '2024-05-24 01:17:36'),
+	(3, 'user2', '$2y$12$qg5m3GJ5QUPNT/rlY9PCtuuci2IpytA6xWo41Xt6SkEr52WK26ozu', 'user', 'Badan Perencanaan dan Pembangunan, Riset dan Inovasi Daerah', 'user', 4, 'jXLzdVQWdAFkpAWfEBmbVqVejncdc7QvJG8ajzgUjnRE0eIRiJkqTZ5dJjCA', '2024-05-17 00:48:09', '2024-05-17 00:48:09'),
+	(4, 'user3', '$2y$12$oSC/qxXt6jpPkIo4bqXfqORg0wBXCdunLLSgrs8NnxOSFKlbuS5z2', 'user', 'Badan Pengelolaan Keuangan dan Aset Daerah', 'user', 7, 'HeT4A4SS9RsYTpCv', '2024-05-17 00:48:09', '2024-05-17 00:48:09'),
+	(5, 'user4', '$2y$12$x87n5QNSVWyw1Zq4JKm39eVioqQO212GPwrAwMNC2IAnXt.eFuZIC', 'user', 'Badan Kepegawaian dan Pengembangan Sumber Daya Manusia', 'user', 8, 'tH1kKe8d9D2xP5Px', '2024-05-17 00:48:09', '2024-05-17 00:48:09'),
+	(6, 'user5', '$2y$12$aTk6FZCQTWo6/KuWzrUiWuIPfivSSOt4S9XzxRVkFQ9qNoB4Ropw.', 'user', 'Dinas Komunikasi dan Informatika', 'user', 2, 'a2HT8D34lb1vsBIv', '2024-05-17 00:48:10', '2024-05-17 00:48:10'),
+	(7, 'user6', '$2y$12$4VNZhxnGOKWV/QRmstU4JO0SQTnWEIf35gN9Etb4opJfRfbUsRszS', 'user', 'Dinas Kesehatan', 'user', 12, '8KOdhnsQc46BUE3K', '2024-05-17 00:48:10', '2024-05-17 00:48:10'),
+	(8, 'user7', '$2y$12$0tqT5khxAHa61b5e6e38ruCmc.Q14OVvPaQWbq22UbceiXHSgWZw6', 'user', 'Dinas Pengendalian Penduduk, KB dan PPPA', 'user', 13, 'PQloRE2Xkjd1aZ12', '2024-05-17 00:48:11', '2024-05-17 00:48:11'),
+	(9, 'user8', '$2y$12$mj1g2JFnopK9JuYJ0D5b6O3Qe4TNS0dEVD6AN/596oo2WtHtM0smq', 'user', 'Dinas Perpustakaan dan Kearsipan', 'user', 10, 'qlFfJeXPIGMNVoWB', '2024-05-17 00:48:11', '2024-05-17 00:48:11'),
+	(10, 'user9', '$2y$12$CMU.MnL.AV1aaTa4rVJZeOctBIMihUOIL.wCDK08TMbjX1Jz9U/Ye', 'user', 'Rumah Sakit Umum Daerah Dolopo', 'user', 11, '99RWLoPcIH9j4Xkn', '2024-05-17 00:48:11', '2024-05-17 00:48:11'),
+	(11, 'user10', '$2y$12$vIcQavX0EUhCxtRK4hKkJuoBcoNnkpOzbiRNinZpnGDyqiXFNgtES', 'user', 'Bagian Organisasi Sekretariat Daerah', 'user', 6, 'iPQIRYpQ7XLxNXVO', '2024-05-17 00:48:11', '2024-05-17 00:48:11'),
+	(12, 'user11', '$2y$12$9qyNcDBlBlv26Z/wc0AqC.vI.DysCAP/nQ2a.EoCltt.JI78MQixC', 'user', 'Bagian Hukum Sekretariat Daerah', 'user', 3, '6rogojNlRSiTRCUE', '2024-05-17 00:48:12', '2024-05-17 00:48:12'),
+	(26, 'user12', '$2y$12$D6Dw7LbbEzBxkdJt2lljT.MYbxUSFvnLl57mOE.zYYJdJFoqMsSFG', 'user', 'Bagian Pengadaan Barang dan Jasa Sekretariat Daerah', 'user', 9, '9bOZQMPtUePPt4uk', '2024-05-17 00:48:12', '2024-05-17 00:48:12');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

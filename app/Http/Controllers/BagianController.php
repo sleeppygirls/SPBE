@@ -67,11 +67,12 @@ class BagianController extends Controller
         // Mengonversi array menjadi string
         $indicatorsString = json_encode($indicatorsArray);
 
-        $bagian = Bagian::create($request->all());
-        $bagian['id'] = $request->input('id');
-        $bagian['name'] = $request->input('nama_instansi');
-        $bagian['indikators'] = $indicatorsString;
-        $bagian->save();
+        Bagian::updateOrCreate([
+            'id' => $request->input('id'),
+        ], [
+            'name' => $request->input('name'),
+            'indikators' => $indicatorsString,
+        ]);
 
         return redirect('/bagians')->with([
             'mess' => 'Data Berhasil Disimpan',
@@ -83,7 +84,6 @@ class BagianController extends Controller
      */
     public function show(Bagian $bagian)
     {
-        
     }
 
     /**
@@ -98,11 +98,11 @@ class BagianController extends Controller
         // Menggunakan json_decode untuk mengubah string JSON menjadi array
         $arrayData = json_decode($stringData, true);
 
-        if(count($arrayData) > 0) {
+        if (count($arrayData) > 0) {
 
             // Mengonversi array menjadi string yang dipisahkan oleh koma
             $commaSeparatedString = implode(", ", $arrayData);
-    
+
             $indikators = DB::select("SELECT i.*, j.id checked FROM indikators i LEFT JOIN (SELECT id FROM indikators WHERE id IN ( $commaSeparatedString )) j ON i.id =  j.id");
         } else {
             $indikators = Indikator::all();

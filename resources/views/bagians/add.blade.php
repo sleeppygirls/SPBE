@@ -16,26 +16,20 @@
                         <div style="padding-bottom: 30px ; margin-bottom: 5px" class="card">
                             <div class="row">
                                 <div class="col-11">
-                                    <form action="/bagians/{{ @$bagian->id }}" method="POST">
-                                        @if (@$bagian)
+                                    <form action="/bagians" method="POST">
+                                        {{-- @if (@$bagian)
                                             @method('PUT')
-                                        @endif
+                                        @endif --}}
                                         @csrf
                                         <input type="hidden" name="id" value="{{ @$bagian->id }}">
                                         <div class="card"
                                             style="margin-left: 80px ; padding: 20px; margin-top: 15px; margin-bottom: 15px; background-color: rgb(252, 248, 213)">
-                                            <div class="form-group">
-                                                <label for="nama_instansi">ID</label>
-                                                <input type="text" class="form-control" name="id" placeholder="ID"
-                                                    value="{{ @$bagian->id }}" {{ @$bagian->id ? 'readonly' : '' }}>
-                                            </div>
+
+                                                <input type="text" name="id" hidden value="{{ @$bagian->id }}" {{ @$bagian->id ? 'readonly' : '' }}>
                                             <div class="form-group">
                                                 <label for="nama_instansi">Nama Instansi</label>
-                                                <select id="nama_instansi" name="nama_instansi" required {{ @$bagian->id ? 'disabled' : '' }} style="margin-left: 20px;height: 40px; color: black; background-color: lightgray; font-weight: bold">
-                                                    @foreach ($user as $item)
-                                                        <option value="{{ $item->nama_instansi }}" {{ @$bagian->name == @$item->nama_instansi ? 'selected' : '' }}>{{ $item->nama_instansi }}</option>
-                                                    @endforeach
-                                                </select>
+                                                <input type="text" class="form-control" name="name" placeholder="Nama Bagian"
+                                                    value="{{ @$bagian->name }}">
                                             </div>
                                             @foreach ($indikators as $key => $indikator)
                                                 <div class="form-check">

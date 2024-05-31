@@ -53,7 +53,7 @@
                           <a href="/bagians" class="nav-link {{ @$page == 'bagian' ? 'active' : '' }}">
                               <i class="nav-icon fas fa-tasks" style="color: #B5565D;"></i>
                               <p>
-                                  Bagian Indikator
+                                  Bagian
                                   <i class="fas fa-angle-left right"></i>
                               </p>
                           </a>
@@ -68,6 +68,29 @@
                                   <a href="/bagians/create" class="nav-link">
                                       <i class="fas fa-plus-circle fa-fw nav-icon" style="color: #B5565D;"></i>
                                       <p>Tambah Bagian</p>
+                                  </a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li class="nav-item">
+                          <a href="/bagians" class="nav-link {{ @$page == 'indikator' ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-tasks" style="color: #B5565D;"></i>
+                              <p>
+                                  Indikator
+                                  <i class="fas fa-angle-left right"></i>
+                              </p>
+                          </a>
+                          <ul class="nav nav-treeview">
+                              <li class="nav-item">
+                                  <a href="/bagians" class="nav-link">
+                                      <i class="fas fa-eye fa-fw nav-icon" style="color: #B5565D;"></i>
+                                      <p>Daftar Indikator</p>
+                                  </a>
+                              </li>
+                              <li class="nav-item">
+                                  <a href="/bagians/create" class="nav-link">
+                                      <i class="fas fa-plus-circle fa-fw nav-icon" style="color: #B5565D;"></i>
+                                      <p>Tambah Indikator</p>
                                   </a>
                               </li>
                           </ul>

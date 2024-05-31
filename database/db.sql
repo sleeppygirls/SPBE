@@ -16,12 +16,10 @@
 
 
 -- Dumping database structure for spbe
-DROP DATABASE IF EXISTS `spbe`;
 CREATE DATABASE IF NOT EXISTS `spbe` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `spbe`;
 
 -- Dumping structure for table spbe.aspeks
-DROP TABLE IF EXISTS `aspeks`;
 CREATE TABLE IF NOT EXISTS `aspeks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `aspek` varchar(50) DEFAULT NULL,
@@ -43,10 +41,10 @@ INSERT INTO `aspeks` (`id`, `aspek`, `created_at`, `updated_at`) VALUES
 	(8, 'Layanan Publik Berbasis Elektronik', NULL, NULL);
 
 -- Dumping structure for table spbe.bagians
-DROP TABLE IF EXISTS `bagians`;
 CREATE TABLE IF NOT EXISTS `bagians` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(225) DEFAULT NULL,
+  `id_task` int(11) DEFAULT NULL,
   `indikators` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -55,23 +53,22 @@ CREATE TABLE IF NOT EXISTS `bagians` (
 
 -- Dumping data for table spbe.bagians: ~13 rows (approximately)
 DELETE FROM `bagians`;
-INSERT INTO `bagians` (`id`, `name`, `indikators`, `created_at`, `updated_at`) VALUES
-	(1, 'Admin', '["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47"]', NULL, '2024-05-23 00:50:33'),
-	(2, 'Dinas Komunikasi dan Informatika', '["1","2","4","5","6","7","8","11","12","15","16","17","18","19","20","22","23","28","30","31","42","43"]', '2024-05-23 01:14:02', '2024-05-23 01:14:55'),
-	(3, 'Bagian Hukum Sekretariat Daerah', '["1","2","3","4","5","6","7","8","9","10","44"]', '2024-05-23 01:16:16', '2024-05-23 01:16:16'),
-	(4, 'Badan Perencanaan dan Pembangunan, Riset dan Inovasi Daerah', '["3","13","23","32"]', '2024-05-23 23:10:31', '2024-05-23 23:10:31'),
-	(5, 'Inspektorat', '["9","21","29","30","31","39"]', '2024-05-23 23:11:21', '2024-05-23 23:11:21'),
-	(6, 'Bagian Organisasi Sekretariat Daerah', '["10","14","19","20","27","40"]', '2024-05-23 23:12:05', '2024-05-23 23:12:05'),
-	(7, 'Badan Pengelolaan Keuangan dan Aset Daerah', '["13","24","33","34","38"]', '2024-05-23 23:12:58', '2024-05-23 23:12:58'),
-	(8, 'Badan Kepegawaian dan Pengembangan Sumber Daya Manusia', '["25","26","36","41"]', '2024-05-23 23:13:51', '2024-05-23 23:13:51'),
-	(9, 'Bagian Pengadaan Barang dan Jasa Sekretariat Daerah', '["25"]', '2024-05-23 23:15:07', '2024-05-23 23:15:08'),
-	(10, 'Dinas Perpustakaan dan Kearsipan', '["37"]', '2024-05-23 23:21:48', '2024-05-23 23:21:48'),
-	(11, 'Rumah Sakit Umum Daerah Dolopo', '["45"]', '2024-05-23 23:22:58', '2024-05-26 21:18:18'),
-	(12, 'Dinas Kesehatan', '["46"]', '2024-05-26 21:18:56', '2024-05-26 21:18:56'),
-	(13, 'Dinas Pengendalian Penduduk, KB dan PPPA', '["47"]', '2024-05-26 21:19:12', '2024-05-27 19:02:44');
+INSERT INTO `bagians` (`id`, `name`, `id_task`, `indikators`, `created_at`, `updated_at`) VALUES
+	(1, 'Admin', 1, '["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47"]', NULL, '2024-05-23 00:50:33'),
+	(2, 'Dinas Komunikasi dan Informatika', 1, '["1","2","4","5","6","7","8","11","12","15","16","17","18","19","20","22","23","28","30","31","42","43"]', '2024-05-23 01:14:02', '2024-05-23 01:14:55'),
+	(3, 'Bagian Hukum Sekretariat Daerah', 1, '["1","2","3","4","5","6","7","8","9","10","44"]', '2024-05-23 01:16:16', '2024-05-23 01:16:16'),
+	(4, 'Badan Perencanaan dan Pembangunan, Riset dan Inovasi Daerah', 1, '["3","13","23","32"]', '2024-05-23 23:10:31', '2024-05-23 23:10:31'),
+	(5, 'Inspektorat', 1, '["9","21","29","30","31","39"]', '2024-05-23 23:11:21', '2024-05-23 23:11:21'),
+	(6, 'Bagian Organisasi Sekretariat Daerah', 1, '["10","14","19","20","27","40"]', '2024-05-23 23:12:05', '2024-05-23 23:12:05'),
+	(7, 'Badan Pengelolaan Keuangan dan Aset Daerah', 1, '["13","24","33","34","38"]', '2024-05-23 23:12:58', '2024-05-23 23:12:58'),
+	(8, 'Badan Kepegawaian dan Pengembangan Sumber Daya Manusia', 1, '["25","26","36","41"]', '2024-05-23 23:13:51', '2024-05-23 23:13:51'),
+	(9, 'Bagian Pengadaan Barang dan Jasa Sekretariat Daerah', 1, '["25"]', '2024-05-23 23:15:07', '2024-05-23 23:15:08'),
+	(10, 'Dinas Perpustakaan dan Kearsipan', 1, '["37"]', '2024-05-23 23:21:48', '2024-05-23 23:21:48'),
+	(11, 'Rumah Sakit Umum Daerah Dolopo', 1, '["45"]', '2024-05-23 23:22:58', '2024-05-26 21:18:18'),
+	(12, 'Dinas Kesehatan', 1, '["46"]', '2024-05-26 21:18:56', '2024-05-26 21:18:56'),
+	(13, 'Dinas Pengendalian Penduduk, KB dan PPPA', 1, '["47"]', '2024-05-26 21:19:12', '2024-05-27 19:02:44');
 
 -- Dumping structure for table spbe.detail_indikators
-DROP TABLE IF EXISTS `detail_indikators`;
 CREATE TABLE IF NOT EXISTS `detail_indikators` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `file` varchar(255) DEFAULT NULL,
@@ -82,19 +79,14 @@ CREATE TABLE IF NOT EXISTS `detail_indikators` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table spbe.detail_indikators: ~4 rows (approximately)
+-- Dumping data for table spbe.detail_indikators: ~0 rows (approximately)
 DELETE FROM `detail_indikators`;
 INSERT INTO `detail_indikators` (`id`, `file`, `username`, `id_indikator`, `capaian`, `note`, `created_at`, `updated_at`) VALUES
-	(8, '', 'user1', '9', 2, NULL, '2024-05-26 20:08:23', '2024-05-26 20:13:33'),
-	(9, '', 'user1', '21', 5, NULL, '2024-05-26 20:13:55', '2024-05-26 20:13:55'),
-	(10, '', 'user1', '29', 1, NULL, '2024-05-27 00:24:08', '2024-05-27 00:24:20'),
-	(11, '', 'user1', '30', 1, NULL, '2024-05-27 00:35:21', '2024-05-27 00:35:21'),
-	(12, '', 'user1', '31', 3, NULL, '2024-05-27 02:07:43', '2024-05-27 02:07:53');
+	(18, '', 'user1', '9', 4, NULL, '2024-05-30 20:47:23', '2024-05-30 20:47:23');
 
 -- Dumping structure for table spbe.domains
-DROP TABLE IF EXISTS `domains`;
 CREATE TABLE IF NOT EXISTS `domains` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain` varchar(50) DEFAULT NULL,
@@ -112,12 +104,10 @@ INSERT INTO `domains` (`id`, `domain`, `created_at`, `updated_at`) VALUES
 	(4, 'Layanan SPBE', NULL, NULL);
 
 -- Dumping structure for table spbe.indikators
-DROP TABLE IF EXISTS `indikators`;
 CREATE TABLE IF NOT EXISTS `indikators` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `no` int(11) NOT NULL DEFAULT 0,
   `name` varchar(255) NOT NULL,
-  `id_task` varchar(255) NOT NULL,
   `username` varchar(50) DEFAULT NULL,
   `aspek` int(11) DEFAULT NULL,
   `domain` int(11) DEFAULT NULL,
@@ -128,57 +118,56 @@ CREATE TABLE IF NOT EXISTS `indikators` (
 
 -- Dumping data for table spbe.indikators: ~47 rows (approximately)
 DELETE FROM `indikators`;
-INSERT INTO `indikators` (`id`, `no`, `name`, `id_task`, `username`, `aspek`, `domain`, `created_at`, `updated_at`) VALUES
-	(1, 1, 'Tingkat Kematangan Kebijakan Internal Arsitektur SPBE', '1', NULL, 1, 1, NULL, '2024-05-20 01:40:44'),
-	(2, 2, 'Tingkat Kematangan Kebijakan Internal Peta Rencana', '1', NULL, 1, 1, NULL, '2024-05-19 22:30:15'),
-	(3, 3, 'Tingkat Kematangan Kebijakan Internal Manajemen Data', '1', NULL, 1, 1, NULL, '2024-05-19 22:33:37'),
-	(4, 4, 'Tingkat Kematangan Kebijakan Internal Pembangunan Aplikasi SPBE', '1', NULL, 1, 1, NULL, '2024-05-19 22:39:17'),
-	(5, 5, 'Tingkat Kematangan Kebijakan Internal Layanan Pusat Data', '1', NULL, 1, 1, NULL, NULL),
-	(6, 6, 'Tingkat Kematangan Kebijakan Internal Layanan', '1', NULL, 1, 1, NULL, NULL),
-	(7, 7, 'Tingkat Kematangan Kebijakan Internal Penggunaan Sistem', '1', NULL, 1, 1, NULL, NULL),
-	(8, 8, 'Tingkat Kematangan Kebijakan Internal Manajemen Keamanan Informasi', '1', NULL, 1, 1, NULL, NULL),
-	(9, 9, 'Tingkat Kematangan Kebijakan Internal Audit TIK', '1', NULL, 1, 1, NULL, NULL),
-	(10, 10, 'Tingkat Kematangan Kebijakan Internal Tim Koordinasi', '1', NULL, 1, 1, NULL, NULL),
-	(11, 11, 'Tingkat Kematangan Arsitektur SPBE Instansi Pusat/Pemerintah Daerah', '1', NULL, 2, 2, NULL, NULL),
-	(12, 12, 'Tingkat Kematangan Peta Rencana SPBE Instansi Pusat/Pemerintah Daerah', '1', NULL, 2, 2, NULL, NULL),
-	(13, 13, 'Tingkat Kematangan Keterpaduan Rencana dan Anggaran SPBE', '1', NULL, 2, 2, NULL, NULL),
-	(14, 14, 'Tingkat Kematangan Inovasi Proses Bisnis SPBE', '1', NULL, 2, 2, NULL, NULL),
-	(15, 15, 'Tingkat Kematangan Pembangunan Aplikasi SPBE', '1', NULL, 3, 2, NULL, NULL),
-	(16, 16, 'Tingkat Kematangan Layanan Pusat Data', '1', NULL, 3, 2, NULL, NULL),
-	(17, 17, 'Tingkat Kematangan Layanan Jaringan Intra Instansi Pusat/Pemerintah Daerah', '1', NULL, 3, 2, NULL, NULL),
-	(18, 18, 'Tingkat Kematangan Penggunaan Sistem Penghubung Layanan Instansi Pusat/Pemerintah Daerah', '1', NULL, 3, 2, NULL, NULL),
-	(19, 19, 'Tingkat Kematangan Pelaksanaan Tim Koordinasi SPBE Instansi Pusat/Pemerintah Daerah', '1', NULL, 4, 2, NULL, NULL),
-	(20, 20, 'Tingkat Kematangan Kolaborasi Penerapan SPBE', '1', NULL, 4, 2, NULL, NULL),
-	(21, 21, 'Tingkat Kematangan Penerapan Manajemen Risiko SPBE', '1', NULL, 5, 3, NULL, NULL),
-	(22, 22, 'Tingkat Kematangan Penerapan Manajemen Keamanan Informasi', '1', NULL, 5, 3, NULL, NULL),
-	(23, 23, 'Tingkat Kematangan Penerapan Manajemen Data', '1', NULL, 5, 3, NULL, NULL),
-	(24, 24, 'Tingkat Kematangan Penerapan Manajemen Aset TIK', '1', NULL, 5, 3, NULL, NULL),
-	(25, 25, 'Tingkat Kematangan Penerapan Kompetensi Sumber Daya', '1', NULL, 5, 3, NULL, NULL),
-	(26, 26, 'Tingkat Kematangan Penerapan Manajemen Pengetahuan', '1', NULL, 5, 3, NULL, NULL),
-	(27, 27, 'Tingkat Kematangan Penerapan Manajemen Perubahan', '1', NULL, 5, 3, NULL, NULL),
-	(28, 28, 'Tingkat Kematangan Penerapan Manajemen Layanan SPBE', '1', NULL, 5, 3, NULL, NULL),
-	(29, 29, 'Tingkat Kematangan Pelaksanaan Audit Infrastruktur SPBE', '1', NULL, 6, 3, NULL, NULL),
-	(30, 30, 'Tingkat Kematangan Pelaksanaan Audit Aplikasi SPBE', '1', NULL, 6, 3, NULL, NULL),
-	(31, 31, 'Tingkat Kematangan Pelaksanaan Audit Keamanan SPBE', '1', NULL, 6, 3, NULL, NULL),
-	(32, 32, 'Tingkat Kematangan Layanan Perencanaan', '1', NULL, 7, 4, NULL, NULL),
-	(33, 33, 'Tingkat Kematangan Layanan Penganggaran', '1', NULL, 7, 4, NULL, NULL),
-	(34, 34, 'Tingkat Kematangan Layanan Keuangan', '1', NULL, 7, 4, NULL, NULL),
-	(35, 35, 'Tingkat Kematangan Layanan Pengadaan Barang dan Jasa', '1', NULL, 7, 4, NULL, NULL),
-	(36, 36, 'Tingkat Kematangan Layanan Kepegawaian', '1', NULL, 7, 4, NULL, NULL),
-	(37, 37, 'Tingkat Kematangan Layanan Kearsipan Dinamis', '1', NULL, 7, 4, NULL, NULL),
-	(38, 38, 'Tingkat Kematangan Layanan Pengelolaan Barang Milik', '1', NULL, 7, 4, NULL, NULL),
-	(39, 39, 'Tingkat Kematangan Layanan Pengawasan Internal', '1', NULL, 7, 4, NULL, NULL),
-	(40, 40, 'Tingkat Kematangan Layanan Akuntabilitas Kinerja Organisasi', '1', NULL, 7, 4, NULL, NULL),
-	(41, 41, 'Tingkat Kematangan Layanan Kinerja Pegawai', '1', NULL, 7, 4, NULL, NULL),
-	(42, 42, 'Tingkat Kematangan Layanan Pengaduan Pelayanan Publik', '1', NULL, 8, 4, NULL, NULL),
-	(43, 43, 'Tingkat Kematangan Layanan Data Terbuka', '1', NULL, 8, 4, NULL, NULL),
-	(44, 44, 'Tingkat Kematangan Jaringan Dokumentasi dan Informasi', '1', NULL, 8, 4, NULL, NULL),
-	(45, 45, 'Tingkat Kematangan Layanan Publik Sektor 1', '1', NULL, 8, 4, NULL, NULL),
-	(46, 46, 'Tingkat Kematangan Layanan Publik Sektor 2', '1', NULL, 8, 4, NULL, NULL),
-	(47, 47, 'Tingkat Kematangan Layanan Publik Sektor 3', '1', NULL, 8, 4, NULL, NULL);
+INSERT INTO `indikators` (`id`, `no`, `name`, `username`, `aspek`, `domain`, `created_at`, `updated_at`) VALUES
+	(1, 1, 'Tingkat Kematangan Kebijakan Internal Arsitektur SPBE', NULL, 1, 1, NULL, '2024-05-20 01:40:44'),
+	(2, 2, 'Tingkat Kematangan Kebijakan Internal Peta Rencana', NULL, 1, 1, NULL, '2024-05-19 22:30:15'),
+	(3, 3, 'Tingkat Kematangan Kebijakan Internal Manajemen Data', NULL, 1, 1, NULL, '2024-05-19 22:33:37'),
+	(4, 4, 'Tingkat Kematangan Kebijakan Internal Pembangunan Aplikasi SPBE', NULL, 1, 1, NULL, '2024-05-19 22:39:17'),
+	(5, 5, 'Tingkat Kematangan Kebijakan Internal Layanan Pusat Data', NULL, 1, 1, NULL, NULL),
+	(6, 6, 'Tingkat Kematangan Kebijakan Internal Layanan', NULL, 1, 1, NULL, NULL),
+	(7, 7, 'Tingkat Kematangan Kebijakan Internal Penggunaan Sistem', NULL, 1, 1, NULL, NULL),
+	(8, 8, 'Tingkat Kematangan Kebijakan Internal Manajemen Keamanan Informasi', NULL, 1, 1, NULL, NULL),
+	(9, 9, 'Tingkat Kematangan Kebijakan Internal Audit TIK', NULL, 1, 1, NULL, NULL),
+	(10, 10, 'Tingkat Kematangan Kebijakan Internal Tim Koordinasi', NULL, 1, 1, NULL, NULL),
+	(11, 11, 'Tingkat Kematangan Arsitektur SPBE Instansi Pusat/Pemerintah Daerah', NULL, 2, 2, NULL, NULL),
+	(12, 12, 'Tingkat Kematangan Peta Rencana SPBE Instansi Pusat/Pemerintah Daerah', NULL, 2, 2, NULL, NULL),
+	(13, 13, 'Tingkat Kematangan Keterpaduan Rencana dan Anggaran SPBE', NULL, 2, 2, NULL, NULL),
+	(14, 14, 'Tingkat Kematangan Inovasi Proses Bisnis SPBE', NULL, 2, 2, NULL, NULL),
+	(15, 15, 'Tingkat Kematangan Pembangunan Aplikasi SPBE', NULL, 3, 2, NULL, NULL),
+	(16, 16, 'Tingkat Kematangan Layanan Pusat Data', NULL, 3, 2, NULL, NULL),
+	(17, 17, 'Tingkat Kematangan Layanan Jaringan Intra Instansi Pusat/Pemerintah Daerah', NULL, 3, 2, NULL, NULL),
+	(18, 18, 'Tingkat Kematangan Penggunaan Sistem Penghubung Layanan Instansi Pusat/Pemerintah Daerah', NULL, 3, 2, NULL, NULL),
+	(19, 19, 'Tingkat Kematangan Pelaksanaan Tim Koordinasi SPBE Instansi Pusat/Pemerintah Daerah', NULL, 4, 2, NULL, NULL),
+	(20, 20, 'Tingkat Kematangan Kolaborasi Penerapan SPBE', NULL, 4, 2, NULL, NULL),
+	(21, 21, 'Tingkat Kematangan Penerapan Manajemen Risiko SPBE', NULL, 5, 3, NULL, NULL),
+	(22, 22, 'Tingkat Kematangan Penerapan Manajemen Keamanan Informasi', NULL, 5, 3, NULL, NULL),
+	(23, 23, 'Tingkat Kematangan Penerapan Manajemen Data', NULL, 5, 3, NULL, NULL),
+	(24, 24, 'Tingkat Kematangan Penerapan Manajemen Aset TIK', NULL, 5, 3, NULL, NULL),
+	(25, 25, 'Tingkat Kematangan Penerapan Kompetensi Sumber Daya', NULL, 5, 3, NULL, NULL),
+	(26, 26, 'Tingkat Kematangan Penerapan Manajemen Pengetahuan', NULL, 5, 3, NULL, NULL),
+	(27, 27, 'Tingkat Kematangan Penerapan Manajemen Perubahan', NULL, 5, 3, NULL, NULL),
+	(28, 28, 'Tingkat Kematangan Penerapan Manajemen Layanan SPBE', NULL, 5, 3, NULL, NULL),
+	(29, 29, 'Tingkat Kematangan Pelaksanaan Audit Infrastruktur SPBE', NULL, 6, 3, NULL, NULL),
+	(30, 30, 'Tingkat Kematangan Pelaksanaan Audit Aplikasi SPBE', NULL, 6, 3, NULL, NULL),
+	(31, 31, 'Tingkat Kematangan Pelaksanaan Audit Keamanan SPBE', NULL, 6, 3, NULL, NULL),
+	(32, 32, 'Tingkat Kematangan Layanan Perencanaan', NULL, 7, 4, NULL, NULL),
+	(33, 33, 'Tingkat Kematangan Layanan Penganggaran', NULL, 7, 4, NULL, NULL),
+	(34, 34, 'Tingkat Kematangan Layanan Keuangan', NULL, 7, 4, NULL, NULL),
+	(35, 35, 'Tingkat Kematangan Layanan Pengadaan Barang dan Jasa', NULL, 7, 4, NULL, NULL),
+	(36, 36, 'Tingkat Kematangan Layanan Kepegawaian', NULL, 7, 4, NULL, NULL),
+	(37, 37, 'Tingkat Kematangan Layanan Kearsipan Dinamis', NULL, 7, 4, NULL, NULL),
+	(38, 38, 'Tingkat Kematangan Layanan Pengelolaan Barang Milik', NULL, 7, 4, NULL, NULL),
+	(39, 39, 'Tingkat Kematangan Layanan Pengawasan Internal', NULL, 7, 4, NULL, NULL),
+	(40, 40, 'Tingkat Kematangan Layanan Akuntabilitas Kinerja Organisasi', NULL, 7, 4, NULL, NULL),
+	(41, 41, 'Tingkat Kematangan Layanan Kinerja Pegawai', NULL, 7, 4, NULL, NULL),
+	(42, 42, 'Tingkat Kematangan Layanan Pengaduan Pelayanan Publik', NULL, 8, 4, NULL, NULL),
+	(43, 43, 'Tingkat Kematangan Layanan Data Terbuka', NULL, 8, 4, NULL, NULL),
+	(44, 44, 'Tingkat Kematangan Jaringan Dokumentasi dan Informasi', NULL, 8, 4, NULL, NULL),
+	(45, 45, 'Tingkat Kematangan Layanan Publik Sektor 1', NULL, 8, 4, NULL, NULL),
+	(46, 46, 'Tingkat Kematangan Layanan Publik Sektor 2', NULL, 8, 4, NULL, NULL),
+	(47, 47, 'Tingkat Kematangan Layanan Publik Sektor 3', NULL, 8, 4, NULL, NULL);
 
 -- Dumping structure for table spbe.jawabans
-DROP TABLE IF EXISTS `jawabans`;
 CREATE TABLE IF NOT EXISTS `jawabans` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `d_jawaban` varchar(255) DEFAULT NULL,
@@ -188,39 +177,18 @@ CREATE TABLE IF NOT EXISTS `jawabans` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table spbe.jawabans: ~24 rows (approximately)
+-- Dumping data for table spbe.jawabans: ~0 rows (approximately)
 DELETE FROM `jawabans`;
 INSERT INTO `jawabans` (`id`, `d_jawaban`, `id_penjelasan`, `username`, `id_indikator`, `created_at`, `updated_at`) VALUES
-	(57, 'rdxh', 41, 'user1', '9', '2024-05-26 20:08:23', '2024-05-26 20:08:23'),
-	(58, 'rtxdhu', 42, 'user1', '9', '2024-05-26 20:08:23', '2024-05-26 20:08:23'),
-	(59, 'xdth', 43, 'user1', '9', '2024-05-26 20:08:23', '2024-05-26 20:08:23'),
-	(60, 'tfxh', 44, 'user1', '9', '2024-05-26 20:08:23', '2024-05-26 20:08:23'),
-	(61, 'fh', 45, 'user1', '9', '2024-05-26 20:08:23', '2024-05-26 20:08:23'),
-	(62, 'fh', 101, 'user1', '21', '2024-05-26 20:13:55', '2024-05-26 20:13:55'),
-	(63, 'fgh', 102, 'user1', '21', '2024-05-26 20:13:55', '2024-05-26 20:13:55'),
-	(64, 'fh', 103, 'user1', '21', '2024-05-26 20:13:55', '2024-05-26 20:13:55'),
-	(65, 'fh', 104, 'user1', '21', '2024-05-26 20:13:55', '2024-05-26 20:13:55'),
-	(66, 'xv', 105, 'user1', '21', '2024-05-26 20:13:55', '2024-05-26 20:13:55'),
-	(67, 'gj', 141, 'user1', '29', '2024-05-27 00:24:08', '2024-05-27 00:24:08'),
-	(68, 'fg', 142, 'user1', '29', '2024-05-27 00:24:08', '2024-05-27 00:24:08'),
-	(69, 'fg', 143, 'user1', '29', '2024-05-27 00:24:08', '2024-05-27 00:24:08'),
-	(70, 'fd', 144, 'user1', '29', '2024-05-27 00:24:08', '2024-05-27 00:24:08'),
-	(71, 'sdfx', 145, 'user1', '29', '2024-05-27 00:24:08', '2024-05-27 00:24:08'),
-	(72, 'qwr', 146, 'user1', '30', '2024-05-27 00:35:21', '2024-05-27 00:35:21'),
-	(73, 'rwa', 147, 'user1', '30', '2024-05-27 00:35:21', '2024-05-27 00:35:21'),
-	(74, 'af', 148, 'user1', '30', '2024-05-27 00:35:21', '2024-05-27 00:35:21'),
-	(75, 'faw', 149, 'user1', '30', '2024-05-27 00:35:21', '2024-05-27 00:35:21'),
-	(76, 'awf', 150, 'user1', '30', '2024-05-27 00:35:21', '2024-05-27 00:35:21'),
-	(77, 'gh', 151, 'user1', '31', '2024-05-27 02:07:43', '2024-05-27 02:07:43'),
-	(78, 'gh', 152, 'user1', '31', '2024-05-27 02:07:43', '2024-05-27 02:07:43'),
-	(79, 'gh', 153, 'user1', '31', '2024-05-27 02:07:43', '2024-05-27 02:07:43'),
-	(80, 'gh', 154, 'user1', '31', '2024-05-27 02:07:43', '2024-05-27 02:07:43'),
-	(81, 'chg', 155, 'user1', '31', '2024-05-27 02:07:43', '2024-05-27 02:07:43');
+	(107, 'fdsf', 41, 'user1', '9', '2024-05-30 20:47:23', '2024-05-30 20:47:23'),
+	(108, 'fsdf', 42, 'user1', '9', '2024-05-30 20:47:23', '2024-05-30 20:47:23'),
+	(109, 'fsdf', 43, 'user1', '9', '2024-05-30 20:47:23', '2024-05-30 20:47:23'),
+	(110, 'fsdfs', 44, 'user1', '9', '2024-05-30 20:47:23', '2024-05-30 20:47:23'),
+	(111, 'fsfdfds', 45, 'user1', '9', '2024-05-30 20:47:23', '2024-05-30 20:47:23');
 
 -- Dumping structure for table spbe.migrations
-DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) NOT NULL,
@@ -240,7 +208,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(7, '2024_05_16_015651_create_tasks_table', 1);
 
 -- Dumping structure for table spbe.penjelasans
-DROP TABLE IF EXISTS `penjelasans`;
 CREATE TABLE IF NOT EXISTS `penjelasans` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `text` longtext NOT NULL,
@@ -490,7 +457,6 @@ INSERT INTO `penjelasans` (`id`, `text`, `id_indikator`, `created_at`, `updated_
 	(235, 'Kriteria tingkat 4 telah terpenuhi dan Layanan Publik Sektoral Berbasis Elektronik telah dilakukan perbaikan berdasarkan hasil reviu dan evaluasi terhadap perubahan lingkungan, peraturan perundang-undangan, teknologi dan kebutuhan Instansi Pusat/Pemerintah Daerah.', '47', NULL, NULL);
 
 -- Dumping structure for table spbe.personal_access_tokens
-DROP TABLE IF EXISTS `personal_access_tokens`;
 CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `tokenable_type` varchar(255) NOT NULL,
@@ -511,7 +477,6 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
 DELETE FROM `personal_access_tokens`;
 
 -- Dumping structure for table spbe.tasks
-DROP TABLE IF EXISTS `tasks`;
 CREATE TABLE IF NOT EXISTS `tasks` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -531,7 +496,6 @@ INSERT INTO `tasks` (`id`, `name`, `tahap`, `batas`, `tahun`, `status`, `desc`, 
 	(1, 'testing', 'penilaian mandiri', '2024-04-30', '2024', 'pemantauan', 'testing', NULL, '2024-05-26 20:20:22');
 
 -- Dumping structure for table spbe.users
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(190) NOT NULL,
@@ -547,16 +511,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `users_username_unique` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table spbe.users: ~13 rows (approximately)
+-- Dumping data for table spbe.users: ~14 rows (approximately)
 DELETE FROM `users`;
 INSERT INTO `users` (`id`, `username`, `password`, `level`, `nama_instansi`, `pass_view`, `id_bagian`, `remember_token`, `created_at`, `updated_at`) VALUES
-	(1, 'Admin', '$2y$12$dslC.jPtJmnBuc.JGrj4.OjkVUet9qo222HHUlt.XX.rlE4FOZ59i', 'admin', 'Admin', 'admin', 1, '6NfRfTolugUqnWAiWbUcaEp0Yus9KmHRtAXa6eLSglADz6fy3ty5BNPjBU0L', '2024-05-17 00:48:08', '2024-05-24 01:11:59'),
-	(2, 'user1', '$2y$12$leDj.TPRQQyUgVHIDQJW9O83t7HwQQmUQNiqOWKdkJCy0CtuZ5mmG', 'user', 'Inspektorat', 'user', 5, 'BCJv7oxg1rMYSubGzsNzq8xJWLtAmEXx5Zz6avXRGFEouPqpQfZYFA1m767J', '2024-05-17 00:48:08', '2024-05-24 01:17:36'),
+	(1, 'Admin', '$2y$12$dslC.jPtJmnBuc.JGrj4.OjkVUet9qo222HHUlt.XX.rlE4FOZ59i', 'admin', 'Admin', 'admin', 1, 'SOY0NkfH1vL6eQuozAuBuMNKqzhWSq8gbPXGEVbDgvpMW13M4VgRos1vuHQU', '2024-05-17 00:48:08', '2024-05-24 01:11:59'),
+	(2, 'user1', '$2y$12$oGgLJPaHngwols.p8eYFme4hKjZTSqwyys1DjzjMRRwdZHkJO9/n.', 'user', 'Inspektorat', 'user1', 5, 'GuWiCriXGNS7vD1WtYt3jRKbESk2taBTi5ivG74C3pAs0WZIvbj1kMFc7Fd9', '2024-05-17 00:48:08', '2024-05-29 17:47:01'),
 	(3, 'user2', '$2y$12$qg5m3GJ5QUPNT/rlY9PCtuuci2IpytA6xWo41Xt6SkEr52WK26ozu', 'user', 'Badan Perencanaan dan Pembangunan, Riset dan Inovasi Daerah', 'user', 4, 'jXLzdVQWdAFkpAWfEBmbVqVejncdc7QvJG8ajzgUjnRE0eIRiJkqTZ5dJjCA', '2024-05-17 00:48:09', '2024-05-17 00:48:09'),
-	(4, 'user3', '$2y$12$oSC/qxXt6jpPkIo4bqXfqORg0wBXCdunLLSgrs8NnxOSFKlbuS5z2', 'user', 'Badan Pengelolaan Keuangan dan Aset Daerah', 'user', 7, 'HeT4A4SS9RsYTpCv', '2024-05-17 00:48:09', '2024-05-17 00:48:09'),
+	(4, 'user3', '$2y$12$oSC/qxXt6jpPkIo4bqXfqORg0wBXCdunLLSgrs8NnxOSFKlbuS5z2', 'user', 'Badan Pengelolaan Keuangan dan Aset Daerah', 'user', 7, 'VjGpSGH8EQXQFdSEBCNMohV4Bp0yuLQj9B0NqRvlO2IbpmjEnNZSoW8ZTLm4', '2024-05-17 00:48:09', '2024-05-17 00:48:09'),
 	(5, 'user4', '$2y$12$x87n5QNSVWyw1Zq4JKm39eVioqQO212GPwrAwMNC2IAnXt.eFuZIC', 'user', 'Badan Kepegawaian dan Pengembangan Sumber Daya Manusia', 'user', 8, 'tH1kKe8d9D2xP5Px', '2024-05-17 00:48:09', '2024-05-17 00:48:09'),
 	(6, 'user5', '$2y$12$aTk6FZCQTWo6/KuWzrUiWuIPfivSSOt4S9XzxRVkFQ9qNoB4Ropw.', 'user', 'Dinas Komunikasi dan Informatika', 'user', 2, 'a2HT8D34lb1vsBIv', '2024-05-17 00:48:10', '2024-05-17 00:48:10'),
-	(7, 'user6', '$2y$12$4VNZhxnGOKWV/QRmstU4JO0SQTnWEIf35gN9Etb4opJfRfbUsRszS', 'user', 'Dinas Kesehatan', 'user', 12, '8KOdhnsQc46BUE3K', '2024-05-17 00:48:10', '2024-05-17 00:48:10'),
+	(7, 'user6', '$2y$12$4VNZhxnGOKWV/QRmstU4JO0SQTnWEIf35gN9Etb4opJfRfbUsRszS', 'user', 'Dinas Kesehatan', 'user', 12, 'NVMDUXJyoOjnbAVncEFrw1BIC7QjUGFhtxs345IT6TBF5U2LpJ6Yj9nw5lXn', '2024-05-17 00:48:10', '2024-05-17 00:48:10'),
 	(8, 'user7', '$2y$12$0tqT5khxAHa61b5e6e38ruCmc.Q14OVvPaQWbq22UbceiXHSgWZw6', 'user', 'Dinas Pengendalian Penduduk, KB dan PPPA', 'user', 13, 'PQloRE2Xkjd1aZ12', '2024-05-17 00:48:11', '2024-05-17 00:48:11'),
 	(9, 'user8', '$2y$12$mj1g2JFnopK9JuYJ0D5b6O3Qe4TNS0dEVD6AN/596oo2WtHtM0smq', 'user', 'Dinas Perpustakaan dan Kearsipan', 'user', 10, 'qlFfJeXPIGMNVoWB', '2024-05-17 00:48:11', '2024-05-17 00:48:11'),
 	(10, 'user9', '$2y$12$CMU.MnL.AV1aaTa4rVJZeOctBIMihUOIL.wCDK08TMbjX1Jz9U/Ye', 'user', 'Rumah Sakit Umum Daerah Dolopo', 'user', 11, '99RWLoPcIH9j4Xkn', '2024-05-17 00:48:11', '2024-05-17 00:48:11'),

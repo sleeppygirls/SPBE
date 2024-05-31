@@ -17,7 +17,6 @@ class Indikator extends Model
         'id',
         'no',
         'name',
-        'id_task',
         'aspek',
         'domain',
     ];

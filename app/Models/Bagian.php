@@ -16,6 +16,7 @@ class Bagian extends Model
     protected $fillable = [                     // nama kolom yang dapat di edit
         'id',
         'name',
+        'id_task',
         'indikators',
     ];
 }

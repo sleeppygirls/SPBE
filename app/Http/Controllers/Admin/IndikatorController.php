@@ -19,68 +19,7 @@ use App\Models\Aspek;
 use App\Http\Controllers\Controller;
 
 class IndikatorController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
-    public function task(Request $req)
-    {
-        // dd($req);
-        $task = Task::find($req->id_task);
-        // $indikator = DB::table('indikators')->where('id_task', '=', $task->id)->get();
-        $indikators = DB::select(
-            "SELECT i.*, d.id exist FROM indikators i LEFT JOIN 
-            (SELECT * FROM detail_indikators d WHERE username = ?) 
-            d ON i.id = d.id_indikator order by i.no asc",
-            [
-                $req->username,
-                // Auth::user()->level == 'admin',
-            ]
-        );
-
-
-        $data = [
-            'indikator' => $indikators,
-            "page" => "penilaian",
-            'task' => $task,
-            'username' => $req->username
-        ];
-
-        // dd($data);
-        return view('indikators.indikator', $data);
-    }
-
-    public function test($id_task,$username)
-    {
-        // dd(Session()->get('username'));
-        $task = Task::find($id_task);
-        // $indikator = DB::table('indikators')->where('id_task', '=', $task->id)->get();
-        $indikators = DB::select(
-            "SELECT i.*, d.id exist FROM indikators i LEFT JOIN 
-            (SELECT * FROM detail_indikators d WHERE username = ?) 
-            d ON i.id = d.id_indikator order by i.no asc",
-            [
-                $username,
-                // Auth::user()->level == 'admin',
-            ]
-        );
-
-        // dd($indikators);
-
-        // dd($indikator);
-
-        $data = [
-            'indikator' => $indikators,
-            "page" => "penilaian",
-            'task' => $task,
-            'username' => $username
-        ];
-
-        // dd($data);
-        return view('indikators.indikator', $data);
-    }
-
-    
+{    
     public function index()
     {
         $indikator = Indikator::all();

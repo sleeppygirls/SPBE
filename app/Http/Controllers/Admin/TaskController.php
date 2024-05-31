@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Task;
 use Illuminate\Support\Facades\DB;
@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Bagian;
+use App\Http\Controllers\Controller;
 
 class TaskController extends Controller
 {
@@ -16,13 +17,13 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $task = Task::with('bagian')->get();
+        $tasks = Task::all();
 
         $data = [
-            "page" => "penilaian",
-            "data" => $task,
+            "page" => "Tugas",
+            "data" => $tasks,
         ];
-        return view('penilaians.data', $data);
+        return view('tasks.data', $data);
     }
 
     /**

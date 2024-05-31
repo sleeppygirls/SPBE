@@ -17,10 +17,9 @@ class BagianController extends Controller
     public function index()
     {
         $data = [
-
             'user' => User::all(),
             'indikators' => Indikator::all(),
-            'bagians' => Bagian::all(),
+            'bagians' => Bagian::with('task')->get(),
             "page" => "bagian",
         ];
 

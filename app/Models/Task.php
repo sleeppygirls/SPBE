@@ -22,7 +22,7 @@ class Task extends Model
         'status',
         'desc',
     ];
-    public function indikator() {
-        return $this->hasMany(Penjelasan::class, 'id_task', 'id');
+    public function bagian() {
+        return $this->hasMany(Bagian::class, 'id_task', 'id');
     }
 }

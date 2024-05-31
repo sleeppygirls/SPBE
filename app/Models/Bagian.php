@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Task;
 
 class Bagian extends Model
 {
@@ -19,4 +20,8 @@ class Bagian extends Model
         'id_task',
         'indikators',
     ];
+
+    public function task() {
+        return $this->hasOne(Task::class, 'id', 'id_task');
+    }
 }

@@ -22,6 +22,7 @@
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>Nama Instansi</th>
+                                                    <th>Tahun Tugas</th>
                                                     <th>Indikators</th>
                                                     <th style="width: 120px">Aksi</th>
                                                 </tr>
@@ -31,6 +32,7 @@
                                                     <tr>
                                                         <td>{{ $bagian->id }}</td>
                                                         <td>{{ $bagian->name }}</td>
+                                                        <td>{{ $bagian->task->tahun }}</td>
                                                         <td>
                                                             @isset($bagian->indikators)
                                                                 @foreach (json_decode($bagian->indikators, true) as $item)

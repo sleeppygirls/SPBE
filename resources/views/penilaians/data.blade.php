@@ -27,6 +27,7 @@
                                                     <th>Tahun</th>
                                                     <th>Status</th>
                                                     <th>Deskripsi</th>
+                                                    <th>Bagian</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -39,6 +40,7 @@
                                                         <td>{{ $item->batas }}</td>
                                                         <td>{{ $item->tahun }}</td>
                                                         <td>{{ $item->status }}</td>
+                                                        <td>{{ $item->bagian->count() }}</td>
                                                         <td>{{ $item->desc }}</td>
                                                         <td>
                                                             <div class="row">

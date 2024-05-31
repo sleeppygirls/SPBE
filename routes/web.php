@@ -21,6 +21,7 @@ use App\Http\Controllers\PenjelasanController;
 use App\Http\Controllers\LihatIndikatorController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\Admin\IndikatorController as IndikatorAdminController;
+use App\Http\Controllers\Admin\TaskController as TaskAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,9 @@ Route::middleware(['is.auth'])->group(function() {
     Route::resource('users', UserController::class);
     Route::resource('skors', SkorController::class);
     Route::resource('file', FileController::class);
+
+    // admin
+    Route::resource('admin/task', TaskAdminController::class);
 
     // custom uri
     Route::get('indikator/{indikator}/{username}', [IndikatorController::class, 'show']);

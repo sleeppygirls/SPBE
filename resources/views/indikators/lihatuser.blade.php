@@ -3,31 +3,27 @@
 @section('title', 'Home')
 
 @section('content')
+    {{-- @dd($username); --}}
     <div class="content-wrapper">
         <div class="content-header p-0">
             <div class="container-fluid back">
                 <div class="row">
                     <div class="col-sm-12 mt-3">
-                        <h1 style="color: white; padding-left: 11px" class="m-0 dashboard fw-bold">
-                            Tugas Penilaian Mandiri
+                        <h1 style="color: white; padding-left: 11px" class="m-0 dashboard fw-bold">Tugas Penilaian Mandiri
                         </h1>
                     </div>
 
                     <div style="padding-left: 20px;padding-right: 20px;" class="col-12">
-                        <div style="margin-bottom: 30px ; margin-bottom: 70px" class="card">
+                        <div style="margin-bottom: 70px" class="card">
                             <div class="row">
                                 <div class="col-10">
                                     <p style="margin-top: 40px; padding-left: 45px; margin-bottom: 0px; font-weight: bold">
-                                        Detail Form
-                                    </p>
+                                        Detail Form</p>
                                 </div>
                                 <div class="col-2">
                                     <button type="button" class="btn"
-                                        style="margin-top: 35px;background-color: #ad323a">
-                                        <a href="/penilaian" style="color: white">
-                                            Kembali
-                                        </a>
-                                    </button>
+                                        style="margin-top: 35px;background-color: #ad323a"><a href="/penilaian"
+                                            style="color: white">Kembali</a></button>
                                 </div>
                             </div>
                             <div class="row" style="margin-top: 20px; margin-bottom: 20px">
@@ -57,44 +53,22 @@
                                     </div>
                                 </div>
                             </div>
-                            @if ($username == 'Admin')
-                                <div class="row">
-                                    @if (Auth::user()->level == 'admin')
-                                        <div class="col-4">
-                                            <button type="button" class="btn"
-                                                style="margin-left: 40px; background-color: #ad323a">
-                                                <a href="/skors" style="color: white">
-                                                    Lihat Skor Index
-                                                </a>
-                                            </button>
-                                        </div>
-                                        <div class="col-4">
-                                            <button type="button" class="btn"
-                                                style="margin-left: 40px; background-color: #ad323a">
-                                                <a href="/indikator/create" style="color: white">
-                                                    Tambah Indikator
-                                                </a>
-                                            </button>
-                                        </div>
-                                    @endif
+
+                            <div class="row">
+                                <div class="col-4">
+                                    <button type="button" class="btn"
+                                        style="margin-left: 40px; background-color: #ad323a">
+                                        <a href="/skors" style="color: white">
+                                            Lihat Skor Index
+                                        </a>
+                                    </button>
                                 </div>
-                            @else
-                                @if (Auth::user()->level == 'admin')
-                                    <div class="col-4">
-                                        <button type="button" class="btn"
-                                            style="margin-left: 40px; background-color: #ad323a">
-                                            <a href="/file" style="color: white">
-                                                Cari File
-                                            </a>
-                                        </button>
-                                    </div>
-                                @endif
-                            @endif
+                            </div>
+
                             <div class="row">
                                 <div class="col-9">
                                     <p style="margin-top: 40px; padding-left: 45px; margin-bottom: 0px; font-weight: bold">
-                                        Data Indikator
-                                    </p>
+                                        Data Indikator </p>
                                 </div>
                                 {{-- <div class="col-3">
                                     <p style="margin-top: 40px; font-weight: bold; margin-bottom: 0px; margin-left: 30px">
@@ -107,8 +81,7 @@
                                 <div class="col-2">
                                     <p
                                         style="margin-bottom: 0px; margin-left: 55px; padding-right: 0px; width: 23px; margin-right: 20px;">
-                                        No.
-                                    </p>
+                                        No.</p>
                                 </div>
                                 <div class="col-7">
                                     <p>Nama Indikator</p>
@@ -130,33 +103,15 @@
                                     <div class="col-3">
                                         <button type="button"
                                             class="ml-5 btn btn-{{ $item->exist != null ? 'danger' : 'primary' }}"
-                                            style="padding-top: 0px;padding-bottom: 0px; margin-left: 20px">
-                                            <a href="/indikator/{{ $item->id }}/{{ @$username }}"
-                                                style="color: white">
-                                                Indikator {{ $item->no }}
-                                            </a>
-                                        </button>
+                                            style="padding-top: 0px;padding-bottom: 0px; margin-left: 20px"><a
+                                                href="/indikator/{{ $item->id }}/{{ @$username }}"
+                                                style="color: white">Indikator
+                                                {{ $item->no }}</a></button>
                                     </div>
                                 </div>
                             @endforeach
 
-                            @if (Auth::user()->level == 'user')
-                                <form action="{{ url('lihat/task') }}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="id_task" value="{{ $task->id }}">
-                                    <button class="btn btn-success"
-                                        style="margin-left: 785px; margin-right: 75px; margin-top: 20px; margin-bottom: 10px"
-                                        type="submit">
-                                        Submit All
-                                    </button>
-                                </form>
-                                {{-- <button type="button" class="btn btn-success"
-                                    style="margin-left: 785px; margin-right: 75px; margin-top: 20px; ">
-                                    <a href="/task/{{ $task->id }}" style="color: white">
-                                        Submit All
-                                    </a>
-                                </button> --}}
-                            @endif
+
                             {{-- <div class="row" style="margin-bottom: 50px">
                                 <div class="col-sm-12 col-md-5" style="padding-top: 20px;">
                                     <div class="dataTables_info" id="example2_info" role="status" aria-live="polite"

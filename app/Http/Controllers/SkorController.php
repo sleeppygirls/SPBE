@@ -16,14 +16,14 @@ class SkorController extends Controller
     public function index()
     {
         if (Auth::user()->level == 'admin') {
-            $user = User::all();
+            $user = User::where('level', '=', 'user')->get();
             $data = [
                 'user' => $user,
                 "page" => "penilaian",
             ];
             return view('skorindex.admin', $data);
         } else {
-            $user = User::where('level', '=', 'user')->get();
+            $user = Auth::user();
             $data = [
                 'user' => $user,
                 "page" => "penilaian",

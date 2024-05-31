@@ -15,7 +15,7 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__wobble" src="/asset/logoloading.png" alt="garuda" height="60" width="60">
+            <img class="animation__wobble" src="/asset/logoorang.png" alt="garuda" height="60" width="60">
         </div>
 
         @include('template.header')

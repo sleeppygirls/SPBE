@@ -61,15 +61,6 @@ class IndikatorController extends Controller
                     $req->username,
                 ]
             );
-
-            // $indikators = DB::select(
-            //     "SELECT i.*, d.id exist FROM indikators i LEFT JOIN 
-            //     (SELECT * FROM detail_indikators d WHERE username = ?) 
-            //     d ON i.id = d.id_indikator order by i.no asc",
-            //     [
-            //         $user->username,
-            //     ]
-            // );
         }
 
         $task = Task::find($req->id_task);
@@ -158,7 +149,13 @@ class IndikatorController extends Controller
      */
     public function create()
     {
-        return view('indikators.add');
+        $data = [
+            'task' => Task::all(),
+            'aspek' => Aspek::all(),
+            'domain' => Domain::all(),
+            "page" => "penilaian",
+        ];
+        return view('indikators.add', $data);
     }
 
     /**
@@ -168,6 +165,8 @@ class IndikatorController extends Controller
     {
         Indikator::create($request->all());
         Task::create($request->all());
+        Aspek::create($request->all());
+        Domain::create($request->all());
         Penjelasan::create($request->all());
 
         return redirect('/indikator/task')->with([
@@ -178,9 +177,9 @@ class IndikatorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Indikator $indikator)
+    public function show(Indikator $indikator,$username)
     {
-        $user = Auth::user();
+        $user = User::where('username','=',$username)->first();
 
             $jawabans = DB::select("SELECT p.id, p.text, p.id_indikator, j.d_jawaban FROM penjelasans p LEFT JOIN (SELECT * FROM jawabans i WHERE i.username = ?) j ON j.id_penjelasan = p.id WHERE p.id_indikator = ?", [
                 $user->username,

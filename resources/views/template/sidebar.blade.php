@@ -1,8 +1,8 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-light-primary elevation-4">
       <!-- Logo -->
-      <a href="index3.html" class="brand-link">
-          <img class="logoutama" src="/asset/logokabupaten.png" alt="logo panrb">
+      <a href="#" class="brand-link">
+          <img class="logoutama" src="/asset/lgkab.jpg" alt="logo panrb" style="width: 110px; height: 50px;">
       </a>
 
       <!-- Sidebar -->

@@ -30,7 +30,7 @@
                                                         <input type="text" class="form-control" name="name"
                                                             placeholder="Indikator">
                                                     </div>
-                                                    <div class="form-group">
+                                                    {{-- <div class="form-group">
                                                         <label for="aspek">Aspek</label>
                                                         <input type="text" class="form-control" name="aspek"
                                                             placeholder="Aspek">
@@ -39,12 +39,30 @@
                                                         <label for="domain">Domain</label>
                                                         <input type="text" class="form-control" name="domain"
                                                             placeholder="Domain">
+                                                    </div> --}}
+                                                    <div class="form-group">
+                                                        <label for="aspek">Aspek</label>
+                                                        <select id="aspek" name="aspek" style="margin-left: 20px;height: 40px; color: black; background-color: lightgray; font-weight: bold">
+                                                            @foreach ($aspek as $item)
+                                                                <option value="{{ $item->aspek }}">{{ $item->aspek }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="year">Tahun</label>
-                                                        <input type="number" class="form-control" placeholder="Tahun"
-                                                            id="year" name="tahun" min="1900" max="2100"
-                                                            step="1" required>
+                                                        <label for="domain">Domain</label>
+                                                        <select id="domain" name="domain" style="margin-left: 20px;height: 40px; color: black; background-color: lightgray; font-weight: bold">
+                                                            @foreach ($domain as $item)
+                                                                <option value="{{ $item->domain }}">{{ $item->domain }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="tahun">Tahun</label>
+                                                        <select id="tahun" name="tahun" style="margin-left: 20px;height: 40px; color: black; background-color: lightgray; font-weight: bold">
+                                                            @foreach ($task as $item)
+                                                                <option value="{{ $item->tahun }}">{{ $item->tahun }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">

@@ -1,8 +1,10 @@
 <?php
 
 use App\Models\Jawaban;
+use App\Models\LihatIndikator;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\SkorController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
@@ -13,10 +15,11 @@ use App\Http\Controllers\JawabanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IndikatorController;
 use App\Http\Controllers\PenilaianController;
+
+
 use App\Http\Controllers\PenjelasanController;
+use App\Http\Controllers\LihatIndikatorController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-
-
 use App\Http\Controllers\Admin\IndikatorController as IndikatorAdminController;
 
 /*
@@ -32,8 +35,8 @@ use App\Http\Controllers\Admin\IndikatorController as IndikatorAdminController;
 
 Route::get('/', [AuthController::class, 'dashboard'])->middleware('is.auth');
 
-// Route::get('/', function () {
-//     return view('dashboard');
+// Route::get('/admin', function () {
+//     return view('admin');
 // });
 
 // Route::get('/penja', function () {
@@ -50,16 +53,19 @@ Route::middleware(['is.auth'])->group(function() {
     Route::resource('penilaian', PenilaianController::class);
     Route::resource('task', TaskController::class);
     Route::resource('indikator', IndikatorController::class);
+    // Route::resource('lihat', LihatIndikatorController::class);
     Route::resource('jawaban', JawabanController::class);
     Route::resource('bantuan', BantuanController::class);
     Route::resource('profil', ProfilController::class);
     Route::resource('bagians', BagianController::class);
     Route::resource('users', UserController::class);
     Route::resource('skors', SkorController::class);
+    Route::resource('file', FileController::class);
 
     // custom uri
-    // Route::get('indikator/{indikator}/{username}', [IndikatorController::class, 'show']);
+    Route::get('indikator/{indikator}/{username}', [IndikatorController::class, 'show']);
     Route::post('indikator/task', [IndikatorController::class, 'task'])->name('indikator.task');
+    Route::post('lihat/task', [LihatIndikatorController::class, 'task'])->name('lihat.task');
     // Route::get('indikator/task/{id_task}/{username}', [IndikatorController::class, 'test']);
     // Route::get('indikator/task/{task}/{user}', [IndikatorController::class, 'user']);
     // Route::post('jawaban', [JawabanController::class,'store']);

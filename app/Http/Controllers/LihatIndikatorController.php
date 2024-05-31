@@ -3,55 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\Bagian;
+use App\Models\Jawaban;
+use App\Models\Indikator;
+use Illuminate\Http\Request;
+use App\Models\LihatIndikator;
+use App\Models\DetailIndikator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StoreTaskRequest;
-use App\Http\Requests\UpdateTaskRequest;
-use App\Models\Bagian;
+use App\Http\Requests\StoreLihatIndikatorRequest;
+use App\Http\Requests\UpdateLihatIndikatorRequest;
 
-class TaskController extends Controller
+class LihatIndikatorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $task = Task::all();
-
-        $data = [
-            "page" => "penilaian",
-            "data" => $task,
-        ];
-        return view('penilaians.data', $data);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $data = [
-            "page" => "penilaian",
-        ];
-        return view('penilaians.add', $data);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreTaskRequest $request)
-    {
-        Task::create($request->all());
-
-        return redirect('/task')->with([
-            'mess' => 'Data Berhasil Disimpan',
-        ]);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Task $task)
+    public function task(Request $req)
     {
         $user = Auth::user();
 
@@ -63,7 +28,7 @@ class TaskController extends Controller
         // Menggunakan json_decode untuk mengubah string JSON menjadi array
         $arrayData = json_decode($stringData, true);
 
-        if(count($arrayData) > 0) {
+        if (count($arrayData) > 0) {
 
             // Mengonversi array menjadi string yang dipisahkan oleh koma
             $commaSeparatedString = implode(", ", $arrayData);
@@ -88,8 +53,7 @@ class TaskController extends Controller
             );
         }
 
-        $task = Task::find($task->id);
-
+        $task = Task::find($req->id_task);
         $data = [
             'indikator' => $indikators,
             "page" => "penilaian",
@@ -98,43 +62,60 @@ class TaskController extends Controller
         ];
 
         // dd($data);
-        return view('indikators.indikator', $data);
+        return view('indikators.lihatuser', $data);
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreLihatIndikatorRequest $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show()
+    {
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Task $task)
+    public function edit(LihatIndikator $lihatIndikator)
     {
-        $data = [
-            "page" => "penilaian",
-            'data' => $task
-        ];
-        return view('penilaians.add', $data);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTaskRequest $request, Task $task)
+    public function update(UpdateLihatIndikatorRequest $request, LihatIndikator $lihatIndikator)
     {
-        $task->fill($request->all());
-        $task->save();
-
-        return redirect('/task')->with([
-            'mess' => 'Data Berhasil Disimpan',
-        ]);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
+    public function destroy(LihatIndikator $lihatIndikator)
     {
-        $task->delete();
-
-        return redirect('/task')->with([
-            'mess' => 'Data Berhasil Dihapus',
-        ]);
+        //
     }
 }

@@ -12,7 +12,7 @@
                         </h1>
                     </div>
                     <div style="padding-left: 20px;padding-right: 20px;" class="col-12">
-                        <div style="min-height: 1010px; margin-bottom: 5px" class="card">
+                        <div style="min-height: 500px; margin-bottom: 30px" class="card">
                             <div class="row">
                                 <div class="col-11">
                                     @php
@@ -79,11 +79,19 @@
                                                                             style="margin-bottom: 10px;"><a
                                                                                 href="/task/{{ $item->id }}"
                                                                                 style="color: white">Kerjakan</a></button>
-                                                                        <button class="btn btn-primary" type="button"><a
-                                                                                href="/indikator/task/{{ $item->id }}"
-                                                                                style="color: white">Lihat</a></button>
+                                                                        <form action="{{ url('lihat/task') }}"
+                                                                            method="post">
+                                                                            @csrf
+                                                                            <input type="hidden" name="id_task"
+                                                                                value="{{ $item->id }}">
+                                                                            <button class="btn btn-primary"
+                                                                                type="submit">Lihat</button>
+                                                                        </form>
+                                                                        {{-- <button class="btn btn-primary" type="button"><a
+                                                                                href="/lihat/{{ $item->id }}"
+                                                                                style="color: white">Lihat</a></button> --}}
                                                                     @else
-                                                                    {{-- <button class="btn btn-primary" type="button"
+                                                                        {{-- <button class="btn btn-primary" type="button"
                                                                             style="margin-bottom: 10px;"><a
                                                                                 href="/task/{{ $item->id }}"
                                                                                 style="color: white">Lihat</a></button> --}}

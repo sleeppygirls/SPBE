@@ -16,11 +16,22 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $task = Task::with('bagian')->get();
+        // $tasks = Task::with('bagian')->get();
+        // $tahun = $tasks->first()->tahun;
+        // $t_count = DB::table('bagians')
+        // ->join('tasks', 'bagians.id', '=', 'tasks.id')
+        // ->where('tasks.tahun', $tahun)
+        // ->select(DB::raw('COUNT(bagians.id) as count'))
+        // ->pluck('count')
+        // ->first();
+        
+        $tasks = DB::select("SELECT t.*,(SELECT count(*) FROM bagians as b WHERE b.id_task = t.id) as qty FROM tasks as t");
+        // dd($tasks);
 
         $data = [
             "page" => "penilaian",
-            "data" => $task,
+            "data" => $tasks,
+
         ];
         return view('penilaians.data', $data);
     }

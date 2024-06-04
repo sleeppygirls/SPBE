@@ -22,7 +22,12 @@ class Task extends Model
         'status',
         'desc',
     ];
-    public function bagian() {
-        return $this->hasMany(Bagian::class, 'id_task', 'id');
+    // public function bagian() {
+    //     return $this->hasOne(Bagian::class, 'id_task', 'id');
+    // }
+
+    public function bagian()
+    {
+        return $this->belongsTo(Bagian::class,);
     }
 }

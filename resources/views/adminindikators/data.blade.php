@@ -8,9 +8,7 @@
             <div class="container-fluid back">
                 <div class="row">
                     <div class="col-sm-12 mt-3">
-                        <h1 style="color: rgb(255, 252, 224); padding-left: 11px" class="m-0 dashboard fw-bold">Daftar Bagian
-                            Indikator
-                        </h1>
+                        <h1 style="color: white; padding-left: 11px" class="m-0 dashboard fw-bold">Daftar Indikator</h1>
                     </div>
                     <div style="padding-left: 20px;padding-right: 20px;" class="col-12">
                         <div style="margin-bottom: 50px" class="card">
@@ -18,51 +16,55 @@
                                 <div class="col-11">
                                     <div class="body">
                                         <table class="table table-bordered"
-                                            style="background-color: rgb(252, 248, 213); margin-top: 30px; margin-left: 40px; margin-right: 25px">
-                                            <thead style="text-align: center">
+                                            style="background-color: rgb(222, 254, 208); margin-top: 30px; margin-left: 40px; margin-right: 25px">
+                                            <thead>
                                                 <tr>
-                                                    <th>ID</th>
-                                                    <th>Nama Instansi</th>
-                                                    <th>Tahun Tugas</th>
-                                                    <th>Indikators</th>
-                                                    <th style="width: 120px">Aksi</th>
+                                                    <th>No</th>
+                                                    <th>Indikator</th>
+                                                    <th>Penjelasan</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach (@$bagians as $bagian)
+                                                @foreach (@$indikator as $item)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $bagian->name }}</td>
-                                                        <td>{{ $bagian->task->tahun }}</td>
-                                                        <td>
-                                                            @isset($bagian->indikators)
-                                                                @php
-                                                                    $array_indikators = json_decode(
-                                                                        $bagian->indikators,
-                                                                        true,
-                                                                    );
-                                                                @endphp
-                                                                @foreach ($array_indikators as $item)
-                                                                    {{ $item }}
-                                                                    @php
-                                                                        if (next($array_indikators) == true) {
-                                                                            echo(",");
-                                                                        }
-                                                                    @endphp
-                                                                @endforeach
-                                                            @endisset
+                                                        <td>{{ $item->name }}</td>
+                                                        <td style="width: 50px; text-align: center">
+                                                            <div class="row">
+                                                                <div class="col-4" style="margin-left: 10px">
+                                                                    <a
+                                                                        href="/adm/indikator/{{ $item->id }}/penjelasan/create">
+                                                                        <button type="button"
+                                                                            class="btn btn-primary btn-sm">
+                                                                            <i class="fas fa-plus">
+                                                                            </i>
+                                                                        </button>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-4" style="margin-left: 10px">
+                                                                    <a
+                                                                        href="/adm/indikator/{{ $item->id }}/penjelasan">
+                                                                        <button type="button"
+                                                                            class="btn btn-success btn-sm">
+                                                                            <i class="fas fa-eye fa-fw">
+                                                                            </i>
+                                                                        </button>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
                                                         </td>
                                                         <td>
                                                             <div class="row">
                                                                 <div class="col-4" style="margin-left: 10px">
-                                                                    <a href="/bagians/{{ $bagian->id }}/edit">
+                                                                    <a href="/adm/indikator/{{ $item->id }}/edit">
                                                                         <button type="button"
                                                                             class="btn btn-warning btn-sm">
                                                                             <i class="far fa-edit"></i></button>
                                                                     </a>
                                                                 </div>
                                                                 <div class="col-4" style="margin-left: 10px">
-                                                                    <form action="/bagians/{{ $bagian->id }}"
+                                                                    <form action="/adm/indikator/{{ $item->id }}"
                                                                         method="POST">
                                                                         @csrf
                                                                         @method('DELETE')
@@ -85,6 +87,4 @@
                 </div>
             </div>
         </div>
-    </div>
-
-@endsection
+    @endsection

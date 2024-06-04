@@ -24,4 +24,8 @@ class Bagian extends Model
     public function task() {
         return $this->hasOne(Task::class, 'id', 'id_task');
     }
+    //  public function task()
+    // {
+    //     return $this->belongsTo(Task::class, 'id_task');
+    // }
 }

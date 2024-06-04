@@ -16,7 +16,7 @@
                                 <div class="col-11">
                                     <div class="body">
                                         <table class="table table-bordered"
-                                            style="background-color: rgb(217, 230, 251); margin-top: 30px; margin-left: 40px; margin-right: 25px">
+                                            style="background-color: rgb(232, 236, 255); margin-top: 30px; margin-left: 40px; margin-right: 25px">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>

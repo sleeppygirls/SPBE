@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use App\Models\User;
 use App\Models\Bagian;
 use App\Models\Indikator;
@@ -31,11 +32,10 @@ class BagianController extends Controller
      */
     public function create()
     {
-
         $data = [
-
             'user' => User::all(),
             'indikators' => Indikator::all(),
+            'task' => Task::all(),
             "page" => "bagian",
         ];
         return view('bagians.add', $data);
@@ -65,13 +65,20 @@ class BagianController extends Controller
 
         // Mengonversi array menjadi string
         $indicatorsString = json_encode($indicatorsArray);
+        $tahun = Task::where('id', $request->id_task)->first();
 
+
+        // dd($tahun);
         Bagian::updateOrCreate([
             'id' => $request->input('id'),
         ], [
+
             'name' => $request->input('name'),
             'indikators' => $indicatorsString,
+            'id_task' => $request->id_task,
         ]);
+
+        User::where('id_bagian', $request->id_bagian)->update(['id_bagian'=> $request->input('id_bagian')]);
 
         return redirect('/bagians')->with([
             'mess' => 'Data Berhasil Disimpan',
@@ -107,12 +114,14 @@ class BagianController extends Controller
             $indikators = Indikator::all();
         }
 
-
+        $task = Task::all();
+        // $task = Bagian::with('task')->get();
         $data = [
 
             "page" => "bagian",
             'user' => $user,
             'bagian' => $bagian,
+            'task' => $task,
             'indikators' => $indikators,
         ];
         return view('bagians.add', $data);
@@ -146,9 +155,7 @@ class BagianController extends Controller
 
         $bagian->fill($request->all());
         $bagian['id'] = $request->input('id');
-        // $bagian['name'] = $request->input('nama_instansi');
         $bagian['indikators'] = $indicatorsString;
-        // dd($bagian); 
         $bagian->save();
 
         return redirect('/bagians')->with([

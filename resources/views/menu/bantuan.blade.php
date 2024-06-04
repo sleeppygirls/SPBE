@@ -11,7 +11,7 @@
                         <h1 style="color: white; padding-left: 11px" class="m-0 dashboard fw-bold">Bantuan</h1>
                     </div>
                     <div style="padding-left: 20px;padding-right: 20px;" class="col-12">
-                        <div style="min-height: 1010px; margin-bottom: 5px" class="card">
+                        <div style="margin-bottom: 50px" class="card">
                             <p
                                 style="text-decoration: underline; margin-left: 50px; margin-top: 25px; margin-bottom: 10px; color: grey">
                                 Frequently Asked Question</p>

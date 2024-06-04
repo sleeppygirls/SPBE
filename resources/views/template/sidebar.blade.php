@@ -74,7 +74,7 @@
                       </li>
                       <li class="nav-item">
                           <a href="/bagians" class="nav-link {{ @$page == 'indikator' ? 'active' : '' }}">
-                              <i class="nav-icon fas fa-tasks" style="color: #B5565D;"></i>
+                              <i class="nav-icon fas fa-book-open" style="color: #B5565D;"></i>
                               <p>
                                   Indikator
                                   <i class="fas fa-angle-left right"></i>
@@ -82,13 +82,13 @@
                           </a>
                           <ul class="nav nav-treeview">
                               <li class="nav-item">
-                                  <a href="/bagians" class="nav-link">
+                                  <a href="/adm/indikator" class="nav-link">
                                       <i class="fas fa-eye fa-fw nav-icon" style="color: #B5565D;"></i>
                                       <p>Daftar Indikator</p>
                                   </a>
                               </li>
                               <li class="nav-item">
-                                  <a href="/bagians/create" class="nav-link">
+                                  <a href="/adm/indikator/create" class="nav-link">
                                       <i class="fas fa-plus-circle fa-fw nav-icon" style="color: #B5565D;"></i>
                                       <p>Tambah Indikator</p>
                                   </a>

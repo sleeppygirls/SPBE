@@ -149,13 +149,14 @@ class IndikatorController extends Controller
      */
     public function create()
     {
-        $data = [
-            'task' => Task::all(),
-            'aspek' => Aspek::all(),
-            'domain' => Domain::all(),
-            "page" => "penilaian",
-        ];
-        return view('indikators.add', $data);
+
+        // $data = [
+        //     'task' => Task::all(),
+        //     'aspek' => Aspek::all(),
+        //     'domain' => Domain::all(),
+        //     "page" => "penilaian",
+        // ];
+        // return view('indikators.add', $data);
     }
 
     /**

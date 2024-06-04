@@ -20,8 +20,10 @@ use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\PenjelasanController;
 use App\Http\Controllers\LihatIndikatorController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+
 use App\Http\Controllers\Admin\IndikatorController as IndikatorAdminController;
 use App\Http\Controllers\Admin\TaskController as TaskAdminController;
+use App\Http\Controllers\Admin\PenjelasanController as PenjelasanAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +55,7 @@ Route::middleware(['is.auth'])->group(function() {
 
     Route::resource('penilaian', PenilaianController::class);
     Route::resource('task', TaskController::class);
-    Route::resource('indikator', IndikatorController::class);
+    Route::resource('/indikator', IndikatorController::class);
     // Route::resource('lihat', LihatIndikatorController::class);
     Route::resource('jawaban', JawabanController::class);
     Route::resource('bantuan', BantuanController::class);
@@ -64,7 +66,8 @@ Route::middleware(['is.auth'])->group(function() {
     Route::resource('file', FileController::class);
 
     // admin
-    Route::resource('admin/task', TaskAdminController::class);
+    Route::resource('/adm/indikator', IndikatorAdminController::class);
+    Route::resource('/adm/indikator/{indikator}/penjelasan', PenjelasanAdminController::class);
 
     // custom uri
     Route::get('indikator/{indikator}/{username}', [IndikatorController::class, 'show']);

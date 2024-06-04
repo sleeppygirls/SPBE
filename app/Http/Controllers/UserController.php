@@ -14,7 +14,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::all();
+        $user = User::with('bagian')->get();
+
+        // dd($user);
 
         $data = [
             'data' => $user,

@@ -48,6 +48,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function bagian() {
+        return $this->hasOne(Bagian::class, 'id', 'id_bagian');
+    }
     // public function indikator() {
     //     return $this->hasMany(Penjelasan::class, 'id_task', 'id');
     // }

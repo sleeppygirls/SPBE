@@ -23,7 +23,7 @@
                                         @csrf
                                         <input type="hidden" name="id" value="{{ @$data->id }}">
                                         <div class="card"
-                                            style="margin-left: 80px ; padding: 20px; margin-top: 15px; margin-bottom: 15px; background-color: rgb(232, 253, 236)">
+                                            style="margin-left: 80px ; padding: 20px; margin-top: 15px; margin-bottom: 15px; background-color: rgb(241, 232, 253)">
                                             
                                             <div class="form-group">
                                                 <label for="nama_instansi">Nama Form</label>

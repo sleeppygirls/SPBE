@@ -68,14 +68,14 @@
                                                 </a>
                                             </button>
                                         </div>
-                                        <div class="col-4">
+                                        {{-- <div class="col-4">
                                             <button type="button" class="btn"
                                                 style="margin-left: 40px; background-color: #ad323a">
                                                 <a href="/indikator/create" style="color: white">
                                                     Tambah Indikator
                                                 </a>
                                             </button>
-                                        </div>
+                                        </div> --}}
                                     @endif
                                 </div>
                             @else

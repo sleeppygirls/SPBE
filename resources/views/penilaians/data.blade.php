@@ -12,12 +12,12 @@
                             Mandiri</h1>
                     </div>
                     <div style="padding-left: 20px;padding-right: 20px;" class="col-12">
-                        <div style="min-height: 1010px; margin-bottom: 5px" class="card">
+                        <div style="margin-bottom: 50px" class="card">
                             <div class="row">
                                 <div class="col-11">
                                     <div class="body">
                                         <table class="table table-bordered"
-                                            style="background-color: rgb(232, 253, 236); margin-top: 30px; margin-left: 40px; margin-right: 25px">
+                                            style="background-color: rgb(241, 232, 253); margin-top: 30px; margin-left: 40px; margin-right: 25px">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
@@ -34,14 +34,27 @@
                                             <tbody>
                                                 @foreach (@$data as $item)
                                                     <tr>
-                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $item->name }}</td>
                                                         <td>{{ $item->tahap }}</td>
                                                         <td>{{ $item->batas }}</td>
                                                         <td>{{ $item->tahun }}</td>
                                                         <td>{{ $item->status }}</td>
-                                                        <td>{{ $item->bagian->count() }}</td>
                                                         <td>{{ $item->desc }}</td>
+                                                        <td>
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    {{$item->qty }}
+                                                                </div>
+                                                                <div class="col-2">
+                                                                    <a href="/task/{{ $item->id }}/edit">
+                                                                        <button type="button"
+                                                                            class="btn btn-success btn-sm">
+                                                                            <i class="far fa-copy"></i></button>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                         <td>
                                                             <div class="row">
                                                                 <div class="col-4" style="margin-left: 10px">
@@ -52,7 +65,8 @@
                                                                     </a>
                                                                 </div>
                                                                 <div class="col-4" style="margin-left: 10px">
-                                                                    <form action="/task/{{ $item->id }}" method="POST">
+                                                                    <form action="/task/{{ $item->id }}"
+                                                                        method="POST">
                                                                         @csrf
                                                                         @method('DELETE')
                                                                         <button type="submit"

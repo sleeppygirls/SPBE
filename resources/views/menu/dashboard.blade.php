@@ -82,7 +82,7 @@
                         </div>
                     </div>
                     <div style="padding-top: 5px;padding-left: 20px;padding-right: 20px;" class="col-12">
-                        <div style="min-height: 1150px" class="card">
+                        <div style="margin-bottom: 50px" class="card">
                             <div class="row">
                                 <div class="col-6 nav-item dropdown">
                                     <button style="padding-top: 20px;padding-bottom: 0px;" class="btn dropdown-toggle"

@@ -11,7 +11,7 @@
                         <h1 style="color: white; padding-left: 11px" class="m-0 dashboard fw-bold">Daftar User</h1>
                     </div>
                     <div style="padding-left: 20px;padding-right: 20px;" class="col-12">
-                        <div style="min-height: 1010px; margin-bottom: 5px" class="card">
+                        <div style="margin-bottom: 50px" class="card">
                             <div class="row">
                                 <div class="col-11">
                                     <div class="body">
@@ -31,7 +31,7 @@
                                                 @foreach (@$data as $item)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $item->nama_instansi }}</td>
+                                                        <td>{{ @$item->bagian->name }}</td>
                                                         <td>{{ $item->username }}</td>
                                                         <td>{{ $item->pass_view }}</td>
                                                         <td>{{ $item->level }}</td>

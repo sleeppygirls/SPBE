@@ -25,7 +25,6 @@ class User extends Authenticatable
         'level',
         'nama_instansi',
         'pass_view',
-        'id_bagian',
     ];
 
     /**
@@ -49,7 +48,7 @@ class User extends Authenticatable
     ];
 
     public function bagian() {
-        return $this->hasOne(Bagian::class, 'id', 'id_bagian');
+        return $this->hasOne(Bagian::class, 'id_user', 'id');
     }
     // public function indikator() {
     //     return $this->hasMany(Penjelasan::class, 'id_task', 'id');

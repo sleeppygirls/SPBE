@@ -20,7 +20,7 @@ class BagianController extends Controller
         $data = [
             'user' => User::all(),
             'indikators' => Indikator::all(),
-            'bagians' => Bagian::with('task')->get(),
+            'bagians' => Bagian::with(['task', 'user'])->get(),
             "page" => "bagian",
         ];
 
@@ -73,7 +73,7 @@ class BagianController extends Controller
             'id' => $request->input('id'),
         ], [
 
-            'name' => $request->input('name'),
+            'id_user' => $request->input('id_user'),
             'indikators' => $indicatorsString,
             'id_task' => $request->id_task,
         ]);

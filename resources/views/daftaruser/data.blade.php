@@ -31,7 +31,7 @@
                                                 @foreach (@$data as $item)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ @$item->bagian->name }}</td>
+                                                        <td>{{ @$item->nama_instansi }}</td>
                                                         <td>{{ $item->username }}</td>
                                                         <td>{{ $item->pass_view }}</td>
                                                         <td>{{ $item->level }}</td>

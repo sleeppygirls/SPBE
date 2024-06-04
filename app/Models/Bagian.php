@@ -16,7 +16,7 @@ class Bagian extends Model
     protected $keyType = 'integer';              // merubah type data agar terpanggil
     protected $fillable = [                     // nama kolom yang dapat di edit
         'id',
-        'name',
+        'id_user',
         'id_task',
         'indikators',
     ];
@@ -24,6 +24,11 @@ class Bagian extends Model
     public function task() {
         return $this->hasOne(Task::class, 'id', 'id_task');
     }
+
+    public function user() {
+        return $this->hasOne(User::class, 'id', 'id_user');
+    }
+
     //  public function task()
     // {
     //     return $this->belongsTo(Task::class, 'id_task');

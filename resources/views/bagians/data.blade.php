@@ -22,6 +22,7 @@
                                             <thead style="text-align: center">
                                                 <tr>
                                                     <th>ID</th>
+                                                    <th>Username</th>
                                                     <th>Nama Instansi</th>
                                                     <th>Tahun Tugas</th>
                                                     <th>Indikators</th>
@@ -32,7 +33,8 @@
                                                 @foreach (@$bagians as $bagian)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $bagian->name }}</td>
+                                                        <td>{{ $bagian->user->username }}</td>
+                                                        <td>{{ $bagian->user->nama_instansi }}</td>
                                                         <td>{{ $bagian->task->tahun }}</td>
                                                         <td>
                                                             @isset($bagian->indikators)

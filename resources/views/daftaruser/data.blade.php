@@ -24,6 +24,7 @@
                                                     <th>Username</th>
                                                     <th>Password</th>
                                                     <th>Level</th>
+                                                    <th style="text-align: center">Bagian</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -31,10 +32,34 @@
                                                 @foreach (@$data as $item)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ @$item->nama_instansi }}</td>
+                                                        <td>{{ $item->nama_instansi }}</td>
                                                         <td>{{ $item->username }}</td>
                                                         <td>{{ $item->pass_view }}</td>
                                                         <td>{{ $item->level }}</td>
+                                                        <td style="width: 120px; text-align: center">
+                                                            <div class="row">
+                                                                <div class="col-4" style="margin-left: 10px">
+                                                                    <a
+                                                                        href="users/{{$item->id}}/bagians/create">
+                                                                        <button type="button"
+                                                                            class="btn btn-primary btn-sm">
+                                                                            <i class="fas fa-plus">
+                                                                            </i>
+                                                                        </button>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-4" style="margin-left: 10px">
+                                                                    <a
+                                                                        href="users/{{$item->id}}/bagians">
+                                                                        <button type="button"
+                                                                            class="btn btn-success btn-sm">
+                                                                            <i class="fas fa-eye fa-fw">
+                                                                            </i>
+                                                                        </button>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                         <td>
                                                             <form action="/users/{{ $item->id }}" method="POST">
                                                                 @csrf

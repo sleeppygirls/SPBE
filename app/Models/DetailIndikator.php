@@ -18,6 +18,7 @@ class DetailIndikator extends Model
         'file',
         'username',
         'id_indikator',
+        'id_task',
         'capaian',
         'note',
     ];

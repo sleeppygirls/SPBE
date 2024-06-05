@@ -66,7 +66,9 @@ class TaskController extends Controller
     {
         $user = Auth::user();
 
-        $bagian = Bagian::where('id', $user->id_bagian)->first();
+        $bagian = Bagian::where('id_user', $user->id)->where('id_task', $task->id)->first();
+
+        // dd($bagian);
 
         // Data string yang akan diubah menjadi array
         $stringData = $bagian->indikators;

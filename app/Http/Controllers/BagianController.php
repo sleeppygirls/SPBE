@@ -15,13 +15,15 @@ class BagianController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(User $user)
     {
+        $bagian = Bagian::where('id_user', $user->id)->get();
         $data = [
-            'user' => User::all(),
+            'user' => $user,
             'indikators' => Indikator::all(),
-            'bagians' => Bagian::with(['task', 'user'])->get(),
-            "page" => "bagian",
+            // 'bagians' => Bagian::with(['task', 'user'])->get(),
+            "bagians" => $bagian,
+            "page" => "user",
         ];
 
         return view('bagians.data', $data);
@@ -30,13 +32,14 @@ class BagianController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(User $user)
     {
+        // dd($user);
         $data = [
-            'user' => User::all(),
+            'user' => $user,
             'indikators' => Indikator::all(),
             'task' => Task::all(),
-            "page" => "bagian",
+            "page" => "user",
         ];
         return view('bagians.add', $data);
     }
@@ -44,8 +47,10 @@ class BagianController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBagianRequest $request)
-    {
+    public function store(StoreBagianRequest $request, User $user)
+    { 
+
+        // dd($user);
         // Mengambil semua data indikator dari database
         $dbIndikators = Indikator::pluck('id')->toArray();
 
@@ -65,22 +70,20 @@ class BagianController extends Controller
 
         // Mengonversi array menjadi string
         $indicatorsString = json_encode($indicatorsArray);
+
         $tahun = Task::where('id', $request->id_task)->first();
+        $id_user = $user->id;
 
-
-        // dd($tahun);
         Bagian::updateOrCreate([
-            'id' => $request->input('id'),
-        ], [
-
-            'id_user' => $request->input('id_user'),
-            'indikators' => $indicatorsString,
+            'id_user' => $id_user,
             'id_task' => $request->id_task,
+        ], [
+            'indikators' => $indicatorsString,
         ]);
 
-        User::where('id_bagian', $request->id_bagian)->update(['id_bagian'=> $request->input('id_bagian')]);
+        // User::where('id_bagian', $request->id_bagian)->update(['id_bagian'=> $request->input('id_bagian')]);
 
-        return redirect('/bagians')->with([
+        return redirect("/users/{$id_user}/bagians")->with([
             'mess' => 'Data Berhasil Disimpan',
         ]);
     }
@@ -95,9 +98,9 @@ class BagianController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Bagian $bagian)
+    public function edit(User $user, Bagian $bagian)
     {
-        $user = User::all();
+        // dd($bagian);
         // Data string yang akan diubah menjadi array
         $stringData = $bagian->indikators;
 
@@ -117,8 +120,7 @@ class BagianController extends Controller
         $task = Task::all();
         // $task = Bagian::with('task')->get();
         $data = [
-
-            "page" => "bagian",
+            "page" => "user",
             'user' => $user,
             'bagian' => $bagian,
             'task' => $task,
@@ -166,12 +168,20 @@ class BagianController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Bagian $bagian)
+    public function destroy($id_user, $id_bagian)
     {
-        $bagian->delete();
+        // dd($id_user);
+        // $bagian->delete();
 
-        return redirect('/bagians')->with([
-            'mess' => 'Data Berhasil Dihapus',
-        ]);
+        // return redirect('/bagians')->with([
+        //     'mess' => 'Data Berhasil Dihapus',
+        // ]);
+        $bagian = Bagian::find($id_bagian);
+        if ($bagian) {
+            $bagian->delete();
+            return redirect("/users/{$id_user}/bagians")->with('success', 'Penjelasan berhasil dihapus.');
+        } else {
+            return redirect()->back()->with('error', 'Penjelasan tidak ditemukan.');
+        }
     }
 }

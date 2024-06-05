@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penilaian;
+use Illuminate\Http\Request;
 use App\Http\Requests\StorePenilaianRequest;
 use App\Http\Requests\UpdatePenilaianRequest;
 use App\Models\Task;
@@ -13,15 +14,19 @@ class PenilaianController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $req)
     {
         $task = Task::all();
         $user = User::all();
+        
+        $tahunini = '';
+        $tahunini = @$req->input('tahun');
 
         $data = [
             'user' => $user,
             "page" => "penilaian",
-            "data" => $task
+            "data" => $task,
+            'tahunini' => $tahunini,
         ];
         // dd($data);
         return view("penilaians.penilaianS",$data);

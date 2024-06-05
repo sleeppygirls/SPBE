@@ -49,7 +49,7 @@
                               </li>
                           </ul>
                       </li>
-                      <li class="nav-item">
+                      {{-- <li class="nav-item">
                           <a href="/bagians" class="nav-link {{ @$page == 'bagian' ? 'active' : '' }}">
                               <i class="nav-icon fas fa-tasks" style="color: #B5565D;"></i>
                               <p>
@@ -71,7 +71,7 @@
                                   </a>
                               </li>
                           </ul>
-                      </li>
+                      </li> --}}
                       <li class="nav-item">
                           <a href="/bagians" class="nav-link {{ @$page == 'indikator' ? 'active' : '' }}">
                               <i class="nav-icon fas fa-book-open" style="color: #B5565D;"></i>

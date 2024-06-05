@@ -15,10 +15,6 @@
                         <div style="min-height: 500px; margin-bottom: 30px" class="card">
                             <div class="row">
                                 <div class="col-11">
-                                    @php
-                                        $tahunini = '';
-                                        $tahunini = @$_GET['tahun'];
-                                    @endphp
                                     <select class="form-control" title="Choose Plan" id="tahun"
                                         onchange="window.location = this.options[this.selectedIndex].value"
                                         style="margin-top: 20px; margin-left: 30px; margin-right: 30px">

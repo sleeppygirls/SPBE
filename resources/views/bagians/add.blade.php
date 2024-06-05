@@ -16,27 +16,25 @@
                         <div style="padding-bottom: 30px ; margin-bottom: 5px" class="card">
                             <div class="row">
                                 <div class="col-11">
-                                    <form action="/bagians" method="POST">
-                                        {{-- @if (@$bagian)
-                                            @method('PUT')
-                                        @endif --}}
+                                    <form action="/users/{{$user->id}}/bagians" method="POST">
                                         @csrf
                                         {{-- <input type="hidden" name="id" value="{{ @$bagian->id }}"> --}}
                                         <div class="card"
                                             style="margin-left: 80px ; padding: 20px; margin-top: 15px; margin-bottom: 15px; background-color: rgb(252, 248, 213)">
 
                                             <input type="text" name="id" hidden value="{{ @$bagian->id }}">
+                                            <input type="text" name="id_user" hidden value="{{ @$user->id }}">
                                             
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label for="id_task">User</label>
                                                 <select id="id_task" name="id_user" style="margin-left: 20px;height: 40px; color: black; background-color: lightgray; font-weight: bold">
                                                     @foreach ($user as $item)
-                                                    <option value="{{ $item->id }}" {{ (@$item->id == @$bagian->id_user) ? 'selected' : '' }}>
+                                                    <option value="{{ $item->id }}" {{ ( @$bagian->id_user == $item->id ) ? 'selected' : '' }}>
                                                         {{ $item->username }} | {{ $item->nama_instansi }}
                                                     </option>
                                                     @endforeach
                                                 </select>
-                                            </div>
+                                            </div> --}}
                                             <div class="form-group">
                                                 <label for="id_task">Tahun</label>
                                                 <select id="id_task" name="id_task" style="margin-left: 20px;height: 40px; color: black; background-color: lightgray; font-weight: bold">

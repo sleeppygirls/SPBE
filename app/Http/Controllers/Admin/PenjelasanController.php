@@ -105,6 +105,7 @@ class PenjelasanController extends Controller
      */
     public function destroy($id_indikator, $id_penjelasan)
     {
+        // dd($id_indikator);
         $penjelasan = Penjelasan::find($id_penjelasan);
         if ($penjelasan) {
             $penjelasan->delete();

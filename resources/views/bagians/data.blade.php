@@ -14,6 +14,14 @@
                     </div>
                     <div style="padding-left: 20px;padding-right: 20px;" class="col-12">
                         <div style="margin-bottom: 50px" class="card">
+                            <div class="col-11" style="text-align: right">
+                                <button type="button" class="btn"
+                                    style="margin-top: 10px;background-color: #ad323a">
+                                    <a href="/users" style="color: white">
+                                        Kembali
+                                    </a>
+                                </button>
+                            </div>
                             <div class="row">
                                 <div class="col-11">
                                     <div class="body">
@@ -22,8 +30,8 @@
                                             <thead style="text-align: center">
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Username</th>
-                                                    <th>Nama Instansi</th>
+                                                    {{-- <th>Username</th>
+                                                    <th>Nama Instansi</th> --}}
                                                     <th>Tahun Tugas</th>
                                                     <th>Indikators</th>
                                                     <th style="width: 120px">Aksi</th>
@@ -33,8 +41,8 @@
                                                 @foreach (@$bagians as $bagian)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $bagian->user->username }}</td>
-                                                        <td>{{ $bagian->user->nama_instansi }}</td>
+                                                        {{-- <td>{{ $bagian->user->username }}</td>
+                                                        <td>{{ $bagian->user->nama_instansi }}</td> --}}
                                                         <td>{{ $bagian->task->tahun }}</td>
                                                         <td>
                                                             @isset($bagian->indikators)
@@ -57,14 +65,17 @@
                                                         <td>
                                                             <div class="row">
                                                                 <div class="col-4" style="margin-left: 10px">
-                                                                    <a href="/bagians/{{ $bagian->id }}/edit">
+                                                                    <a 
+                                                                    href="/users/{{ $bagian->id_user }}/bagians/{{ $bagian->id }}/edit"
+                                                                    {{-- href="/bagians/{{ $bagian->id }}/edit" --}}
+                                                                    >
                                                                         <button type="button"
                                                                             class="btn btn-warning btn-sm">
                                                                             <i class="far fa-edit"></i></button>
                                                                     </a>
                                                                 </div>
                                                                 <div class="col-4" style="margin-left: 10px">
-                                                                    <form action="/bagians/{{ $bagian->id }}"
+                                                                    <form action="/users/{{ $bagian->id_user }}/bagians/{{ $bagian->id }}"
                                                                         method="POST">
                                                                         @csrf
                                                                         @method('DELETE')

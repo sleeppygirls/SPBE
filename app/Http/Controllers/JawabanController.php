@@ -38,12 +38,15 @@ class JawabanController extends Controller
      */
     public function store(StoreJawabanRequest $req)
     {
+        // dd($req);
+
         $username = $req->username;
 
         DetailIndikator::updateOrCreate(
             [
                 'id_indikator' => $req->input('id_indikator'),
                 'username' => $username,
+                'id_task' => $req->input('id_task'),
             ],
             [
                 'file' => '',
@@ -62,6 +65,7 @@ class JawabanController extends Controller
                     'id_penjelasan' => $penjelasan->id,
                     'username' => $username,
                     'id_indikator' => $req->id_indikator,
+                    'id_task' => $req->input('id_task'),
                 ],
                 [
                     'd_jawaban' => $req->input('jawab-' . $penjelasan->id),

@@ -163,7 +163,7 @@
                                                     <input type="hidden" name="id_indikator" id="id_indikator"
                                                         value="{{ $indikator->id }}">
                                                     <input type="hidden" name="id_task" id="id_task"
-                                                        value="{{ $indikator->id_task }}">
+                                                        value="{{ $task->id }}">
                                                     @foreach ($data as $key => $item)
                                                         <tr>
                                                             <td style="padding-left: 25px">{{ $key + 1 }}</td>

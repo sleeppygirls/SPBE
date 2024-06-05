@@ -60,17 +60,17 @@ Route::middleware(['is.auth'])->group(function() {
     Route::resource('jawaban', JawabanController::class);
     Route::resource('bantuan', BantuanController::class);
     Route::resource('profil', ProfilController::class);
-    Route::resource('bagians', BagianController::class);
-    Route::resource('users', UserController::class);
     Route::resource('skors', SkorController::class);
     Route::resource('file', FileController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('users/{user}/bagians', BagianController::class);
 
     // admin
     Route::resource('/adm/indikator', IndikatorAdminController::class);
     Route::resource('/adm/indikator/{indikator}/penjelasan', PenjelasanAdminController::class);
 
     // custom uri
-    Route::get('indikator/{indikator}/{username}', [IndikatorController::class, 'show']);
+    Route::get('task/{task}/indikator/{indikator}/{username}', [IndikatorController::class, 'show']);
     Route::post('indikator/task', [IndikatorController::class, 'task'])->name('indikator.task');
     Route::post('lihat/task', [LihatIndikatorController::class, 'task'])->name('lihat.task');
     // Route::get('indikator/task/{id_task}/{username}', [IndikatorController::class, 'test']);

@@ -178,7 +178,7 @@ class IndikatorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Indikator $indikator,$username)
+    public function show(Task $task, Indikator $indikator, $username)
     {
         $user = User::where('username','=',$username)->first();
 
@@ -200,6 +200,7 @@ class IndikatorController extends Controller
                 'username' => $user->username,
                 'aspek' => $aspek,
                 'domain' => $domain,
+                'task' => $task,
             ];
             return view("penjelasanjawaban", $data);
     }

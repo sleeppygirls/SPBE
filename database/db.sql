@@ -49,42 +49,41 @@ CREATE TABLE IF NOT EXISTS `bagians` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table spbe.bagians: ~13 rows (approximately)
+-- Dumping data for table spbe.bagians: ~14 rows (approximately)
 DELETE FROM `bagians`;
 INSERT INTO `bagians` (`id`, `id_user`, `id_task`, `indikators`, `created_at`, `updated_at`) VALUES
-	(1, 1, 1, '["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47"]', NULL, '2024-06-02 21:07:51'),
-	(2, 2, 1, '["1","2","4","5","6","7","8","11","12","15","16","17","18","19","20","22","23","28","30","31","42","43"]', '2024-05-23 01:14:02', '2024-05-23 01:14:55'),
-	(3, 3, 1, '["1","2","3","4","5","6","7","8","9","10","44"]', '2024-05-23 01:16:16', '2024-05-23 01:16:16'),
-	(4, 4, 1, '["3","13","23","32"]', '2024-05-23 23:10:31', '2024-05-23 23:10:31'),
-	(5, 5, 1, '["9","21","29","30","31","39"]', '2024-05-23 23:11:21', '2024-05-23 23:11:21'),
-	(6, 6, 1, '["10","14","19","20","27","40"]', '2024-05-23 23:12:05', '2024-05-23 23:12:05'),
-	(7, 7, 1, '["13","24","33","34","38"]', '2024-05-23 23:12:58', '2024-05-23 23:12:58'),
-	(8, 8, 1, '["25","26","36","41"]', '2024-05-23 23:13:51', '2024-05-23 23:13:51'),
-	(9, 9, 1, '["25"]', '2024-05-23 23:15:07', '2024-05-23 23:15:08'),
-	(10, 10, 1, '["37"]', '2024-05-23 23:21:48', '2024-05-23 23:21:48'),
-	(11, 11, 1, '["45"]', '2024-05-23 23:22:58', '2024-05-26 21:18:18'),
-	(12, 12, 1, '["46"]', '2024-05-26 21:18:56', '2024-05-26 21:18:56'),
-	(38, 26, 1, '["1","2"]', '2024-06-03 22:54:27', '2024-06-03 22:54:27');
+	(2, 6, 1, '["1","2","4","5","6","7","8","11","12","15","16","17","18","19","20","22","23","28","30","31","42","43"]', '2024-05-23 01:14:02', '2024-05-23 01:14:55'),
+	(3, 12, 1, '["1","2","3","4","5","6","7","8","9","10","44"]', '2024-05-23 01:16:16', '2024-05-23 01:16:16'),
+	(4, 3, 1, '["3","13","23","32"]', '2024-05-23 23:10:31', '2024-05-23 23:10:31'),
+	(5, 2, 1, '["9","21","29","30","31","39"]', '2024-05-23 23:11:21', '2024-05-23 23:11:21'),
+	(6, 11, 1, '["10","14","19","20","27","40"]', '2024-05-23 23:12:05', '2024-05-23 23:12:05'),
+	(7, 4, 1, '["13","24","33","34","38"]', '2024-05-23 23:12:58', '2024-05-23 23:12:58'),
+	(8, 5, 1, '["25","26","36","41"]', '2024-05-23 23:13:51', '2024-05-23 23:13:51'),
+	(9, 26, 1, '["25"]', '2024-05-23 23:15:07', '2024-05-23 23:15:08'),
+	(10, 9, 1, '["37"]', '2024-05-23 23:21:48', '2024-05-23 23:21:48'),
+	(11, 10, 1, '["45"]', '2024-05-23 23:22:58', '2024-05-26 21:18:18'),
+	(12, 7, 1, '["46"]', '2024-05-26 21:18:56', '2024-05-26 21:18:56'),
+	(38, 8, 1, '["1","2"]', '2024-06-03 22:54:27', '2024-06-03 22:54:27'),
+	(51, 1, 1, '["1","2","4","5"]', '2024-06-05 02:21:35', '2024-06-05 02:21:52'),
+	(52, 1, 2, '["1","2","3"]', '2024-06-05 02:21:45', '2024-06-05 02:21:45');
 
 -- Dumping structure for table spbe.detail_indikators
 CREATE TABLE IF NOT EXISTS `detail_indikators` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `file` varchar(255) DEFAULT NULL,
   `username` varchar(255) NOT NULL,
   `id_indikator` varchar(255) NOT NULL,
   `capaian` int(11) NOT NULL DEFAULT 0,
   `note` mediumtext DEFAULT NULL,
+  `id_task` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table spbe.detail_indikators: ~0 rows (approximately)
 DELETE FROM `detail_indikators`;
-INSERT INTO `detail_indikators` (`id`, `file`, `username`, `id_indikator`, `capaian`, `note`, `created_at`, `updated_at`) VALUES
-	(18, '', 'user1', '9', 4, NULL, '2024-05-30 20:47:23', '2024-05-30 20:47:23');
 
 -- Dumping structure for table spbe.domains
 CREATE TABLE IF NOT EXISTS `domains` (
@@ -171,22 +170,17 @@ INSERT INTO `indikators` (`id`, `no`, `name`, `username`, `aspek`, `domain`, `cr
 CREATE TABLE IF NOT EXISTS `jawabans` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `d_jawaban` varchar(255) DEFAULT NULL,
-  `id_penjelasan` int(11) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `id_indikator` varchar(255) NOT NULL,
+  `id_penjelasan` int(11) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `id_task` int(11) DEFAULT NULL,
+  `id_indikator` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table spbe.jawabans: ~5 rows (approximately)
+-- Dumping data for table spbe.jawabans: ~0 rows (approximately)
 DELETE FROM `jawabans`;
-INSERT INTO `jawabans` (`id`, `d_jawaban`, `id_penjelasan`, `username`, `id_indikator`, `created_at`, `updated_at`) VALUES
-	(107, 'fdsf', 41, 'user1', '9', '2024-05-30 20:47:23', '2024-05-30 20:47:23'),
-	(108, 'fsdf', 42, 'user1', '9', '2024-05-30 20:47:23', '2024-05-30 20:47:23'),
-	(109, 'fsdf', 43, 'user1', '9', '2024-05-30 20:47:23', '2024-05-30 20:47:23'),
-	(110, 'fsdfs', 44, 'user1', '9', '2024-05-30 20:47:23', '2024-05-30 20:47:23'),
-	(111, 'fsfdfds', 45, 'user1', '9', '2024-05-30 20:47:23', '2024-05-30 20:47:23');
 
 -- Dumping structure for table spbe.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
@@ -494,7 +488,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
 DELETE FROM `tasks`;
 INSERT INTO `tasks` (`id`, `name`, `tahap`, `batas`, `tahun`, `status`, `desc`, `created_at`, `updated_at`) VALUES
 	(1, 'testing', 'penilaian mandiri', '2024-04-30', '2024', 'pemantauan', 'testing', NULL, '2024-05-31 01:22:31'),
-	(2, 'test', NULL, NULL, '2023', NULL, NULL, NULL, NULL);
+	(2, NULL, NULL, NULL, '2025', NULL, NULL, NULL, NULL);
 
 -- Dumping structure for table spbe.users
 CREATE TABLE IF NOT EXISTS `users` (
@@ -511,11 +505,11 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `users_username_unique` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table spbe.users: ~13 rows (approximately)
+-- Dumping data for table spbe.users: ~14 rows (approximately)
 DELETE FROM `users`;
 INSERT INTO `users` (`id`, `username`, `password`, `level`, `nama_instansi`, `pass_view`, `remember_token`, `created_at`, `updated_at`) VALUES
-	(1, 'Admin', '$2y$12$dslC.jPtJmnBuc.JGrj4.OjkVUet9qo222HHUlt.XX.rlE4FOZ59i', 'admin', 'Admin', 'admin', 'X18SJh3NN5DxsEYPfTRwZGMDddvo1PA7Oij6Do2cvSBJF9eqipZQtJOEBnxh', '2024-05-17 00:48:08', '2024-05-24 01:11:59'),
-	(2, 'user1', '$2y$12$oGgLJPaHngwols.p8eYFme4hKjZTSqwyys1DjzjMRRwdZHkJO9/n.', 'user', 'Inspektorat', 'user1', 'GuWiCriXGNS7vD1WtYt3jRKbESk2taBTi5ivG74C3pAs0WZIvbj1kMFc7Fd9', '2024-05-17 00:48:08', '2024-05-29 17:47:01'),
+	(1, 'Admin', '$2y$12$dslC.jPtJmnBuc.JGrj4.OjkVUet9qo222HHUlt.XX.rlE4FOZ59i', 'admin', 'Admin', 'admin', 'eBkfRihoq6GWXULuD2CdYELZahRcnAb86q8S1u0S3bmu6I3G16fgBLOnzJ04', '2024-05-17 00:48:08', '2024-05-24 01:11:59'),
+	(2, 'user1', '$2y$12$oGgLJPaHngwols.p8eYFme4hKjZTSqwyys1DjzjMRRwdZHkJO9/n.', 'user', 'Inspektorat', 'user1', 'c647PIpdMCPjdfRDSrY03ebVGHORPvh6UdRO1WyYQzRLo32Tde1nz2KuEgah', '2024-05-17 00:48:08', '2024-05-29 17:47:01'),
 	(3, 'user2', '$2y$12$qg5m3GJ5QUPNT/rlY9PCtuuci2IpytA6xWo41Xt6SkEr52WK26ozu', 'user', 'Badan Perencanaan dan Pembangunan, Riset dan Inovasi Daerah', 'user', 'jXLzdVQWdAFkpAWfEBmbVqVejncdc7QvJG8ajzgUjnRE0eIRiJkqTZ5dJjCA', '2024-05-17 00:48:09', '2024-05-17 00:48:09'),
 	(4, 'user3', '$2y$12$oSC/qxXt6jpPkIo4bqXfqORg0wBXCdunLLSgrs8NnxOSFKlbuS5z2', 'user', 'Badan Pengelolaan Keuangan dan Aset Daerah', 'user', 'VjGpSGH8EQXQFdSEBCNMohV4Bp0yuLQj9B0NqRvlO2IbpmjEnNZSoW8ZTLm4', '2024-05-17 00:48:09', '2024-05-17 00:48:09'),
 	(5, 'user4', '$2y$12$x87n5QNSVWyw1Zq4JKm39eVioqQO212GPwrAwMNC2IAnXt.eFuZIC', 'user', 'Badan Kepegawaian dan Pengembangan Sumber Daya Manusia', 'user', 'tH1kKe8d9D2xP5Px', '2024-05-17 00:48:09', '2024-05-17 00:48:09'),

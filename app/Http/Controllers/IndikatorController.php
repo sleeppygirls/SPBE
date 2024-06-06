@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreIndikatorRequest;
 use App\Http\Requests\UpdateIndikatorRequest;
 use App\Models\Bagian;
+use App\Models\FileData;
 
 class IndikatorController extends Controller
 {
@@ -38,15 +39,15 @@ class IndikatorController extends Controller
 
         // Menggunakan json_decode untuk mengubah string JSON menjadi array
         $arrayData = json_decode($stringData, true);
-        
+
         if(count($arrayData) > 0) {
 
             // Mengonversi array menjadi string yang dipisahkan oleh koma
             $commaSeparatedString = implode(", ", $arrayData);
 
             $indikators = DB::select(
-                "SELECT i.*, d.id exist FROM indikators i LEFT JOIN 
-                (SELECT * FROM detail_indikators d WHERE username = ?) 
+                "SELECT i.*, d.id exist FROM indikators i LEFT JOIN
+                (SELECT * FROM detail_indikators d WHERE username = ?)
                 d ON i.id = d.id_indikator WHERE i.id IN ( $commaSeparatedString ) order by i.no asc",
                 [
                     $user->username,
@@ -54,8 +55,8 @@ class IndikatorController extends Controller
             );
         } else {
             $indikators = DB::select(
-                "SELECT i.*, d.id exist FROM indikators i LEFT JOIN 
-                (SELECT * FROM detail_indikators d WHERE username = ?) 
+                "SELECT i.*, d.id exist FROM indikators i LEFT JOIN
+                (SELECT * FROM detail_indikators d WHERE username = ?)
                 d ON i.id = d.id_indikator order by i.no asc",
                 [
                     $req->username,
@@ -83,8 +84,8 @@ class IndikatorController extends Controller
     //     $arrayData = json_decode($stringData, true);
     //     $task = Task::find($req->id_task);
     //     $indikators = DB::select(
-    //         "SELECT i.*, d.id exist FROM indikators i LEFT JOIN 
-    //         (SELECT * FROM detail_indikators d WHERE username = ?) 
+    //         "SELECT i.*, d.id exist FROM indikators i LEFT JOIN
+    //         (SELECT * FROM detail_indikators d WHERE username = ?)
     //         d ON i.id = d.id_indikator order by i.no asc",
     //         [
     //             $req->username,
@@ -105,11 +106,11 @@ class IndikatorController extends Controller
 
     // public function test($id_task,$username)
     // {
-        
+
     //     $task = Task::find($id_task);
     //     $indikators = DB::select(
-    //         "SELECT i.*, d.id exist FROM indikators i LEFT JOIN 
-    //         (SELECT * FROM detail_indikators d WHERE username = ?) 
+    //         "SELECT i.*, d.id exist FROM indikators i LEFT JOIN
+    //         (SELECT * FROM detail_indikators d WHERE username = ?)
     //         d ON i.id = d.id_indikator order by i.no asc",
     //         [
     //             $username,
@@ -126,7 +127,7 @@ class IndikatorController extends Controller
     //     return view('indikators.indikator', $data);
     // }
 
-    
+
     public function index()
     {
         $indikator = Indikator::all();
@@ -188,9 +189,15 @@ class IndikatorController extends Controller
             ]);
 
             $detail_indikator = DetailIndikator::where('username', $user->username)->where('id_indikator', $indikator->id)->first();
-           
+
             $domain = Domain::where('id', $indikator->domain)->first();
             $aspek = Aspek::where('id', $indikator->aspek)->first();
+
+            $documents = FileData::where('id_indikator', $indikator->id)
+            ->where('id_task', $indikator->id_task)
+            ->where('id_user', Auth::id())
+            ->get()
+            ->toArray();
 
             $data = [
                 'indikator' => $indikator,
@@ -201,7 +208,9 @@ class IndikatorController extends Controller
                 'aspek' => $aspek,
                 'domain' => $domain,
                 'task' => $task,
+                'documents' => $documents,
             ];
+
             return view("penjelasanjawaban", $data);
     }
 

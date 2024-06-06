@@ -237,6 +237,22 @@
                                             <p style="color: grey">(centang untuk menandai bahwa dokumen tersebut akan
                                                 digunakan
                                                 sebagai bukti dukung pada indikator yang dipilih)</p>
+
+
+                                            @foreach ($documents as $index => $document)
+                                                <div class="form-group clearfix" style="margin-bottom: 3px;">
+                                                    <div class=" d-inline">
+
+                                                        <label>
+                                                            <a href="{{ Storage::url(json_decode($document['files'], true)[0]['path']) }}"
+                                                                target="_blank">
+                                                               {{ $index+1 }}. {{ $document['name'] }}
+
+                                                            </a>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            @endforeach
                                             <div class="form-group clearfix" style="margin-bottom: 3px;">
                                                 <div class="icheck-primary d-inline">
                                                     <input type="checkbox" id="checkboxPrimary1" checked>
@@ -265,16 +281,23 @@
                                             </div>
                                             <p style="color: lightgrey; margin-top: 30px;">Upload Dokumen Pendukung</p>
                                             <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" name="file" class="custom-file-input"
-                                                        id="exampleInputFile">
-                                                    <label class="custom-file-label" for="exampleInputFile"
-                                                        style="color: lightgrey; width: 840px">Unggah satu [pdf] atau
-                                                        banyak
-                                                        file
-                                                        [zip/rar] *max
-                                                        100MB</label>
-                                                </div>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#exampleModal">
+                                                    Bukti Dukung
+                                                </button>
+                                                {{-- <div class="custom-file">
+                                                    <form action="#" method="POST" enctype="multipart/form-data">
+
+                                                        <input type="file" name="files[]" multiple class="custom-file-input"
+                                                            id="exampleInputFile">
+                                                        <label class="custom-file-label" for="exampleInputFile"
+                                                            style="color: lightgrey; width: 840px">Unggah satu [pdf] atau
+                                                            banyak
+                                                            file
+                                                            [zip/rar] *max
+                                                            100MB</label>
+                                                    </form>
+                                                </div> --}}
                                             </div>
                                             <p style="color: red; margin-bottom: 0px;margin-top: 25px;font-size: small">
                                                 *panjang
@@ -313,6 +336,29 @@
                     </div>
                 </div>
             </form>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Bukti Dukung</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            @livewire('document-upload', [$indikator->id, $indikator->id_task])
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <script>
             var rates = document.getElementById('radio').value;

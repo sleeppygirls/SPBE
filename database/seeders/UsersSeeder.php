@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class UsersSeeder extends Seeder
 {
@@ -111,5 +113,6 @@ class UsersSeeder extends Seeder
         foreach ($userData as $key => $val) {
             User::create($val);
         }
+
     }
 }

@@ -8,6 +8,8 @@
 
     @include('template.css')
 
+    @livewireStyles
+
 </head>
 
 <body class="hold-transition light-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -35,6 +37,7 @@
     </div>
     <!-- ./wrapper -->
 
+    @livewireScripts
     @include('template.js')
 
 </body>

@@ -20,7 +20,7 @@ class LihatIndikatorController extends Controller
     {
         $user = Auth::user();
 
-        $bagian = Bagian::where('id', $user->id_bagian)->first();
+        $bagian = Bagian::where('id_user', $user->id)->first();
 
         // Data string yang akan diubah menjadi array
         $stringData = $bagian->indikators;

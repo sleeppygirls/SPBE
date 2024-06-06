@@ -49,7 +49,6 @@ class JawabanController extends Controller
                 'id_task' => $req->input('id_task'),
             ],
             [
-                'file' => '',
                 'capaian' => $req->pencapaian,
                 'note' => @$req->catatan,
             ],

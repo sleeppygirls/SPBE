@@ -135,34 +135,34 @@ class BagianController extends Controller
     public function update(UpdateBagianRequest $request, Bagian $bagian)
     {
 
-        // Mengambil semua data indikator dari database
-        $dbIndikators = Indikator::pluck('id')->toArray();
+        // // Mengambil semua data indikator dari database
+        // $dbIndikators = Indikator::pluck('id')->toArray();
 
-        // Mengambil data dari form
-        $formData = $request->all();
+        // // Mengambil data dari form
+        // $formData = $request->all();
 
-        // Mengonversi data menjadi array angka tanpa kunci, hanya nilainya saja
-        $indicatorsArray = [];
-        foreach ($dbIndikators as $indikator) {
-            if (isset($formData["indikator-{$indikator}"])) {
-                $indicatorsArray[] = $formData["indikator-{$indikator}"];
-            }
-        }
+        // // Mengonversi data menjadi array angka tanpa kunci, hanya nilainya saja
+        // $indicatorsArray = [];
+        // foreach ($dbIndikators as $indikator) {
+        //     if (isset($formData["indikator-{$indikator}"])) {
+        //         $indicatorsArray[] = $formData["indikator-{$indikator}"];
+        //     }
+        // }
 
-        // Mengonversi array menjadi string angka yang dipisahkan oleh koma
-        // $indicatorsString = implode(',', $indicatorsArray);
+        // // Mengonversi array menjadi string angka yang dipisahkan oleh koma
+        // // $indicatorsString = implode(',', $indicatorsArray);
 
-        // Mengonversi array menjadi string
-        $indicatorsString = json_encode($indicatorsArray);
+        // // Mengonversi array menjadi string
+        // $indicatorsString = json_encode($indicatorsArray);
 
-        $bagian->fill($request->all());
-        $bagian['id'] = $request->input('id');
-        $bagian['indikators'] = $indicatorsString;
-        $bagian->save();
+        // $bagian->fill($request->all());
+        // $bagian['id'] = $request->input('id');
+        // $bagian['indikators'] = $indicatorsString;
+        // $bagian->save();
 
-        return redirect('/bagians')->with([
-            'mess' => 'Data Berhasil Disimpan',
-        ]);
+        // return redirect('/bagians')->with([
+        //     'mess' => 'Data Berhasil Disimpan',
+        // ]);
     }
 
     /**

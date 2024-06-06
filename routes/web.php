@@ -61,7 +61,6 @@ Route::middleware(['is.auth'])->group(function() {
     Route::resource('bantuan', BantuanController::class);
     Route::resource('profil', ProfilController::class);
     Route::resource('skors', SkorController::class);
-    Route::resource('file', FileController::class);
     Route::resource('users', UserController::class);
     Route::resource('users/{user}/bagians', BagianController::class);
 

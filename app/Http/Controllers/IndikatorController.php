@@ -31,7 +31,7 @@ class IndikatorController extends Controller
         $username = $req->input('username');
         $user = User::where('username', $username)->first();
 
-        $bagian = Bagian::where('id', $user->id_bagian)->first();
+        $bagian = Bagian::where('id_user', $user->id)->first();
 
         // Data string yang akan diubah menjadi array
         $stringData = $bagian->indikators;

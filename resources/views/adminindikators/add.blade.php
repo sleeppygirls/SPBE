@@ -32,6 +32,16 @@
                                                         <input type="text" class="form-control" name="name"
                                                             placeholder="Indikator" value="{{ @$indikator->name }}">
                                                     </div>
+                                                    <div class="form-group">
+                                                        <label for="bobot">Bobot</label>
+                                                        <input type="number" class="form-control" name="bobot"
+                                                            placeholder="Bobot" value="{{ @$indikator->bobot }}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="bobot_aspek">Bobot Aspek</label>
+                                                        <input type="number" class="form-control" name="bobot_aspek"
+                                                            placeholder="Bobot Aspek" value="{{ @$indikator->bobot_aspek }}">
+                                                    </div>
                                                     {{-- <div class="form-group">
                                                         <label for="aspek">Aspek</label>
                                                         <select id="aspek" name="aspek" style="margin-left: 20px;height: 40px; color: black; background-color: lightgray; font-weight: bold">

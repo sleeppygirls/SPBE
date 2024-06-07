@@ -21,6 +21,8 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Indikator</th>
+                                                    <th>Bobot</th>
+                                                    <th>Bobot Aspek</th>
                                                     <th>Penjelasan</th>
                                                     <th>Aksi</th>
                                                 </tr>
@@ -30,6 +32,8 @@
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $item->name }}</td>
+                                                        <td>{{ $item->bobot }}</td>
+                                                        <td>{{ $item->bobot_aspek }}</td>
                                                         <td style="width: 50px; text-align: center">
                                                             <div class="row">
                                                                 <div class="col-4" style="margin-left: 10px">

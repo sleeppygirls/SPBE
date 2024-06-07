@@ -209,11 +209,6 @@
                                                                     <label for="customRadio{{ $key + 1 }}"
                                                                         class="custom-control-label"></label>
                                                                 </div>
-
-                                                                {{-- <div class="custom-control custom-radio custom-control-input-outline" style="padding-left: 35px">
-                                                            <input class="custom-control-input" type="radio" id="customRadio{{$loop->iteration}}" name="customRadio">
-                                                            <label for="customRadio{{$loop->iteration}}" class="custom-control-label"></label>
-                                                          </div> --}}
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -231,104 +226,57 @@
                                     </div>
                                     <div class="row" style="margin-left: 40px;">
                                         <div class="col-11">
-                                            <p style="margin-bottom: 0px; color: lightgrey">Daftar Dokumen Evaluasi Tahun
-                                                Lalu
+                                            <p style="margin-bottom: 5px; color: lightgrey;">
+                                                Daftar Dokumen
                                             </p>
-                                            <p style="color: grey">(centang untuk menandai bahwa dokumen tersebut akan
-                                                digunakan
-                                                sebagai bukti dukung pada indikator yang dipilih)</p>
-
-
                                             @foreach ($documents as $index => $document)
                                                 <div class="form-group clearfix" style="margin-bottom: 3px;">
                                                     <div class=" d-inline">
-
                                                         <label>
                                                             <a href="{{ Storage::url(json_decode($document['files'], true)[0]['path']) }}"
                                                                 target="_blank">
-                                                               {{ $index+1 }}. {{ $document['name'] }}
-
+                                                                {{ $index + 1 }}. {{ $document['name'] }}
                                                             </a>
                                                         </label>
                                                     </div>
                                                 </div>
                                             @endforeach
-                                            <div class="form-group clearfix" style="margin-bottom: 3px;">
-                                                <div class="icheck-primary d-inline">
-                                                    <input type="checkbox" id="checkboxPrimary1" checked>
-                                                    <label for="checkboxPrimary1"> Indikator_1.rar
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group clearfix">
-                                                <div class="icheck-danger d-inline">
-                                                    <input type="checkbox" checked id="checkboxDanger1">
-                                                    <label for="checkboxDanger1"> dt yg di up
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <p style="margin-top: 25px; margin-bottom: 5px; color: lightgrey;">Daftar
-                                                Dokumen
-                                            </p>
-                                            <div class="row" style="margin-left: 2px">
-                                                <div class="col-3" style="padding-left: 0px;">
-                                                    <p>Dokumen yg diup</p>
-                                                </div>
-                                                <div class="col-1">
-                                                    <button type="button" class="btn btn-danger"
-                                                        style="padding-top: 3px; padding-bottom: 3px">Hapus</button>
-                                                </div>
-                                            </div>
-                                            <p style="color: lightgrey; margin-top: 30px;">Upload Dokumen Pendukung</p>
-                                            <div class="input-group">
+                                            @if (Auth::user()->level == 'user')
                                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                                     data-target="#exampleModal">
                                                     Bukti Dukung
                                                 </button>
-                                                {{-- <div class="custom-file">
-                                                    <form action="#" method="POST" enctype="multipart/form-data">
-
-                                                        <input type="file" name="files[]" multiple class="custom-file-input"
-                                                            id="exampleInputFile">
-                                                        <label class="custom-file-label" for="exampleInputFile"
-                                                            style="color: lightgrey; width: 840px">Unggah satu [pdf] atau
-                                                            banyak
-                                                            file
-                                                            [zip/rar] *max
-                                                            100MB</label>
-                                                    </form>
-                                                </div> --}}
-                                            </div>
-                                            <p style="color: red; margin-bottom: 0px;margin-top: 25px;font-size: small">
-                                                *panjang
-                                                nama file maksimum 60 karakter, jika melebihi 60 karakter, sistem akan
-                                                otomatis
-                                                memotong nama file menjadi 60 karakter</p>
-                                            <p style="color: red; font-size: small; margin-bottom: 50px;">*apabila ukuran
-                                                file
-                                                yang
-                                                di unggah melebihi ketentuan batas maksimum, agar dapat mereferensikan
-                                                url/link
-                                                data
-                                                dukung dalam penjelasan</p>
-                                            @if (Auth::user()->level == 'admin')
-                                                <div class="callout callout-danger"
-                                                    style="margin-bottom: 40px; padding-bottom: 5px; padding-top: 5px">
-                                                    <h5>Catatan</h5>
-                                                    <textarea name="catatan" id="catatan" cols="107" rows="3" style="resize: none">{{ @$detail_indikator->note }}</textarea>
-                                                </div>
-                                            @else
-                                                <div class="callout callout-danger"
-                                                    style="margin-bottom: 40px; padding-bottom: 5px; padding-top: 5px">
-                                                    <h5>Catatan</h5>
-                                                    <textarea name="catatan" id="catatan" cols="107" rows="3" style="resize: none" disabled>{{ @$detail_indikator->note }}</textarea>
-                                                </div>
                                             @endif
-                                            <button type="submit" class="btn btn-success"
-                                                style="margin-left: 690px; margin-bottom: 15px">Upload
-                                                dan
-                                                Simpan</button>
                                         </div>
+                                        {{-- <p style="color: red; margin-bottom: 0px;margin-top: 25px;font-size: small">
+                                            *panjang
+                                            nama file maksimum 60 karakter, jika melebihi 60 karakter, sistem akan
+                                            otomatis
+                                            memotong nama file menjadi 60 karakter</p>
+                                        <p style="color: red; font-size: small; margin-bottom: 50px;">*apabila ukuran
+                                            file
+                                            yang
+                                            di unggah melebihi ketentuan batas maksimum, agar dapat mereferensikan
+                                            url/link
+                                            data
+                                            dukung dalam penjelasan</p> --}}
+                                        @if (Auth::user()->level == 'admin')
+                                            <div class="callout callout-danger"
+                                                style="margin-top: 40px; margin-bottom: 40px; padding-bottom: 5px; padding-top: 5px">
+                                                <h5>Catatan</h5>
+                                                <textarea name="catatan" id="catatan" cols="107" rows="3" style="resize: none">{{ @$detail_indikator->note }}</textarea>
+                                            </div>
+                                        @else
+                                            <div class="callout callout-danger"
+                                                style="margin-top: 40px; margin-bottom: 40px; padding-bottom: 5px; padding-top: 5px">
+                                                <h5>Catatan</h5>
+                                                <textarea name="catatan" id="catatan" cols="107" rows="3" style="resize: none" disabled>{{ @$detail_indikator->note }}</textarea>
+                                            </div>
+                                        @endif
+                                        <button type="submit" class="btn btn-success"
+                                            style="margin-left: 690px; margin-bottom: 15px">
+                                            Upload dan Simpan
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -336,43 +284,39 @@
                     </div>
                 </div>
             </form>
+        </div>
 
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Bukti Dukung</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            @livewire('document-upload', [$indikator->id, $indikator->id_task])
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Bukti Dukung</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @livewire('document-upload', [$indikator->id, $indikator->id_task])
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
-
         </div>
+
         <script>
             var rates = document.getElementById('radio').value;
             var rate_value;
             if (rates == 'Fixed Rate') {
                 rate_value = document.getElementById('r1').value;
-
             } else if (rates == 'Variable Rate') {
                 rate_value = document.getElementById('r2').value;
-
             } else if (rates == 'Multi Rate') {
                 rate_value = document.getElementById('r3').value;
             }
-
             document.getElementById('results').innerHTML = rate_value;
         </script>
     @endif

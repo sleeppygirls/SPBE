@@ -19,17 +19,16 @@
                                             style="background-color: rgb(217, 230, 251); margin-top: 30px; margin-left: 40px; margin-right: 25px">
                                             <thead>
                                                 <tr>
-                                                    <th>No</th>
-                                                    <th>Kategori</th>
+                                                    <th style="width: 30px">No</th>
                                                     <th>Nama File</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($file as $item)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td></td>
-                                                        <td>{{ $item->file }}</td>
+                                                        <td>{{ $item->name }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -43,4 +42,18 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const navbarAutocomplete = document.querySelector('#navbar-search-autocomplete');
+        const navbarData = ['One', 'Two', 'Three', 'Four', 'Five'];
+        const navbarDataFilter = (value) => {
+            return navbarData.filter((item) => {
+                return item.toLowerCase().startsWith(value.toLowerCase());
+            });
+        };
+
+        new mdb.Autocomplete(navbarAutocomplete, {
+            filter: navbarDataFilter,
+        });
+    </script>
 @endsection

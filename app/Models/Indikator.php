@@ -17,6 +17,8 @@ class Indikator extends Model
         'id',
         'no',
         'name',
+        'bobot',
+        'bobot_aspek',
         'aspek',
         'domain',
     ];

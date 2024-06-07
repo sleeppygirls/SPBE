@@ -83,7 +83,7 @@
                                     <div class="col-4">
                                         <button type="button" class="btn"
                                             style="margin-left: 40px; background-color: #ad323a">
-                                            <a href="/file" style="color: white">
+                                            <a href="/task/{{ $task->id }}/{{ @$username }}/file" style="color: white">
                                                 Cari File
                                             </a>
                                         </button>

@@ -29,6 +29,8 @@
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
+            @livewireScripts
+            @include('template.js')
         </aside>
         <!-- /.control-sidebar -->
 
@@ -36,9 +38,6 @@
 
     </div>
     <!-- ./wrapper -->
-
-    @livewireScripts
-    @include('template.js')
 
 </body>
 

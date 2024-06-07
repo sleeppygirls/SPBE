@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('no');
             $table->string('name');
-            $table->string('id_task');
-            $table->string('username');
+            $table->decimal('bobot', 3,2)->default(0);
+            $table->decimal('bobot_aspek', 3,2)->default(0);
             $table->integer('aspek');
             $table->integer('domain');
             $table->timestamps();

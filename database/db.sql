@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `bagians` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table spbe.bagians: ~14 rows (approximately)
 DELETE FROM `bagians`;
@@ -57,7 +57,7 @@ INSERT INTO `bagians` (`id`, `id_user`, `id_task`, `indikators`, `created_at`, `
 	(2, 6, 1, '["1","2","4","5","6","7","8","11","12","15","16","17","18","19","20","22","23","28","30","31","42","43"]', '2024-05-23 01:14:02', '2024-05-23 01:14:55'),
 	(3, 12, 1, '["1","2","3","4","5","6","7","8","9","10","44"]', '2024-05-23 01:16:16', '2024-05-23 01:16:16'),
 	(4, 3, 1, '["3","13","23","32"]', '2024-05-23 23:10:31', '2024-05-23 23:10:31'),
-	(5, 2, 1, '["9","21","29","30","31","39"]', '2024-05-23 23:11:21', '2024-05-23 23:11:21'),
+	(5, 2, 1, '["9","21","29","30","31","39"]', '2024-05-23 23:11:21', '2024-06-06 00:32:17'),
 	(6, 11, 1, '["10","14","19","20","27","40"]', '2024-05-23 23:12:05', '2024-05-23 23:12:05'),
 	(7, 4, 1, '["13","24","33","34","38"]', '2024-05-23 23:12:58', '2024-05-23 23:12:58'),
 	(8, 5, 1, '["25","26","36","41"]', '2024-05-23 23:13:51', '2024-05-23 23:13:51'),
@@ -66,8 +66,7 @@ INSERT INTO `bagians` (`id`, `id_user`, `id_task`, `indikators`, `created_at`, `
 	(11, 10, 1, '["45"]', '2024-05-23 23:22:58', '2024-05-26 21:18:18'),
 	(12, 7, 1, '["46"]', '2024-05-26 21:18:56', '2024-05-26 21:18:56'),
 	(38, 8, 1, '["1","2"]', '2024-06-03 22:54:27', '2024-06-03 22:54:27'),
-	(51, 1, 1, '["1","2","4","5"]', '2024-06-05 02:21:35', '2024-06-05 02:21:52'),
-	(52, 1, 2, '["1","2","3"]', '2024-06-05 02:21:45', '2024-06-05 02:21:45');
+	(51, 1, 1, '["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47"]', '2024-06-05 02:21:35', '2024-06-05 02:30:57');
 
 -- Dumping structure for table spbe.detail_indikators
 CREATE TABLE IF NOT EXISTS `detail_indikators` (
@@ -80,10 +79,12 @@ CREATE TABLE IF NOT EXISTS `detail_indikators` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table spbe.detail_indikators: ~0 rows (approximately)
 DELETE FROM `detail_indikators`;
+INSERT INTO `detail_indikators` (`id`, `username`, `id_indikator`, `capaian`, `note`, `id_task`, `created_at`, `updated_at`) VALUES
+	(23, 'user1', '9', 5, NULL, 1, '2024-06-06 00:42:01', '2024-06-06 00:42:01');
 
 -- Dumping structure for table spbe.domains
 CREATE TABLE IF NOT EXISTS `domains` (
@@ -102,6 +103,22 @@ INSERT INTO `domains` (`id`, `domain`, `created_at`, `updated_at`) VALUES
 	(3, 'Manajemen SPBE', NULL, NULL),
 	(4, 'Layanan SPBE', NULL, NULL);
 
+-- Dumping structure for table spbe.file_data
+CREATE TABLE IF NOT EXISTS `file_data` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` bigint(20) DEFAULT NULL,
+  `id_task` bigint(20) DEFAULT NULL,
+  `id_indikator` bigint(20) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `files` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`files`)),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table spbe.file_data: ~0 rows (approximately)
+DELETE FROM `file_data`;
+
 -- Dumping structure for table spbe.indikators
 CREATE TABLE IF NOT EXISTS `indikators` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -113,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `indikators` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1186 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1187 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table spbe.indikators: ~47 rows (approximately)
 DELETE FROM `indikators`;
@@ -177,10 +194,16 @@ CREATE TABLE IF NOT EXISTS `jawabans` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table spbe.jawabans: ~0 rows (approximately)
+-- Dumping data for table spbe.jawabans: ~5 rows (approximately)
 DELETE FROM `jawabans`;
+INSERT INTO `jawabans` (`id`, `d_jawaban`, `id_penjelasan`, `username`, `id_task`, `id_indikator`, `created_at`, `updated_at`) VALUES
+	(147, 'cdh', 41, 'user1', 1, '9', '2024-06-06 00:42:01', '2024-06-06 00:42:01'),
+	(148, 'fchnb', 42, 'user1', 1, '9', '2024-06-06 00:42:01', '2024-06-06 00:42:01'),
+	(149, 'fgh', 43, 'user1', 1, '9', '2024-06-06 00:42:01', '2024-06-06 00:42:01'),
+	(150, 'rfh', 44, 'user1', 1, '9', '2024-06-06 00:42:01', '2024-06-06 00:42:01'),
+	(151, 'rfgh', 45, 'user1', 1, '9', '2024-06-06 00:42:01', '2024-06-06 00:42:01');
 
 -- Dumping structure for table spbe.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
@@ -209,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `penjelasans` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=327 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=328 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table spbe.penjelasans: ~235 rows (approximately)
 DELETE FROM `penjelasans`;
@@ -482,13 +505,13 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table spbe.tasks: ~2 rows (approximately)
+-- Dumping data for table spbe.tasks: ~1 rows (approximately)
 DELETE FROM `tasks`;
 INSERT INTO `tasks` (`id`, `name`, `tahap`, `batas`, `tahun`, `status`, `desc`, `created_at`, `updated_at`) VALUES
 	(1, 'testing', 'penilaian mandiri', '2024-04-30', '2024', 'pemantauan', 'testing', NULL, '2024-05-31 01:22:31'),
-	(2, NULL, NULL, NULL, '2025', NULL, NULL, NULL, NULL);
+	(12, 'Coba', 'Pemantauan', '2024-06-06', '2025', 'Pantau', 'coba', '2024-06-06 00:33:43', '2024-06-06 00:33:43');
 
 -- Dumping structure for table spbe.users
 CREATE TABLE IF NOT EXISTS `users` (
@@ -503,12 +526,12 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_username_unique` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table spbe.users: ~14 rows (approximately)
+-- Dumping data for table spbe.users: ~13 rows (approximately)
 DELETE FROM `users`;
 INSERT INTO `users` (`id`, `username`, `password`, `level`, `nama_instansi`, `pass_view`, `remember_token`, `created_at`, `updated_at`) VALUES
-	(1, 'Admin', '$2y$12$dslC.jPtJmnBuc.JGrj4.OjkVUet9qo222HHUlt.XX.rlE4FOZ59i', 'admin', 'Admin', 'admin', 'eBkfRihoq6GWXULuD2CdYELZahRcnAb86q8S1u0S3bmu6I3G16fgBLOnzJ04', '2024-05-17 00:48:08', '2024-05-24 01:11:59'),
+	(1, 'Admin', '$2y$12$dslC.jPtJmnBuc.JGrj4.OjkVUet9qo222HHUlt.XX.rlE4FOZ59i', 'admin', 'Admin', 'admin', 'YTXojKDxFUCo6SshMX1ULQ416eiCx6ZjxCaFBsCJxqoexmy6vhvh4bLVcIpq', '2024-05-17 00:48:08', '2024-05-24 01:11:59'),
 	(2, 'user1', '$2y$12$oGgLJPaHngwols.p8eYFme4hKjZTSqwyys1DjzjMRRwdZHkJO9/n.', 'user', 'Inspektorat', 'user1', 'c647PIpdMCPjdfRDSrY03ebVGHORPvh6UdRO1WyYQzRLo32Tde1nz2KuEgah', '2024-05-17 00:48:08', '2024-05-29 17:47:01'),
 	(3, 'user2', '$2y$12$qg5m3GJ5QUPNT/rlY9PCtuuci2IpytA6xWo41Xt6SkEr52WK26ozu', 'user', 'Badan Perencanaan dan Pembangunan, Riset dan Inovasi Daerah', 'user', 'jXLzdVQWdAFkpAWfEBmbVqVejncdc7QvJG8ajzgUjnRE0eIRiJkqTZ5dJjCA', '2024-05-17 00:48:09', '2024-05-17 00:48:09'),
 	(4, 'user3', '$2y$12$oSC/qxXt6jpPkIo4bqXfqORg0wBXCdunLLSgrs8NnxOSFKlbuS5z2', 'user', 'Badan Pengelolaan Keuangan dan Aset Daerah', 'user', 'VjGpSGH8EQXQFdSEBCNMohV4Bp0yuLQj9B0NqRvlO2IbpmjEnNZSoW8ZTLm4', '2024-05-17 00:48:09', '2024-05-17 00:48:09'),
@@ -520,8 +543,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `level`, `nama_instansi`, `pa
 	(10, 'user9', '$2y$12$CMU.MnL.AV1aaTa4rVJZeOctBIMihUOIL.wCDK08TMbjX1Jz9U/Ye', 'user', 'Rumah Sakit Umum Daerah Dolopo', 'user', '99RWLoPcIH9j4Xkn', '2024-05-17 00:48:11', '2024-05-17 00:48:11'),
 	(11, 'user10', '$2y$12$vIcQavX0EUhCxtRK4hKkJuoBcoNnkpOzbiRNinZpnGDyqiXFNgtES', 'user', 'Bagian Organisasi Sekretariat Daerah', 'user', 'iPQIRYpQ7XLxNXVO', '2024-05-17 00:48:11', '2024-05-17 00:48:11'),
 	(12, 'user11', '$2y$12$9qyNcDBlBlv26Z/wc0AqC.vI.DysCAP/nQ2a.EoCltt.JI78MQixC', 'user', 'Bagian Hukum Sekretariat Daerah', 'user', '6rogojNlRSiTRCUE', '2024-05-17 00:48:12', '2024-05-17 00:48:12'),
-	(26, 'user12', '$2y$12$D6Dw7LbbEzBxkdJt2lljT.MYbxUSFvnLl57mOE.zYYJdJFoqMsSFG', 'user', 'Bagian Pengadaan Barang dan Jasa Sekretariat Daerah', 'user', '9bOZQMPtUePPt4uk', '2024-05-17 00:48:12', '2024-05-17 00:48:12'),
-	(33, 'polisi', '$2y$12$immxgqiEBIchFlMsKITVBOJWvMi/jqE.xjSVO75CJbPtJRzpJcrYK', 'user', 'Kepolisian', 'user', NULL, '2024-06-03 21:01:56', '2024-06-03 22:54:27');
+	(26, 'user12', '$2y$12$D6Dw7LbbEzBxkdJt2lljT.MYbxUSFvnLl57mOE.zYYJdJFoqMsSFG', 'user', 'Bagian Pengadaan Barang dan Jasa Sekretariat Daerah', 'user', '9bOZQMPtUePPt4uk', '2024-05-17 00:48:12', '2024-05-17 00:48:12');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

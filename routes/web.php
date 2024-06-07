@@ -24,6 +24,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\Admin\IndikatorController as IndikatorAdminController;
 use App\Http\Controllers\Admin\TaskController as TaskAdminController;
 use App\Http\Controllers\Admin\PenjelasanController as PenjelasanAdminController;
+use App\Http\Controllers\FileDataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +64,7 @@ Route::middleware(['is.auth'])->group(function() {
     Route::resource('skors', SkorController::class);
     Route::resource('users', UserController::class);
     Route::resource('users/{user}/bagians', BagianController::class);
+    Route::resource('task/{task}/{username}/file', FileDataController::class);
 
     // admin
     Route::resource('/adm/indikator', IndikatorAdminController::class);

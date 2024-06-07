@@ -68,6 +68,8 @@ class IndikatorController extends Controller
             'id' => $request->input('id'),
         ], [
             'name' => $request->input('name'),
+            'bobot' => $request->input('bobot'),
+            'bobot_aspek' => $request->input('bobot_aspek'),
         ]);
 
         return redirect('/adm/indikator')->with([

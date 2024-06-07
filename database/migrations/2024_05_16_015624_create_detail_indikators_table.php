@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('file')->nullable();
             $table->string('username')->nullable();
+            $table->integer('id_task')->nullable();
             $table->string('id_indikator')->nullable();
             $table->string('capaian')->nullable();
             $table->string('note')->nullable();

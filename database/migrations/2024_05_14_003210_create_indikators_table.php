@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('indikators', function (Blueprint $table) {
             $table->id();
-            $table->integer('no');
+            $table->integer('no')->nullable();
             $table->string('name');
-            $table->decimal('bobot', 3,2)->default(0);
-            $table->decimal('bobot_aspek', 3,2)->default(0);
-            $table->integer('aspek');
+            $table->decimal('bobot', 5,2)->default(0);
+            $table->decimal('bobot_aspek', 5,2)->default(0);
+            $table->integer('aspek')->nullable();
             $table->integer('domain');
             $table->timestamps();
         });

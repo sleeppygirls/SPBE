@@ -22,9 +22,24 @@ class Indikator extends Model
         'aspek',
         'domain',
     ];
-    
+
     public function penjelasan() {
         return $this->hasMany(Penjelasan::class, 'id_indikator', 'id');
+    }
+
+    public function domainR()
+    {
+        return $this->belongsTo(Domain::class,'domain','id');
+    }
+
+    public function aspekR()
+    {
+        return $this->belongsTo(Aspek::class,'aspek','id');
+    }
+
+    public function detailIndikator()
+    {
+        return $this->hasOne(DetailIndikator::class, 'id_indikator');
     }
 
     // public function aspek() {

@@ -21,8 +21,8 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Indikator</th>
-                                                    <th>Bobot</th>
-                                                    <th>Bobot Aspek</th>
+                                                    <th>Bobot(%)</th>
+                                                    <th>Bobot Aspek(%)</th>
                                                     <th>Penjelasan</th>
                                                     <th>Aksi</th>
                                                 </tr>

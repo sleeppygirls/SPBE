@@ -27,40 +27,38 @@ class IndikatorController extends Controller
      */
     public function task(Request $req)
     {
-
-        // dd($req);
         $username = $req->input('username');
+        if (!$username) {
+            return redirect()->back();
+        }
         $user = User::where('username', $username)->first();
 
         $bagian = Bagian::where('id_user', $user->id)->first();
 
-        // Data string yang akan diubah menjadi array
-        $stringData = $bagian->indikators;
+        $arrayData = [];
+        if ($bagian) {
+            if ($bagian->indikators) {
+                $stringData = $bagian->indikators;
+                $arrayData = json_decode($stringData, true);
+            }
+        }
 
-        // Menggunakan json_decode untuk mengubah string JSON menjadi array
-        $arrayData = json_decode($stringData, true);
+        if (count($arrayData) > 0) {
 
-        if(count($arrayData) > 0) {
-
-            // Mengonversi array menjadi string yang dipisahkan oleh koma
-            $commaSeparatedString = implode(", ", $arrayData);
+            $commaSeparatedString = implode(', ', $arrayData);
 
             $indikators = DB::select(
                 "SELECT i.*, d.id exist FROM indikators i LEFT JOIN
                 (SELECT * FROM detail_indikators d WHERE username = ?)
                 d ON i.id = d.id_indikator WHERE i.id IN ( $commaSeparatedString ) order by i.no asc",
-                [
-                    $user->username,
-                ]
+                [$user->username],
             );
         } else {
             $indikators = DB::select(
                 "SELECT i.*, d.id exist FROM indikators i LEFT JOIN
                 (SELECT * FROM detail_indikators d WHERE username = ?)
                 d ON i.id = d.id_indikator order by i.no asc",
-                [
-                    $req->username,
-                ]
+                [$req->username],
             );
         }
 
@@ -68,9 +66,9 @@ class IndikatorController extends Controller
 
         $data = [
             'indikator' => $indikators,
-            "page" => "penilaian",
+            'page' => 'penilaian',
             'task' => $task,
-            'username' => $user->username
+            'username' => $user->username,
         ];
 
         return view('indikators.indikator', $data);
@@ -91,7 +89,6 @@ class IndikatorController extends Controller
     //             $req->username,
     //         ]
     //     );
-
 
     //     $data = [
     //         'indikator' => $indikators,
@@ -127,19 +124,17 @@ class IndikatorController extends Controller
     //     return view('indikators.indikator', $data);
     // }
 
-
     public function index()
     {
         $indikator = Indikator::all();
         $task = Task::all();
         $aspek = Aspek::all();
 
-
         $data = [
             'indikator' => $indikator,
-            "page" => "penilaian",
+            'page' => 'penilaian',
             'task' => $task,
-            'aspek' => $aspek
+            'aspek' => $aspek,
         ];
 
         return view('indikators.indikator', $data);
@@ -150,7 +145,6 @@ class IndikatorController extends Controller
      */
     public function create()
     {
-
         // $data = [
         //     'task' => Task::all(),
         //     'aspek' => Aspek::all(),
@@ -181,37 +175,36 @@ class IndikatorController extends Controller
      */
     public function show(Task $task, Indikator $indikator, $username)
     {
-        $user = User::where('username','=',$username)->first();
+        $user = User::where('username', '=', $username)->first();
 
-            $jawabans = DB::select("SELECT p.id, p.text, p.id_indikator, j.d_jawaban FROM penjelasans p LEFT JOIN (SELECT * FROM jawabans i WHERE i.username = ?) j ON j.id_penjelasan = p.id WHERE p.id_indikator = ?", [
-                $user->username,
-                $indikator->id,
-            ]);
+        $jawabans = DB::select('SELECT p.id, p.text, p.id_indikator, j.d_jawaban FROM penjelasans p LEFT JOIN (SELECT * FROM jawabans i WHERE i.username = ?) j ON j.id_penjelasan = p.id WHERE p.id_indikator = ?', [$user->username, $indikator->id]);
 
-            $detail_indikator = DetailIndikator::where('username', $user->username)->where('id_indikator', $indikator->id)->first();
+        $detail_indikator = DetailIndikator::where('username', $user->username)
+            ->where('id_indikator', $indikator->id)
+            ->first();
 
-            $domain = Domain::where('id', $indikator->domain)->first();
-            $aspek = Aspek::where('id', $indikator->aspek)->first();
+        $domain = Domain::where('id', $indikator->domain)->first();
+        $aspek = Aspek::where('id', $indikator->aspek)->first();
 
-            $documents = FileData::where('id_indikator', $indikator->id)
+        $documents = FileData::where('id_indikator', $indikator->id)
             ->where('id_task', $indikator->id_task)
             ->where('id_user', Auth::id())
             ->get()
             ->toArray();
 
-            $data = [
-                'indikator' => $indikator,
-                "page" => "penilaian",
-                "data" => $jawabans,
-                "detail_indikator" => $detail_indikator,
-                'username' => $user->username,
-                'aspek' => $aspek,
-                'domain' => $domain,
-                'task' => $task,
-                'documents' => $documents,
-            ];
+        $data = [
+            'indikator' => $indikator,
+            'page' => 'penilaian',
+            'data' => $jawabans,
+            'detail_indikator' => $detail_indikator,
+            'username' => $user->username,
+            'aspek' => $aspek,
+            'domain' => $domain,
+            'task' => $task,
+            'documents' => $documents,
+        ];
 
-            return view("penjelasanjawaban", $data);
+        return view('penjelasanjawaban', $data);
     }
 
     /**

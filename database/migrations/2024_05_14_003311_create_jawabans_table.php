@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('d_jawaban');
             $table->integer('id_penjelasan');
+            $table->integer('id_task')->nullable();
             $table->string('username');
             $table->string('id_indikator');
             $table->timestamps();

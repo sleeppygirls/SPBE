@@ -12,7 +12,7 @@
                             {{ $user->nama_instansi }}</h1>
                     </div>
                     <div style="padding-left: 20px;padding-right: 20px;" class="col-12">
-                        <div style="min-height: 500px; margin-bottom: 5px" class="card">
+                        <div style="margin-bottom: 50px" class="card">
                             <div class="row">
                                 <div class="col-11">
                                     <div class="body">

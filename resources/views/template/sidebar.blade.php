@@ -49,29 +49,52 @@
                               </li>
                           </ul>
                       </li>
-                      {{-- <li class="nav-item">
-                          <a href="/bagians" class="nav-link {{ @$page == 'bagian' ? 'active' : '' }}">
+                      <li class="nav-item">
+                        <a href="/domain" class="nav-link {{ @$page == 'domain' ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-key" style="color: #B5565D;"></i>
+                            <p>
+                                Domain
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/domain" class="nav-link">
+                                    <i class="fas fa-eye fa-fw nav-icon" style="color: #B5565D;"></i>
+                                    <p>Daftar Domain</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/domain/create" class="nav-link">
+                                    <i class="fas fa-plus-circle fa-fw nav-icon" style="color: #B5565D;"></i>
+                                    <p>Tambah Domain</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                      <li class="nav-item">
+                          <a href="/aspek" class="nav-link {{ @$page == 'aspek' ? 'active' : '' }}">
                               <i class="nav-icon fas fa-tasks" style="color: #B5565D;"></i>
                               <p>
-                                  Bagian
+                                  Aspek
                                   <i class="fas fa-angle-left right"></i>
                               </p>
                           </a>
                           <ul class="nav nav-treeview">
                               <li class="nav-item">
-                                  <a href="/bagians" class="nav-link">
+                                  <a href="/aspek" class="nav-link">
                                       <i class="fas fa-eye fa-fw nav-icon" style="color: #B5565D;"></i>
-                                      <p>Daftar Bagian</p>
+                                      <p>Daftar Aspek</p>
                                   </a>
                               </li>
                               <li class="nav-item">
-                                  <a href="/bagians/create" class="nav-link">
+                                  <a href="/aspek/create" class="nav-link">
                                       <i class="fas fa-plus-circle fa-fw nav-icon" style="color: #B5565D;"></i>
-                                      <p>Tambah Bagian</p>
+                                      <p>Tambah Aspek</p>
                                   </a>
                               </li>
                           </ul>
-                      </li> --}}
+                      </li>
                       <li class="nav-item">
                           <a href="/bagians" class="nav-link {{ @$page == 'indikator' ? 'active' : '' }}">
                               <i class="nav-icon fas fa-book-open" style="color: #B5565D;"></i>

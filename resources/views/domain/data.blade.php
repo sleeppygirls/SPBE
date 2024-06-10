@@ -8,8 +8,7 @@
             <div class="container-fluid back">
                 <div class="row">
                     <div class="col-sm-12 mt-3">
-                        <h1 style="color: white; padding-left: 11px" class="m-0 dashboard fw-bold">Daftar Tugas Penilaian
-                            Mandiri</h1>
+                        <h1 style="color: white; padding-left: 11px" class="m-0 dashboard fw-bold">Daftar Domain</h1>
                     </div>
                     <div style="padding-left: 20px;padding-right: 20px;" class="col-12">
                         <div style="margin-bottom: 50px" class="card">
@@ -21,51 +20,28 @@
                                             <thead>
                                                 <tr>
                                                     <th style="text-align: center">No</th>
-                                                    <th style="text-align: center">Nama Form</th>
-                                                    <th style="text-align: center">Tahap Form</th>
-                                                    <th style="text-align: center">Batas Waktu</th>
-                                                    <th style="text-align: center">Tahun</th>
-                                                    <th style="text-align: center">Status</th>
-                                                    <th style="text-align: center">Deskripsi</th>
-                                                    <th style="text-align: center">Bagian</th>
+                                                    <th>Domain</th>
+                                                    <th style="text-align: center">Bobot(%)</th>
                                                     <th style="text-align: center">Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach (@$data as $item)
+                                                @foreach (@$domain as $item)
                                                     <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $item->name }}</td>
-                                                        <td>{{ $item->tahap }}</td>
-                                                        <td style="text-align: center">{{ $item->batas }}</td>
-                                                        <td style="text-align: center">{{ $item->tahun }}</td>
-                                                        <td>{{ $item->status }}</td>
-                                                        <td>{{ $item->desc }}</td>
-                                                        <td>
+                                                        <td style="width: 40px">{{ $loop->iteration }}</td>
+                                                        <td>{{ $item->domain }}</td>
+                                                        <td style="width: 110px; text-align: center">{{ $item->bobot_domain }}</td>
+                                                        <td style="width: 100px">
                                                             <div class="row">
-                                                                <div class="col-6">
-                                                                    {{$item->qty }}
-                                                                </div>
-                                                                <div class="col-2">
-                                                                    <a href="/task/{{ $item->id }}/edit">
-                                                                        <button type="button"
-                                                                            class="btn btn-success btn-sm">
-                                                                            <i class="far fa-copy"></i></button>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="row">
-                                                                <div class="col-4" style="margin-left: 10px">
-                                                                    <a href="/task/{{ $item->id }}/edit">
+                                                                <div class="col-4">
+                                                                    <a href="/domain/{{ $item->id }}/edit">
                                                                         <button type="button"
                                                                             class="btn btn-warning btn-sm">
                                                                             <i class="far fa-edit"></i></button>
                                                                     </a>
                                                                 </div>
-                                                                <div class="col-4" style="margin-left: 10px">
-                                                                    <form action="/task/{{ $item->id }}"
+                                                                <div class="col-4" style="margin-left: 15px">
+                                                                    <form action="/domain/{{ $item->id }}"
                                                                         method="POST">
                                                                         @csrf
                                                                         @method('DELETE')

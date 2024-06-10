@@ -13,7 +13,13 @@ class DomainController extends Controller
      */
     public function index()
     {
-        //
+        $domain = Domain::all();
+
+        $data = [
+            'domain' => $domain,
+            "page" => "domain",
+        ];
+        return view('domain.data', $data);
     }
 
     /**
@@ -21,7 +27,10 @@ class DomainController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            "page" => "domain",
+        ];
+        return view('domain.add', $data);
     }
 
     /**
@@ -29,7 +38,16 @@ class DomainController extends Controller
      */
     public function store(StoreDomainRequest $request)
     {
-        //
+        Domain::updateOrCreate([
+            'id' => $request->input('id'),
+        ], [
+            'domain' => $request->input('domain'),
+            'bobot_domain' => $request->input('bobot_domain'),
+        ]);
+
+        return redirect('/domain')->with([
+            'mess' => 'Data Berhasil Disimpan',
+        ]);
     }
 
     /**
@@ -45,7 +63,12 @@ class DomainController extends Controller
      */
     public function edit(Domain $domain)
     {
-        //
+        $data = [
+            "domain" => $domain,
+            "page" => "domain",
+        ];
+
+        return view('domain.add', $data);
     }
 
     /**
@@ -61,6 +84,10 @@ class DomainController extends Controller
      */
     public function destroy(Domain $domain)
     {
-        //
+        $domain->delete();
+
+        return redirect('/domain')->with([
+            'mess' => 'Data Berhasil Dihapus',
+        ]);
     }
 }

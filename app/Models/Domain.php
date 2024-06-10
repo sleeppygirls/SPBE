@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Indikator;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Domain extends Model
 {
@@ -15,9 +16,10 @@ class Domain extends Model
     protected $fillable = [                     // nama kolom yang dapat di edit
         'id',
         'domain',
+        'bobot_domain',
     ];
 
-    // public function aspek() {
-    //     return $this->hasMany(Indikator::class);
-    // }
+    public function indikator() {
+        return $this->hasMany(Indikator::class);
+    }
 }

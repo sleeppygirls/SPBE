@@ -13,7 +13,13 @@ class AspekController extends Controller
      */
     public function index()
     {
-        //
+        $aspek = Aspek::all();
+
+        $data = [
+            'aspek' => $aspek,
+            "page" => "aspek",
+        ];
+        return view('aspek.data', $data);
     }
 
     /**
@@ -21,7 +27,10 @@ class AspekController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            "page" => "aspek",
+        ];
+        return view('aspek.add', $data);
     }
 
     /**
@@ -29,7 +38,17 @@ class AspekController extends Controller
      */
     public function store(StoreAspekRequest $request)
     {
-        //
+        Aspek::updateOrCreate([
+            'id' => $request->input('id'),
+        ], [
+            'aspek' => $request->input('aspek'),
+            'bobot_a' => $request->input('bobot_a'),
+            'bobot_aspeka' => $request->input('bobot_aspeka'),
+        ]);
+
+        return redirect('/aspek')->with([
+            'mess' => 'Data Berhasil Disimpan',
+        ]);
     }
 
     /**
@@ -45,7 +64,12 @@ class AspekController extends Controller
      */
     public function edit(Aspek $aspek)
     {
-        //
+        $data = [
+            "aspek" => $aspek,
+            "page" => "aspek",
+        ];
+
+        return view('aspek.add', $data);
     }
 
     /**
@@ -61,6 +85,10 @@ class AspekController extends Controller
      */
     public function destroy(Aspek $aspek)
     {
-        //
+        $aspek->delete();
+
+        return redirect('/aspek')->with([
+            'mess' => 'Data Berhasil Dihapus',
+        ]);
     }
 }

@@ -21,11 +21,11 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Nama Instansi</th>
-                                                    <th>Username</th>
-                                                    <th>Password</th>
-                                                    <th>Level</th>
+                                                    <th style="text-align: center">Username</th>
+                                                    <th style="text-align: center">Password</th>
+                                                    <th style="text-align: center">Level</th>
                                                     <th style="text-align: center">Bagian</th>
-                                                    <th>Aksi</th>
+                                                    <th style="text-align: center">Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -33,9 +33,9 @@
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $item->nama_instansi }}</td>
-                                                        <td>{{ $item->username }}</td>
-                                                        <td>{{ $item->pass_view }}</td>
-                                                        <td>{{ $item->level }}</td>
+                                                        <td style="text-align: center">{{ $item->username }}</td>
+                                                        <td style="text-align: center">{{ $item->pass_view }}</td>
+                                                        <td style="text-align: center">{{ $item->level }}</td>
                                                         <td style="width: 120px; text-align: center">
                                                             <div class="row">
                                                                 <div class="col-4" style="margin-left: 10px">

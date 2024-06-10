@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Aspek;
+use App\Models\Domain;
+use App\Models\Penjelasan;
+use App\Models\DetailIndikator;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Indikator extends Model
 {
@@ -27,12 +31,12 @@ class Indikator extends Model
         return $this->hasMany(Penjelasan::class, 'id_indikator', 'id');
     }
 
-    public function domainR()
+    public function domain()
     {
         return $this->belongsTo(Domain::class,'domain','id');
     }
 
-    public function aspekR()
+    public function aspek()
     {
         return $this->belongsTo(Aspek::class,'aspek','id');
     }

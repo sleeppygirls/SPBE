@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('domains', function (Blueprint $table) {
             $table->id();
             $table->string('domain')->nullable();
+            $table->decimal('bobot_domain', 5,2)->nullable();
             $table->timestamps();
         });
     }

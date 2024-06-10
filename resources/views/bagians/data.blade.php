@@ -29,9 +29,7 @@
                                             style="background-color: rgb(252, 248, 213); margin-top: 30px; margin-left: 40px; margin-right: 25px">
                                             <thead style="text-align: center">
                                                 <tr>
-                                                    <th>ID</th>
-                                                    {{-- <th>Username</th>
-                                                    <th>Nama Instansi</th> --}}
+                                                    <th>No</th>
                                                     <th>Tahun Tugas</th>
                                                     <th>Indikators</th>
                                                     <th style="width: 120px">Aksi</th>
@@ -41,9 +39,7 @@
                                                 @foreach (@$bagians as $bagian)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        {{-- <td>{{ $bagian->user->username }}</td>
-                                                        <td>{{ $bagian->user->nama_instansi }}</td> --}}
-                                                        <td>{{ $bagian->task->tahun }}</td>
+                                                        <td style="text-align: center">{{ $bagian->task->tahun }}</td>
                                                         <td>
                                                             @isset($bagian->indikators)
                                                                 @php

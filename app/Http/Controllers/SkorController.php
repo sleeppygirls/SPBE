@@ -41,7 +41,7 @@ class SkorController extends Controller
             // Loop melalui indikator dan lakukan perhitungan
             foreach ($indikators as $indikator) {
                 $capaian = $indikator->detailIndikator->capaian ?? 0;
-                $indikator->index_akhir = $indikator->bobot_aspek * $capaian;
+                $indikator->index_akhir = ($indikator->bobot_aspek / 100) * $capaian;
                 $total_index_akhir += $indikator->index_akhir;
                 $total_bobot += $indikator->bobot;
             }

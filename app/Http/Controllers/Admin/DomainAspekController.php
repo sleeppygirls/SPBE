@@ -32,9 +32,12 @@ class DomainAspekController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Domain $domain, Aspek $aspek,Indikator $indikator)
     {
         $data = [
+            'indikator' => $indikator,
+            'domain' => $domain,
+            'aspek' => $aspek,
             "page" => "indikator",
         ];
         return view('domainaspek.add', $data);
@@ -84,7 +87,6 @@ class DomainAspekController extends Controller
             'domain' => $domain,
             'aspek' => $aspek
         ];
-        dd($data);
 
         return view('domainaspek.add', $data);
     }

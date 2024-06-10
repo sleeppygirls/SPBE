@@ -100,7 +100,6 @@ class BagianController extends Controller
      */
     public function edit(User $user, Bagian $bagian)
     {
-        // dd($bagian);
         // Data string yang akan diubah menjadi array
         $stringData = $bagian->indikators;
 
@@ -118,7 +117,6 @@ class BagianController extends Controller
         }
 
         $task = Task::all();
-        // $task = Bagian::with('task')->get();
         $data = [
             "page" => "user",
             'user' => $user,
@@ -170,12 +168,6 @@ class BagianController extends Controller
      */
     public function destroy($id_user, $id_bagian)
     {
-        // dd($id_user);
-        // $bagian->delete();
-
-        // return redirect('/bagians')->with([
-        //     'mess' => 'Data Berhasil Dihapus',
-        // ]);
         $bagian = Bagian::find($id_bagian);
         if ($bagian) {
             $bagian->delete();

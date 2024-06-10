@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('aspeks', function (Blueprint $table) {
             $table->id();
             $table->string('aspek')->nullable();
-            $table->decimal('bobot_a', 5,2)->nullable();
-            $table->decimal('bobot_aspeka', 5,2)->nullable();
+            $table->decimal('bobot_a', 5,2)->default(0);
+            $table->decimal('bobot_aspeka', 5,2)->default(0);
             $table->timestamps();
         });
     }

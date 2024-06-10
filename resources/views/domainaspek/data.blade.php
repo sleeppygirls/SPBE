@@ -12,6 +12,14 @@
                     </div>
                     <div style="padding-left: 20px;padding-right: 20px;" class="col-12">
                         <div style="margin-bottom: 50px" class="card">
+                            <div class="col-11" style="text-align: right">
+                                <button type="button" class="btn"
+                                    style="margin-top: 10px;background-color: #ad323a">
+                                    <a href="/adm/indikator" style="color: white">
+                                        Kembali
+                                    </a>
+                                </button>
+                            </div>
                             <div class="row">
                                 <div class="col-11">
                                     <div class="body">
@@ -31,8 +39,7 @@
                                                     <tr>
                                                         <td style="width: 40px">{{ $no++ }}</td>
                                                         <td>{{ $domain->domain ?? 'null' }}</td>
-                                                        <td>{{ $domain->aspek ?? 'null' }}</td>
-                                                        {{-- @foreach (@$indikator as $item) --}}
+                                                        <td>{{ $aspek->aspek ?? 'null' }}</td>
                                                         <td style="width: 100px">
                                                             <div class="row">
                                                                 <div class="col-4">

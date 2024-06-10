@@ -15,29 +15,14 @@ class DomainAspekController extends Controller
 {
     public function index(Indikator $indikator)
     {
-        // $indikat or = Indikator::whereHas('domainR', function ($query) {
-        //     $query->where('domain', 'id');
-        // })->whereHas('aspekR', function ($query) {
-        //     $query->where('aspek', 'id');
-        // })->get();
-
         $aspek = Aspek::where('id', $indikator->aspek)->first();
         $domain = Domain::where('id', $indikator->domain)->first();
-        // $indikator = Indikator::with(['domainR', 'aspekR'])->get();
-    //    $indikator = DB::table('indikators')
-    //    ->join('aspeks','indikators.aspek','=','aspeks.aspek')
-    //    ->select('indikators.*','aspeks.aspek')
-    //    ->where('indikators.id',$indikator->id)
-    //    ->get();
-        // dd($domain);
         $no = 1;
         $data = [
             'indikator' => $indikator,
             'aspek'=>$aspek,
             'domain'=>$domain,
             'no'=>$no,
-            // 'aspek' => $aspek,
-            // 'domain' => $domain,
             "page" => "indikator",
         ];
 
@@ -47,36 +32,36 @@ class DomainAspekController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    // public function create()
-    // {
-    //     $data = [
-    //         "page" => "indikator",
-    //     ];
-    //     return view('domainaspek.add', $data);
-    // }
+    public function create()
+    {
+        $data = [
+            "page" => "indikator",
+        ];
+        return view('domainaspek.add', $data);
+    }
 
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(StoreDomainAspekRequest $request, Indikator $indikator)
-    // {
-    //     $id_indikator = $indikator->id;
-    //     Aspek::updateOrCreate([
-    //         'id' => $request->input('id'),
-    //     ], [
-    //         'name' => $request->input('name'),
-    //     ]);
+    public function store(StoreDomainAspekRequest $request, Indikator $indikator)
+    {
+        $id_indikator = $indikator->id;
+        Aspek::updateOrCreate([
+            'id' => $request->input('id'),
+        ], [
+            'name' => $request->input('name'),
+        ]);
 
-    //     Domain::updateOrCreate([
-    //         'id' => $request->input('id'),
-    //     ], [
-    //         'name' => $request->input('name'),
-    //     ]);
+        Domain::updateOrCreate([
+            'id' => $request->input('id'),
+        ], [
+            'name' => $request->input('name'),
+        ]);
 
-    //     return redirect('/adm/indikator/'. $id_indikator .'/domainaspek')->with([
-    //         'mess' => 'Data Berhasil Disimpan',
-    //     ]);
-    // }
+        return redirect('/adm/indikator/'. $id_indikator .'/domainaspek')->with([
+            'mess' => 'Data Berhasil Disimpan',
+        ]);
+    }
 
     /**
      * Display the specified resource.

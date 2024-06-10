@@ -63,7 +63,6 @@
                                                                 <div class="col-4" style="margin-left: 10px">
                                                                     <a 
                                                                     href="/users/{{ $bagian->id_user }}/bagians/{{ $bagian->id }}/edit"
-                                                                    {{-- href="/bagians/{{ $bagian->id }}/edit" --}}
                                                                     >
                                                                         <button type="button"
                                                                             class="btn btn-warning btn-sm">

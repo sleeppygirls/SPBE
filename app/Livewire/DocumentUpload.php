@@ -37,7 +37,6 @@ class DocumentUpload extends Component
 
     public function addDocument()
     {
-        session()->flash('message', 'Document successfully uploaded!');
         $this->isUploading = true;
         $this->validate([
             'newDocument' => 'required|mimes:pdf|max:2048',
@@ -59,11 +58,11 @@ class DocumentUpload extends Component
         $this->newDocument = null;
         $this->newDocumentName = null;
         $this->isUploading = false;
+        session()->flash('message', 'Document successfully uploaded!');
     }
 
     public function removeDocument($id)
     {
-        session()->flash('message', 'Document successfully removed!');
         $fileData = FileData::find($id);
         if ($fileData) {
             $files = json_decode($fileData->files, true);
@@ -73,6 +72,7 @@ class DocumentUpload extends Component
             $fileData->delete();
             $this->loadDocuments();
         }
+        session()->flash('message', 'Document successfully removed!');
     }
     public function render()
     {

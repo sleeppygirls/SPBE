@@ -44,7 +44,7 @@
                                                             <div class="row">
                                                                 <div class="col-4">
                                                                     <a
-                                                                        href="/adm/indikator/{{$indikator->id}}/domainaspek/edit">
+                                                                        href="/adm/indikator/{{$indikator->id}}/domainaspek/{{ $domain->id ?? null }}/edit">
                                                                         <button type="button"
                                                                             class="btn btn-warning btn-sm">
                                                                             <i class="far fa-edit"></i></button>

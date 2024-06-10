@@ -31,12 +31,12 @@ class Indikator extends Model
         return $this->hasMany(Penjelasan::class, 'id_indikator', 'id');
     }
 
-    public function domain()
+    public function domainR()
     {
         return $this->belongsTo(Domain::class,'domain','id');
     }
 
-    public function aspek()
+    public function aspekR()
     {
         return $this->belongsTo(Aspek::class,'aspek','id');
     }

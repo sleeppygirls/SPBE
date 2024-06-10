@@ -26,7 +26,9 @@
                                                         <input type="text" class="form-control" name="no"
                                                             placeholder="No">
                                                     </div> --}}
-                                                    <input type="text" name="id" hidden value="{{ @$indikator->id }}" {{ @$indikator->id ? 'readonly' : '' }}>
+                                                    <input type="text" name="id" hidden
+                                                        value="{{ @$indikator->id }}"
+                                                        {{ @$indikator->id ? 'readonly' : '' }}>
                                                     <div class="form-group">
                                                         <label for="name">Indikator</label>
                                                         <input type="text" class="form-control" name="name"
@@ -40,29 +42,40 @@
                                                     <div class="form-group">
                                                         <label for="bobot_aspek">Bobot Aspek</label>
                                                         <input type="decimal" class="form-control" name="bobot_aspek"
-                                                            placeholder="Bobot Aspek" value="{{ @$indikator->bobot_aspek }}">
+                                                            placeholder="Bobot Aspek"
+                                                            value="{{ @$indikator->bobot_aspek }}">
                                                     </div>
-                                                    {{-- <div class="form-group">
-                                                        <label for="aspek">Aspek</label>
-                                                        <select id="aspek" name="aspek" style="margin-left: 20px;height: 40px; color: black; background-color: lightgray; font-weight: bold">
-                                                            @foreach ($aspek as $item)
-                                                                <option value="{{ $item->aspek }}">{{ $item->aspek }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="domain">Domain</label>
-                                                        <select id="domain" name="domain" style="margin-left: 20px;height: 40px; color: black; background-color: lightgray; font-weight: bold">
-                                                            @foreach ($domain as $item)
-                                                                <option value="{{ $item->domain }}">{{ $item->domain }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div> --}}
+                                                    @if (@$edit)
+                                                        <div class="form-group">
+                                                            <label for="domain">Domain</label>
+                                                            <select id="domain" name="domain"
+                                                                style="margin-left: 20px;height: 40px; color: black; background-color: lightgray; font-weight: bold">
+                                                                @foreach ($domain as $item)
+                                                                    <option value="{{ $item->id }}"
+                                                                        {{ @$indikator->domain == $item->id ? 'selected' : '' }}>
+                                                                        {{ $item->domain }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="aspek">Aspek</label>
+                                                            <select id="aspek" name="aspek"
+                                                                style="margin-left: 20px;height: 40px; color: black; background-color: lightgray; font-weight: bold">
+                                                                @foreach ($aspek as $item)
+                                                                    <option value="{{ $item->id }}"
+                                                                        {{ @$indikator->aspek == $item->id ? 'selected' : '' }}>
+                                                                        {{ $item->aspek }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    @endif
                                                     <div class="form-group">
                                                         <label for="tahun">Tahun</label>
-                                                        <select id="tahun" name="tahun" style="margin-left: 20px;height: 40px; color: black; background-color: lightgray; font-weight: bold">
+                                                        <select id="tahun" name="tahun"
+                                                            style="margin-left: 20px;height: 40px; color: black; background-color: lightgray; font-weight: bold">
                                                             @foreach ($task as $item)
-                                                                <option value="{{ $item->tahun }}">{{ $item->tahun }}</option>
+                                                                <option value="{{ $item->tahun }}">
+                                                                    {{ $item->tahun }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>

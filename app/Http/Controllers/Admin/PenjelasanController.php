@@ -19,7 +19,7 @@ class PenjelasanController extends Controller
      */
     public function index(Indikator $indikator)
     {
-        // $indikator = Indikator::all();
+        $indikator = Indikator::with(['domainR', 'aspekR'])->where('id', $indikator->id)->first();
         $penjelasan = Penjelasan::where('id_indikator', $indikator->id)->get();
         
         $data = [

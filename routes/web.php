@@ -74,7 +74,7 @@ Route::middleware(['is.auth'])->group(function() {
     // admin
     Route::resource('/adm/indikator', IndikatorAdminController::class);
     Route::resource('/adm/indikator/{indikator}/penjelasan', PenjelasanAdminController::class);
-    Route::resource('/adm/indikator/{indikator}/domainaspek', DomainAspekAdminController::class);
+    // Route::resource('/adm/indikator/{indikator}/domainaspek', DomainAspekAdminController::class);
 
     // custom uri
     Route::get('task/{task}/indikator/{indikator}/{username}', [IndikatorController::class, 'show']);

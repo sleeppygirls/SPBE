@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Task;
 use App\Models\Aspek;
 use App\Models\Domain;
 use App\Models\Indikator;
@@ -32,12 +33,12 @@ class DomainAspekController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Domain $domain, Aspek $aspek,Indikator $indikator)
+    public function create(Indikator $indikator)
     {
         $data = [
             'indikator' => $indikator,
-            'domain' => $domain,
-            'aspek' => $aspek,
+            'domain' => Domain::all(),
+            'aspek' => Aspek::all(),
             "page" => "indikator",
         ];
         return view('domainaspek.add', $data);
@@ -48,18 +49,23 @@ class DomainAspekController extends Controller
      */
     public function store(StoreDomainAspekRequest $request, Indikator $indikator)
     {
+        // dd($request);
         $id_indikator = $indikator->id;
-        Aspek::updateOrCreate([
-            'id' => $request->input('id'),
+        Indikator::updateOrCreate([
+            'name' => $indikator->name,
+            'aspek' => $request->input('aspek'),
+            'domain' => $request->input('domain'),
         ], [
-            'name' => $request->input('name'),
         ]);
+        // Aspek::updateOrCreate([
+        //     'aspek' => $request->input('aspek'),
+        // ], [
+        // ]);
 
-        Domain::updateOrCreate([
-            'id' => $request->input('id'),
-        ], [
-            'name' => $request->input('name'),
-        ]);
+        // Domain::updateOrCreate([
+        //     'domain' => $request->input('domain'),
+        // ], [
+        // ]);
 
         return redirect('/adm/indikator/'. $id_indikator .'/domainaspek')->with([
             'mess' => 'Data Berhasil Disimpan',
@@ -96,18 +102,6 @@ class DomainAspekController extends Controller
      */
     public function update(UpdateDomainAspekRequest $request, Domain $domain, Aspek $aspek, Indikator $indikator)
     {
-        $indikator = Indikator::all();
-        $aspek = Aspek::all();
-        $domain = Domain::all();
-
-        $data = [
-            'indikator' => $indikator,
-            "page" => "indikator",
-            'domain' => $domain,
-            'aspek' => $aspek
-        ];
-
-        return view('domainaspek.add', $data);
     }
 
     /**

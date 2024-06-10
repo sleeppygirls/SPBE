@@ -34,7 +34,6 @@ class BagianController extends Controller
      */
     public function create(User $user)
     {
-        // dd($user);
         $data = [
             'user' => $user,
             'indikators' => Indikator::all(),

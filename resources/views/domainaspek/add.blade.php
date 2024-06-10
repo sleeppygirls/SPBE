@@ -17,6 +17,8 @@
                                     <form action="/adm/indikator/{{$indikator->id}}/domainaspek" method="POST" style="margin-left: 80px">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ @$indikator->id }}">
+                                        {{-- <input type="hidden" name="aspek" value="{{ @$aspek->id }}">
+                                        <input type="hidden" name="domain" value="{{ @$domain->id }}"> --}}
                                         <div class="card"
                                             style="padding: 20px; margin-top: 15px; margin-bottom: 15px; background-color: rgb(222, 254, 208)">
                                             <div class="row">
@@ -26,7 +28,7 @@
                                                         <label for="domain">Domain</label>
                                                         <select id="domain" name="domain" style="margin-left: 20px;height: 40px; color: black; background-color: lightgray; font-weight: bold">
                                                             @foreach ($domain as $item)
-                                                                <option value="{{ $item->domain }}">{{ $item->domain }}</option>
+                                                                <option value="{{ $item->id }}" {{ (@$indikator->domain == $item->id) ? 'selected' : '' }}>{{ $item->domain }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -34,7 +36,7 @@
                                                         <label for="aspek">Aspek</label>
                                                         <select id="aspek" name="aspek" style="margin-left: 20px;height: 40px; color: black; background-color: lightgray; font-weight: bold">
                                                             @foreach ($aspek as $item)
-                                                                <option value="{{ $item->aspek }}">{{ $item->aspek }}</option>
+                                                                <option value="{{ $item->id }}" {{ (@$indikator->aspek == $item->id) ? 'selected' : '' }}>{{ $item->aspek }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>

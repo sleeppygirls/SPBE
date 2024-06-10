@@ -70,6 +70,8 @@ class IndikatorController extends Controller
             'name' => $request->input('name'),
             'bobot' => $request->input('bobot'),
             'bobot_aspek' => $request->input('bobot_aspek'),
+            'aspek' => $request->input('aspek'),
+            'domain' => $request->input('domain'),
         ]);
 
         return redirect('/adm/indikator')->with([
@@ -101,7 +103,8 @@ class IndikatorController extends Controller
             "page" => "indikator",
             'task' => $task,
             'domain' => $domain,
-            'aspek' => $aspek
+            'aspek' => $aspek,
+            'edit' => true
         ];
 
         return view('adminindikators.add', $data);

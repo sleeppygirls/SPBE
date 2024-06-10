@@ -23,8 +23,9 @@
                                                     <th>Indikator</th>
                                                     <th style="text-align: center">Bobot(%)</th>
                                                     <th style="text-align: center">Bobot Aspek(%)</th>
-                                                    <th style="text-align: center">Pilih Domain & Aspek</th>
-                                                    <th style="text-align: center">Penjelasan</th>
+                                                    {{-- <th style="text-align: center">Pilih Domain & Aspek</th> --}}
+                                                    <th style="text-align: center">Tambah Penjelasan</th>
+                                                    <th style="text-align: center">Lihat Penjelasan, Domain & Aspek</th>
                                                     <th style="text-align: center">Aksi</th>
                                                 </tr>
                                             </thead>
@@ -35,7 +36,7 @@
                                                         <td>{{ $item->name }}</td>
                                                         <td style="text-align: center">{{ $item->bobot }}</td>
                                                         <td style="text-align: center">{{ $item->bobot_aspek }}</td>
-                                                        <td style="width: 100px">
+                                                        {{-- <td style="width: 100px">
                                                             <div class="row">
                                                                 <div class="col-4">
                                                                     <a
@@ -57,29 +58,22 @@
                                                                     </a>
                                                                 </div>
                                                             </div>
+                                                        </td> --}}
+                                                        <td style="width: 50px; text-align: center">
+                                                            <a href="/adm/indikator/{{ $item->id }}/penjelasan/create">
+                                                                <button type="button" class="btn btn-primary btn-sm">
+                                                                    <i class="fas fa-plus">
+                                                                    </i>
+                                                                </button>
+                                                            </a>
                                                         </td>
                                                         <td style="width: 50px; text-align: center">
-                                                            <div class="row">
-                                                                <div class="col-4">
-                                                                    <a
-                                                                        href="/adm/indikator/{{ $item->id }}/penjelasan/create">
-                                                                        <button type="button"
-                                                                            class="btn btn-primary btn-sm">
-                                                                            <i class="fas fa-plus">
-                                                                            </i>
-                                                                        </button>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="col-4" style="margin-left: 10px">
-                                                                    <a href="/adm/indikator/{{ $item->id }}/penjelasan">
-                                                                        <button type="button"
-                                                                            class="btn btn-success btn-sm">
-                                                                            <i class="fas fa-eye fa-fw">
-                                                                            </i>
-                                                                        </button>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
+                                                            <a href="/adm/indikator/{{ $item->id }}/penjelasan">
+                                                                <button type="button" class="btn btn-success btn-sm">
+                                                                    <i class="fas fa-eye fa-fw">
+                                                                    </i>
+                                                                </button>
+                                                            </a>
                                                         </td>
                                                         <td>
                                                             <div class="row">
@@ -90,7 +84,8 @@
                                                                             <i class="far fa-edit"></i></button>
                                                                     </a>
                                                                 </div>
-                                                                <div class="col-4" style="margin-left: 15px; margin-right: 15px">
+                                                                <div class="col-4"
+                                                                    style="margin-left: 15px; margin-right: 15px">
                                                                     <form action="/adm/indikator/{{ $item->id }}"
                                                                         method="POST">
                                                                         @csrf

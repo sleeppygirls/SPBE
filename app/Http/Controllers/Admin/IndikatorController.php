@@ -20,7 +20,7 @@ use App\Http\Requests\StoreIndikatorRequest;
 use App\Http\Requests\UpdateIndikatorRequest;
 
 class IndikatorController extends Controller
-{    
+{
     public function index()
     {
         $indikator = Indikator::all();
@@ -84,7 +84,8 @@ class IndikatorController extends Controller
      */
     public function show(Indikator $indikator)
     {
-        
+
+
     }
 
     /**
@@ -92,7 +93,7 @@ class IndikatorController extends Controller
      */
     public function edit(Indikator $indikator)
     {
-        $indikators[0] = $indikator; 
+        $indikators[0] = $indikator;
         $indikator = Indikator::all();
         $task = Task::all();
         $aspek = Aspek::all();

@@ -35,7 +35,7 @@
                                                             <input type="hidden" id="txtnama_instansi"
                                                                 name="nama_instansi">
                                                             <input type="hidden" name="id_task"
-                                                                value="{{ $indikator->id_task }}">
+                                                                value="{{ $task->id }}">
                                                             <button class="btn" style="background-color: #ad323a; color: white" type="submit">Kembali</button>
                                                         </form> --}}
                                                     </td>
@@ -77,7 +77,7 @@
                                                     <input type="hidden" name="id_indikator" id="id_indikator"
                                                         value="{{ $indikator->id }}">
                                                     <input type="hidden" name="id_task" id="id_task"
-                                                        value="{{ $indikator->id_task }}">
+                                                        value="{{ $task->id }}">
                                                     @foreach ($data as $key => $item)
                                                         <tr>
                                                             <td style="padding-left: 25px">{{ $key + 1 }}</td>
@@ -298,7 +298,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        @livewire('document-upload', [$indikator->id, $indikator->id_task])
+                        @livewire('document-upload', [$indikator->id, $task->id])
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

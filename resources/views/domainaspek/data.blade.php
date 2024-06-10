@@ -26,34 +26,39 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+
+                                                @if ($domain)
                                                     <tr>
                                                         <td style="width: 40px">{{ $no++ }}</td>
-                                                        <td>{{ $domain->domain }}</td>
-                                                        <td>{{ $aspek->aspek }}</td>
+                                                        <td>{{ $domain->domain ?? 'null' }}</td>
+                                                        <td>{{ $domain->aspek ?? 'null' }}</td>
                                                         {{-- @foreach (@$indikator as $item) --}}
-                                                            <td style="width: 100px">
-                                                                <div class="row">
-                                                                    <div class="col-4">
-                                                                        <a href="/adm/indikator/{{ $indikator->id }}/domainaspek/edit">
-                                                                            <button type="button"
-                                                                                class="btn btn-warning btn-sm">
-                                                                                <i class="far fa-edit"></i></button>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="col-4" style="margin-left: 15px">
-                                                                        <form action="/adm/indikator/{{ $indikator->id }}/domainaspek/{{$domain->id}}"
-                                                                            method="POST">
-                                                                            @csrf
-                                                                            @method('DELETE')
-                                                                            <button type="submit"
-                                                                                class="btn btn-danger btn-sm">
-                                                                                <i class="far fa-trash-alt"></i></button>
-                                                                        </form>
-                                                                    </div>
+                                                        <td style="width: 100px">
+                                                            <div class="row">
+                                                                <div class="col-4">
+                                                                    <a
+                                                                        href="/adm/indikator/{{ $indikator->id }}/domainaspek/edit">
+                                                                        <button type="button"
+                                                                            class="btn btn-warning btn-sm">
+                                                                            <i class="far fa-edit"></i></button>
+                                                                    </a>
                                                                 </div>
-                                                            </td>
+                                                                <div class="col-4" style="margin-left: 15px">
+                                                                    <form
+                                                                        action="/adm/indikator/{{ $indikator->id }}/domainaspek/{{ $domain->id ?? null }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit"
+                                                                            class="btn btn-danger btn-sm">
+                                                                            <i class="far fa-trash-alt"></i></button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                         {{-- @endforeach --}}
                                                     </tr>
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>

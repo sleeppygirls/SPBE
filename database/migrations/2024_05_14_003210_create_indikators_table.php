@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('bobot', 5,2)->default(0);
             $table->decimal('bobot_aspek', 5,2)->default(0);
             $table->integer('aspek')->nullable();
-            $table->integer('domain');
+            $table->integer('domain')->nullable();
             $table->timestamps();
         });
     }

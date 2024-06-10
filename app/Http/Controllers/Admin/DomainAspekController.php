@@ -99,6 +99,7 @@ class DomainAspekController extends Controller
             'domain' => $domain,
             'aspek' => $aspek
         ];
+        dd($data);
 
         return view('domainaspek.add', $data);
     }
@@ -127,26 +128,29 @@ class DomainAspekController extends Controller
      */
     public function destroy($id_indikator)
     {
-        DB::transaction(function () use ($id_indikator){
-            // Aspek::join('indikators','aspeks.id','=','indikators.aspek')
-            // ->where('id_indikator',$id_indikator)
-            // ->delete();
+        try {
+            $indikator = Indikator::find($id_indikator);
+            if ($indikator) {
+                $indikator->update([
+                    'aspek' => null,
+                    'domain' => null
+                ]);
 
-            // Domain::join('indikators','domains.id','=','indikators.domain')
-            // ->where('id_indikator',$id_indikator)
-            // ->delete();
+                return redirect('/adm/indikator/'. $id_indikator .'/domainaspek')->with([
+                    'mess' => 'Aspek dan Domain indikator berhasil diperbarui.',
+                ]);
+            } else {
+                dd("indikator tidak ditemukan");
+                return redirect('/adm/indikator/'. $id_indikator .'/domainaspek')->with([
+                    'mess' => 'Indikator tidak ditemukan.',
+                ]);
+            }
+        } catch (\Throwable $th) {
+            dd("error");
+            return redirect('/adm/indikator/'. $id_indikator .'/domainaspek')->with([
+                'mess' => 'Aspek dan Domain indikator gagal diperbarui.',
+            ]);
+        }
 
-            Aspek::whereHas('indikators', function ($query) use ($id_indikator){
-                $query->where('id', $id_indikator);
-            })->delete();
-
-            Domain::whereHas('indikators', function ($query) use ($id_indikator){
-                $query->where('id', $id_indikator);
-            })->delete();
-        });
-        
-        return redirect('/adm/indikator/'. $id_indikator .'/domainaspek')->with([
-            'mess' => 'Data Berhasil Dihapus',
-        ]);
     }
 }

@@ -21,7 +21,7 @@
                                                 <tr>
                                                     <th style="text-align: center">No</th>
                                                     <th>Domain</th>
-                                                    <th style="text-align: center">Bobot(%)</th>
+                                                    {{-- <th style="text-align: center">Bobot(%)</th> --}}
                                                     <th style="text-align: center">Aksi</th>
                                                 </tr>
                                             </thead>
@@ -30,7 +30,7 @@
                                                     <tr>
                                                         <td style="width: 40px">{{ $loop->iteration }}</td>
                                                         <td>{{ $item->domain }}</td>
-                                                        <td style="width: 110px; text-align: center">{{ $item->bobot_domain }}</td>
+                                                        {{-- <td style="width: 110px; text-align: center">{{ $item->bobot_domain }}</td> --}}
                                                         <td style="width: 100px">
                                                             <div class="row">
                                                                 <div class="col-4">

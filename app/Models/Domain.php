@@ -16,7 +16,7 @@ class Domain extends Model
     protected $fillable = [                     // nama kolom yang dapat di edit
         'id',
         'domain',
-        'bobot_domain',
+        // 'bobot_domain',
     ];
 
     public function indikator() {

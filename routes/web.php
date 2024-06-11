@@ -24,7 +24,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\Admin\IndikatorController as IndikatorAdminController;
 use App\Http\Controllers\Admin\TaskController as TaskAdminController;
 use App\Http\Controllers\Admin\PenjelasanController as PenjelasanAdminController;
-use App\Http\Controllers\Admin\DomainAspekController as DomainAspekAdminController;
+use App\Http\Controllers\Admin\SkorController as SkorAspekAdminController;
 use App\Http\Controllers\AspekController;
 use App\Http\Controllers\DomainController;
 use App\Http\Controllers\FileDataController;
@@ -74,7 +74,7 @@ Route::middleware(['is.auth'])->group(function() {
     // admin
     Route::resource('/adm/indikator', IndikatorAdminController::class);
     Route::resource('/adm/indikator/{indikator}/penjelasan', PenjelasanAdminController::class);
-    // Route::resource('/adm/indikator/{indikator}/domainaspek', DomainAspekAdminController::class);
+    Route::resource('/adm/users/{user}/skor', SkorAspekAdminController::class);
 
     // custom uri
     Route::get('task/{task}/indikator/{indikator}/{username}', [IndikatorController::class, 'show']);

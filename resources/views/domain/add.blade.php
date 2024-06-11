@@ -27,11 +27,11 @@
                                                 <input type="text" class="form-control" name="domain"
                                                     placeholder="Domain" value="{{ @$domain->domain }}">
                                             </div>
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label for="bobot_domain">Bobot</label>
                                                 <input type="decimal" class="form-control" name="bobot_domain"
                                                     placeholder="Bobot" value="{{ @$domain->bobot_domain }}">
-                                            </div>
+                                            </div> --}}
                                             <div class="card-footer">
                                                 <button type="submit" class="btn btn-primary">Simpan</button>
                                             </div>

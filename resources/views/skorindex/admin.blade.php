@@ -21,17 +21,32 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Nama Instansi</th>
-                                                    <th>Username</th>
-                                                    <th>Skor</th>
+                                                    <th style="text-align: center">Username</th>
+                                                    <th style="text-align: center">Skor Index</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach (@$user as $item)
                                                     <tr>
-                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td style="width: 40px">{{ $loop->iteration }}</td>
                                                         <td>{{ $item->nama_instansi }}</td>
-                                                        <td>{{ $item->username }}</td>
-                                                        <td></td>
+                                                        <td style="text-align: center">{{ $item->username }}</td>
+                                                        <td>
+                                                            <div class="row">
+                                                                <div class="col-4" style="margin-left: 10px">
+                                                                    {{-- {{ $indikators->total_index_akhir }} --}}
+                                                                </div>
+                                                                <div class="col-4" style="margin-left: 10px">
+                                                                    <a href="/adm/users/{{ $item->id }}/skor">
+                                                                        <button type="button"
+                                                                            class="btn btn-success btn-sm">
+                                                                            <i class="fas fa-eye fa-fw">
+                                                                            </i>
+                                                                        </button>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

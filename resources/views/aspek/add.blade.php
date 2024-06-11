@@ -27,7 +27,7 @@
                                                 <input type="text" class="form-control" name="aspek"
                                                     placeholder="Aspek" value="{{ @$aspek->aspek }}">
                                             </div>
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label for="bobot_a">Bobot</label>
                                                 <input type="decimal" class="form-control" name="bobot_a"
                                                     placeholder="Bobot" value="{{ @$aspek->bobot_a }}">
@@ -36,7 +36,7 @@
                                                 <label for="bobot_aspeka">Bobot Aspek</label>
                                                 <input type="decimal" class="form-control" name="bobot_aspeka"
                                                     placeholder="Bobot Aspek" value="{{ @$aspek->bobot_aspeka }}">
-                                            </div>
+                                            </div> --}}
                                             <div class="card-footer">
                                                 <button type="submit" class="btn btn-primary">Simpan</button>
                                             </div>

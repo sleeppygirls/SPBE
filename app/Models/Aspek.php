@@ -17,8 +17,8 @@ class Aspek extends Model
     protected $fillable = [                     // nama kolom yang dapat di edit
         'id',
         'aspek',
-        'bobot_a',
-        'bobot_aspeka',
+        // 'bobot_a',
+        // 'bobot_aspeka',
     ];
 
     public function indikator() {

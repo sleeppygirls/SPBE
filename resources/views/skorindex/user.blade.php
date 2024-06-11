@@ -13,6 +13,25 @@
                     </div>
                     <div style="padding-left: 20px;padding-right: 20px;" class="col-12">
                         <div style="margin-bottom: 50px" class="card">
+                            @if (Auth::user()->level == 'admin')
+                            <div class="col-11" style="text-align: right">
+                                <button type="button" class="btn"
+                                    style="margin-top: 10px;background-color: #ad323a">
+                                    <a href="/skors" style="color: white">
+                                        Kembali
+                                    </a>
+                                </button>
+                            </div>
+                            @else
+                            <div class="col-11" style="text-align: right">
+                                <button type="button" class="btn"
+                                    style="margin-top: 10px;background-color: #ad323a">
+                                    <a href="/penilaian" style="color: white">
+                                        Kembali
+                                    </a>
+                                </button>
+                            </div>
+                            @endif
                             <div class="row">
                                 <div class="col-11">
                                     <div class="body">
@@ -44,12 +63,20 @@
                                                     </tr>
                                                 @endforeach
                                                 <tr>
-                                                    <td colspan="7">Total</td>
+                                                    <td colspan="7">Total Index Akhir</td>
                                                     <td>{{ $indikators->total_index_akhir }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="7">Total Bobot</td>
+                                                    <td colspan="7">Total Bobot(%)</td>
                                                     <td>{{ $indikators->total_bobot }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="7">Total Tk Final Adj</td>
+                                                    <td>{{ $indikators->total_tk_final }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="7">Total Bobot Aspek(%)</td>
+                                                    <td>{{ $indikators->total_bobot_aspek }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>

@@ -17,12 +17,40 @@ class SkorController extends Controller
      */ public function index()
     {
         if (Auth::user()->level == 'admin') {
+
             $user = User::where('level', '=', 'user')->get();
+            // $indikators = collect();
+            // $bagian = Bagian::where('id_user', $user->id)->get();
+
+            // if ($bagian) {
+            //     $indikatorIds = json_decode($bagian->indikators, true);
+            //     $indikators = Indikator::with(['domainR', 'aspekR', 'detailIndikator'])
+            //         ->whereIn('id', $indikatorIds)
+            //         ->get();
+
+            //     // Inisialisasi total
+            //     $total_index_akhir = 0;
+            //     $total_bobot_aspek = 0;
+
+            //     // Loop melalui indikator dan lakukan perhitungan
+            //     foreach ($indikators as $indikator) {
+            //         $capaian = $indikator->detailIndikator->capaian ?? 0;
+            //         $indikator->index_akhir = ($indikator->bobot_aspek / 100) * $capaian;
+            //         $total_index_akhir = $indikators->sum('index_akhir') * $total_bobot_aspek;
+            //     }
+
+            //     // Tambahkan total ke koleksi
+            //     $indikators->total_index_akhir = $total_index_akhir;
+            //     $indikators->total_bobot_aspek = $total_bobot_aspek;
+            // }
+
             $data = [
                 'user' => $user,
+                // 'indikators' => $indikators,
                 'page' => 'penilaian',
             ];
             return view('skorindex.admin', $data);
+
         } else {
             $user = Auth::user();
             $indikators = collect();
@@ -37,18 +65,24 @@ class SkorController extends Controller
                 // Inisialisasi total
                 $total_index_akhir = 0;
                 $total_bobot = 0;
+                $total_tk_final = 0;
+                $total_bobot_aspek = 0;
 
                 // Loop melalui indikator dan lakukan perhitungan
                 foreach ($indikators as $indikator) {
                     $capaian = $indikator->detailIndikator->capaian ?? 0;
                     $indikator->index_akhir = ($indikator->bobot_aspek / 100) * $capaian;
-                    $total_index_akhir += $indikator->index_akhir;
-                    $total_bobot += $indikator->bobot;
+                    $total_index_akhir = $indikators->sum('index_akhir') * $total_bobot_aspek;
+                    $total_bobot = $indikators->sum('bobot');
+                    $total_tk_final = $indikators->sum('index_akhir');
+                    $total_bobot_aspek = $indikators->sum('bobot_aspek');
                 }
 
                 // Tambahkan total ke koleksi
                 $indikators->total_index_akhir = $total_index_akhir;
                 $indikators->total_bobot = $total_bobot;
+                $indikators->total_tk_final = $total_tk_final;
+                $indikators->total_bobot_aspek = $total_bobot_aspek;
             }
 
             $data = [
@@ -57,7 +91,6 @@ class SkorController extends Controller
                 'indikators' => $indikators,
                 'bagian' => $bagian,
             ];
-
             return view('skorindex.user', $data);
         }
     }

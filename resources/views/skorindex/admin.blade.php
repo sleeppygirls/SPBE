@@ -31,12 +31,12 @@
                                                         <td style="width: 40px">{{ $loop->iteration }}</td>
                                                         <td>{{ $item->nama_instansi }}</td>
                                                         <td style="text-align: center">{{ $item->username }}</td>
-                                                        <td>
+                                                        <td style="width: 150px">
                                                             <div class="row">
-                                                                <div class="col-4" style="margin-left: 10px">
+                                                                <div class="col-8">
                                                                     {{ $item->total_index_akhir }}
                                                                 </div>
-                                                                <div class="col-4" style="margin-left: 10px">
+                                                                <div class="col-4">
                                                                     <a href="/adm/users/{{ $item->id }}/skor">
                                                                         <button type="button"
                                                                             class="btn btn-success btn-sm">

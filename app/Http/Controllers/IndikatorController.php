@@ -187,7 +187,7 @@ class IndikatorController extends Controller
         $aspek = Aspek::where('id', $indikator->aspek)->first();
 
         $documents = FileData::where('id_indikator', $indikator->id)
-            ->where('id_task', $indikator->id_task)
+            ->where('id_task', $task->id)
             ->where('id_user', Auth::id())
             ->get()
             ->toArray();

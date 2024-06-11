@@ -34,7 +34,7 @@
                                                         <td>
                                                             <div class="row">
                                                                 <div class="col-4" style="margin-left: 10px">
-                                                                    {{ $total_index_akhir }}
+                                                                    {{ $item->total_index_akhir }}
                                                                 </div>
                                                                 <div class="col-4" style="margin-left: 10px">
                                                                     <a href="/adm/users/{{ $item->id }}/skor">

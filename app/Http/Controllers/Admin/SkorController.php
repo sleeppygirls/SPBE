@@ -21,8 +21,15 @@ class SkorController extends Controller
         $bagian = Bagian::where('id_user', $user->id)->first();
 
         if ($bagian) {
+            $username = $user->username;
             $indikatorIds = json_decode($bagian->indikators, true);
-            $indikators = Indikator::with(['domainR', 'aspekR', 'detailIndikator'])
+            $indikators = Indikator::with([
+                'domainR',
+                'aspekR',
+                'detailIndikator' => function ($query) use ($username) {
+                    $query->where('username', $username);
+                },
+            ])
                 ->whereIn('id', $indikatorIds)
                 ->get();
 
@@ -48,7 +55,6 @@ class SkorController extends Controller
             $indikators->total_tk_final = $total_tk_final;
             $indikators->total_bobot_aspek = $total_bobot_aspek;
         }
-
         $data = [
             'user' => $user,
             'page' => 'penilaian',
@@ -58,7 +64,6 @@ class SkorController extends Controller
 
         return view('skorindex.user', $data);
     }
-
 
     /**
      * Show the form for creating a new resource.

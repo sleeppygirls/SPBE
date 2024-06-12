@@ -85,6 +85,30 @@
                         <div style="margin-bottom: 50px" class="card">
                             <div class="row">
                                 <div class="col-6 nav-item dropdown">
+                                    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Cari Dokumen
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cari Dokumen</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            @livewire('cari-dokumen')
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
                                     <button style="padding-top: 20px;padding-bottom: 0px;" class="btn dropdown-toggle"
                                         type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
@@ -151,6 +175,11 @@
                                         (tahunny dtbs)</h5>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-11 margin-left: 35px;margin-top: 10px">
+                                    @livewire('cart-dashboard')
+                            </div>
+                        </div>
                             <div class="row" style="margin-left: 28px; margin-right: 35px">
                                 <div class="col-12">
                                     <p style="margin-bottom: 0px">Nama Instansi</p>

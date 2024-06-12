@@ -45,7 +45,6 @@ class IndikatorController extends Controller
         }
 
         if (count($arrayData) > 0) {
-
             $commaSeparatedString = implode(', ', $arrayData);
 
             $indikators = DB::select(
@@ -126,7 +125,11 @@ class IndikatorController extends Controller
      */
     public function show(Task $task, Indikator $indikator, $username)
     {
-        $user = User::where('username', '=', $username)->first();
+        if (Auth::user()->level == 'admin') {
+            $user = User::where('username', '=', $username)->first();
+        } else {
+            $user = Auth::user();
+        }
         $keterangan = Keterangan::where('id', '=', $indikator->id_keterangan);
 
         $jawabans = DB::select('SELECT p.id, p.text, p.id_indikator, j.d_jawaban FROM penjelasans p LEFT JOIN (SELECT * FROM jawabans i WHERE i.username = ?) j ON j.id_penjelasan = p.id WHERE p.id_indikator = ?', [$user->username, $indikator->id]);
@@ -140,7 +143,7 @@ class IndikatorController extends Controller
 
         $documents = FileData::where('id_indikator', $indikator->id)
             ->where('id_task', $task->id)
-            ->where('id_user', Auth::id())
+            ->where('id_user', $user->id)
             ->get()
             ->toArray();
 

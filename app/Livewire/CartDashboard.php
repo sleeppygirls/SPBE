@@ -1,25 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Livewire;
 
-use App\Models\Skor;
 use App\Models\User;
-use App\Http\Requests\StoreSkorRequest;
-use App\Http\Requests\UpdateSkorRequest;
 use App\Models\Bagian;
-use App\Models\DetailIndikator;
+use Livewire\Component;
 use App\Models\Indikator;
 use Illuminate\Support\Facades\Auth;
 
-use function Laravel\Prompts\select;
-
-class SkorController extends Controller
+class CartDashboard extends Component
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public $data = [];
+
+    public function mount()
     {
+        $labels = [];
+        $nilais = [];
         if (Auth::user()->level == 'admin') {
             $users = User::where('level', '=', 'user')->get();
             $userIds = $users->pluck('id')->toArray();
@@ -70,13 +66,10 @@ class SkorController extends Controller
                 return $user;
             });
 
-            $data = [
-                'user' => $users,
-                'indikator' => $indikators,
-                'page' => 'penilaian',
-            ];
-
-            return view('skorindex.admin', $data);
+            foreach ($users as $value) {
+                $labels[] = $value->nama_instansi;
+                $nilais[] = $value->total_index_akhir;
+            }
         } else {
             $user = Auth::user();
             $indikators = collect();
@@ -94,14 +87,11 @@ class SkorController extends Controller
                     ->whereIn('id', $indikatorIds)
                     ->get();
 
-                // dd($indikators);
-                // Inisialisasi total
                 $total_index_akhir = 0;
                 $total_bobot = 0;
                 $total_tk_final = 0;
                 $total_bobot_aspek = 0;
 
-                // Loop melalui indikator dan lakukan perhitungan
                 foreach ($indikators as $indikator) {
                     $capaian = $indikator->detailIndikator->capaian ?? 0;
                     $indikator->index_akhir = ($indikator->bobot_aspek / 100) * $capaian;
@@ -111,68 +101,33 @@ class SkorController extends Controller
                     $total_bobot_aspek = $indikators->sum('bobot_aspek');
                 }
 
-                // Tambahkan total ke koleksi
                 $indikators->total_index_akhir = $total_index_akhir;
                 $indikators->total_bobot = $total_bobot;
                 $indikators->total_tk_final = $total_tk_final;
                 $indikators->total_bobot_aspek = $total_bobot_aspek;
             }
 
-            $data = [
-                'user' => $user,
-                'page' => 'penilaian',
-                'indikators' => $indikators,
-                'bagian' => $bagian,
-            ];
-            return view('skorindex.user', $data);
+            foreach ($indikators as $value) {
+                $labels[] = $value->name;
+                $nilais[] = $value->index_akhir;
+            }
         }
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $this->data = [
+            'labels' => $labels,
+            'datasets' => [
+                [
+                    'label' => 'Grafik',
+                    'data' => $nilais,
+                    'backgroundColor' => 'rgba(255, 99, 132, 0.2)',
+                    'borderColor' => 'rgba(255, 99, 132, 1)',
+                    'borderWidth' => 1,
+                ],
+            ],
+        ];
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreSkorRequest $request)
+    public function render()
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Skor $skor)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Skor $skor)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateSkorRequest $request, Skor $skor)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Skor $skor)
-    {
-        //
+        return view('livewire.cart-dashboard');
     }
 }

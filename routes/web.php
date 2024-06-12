@@ -42,11 +42,12 @@ use App\Models\Keterangan;
 |
 */
 
+
 Route::get('/', [AuthController::class, 'dashboard'])->middleware('is.auth');
 
-// Route::get('/admin', function () {
-//     return view('admin');
-// });
+Route::get('/test', function () {
+    return view('test');
+});
 
 // Route::get('/penja', function () {
 //     return view('penjelasanjawaban');

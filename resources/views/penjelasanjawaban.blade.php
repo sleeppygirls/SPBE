@@ -285,7 +285,7 @@
                                             memotong nama file menjadi 60 karakter</p>
                                         <p style="color: red; font-size: small; margin-bottom: 50px;">*apabila ukuran
                                             file
-                                            yang    
+                                            yang
                                             di unggah melebihi ketentuan batas maksimum, agar dapat mereferensikan
                                             url/link
                                             data

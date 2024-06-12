@@ -17,6 +17,7 @@
                                     <form action="/adm/indikator" method="POST" style="margin-left: 80px">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ @$indikator->id }}">
+                                        <input type="hidden" name="id_keterangan" value="{{ @$indikator->id_keterangan }}">
                                         <div class="card"
                                             style="padding: 20px; margin-top: 15px; margin-bottom: 15px; background-color: rgb(222, 254, 208)">
                                             <div class="row">
@@ -46,6 +47,11 @@
                                                             value="{{ @$indikator->bobot_aspek }}">
                                                     </div>
                                                     @if (@$edit)
+                                                        <div class="form-group">
+                                                            <label for="nama_keterangan">Detail Indikator</label>
+                                                            <input type="text" class="form-control" name="nama_keterangan" id="nama_keterangan"
+                                                                placeholder="Detail Indikator" value="{{ @$ket->name }}">
+                                                        </div>
                                                         <div class="form-group">
                                                             <label for="domain">Domain</label>
                                                             <select id="domain" name="domain"

@@ -19,6 +19,7 @@ use App\Http\Requests\StoreIndikatorRequest;
 use App\Http\Requests\UpdateIndikatorRequest;
 use App\Models\Bagian;
 use App\Models\FileData;
+use App\Models\Keterangan;
 
 class IndikatorController extends Controller
 {
@@ -74,56 +75,6 @@ class IndikatorController extends Controller
         return view('indikators.indikator', $data);
     }
 
-    // public function task2(Request $req)
-    // {
-    //     $user = User::where('id',$req->username);
-    //     $bagian = Bagian::where('id', $user->id_bagian)->first();
-    //     $stringData = $bagian->indikators;
-    //     $arrayData = json_decode($stringData, true);
-    //     $task = Task::find($req->id_task);
-    //     $indikators = DB::select(
-    //         "SELECT i.*, d.id exist FROM indikators i LEFT JOIN
-    //         (SELECT * FROM detail_indikators d WHERE username = ?)
-    //         d ON i.id = d.id_indikator order by i.no asc",
-    //         [
-    //             $req->username,
-    //         ]
-    //     );
-
-    //     $data = [
-    //         'indikator' => $indikators,
-    //         "page" => "penilaian",
-    //         'task' => $task,
-    //         'username' => $req->username,
-    //         'bagian' => $bagian
-    //     ];
-
-    //     return view('indikators.indikator', $data);
-    // }
-
-    // public function test($id_task,$username)
-    // {
-
-    //     $task = Task::find($id_task);
-    //     $indikators = DB::select(
-    //         "SELECT i.*, d.id exist FROM indikators i LEFT JOIN
-    //         (SELECT * FROM detail_indikators d WHERE username = ?)
-    //         d ON i.id = d.id_indikator order by i.no asc",
-    //         [
-    //             $username,
-    //         ]
-    //     );
-
-    //     $data = [
-    //         'indikator' => $indikators,
-    //         "page" => "penilaian",
-    //         'task' => $task,
-    //         'username' => $username
-    //     ];
-
-    //     return view('indikators.indikator', $data);
-    // }
-
     public function index()
     {
         $indikator = Indikator::all();
@@ -176,6 +127,7 @@ class IndikatorController extends Controller
     public function show(Task $task, Indikator $indikator, $username)
     {
         $user = User::where('username', '=', $username)->first();
+        $keterangan = Keterangan::where('id', '=', $indikator->id_keterangan);
 
         $jawabans = DB::select('SELECT p.id, p.text, p.id_indikator, j.d_jawaban FROM penjelasans p LEFT JOIN (SELECT * FROM jawabans i WHERE i.username = ?) j ON j.id_penjelasan = p.id WHERE p.id_indikator = ?', [$user->username, $indikator->id]);
 
@@ -201,6 +153,7 @@ class IndikatorController extends Controller
             'aspek' => $aspek,
             'domain' => $domain,
             'task' => $task,
+            'keterangan' => $keterangan,
             'documents' => $documents,
         ];
 

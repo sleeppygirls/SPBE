@@ -23,9 +23,9 @@
                                                     <th>Indikator</th>
                                                     <th style="text-align: center">Bobot(%)</th>
                                                     <th style="text-align: center">Bobot Aspek(%)</th>
-                                                    {{-- <th style="text-align: center">Pilih Domain & Aspek</th> --}}
+                                                    {{-- <th style="text-align: center">Detail Indikator</th> --}}
                                                     <th style="text-align: center">Tambah Penjelasan</th>
-                                                    <th style="text-align: center">Lihat Penjelasan, Domain & Aspek</th>
+                                                    <th style="text-align: center">Lihat Detail</th>
                                                     <th style="text-align: center">Aksi</th>
                                                 </tr>
                                             </thead>
@@ -40,7 +40,7 @@
                                                             <div class="row">
                                                                 <div class="col-4">
                                                                     <a
-                                                                        href="/adm/indikator/{{ $item->id }}/domainaspek/create">
+                                                                        href="/adm/indikator/{{ $item->id }}/keterangan/create">
                                                                         <button type="button"
                                                                             class="btn btn-primary btn-sm">
                                                                             <i class="fas fa-plus">
@@ -49,7 +49,7 @@
                                                                     </a>
                                                                 </div>
                                                                 <div class="col-4" style="margin-left: 10px;">
-                                                                    <a href="/adm/indikator/{{ $item->id }}/domainaspek">
+                                                                    <a href="/adm/indikator/{{ $item->id }}/keterangan">
                                                                         <button type="button"
                                                                             class="btn btn-success btn-sm">
                                                                             <i class="fas fa-eye fa-fw">

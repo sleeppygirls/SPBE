@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreIndikatorRequest;
 use App\Http\Requests\UpdateIndikatorRequest;
+use App\Models\Keterangan;
 
 class IndikatorController extends Controller
 {
@@ -27,6 +28,7 @@ class IndikatorController extends Controller
         $task = Task::all();
         $aspek = Aspek::all();
         $domain = Domain::all();
+        $ket = Keterangan::all();
 
 
         $data = [
@@ -34,6 +36,7 @@ class IndikatorController extends Controller
             "page" => "indikator",
             'task' => $task,
             'domain' => $domain,
+            'ket' => $ket,
             'aspek' => $aspek
         ];
 
@@ -46,8 +49,8 @@ class IndikatorController extends Controller
     public function create()
     {
         $data = [
-            // 'indikator' => Indikator::all(),
             'task' => Task::all(),
+            'ket' => Keterangan::all(),
             'aspek' => Aspek::all(),
             'domain' => Domain::all(),
             "page" => "indikator",
@@ -60,9 +63,23 @@ class IndikatorController extends Controller
      */
     public function store(StoreIndikatorRequest $request)
     {
+        // dd($request);
         // Indikator::create($request->all());
         // Task::create($request->all());
         // Penjelasan::create($request->all());
+
+        Keterangan::updateOrCreate([
+            'id' => $request->input('id_keterangan')
+        ], [
+            'name' => $request->input('nama_keterangan')
+        ]);
+
+        if ($request->input('id_keterangan') == null) {
+            $keterangan = Keterangan::all()->last();
+        } else {
+            $keterangan = Keterangan::where('id', '=', $request->input('id_keterangan'))->first();
+        }
+        // dd($keterangan);
 
         Indikator::updateOrCreate([
             'id' => $request->input('id'),
@@ -70,6 +87,7 @@ class IndikatorController extends Controller
             'name' => $request->input('name'),
             'bobot' => $request->input('bobot'),
             'bobot_aspek' => $request->input('bobot_aspek'),
+            'id_keterangan' => $keterangan->id,
             'aspek' => $request->input('aspek'),
             'domain' => $request->input('domain'),
         ]);
@@ -84,8 +102,6 @@ class IndikatorController extends Controller
      */
     public function show(Indikator $indikator)
     {
-
-
     }
 
     /**
@@ -93,9 +109,13 @@ class IndikatorController extends Controller
      */
     public function edit(Indikator $indikator)
     {
+        // if ($indikator->id_keterangan == NULL) {
+        //     $indikator->id_keterangan = 1;
+        // }
+        // dd($indikator);
         $indikators[0] = $indikator;
-        $indikator = Indikator::all();
         $task = Task::all();
+        $ket = Keterangan::where('id', '=', @$indikator->id_keterangan)->first();
         $aspek = Aspek::all();
         $domain = Domain::all();
 
@@ -104,6 +124,7 @@ class IndikatorController extends Controller
             "page" => "indikator",
             'task' => $task,
             'domain' => $domain,
+            'ket' => $ket,
             'aspek' => $aspek,
             'edit' => true
         ];
@@ -116,20 +137,6 @@ class IndikatorController extends Controller
      */
     public function update(UpdateIndikatorRequest $request, Indikator $indikator)
     {
-        $indikator = Indikator::all();
-        $task = Task::all();
-        $aspek = Aspek::all();
-        $domain = Domain::all();
-
-        $data = [
-            'indikator' => $indikator,
-            "page" => "indikator",
-            'task' => $task,
-            'domain' => $domain,
-            'aspek' => $aspek
-        ];
-
-        return view('adminindikators.add', $data);
     }
 
     /**

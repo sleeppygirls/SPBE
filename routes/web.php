@@ -25,9 +25,11 @@ use App\Http\Controllers\Admin\IndikatorController as IndikatorAdminController;
 use App\Http\Controllers\Admin\TaskController as TaskAdminController;
 use App\Http\Controllers\Admin\PenjelasanController as PenjelasanAdminController;
 use App\Http\Controllers\Admin\SkorController as SkorAspekAdminController;
+use App\Http\Controllers\Admin\KeteranganController as KeteranganAdminController;
 use App\Http\Controllers\AspekController;
 use App\Http\Controllers\DomainController;
 use App\Http\Controllers\FileDataController;
+use App\Models\Keterangan;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,6 +76,7 @@ Route::middleware(['is.auth'])->group(function() {
     // admin
     Route::resource('/adm/indikator', IndikatorAdminController::class);
     Route::resource('/adm/indikator/{indikator}/penjelasan', PenjelasanAdminController::class);
+    // Route::resource('/adm/indikator/{indikator}/keterangan', KeteranganAdminController::class);
     Route::resource('/adm/users/{user}/skor', SkorAspekAdminController::class);
 
     // custom uri

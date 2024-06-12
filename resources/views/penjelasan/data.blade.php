@@ -39,6 +39,10 @@
                                         <tr>
                                             <td style="width: 250px; color: grey">Indikator</td>
                                             <td style="color: grey">{{ $indikator->name }}</td>
+                                        </tr>>
+                                        <tr>
+                                            <td style="width: 250px; color: grey">Detail Indikator</td>
+                                            <td style="color: grey">{{ @$indikator->keterangan->name }}</td>
                                         </tr>
                                         <tr>
                                             <td style="width: 250px; color: grey">Domain</td>

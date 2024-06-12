@@ -23,6 +23,7 @@ class Indikator extends Model
         'name',
         'bobot',
         'bobot_aspek',
+        'id_keterangan',
         'aspek',
         'domain',
     ];
@@ -39,6 +40,11 @@ class Indikator extends Model
     public function aspekR()
     {
         return $this->belongsTo(Aspek::class,'aspek','id');
+    }
+
+    public function keterangan()
+    {
+        return $this->belongsTo(Keterangan::class,'id_keterangan','id');
     }
 
     public function detailIndikator()

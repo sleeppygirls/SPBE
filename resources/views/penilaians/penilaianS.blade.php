@@ -11,107 +11,104 @@
                         <h1 style="color: white; padding-left: 11px" class="m-0 dashboard fw-bold">Tugas Penilaian Mandiri
                         </h1>
                     </div>
-                    <div style="padding-left: 20px;padding-right: 20px;" class="col-12">
-                        <div style="min-height: 500px; margin-bottom: 30px" class="card">
+                </div>
+                <div style="padding-left: 20px;padding-right: 20px;" class="col-12">
+                    <div style="min-height: 500px; margin-bottom: 30px" class="card">
+                        <div class="row">
+                            <div class="col-11">
+                                <select class="form-control" title="Choose Plan" id="tahun"
+                                    onchange="window.location = this.options[this.selectedIndex].value"
+                                    style="margin-top: 20px; margin-left: 30px; margin-right: 30px">
+                                    <option value="{{ url('penilaian') }}" {{ $tahunini == '' ? 'selected' : '' }}>Pilih
+                                        Tahun</option>
+                                    @foreach ($data as $item)
+                                        <option value="{{ url('penilaian?tahun=' . $item->tahun) }}"
+                                            {{ $item->tahun == $tahunini ? 'selected' : '' }}>{{ $item->tahun }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @if (Auth::user()->level == 'admin')
+                                    <div class="row">
+                                        <div class="col-11">
+                                            <button id="user_pilih"
+                                                style="margin-top: 25px; background-color: brown; color: white; margin-left: 30px"
+                                                type="button" class="btn btn-default" data-toggle="modal"
+                                                data-target="#modal-xl">
+                                                Pilih User
+                                            </button>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
                             <div class="row">
                                 <div class="col-11">
-                                    <select class="form-control" title="Choose Plan" id="tahun"
-                                        onchange="window.location = this.options[this.selectedIndex].value"
-                                        style="margin-top: 20px; margin-left: 30px; margin-right: 30px">
-                                        <option value="{{ url('penilaian') }}" {{ $tahunini == '' ? 'selected' : '' }}>Pilih
-                                            Tahun</option>
-                                        @foreach ($data as $item)
-                                            <option value="{{ url('penilaian?tahun=' . $item->tahun) }}"
-                                                {{ $item->tahun == $tahunini ? 'selected' : '' }}>{{ $item->tahun }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @if (Auth::user()->level == 'admin')
-                                        <div class="row">
-                                            <div class="col-11">
-                                                <button id="user_pilih"
-                                                    style="margin-top: 25px; background-color: brown; color: white; margin-left: 30px"
-                                                    type="button" class="btn btn-default" data-toggle="modal"
-                                                    data-target="#modal-xl">
-                                                    Pilih User
-                                                </button>
-                                            </div>
-                                        </div>
-                                    @endif
-                                    <div class="card-body" style="margin-left: 13px">
-                                        <table id="example2" class="table table-bordered table-hover" style="width: 890px">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 5px;padding-right: 0px;padding-left: 5px;">No.</th>
-                                                    <th>Tahun</th>
-                                                    <th>nama Form</th>
-                                                    <th>Tahap Form</th>
-                                                    <th>Batas Waktu </th>
-                                                    <th>Kemajuan</th>
-                                                    <th>aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($data as $item)
-                                                    @if ($tahunini == $item->tahun)
-                                                        <tr>
-                                                            <td
-                                                                style="padding-top: 70px; padding-bottom: 70px; padding-right: 45px; background-color:silver">
-                                                                1</td>
-                                                            <td style="padding-top: 70px; padding-bottom: 70px;">
-                                                                {{ $item->tahun }}</td>
-                                                            <td style="padding-top: 70px; padding-bottom: 70px;">
-                                                                {{ $item->name }}</td>
-                                                            <td style="padding-top: 70px; padding-bottom: 70px;">
-                                                                {{ $item->tahap }}</td>
-                                                            <td style="padding-top: 70px; padding-bottom: 70px;">
-                                                                {{ $item->batas }}</td>
-                                                            <td style="padding-top: 70px; padding-bottom: 70px;"></td>
-                                                            <td>
-                                                                <div class="d-grid gap-2 col-6 mx-auto"
-                                                                    style="margin-top: 35px;">
-                                                                    @if (Auth::user()->level == 'user')
-                                                                        <button class="btn btn-primary" type="button"
-                                                                            style="margin-bottom: 10px;"><a
-                                                                                href="/task/{{ $item->id }}"
-                                                                                style="color: white">Kerjakan</a></button>
-                                                                        <form action="{{ url('lihat/task') }}"
-                                                                            method="post">
-                                                                            @csrf
-                                                                            <input type="hidden" name="id_task"
-                                                                                value="{{ $item->id }}">
-                                                                            <button class="btn btn-primary"
-                                                                                type="submit">Lihat</button>
-                                                                        </form>
-                                                                        {{-- <button class="btn btn-primary" type="button"><a
-                                                                                href="/lihat/{{ $item->id }}"
-                                                                                style="color: white">Lihat</a></button> --}}
-                                                                    @else
-                                                                        {{-- <button class="btn btn-primary" type="button"
-                                                                            style="margin-bottom: 10px;"><a
-                                                                                href="/task/{{ $item->id }}"
-                                                                                style="color: white">Lihat</a></button> --}}
-                                                                        <form action="{{ url('indikator/task') }}"
-                                                                            method="post">
-                                                                            @csrf
-                                                                            <input type="hidden" id="txtnama_username"
-                                                                                name="username">
-                                                                            <input type="hidden" id="txtnama_instansi"
-                                                                                name="nama_instansi">
-                                                                            <input type="hidden" name="id_task"
-                                                                                value="{{ $item->id }}">
-                                                                            <button class="btn btn-primary"
-                                                                                type="submit">Lihat</button>
-                                                                        </form>
-                                                                    @endif
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    @endif
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                    <table id="example2" class="table table-bordered table-hover"
+                                        style="width: 890px; margin-left: 37px; margin-top: 10px; margin-right: 30px">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 5px;padding-right: 0px;padding-left: 5px;">No.
+                                                </th>
+                                                <th>Tahun</th>
+                                                <th>nama Form</th>
+                                                <th>Tahap Form</th>
+                                                <th>Batas Waktu </th>
+                                                <th>Kemajuan</th>
+                                                <th>aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($data as $item)
+                                                @if ($tahunini == $item->tahun)
+                                                    <tr>
+                                                        <td
+                                                            style="padding-top: 70px; padding-bottom: 70px; padding-right: 45px; background-color:silver">
+                                                            1</td>
+                                                        <td style="padding-top: 70px; padding-bottom: 70px;">
+                                                            {{ $item->tahun }}</td>
+                                                        <td style="padding-top: 70px; padding-bottom: 70px;">
+                                                            {{ $item->name }}</td>
+                                                        <td style="padding-top: 70px; padding-bottom: 70px;">
+                                                            {{ $item->tahap }}</td>
+                                                        <td style="padding-top: 70px; padding-bottom: 70px;">
+                                                            {{ $item->batas }}</td>
+                                                        <td style="padding-top: 70px; padding-bottom: 70px;">
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-grid gap-2 col-6 mx-auto"
+                                                                style="margin-top: 35px;">
+                                                                @if (Auth::user()->level == 'user')
+                                                                    <button class="btn btn-primary" type="button"
+                                                                        style="margin-bottom: 10px;"><a
+                                                                            href="/task/{{ $item->id }}"
+                                                                            style="color: white">Kerjakan</a></button>
+                                                                    <form action="{{ url('lihat/task') }}" method="post">
+                                                                        @csrf
+                                                                        <input type="hidden" name="id_task"
+                                                                            value="{{ $item->id }}">
+                                                                        <button class="btn btn-primary"
+                                                                            type="submit">Lihat</button>
+                                                                    </form>
+                                                                @else
+                                                                    <form action="{{ url('indikator/task') }}"
+                                                                        method="post">
+                                                                        @csrf
+                                                                        <input type="hidden" id="txtnama_username"
+                                                                            name="username">
+                                                                        <input type="hidden" id="txtnama_instansi"
+                                                                            name="nama_instansi">
+                                                                        <input type="hidden" name="id_task"
+                                                                            value="{{ $item->id }}">
+                                                                        <button class="btn btn-primary"
+                                                                            type="submit">Lihat</button>
+                                                                    </form>
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -162,170 +159,3 @@
     </div>
 @endsection
 
-
-{{-- @if (Auth::user()->level == 'user')
-    <div class="row">
-        <div class="col-11">
-            @php
-                $tahunini = '';
-                $tahunini = @$_GET['tahun'];
-            @endphp
-            <select class="form-control" title="Choose Plan" id="tahun"
-                onchange="window.location = this.options[this.selectedIndex].value"
-                style="margin-top: 20px; margin-left: 30px; margin-right: 30px">
-                <option value="{{ url('penilaian') }}" {{ $tahunini == '' ? 'selected' : '' }}>
-                    Pilih
-                    Tahun</option>
-                @foreach ($data as $item)
-                    <option value="{{ url('penilaian?tahun=' . $item->tahun) }}"
-                        {{ $item->tahun == $tahunini ? 'selected' : '' }}>{{ $item->tahun }}
-                    </option>
-                @endforeach
-            </select>
-            <div class="card-body" style="margin-left: 13px">
-                <table id="example2" class="table table-bordered table-hover" style="width: 890px">
-                    <thead>
-                        <tr>
-                            <th style="width: 5px;padding-right: 0px;padding-left: 5px;">No.
-                            </th>
-                            <th>Tahun</th>
-                            <th>nama Form</th>
-                            <th>Tahap Form</th>
-                            <th>Batas Waktu </th>
-                            <th>Kemajuan</th>
-                            <th>aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data as $item)
-                            @if ($tahunini == $item->tahun)
-                                <tr>
-                                    <td
-                                        style="padding-top: 70px; padding-bottom: 70px; padding-right: 45px; background-color:silver">
-                                        1</td>
-                                    <td style="padding-top: 70px; padding-bottom: 70px;">
-                                        {{ $item->tahun }}</td>
-                                    <td style="padding-top: 70px; padding-bottom: 70px;">
-                                        {{ $item->name }}</td>
-                                    <td style="padding-top: 70px; padding-bottom: 70px;">
-                                        {{ $item->tahap }}</td>
-                                    <td style="padding-top: 70px; padding-bottom: 70px;">
-                                        {{ $item->batas }}</td>
-                                    <td style="padding-top: 70px; padding-bottom: 70px;"></td>
-                                    <td>
-                                        <div class="d-grid gap-2 col-6 mx-auto" style="margin-top: 35px;">
-                                            <button class="btn btn-primary" type="button"
-                                                style="margin-bottom: 10px;">
-                                                <a href="/task/{{ $item->id }}" style="color: white">
-                                                    Kerjakan
-                                                </a>
-                                            </button>
-                                            <button class="btn btn-primary" type="button">
-                                                <a href="/indikator/task/{{ $item->id }}" style="color: white">
-                                                    Lihat
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endif
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-@else
-    <div class="row">
-        <div class="col-11">
-            <div class="row">
-                <div class="col-6">
-                    @php
-                        $tahunini = '';
-                        $tahunini = @$_GET['tahun'];
-                    @endphp
-                    <select class="form-control" title="Choose Plan" id="tahun"
-                        onchange="window.location = this.options[this.selectedIndex].value"
-                        style="margin-top: 20px; margin-left: 30px; margin-right: 30px">
-                        <option value="{{ url('penilaian') }}" {{ $tahunini == '' ? 'selected' : '' }}>
-                            Pilih
-                            Tahun</option>
-                        @foreach ($data as $item)
-                            <option value="{{ url('penilaian?tahun=' . $item->tahun) }}"
-                                {{ $item->tahun == $tahunini ? 'selected' : '' }}>
-                                {{ $item->tahun }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-6">
-                    @php
-                        $userpilih = '';
-                        $userpilih = @$_GET['nama_instansi'];
-                    @endphp
-                    <select class="form-control" title="Choose Plan" id="tahun"
-                        onchange="window.location = this.options[this.selectedIndex].value"
-                        style="margin-top: 20px; margin-left: 30px; margin-right: 30px">
-                        <option value="{{ url('penilaian') }}" {{ $userpilih == '' ? 'selected' : '' }}>
-                            Pilih
-                            User</option>
-                        @foreach ($user as $item)
-                            <option value="{{ url('penilaian?user=' . $item->nama_instansi) }}"
-                                {{ $item->nama_instansi == $userpilih ? 'selected' : '' }}>
-                                {{ $item->nama_instansi }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="card-body" style="margin-left: 13px">
-                <table id="example2" class="table table-bordered table-hover" style="width: 890px">
-                    <thead>
-                        <tr>
-                            <th style="width: 5px;padding-right: 0px;padding-left: 5px;">No.
-                            </th>
-                            <th>Tahun</th>
-                            <th>nama Form</th>
-                            <th>Tahap Form</th>
-                            <th>Batas Waktu </th>
-                            <th>Kemajuan</th>
-                            <th>Username</th>
-                            <th>aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data as $item)
-                            @if ($tahunini == $item->tahun)
-                                <tr>
-                                    <td
-                                        style="padding-top: 70px; padding-bottom: 70px; padding-right: 45px; background-color:silver">
-                                        1</td>
-                                    <td style="padding-top: 70px; padding-bottom: 70px;">
-                                        {{ $item->tahun }}</td>
-                                    <td style="padding-top: 70px; padding-bottom: 70px;">
-                                        {{ $item->name }}</td>
-                                    <td style="padding-top: 70px; padding-bottom: 70px;">
-                                        {{ $item->tahap }}</td>
-                                    <td style="padding-top: 70px; padding-bottom: 70px;">
-                                        {{ $item->batas }}</td>
-                                    <td style="padding-top: 70px; padding-bottom: 70px;"></td>
-                                    <td style="padding-top: 70px; padding-bottom: 70px;"></td>
-                                    <td>
-                                        <div class="d-grid gap-2 col-6 mx-auto" style="margin-top: 35px;">
-                                            <form action="{{ url('indikator/task') }}" method="post">
-                                                @csrf
-                                                <input type="hidden" id="txtusername" name="username">
-                                                <input type="hidden" name="id_task" value="{{ $item->id }}">
-                                                <button class="btn btn-primary" type="submit">Lihat</button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endif
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-@endif --}}

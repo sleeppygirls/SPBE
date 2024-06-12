@@ -143,10 +143,40 @@
                                     </div>
                                     <hr style="margin-top: 10px;margin-left: 30px;margin-right: 30px;">
                                     <div class="row">
-                                        <div class="col-10">
-                                            <button type="button" class="btn"
-                                                style="margin-left: 30px; margin-bottom: 15px; background-color: #ad323a; color: white">Penjelasan
-                                                Indikator</button>
+                                        <div class="col-12" id="accordion">
+                                            <a class="d-block w-100" data-toggle="collapse" href="#collapseOne">
+                                                <button type="button" class="btn"
+                                                    style="margin-left: 30px; margin-bottom: 15px; background-color: #ad323a; color: white">
+                                                    Penjelasan Indikator
+                                                </button>
+                                            </a>
+                                            <div id="collapseOne" class="collapse" data-parent="#accordion">
+                                                <div style="padding-left: 20px;padding-right: 20px;" class="col-12">
+                                                    <div style="margin-bottom: 50px" class="card">
+                                                        <div class="row">
+                                                            <div class="col-10">
+                                                                <p style="margin-top: 40px; padding-left: 45px; margin-bottom: 0px; font-weight: bold">
+                                                                    Detail Penjelasan Indikator
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="margin-top: 20px; margin-bottom: 20px">
+                                                            <table class="table" style="margin-left: 40px; margin-right: 40px; margin-bottom: 0px">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width: 250px; color: grey">ID</td>
+                                                                        <td style="color: grey">{{ @$indikator->keterangan->id }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 250px; color: grey">Penjelasan</td>
+                                                                        <td style="color: grey">{{@$indikator->keterangan->name}}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">

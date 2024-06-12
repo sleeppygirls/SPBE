@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Keterangan;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
@@ -27,6 +28,7 @@ class UsersSeeder extends Seeder
             JawabanSeeder::class,
             DomainSeeder::class,
             BagianSeeder::class,
+            KeteranganSeeder::class,
         ]);
 
     }

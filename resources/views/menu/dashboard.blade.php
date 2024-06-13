@@ -86,30 +86,35 @@
                             <div class="row">
                                 <div class="col-6 nav-item dropdown">
                                     <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Cari Dokumen
-  </button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal" style="margin-left: 40px; margin-top: 30px;">
+                                        Cari Dokumen
+                                    </button>
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Cari Dokumen</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            @livewire('cari-dokumen')
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-                                    <button style="padding-top: 20px;padding-bottom: 0px;" class="btn dropdown-toggle"
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-scrollable">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Cari Dokumen</h5>
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target="#exampleModal">
+                                                        Cari Dokumen</button>
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    @livewire('cari-dokumen')
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button style="padding-top: 20px; padding-bottom: 0px;" class="btn dropdown-toggle"
                                         type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
                                         <a class="nav-item d-none d-sm-inline-block" style="margin-right: 200px">
@@ -175,11 +180,11 @@
                                         (tahunny dtbs)</h5>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-11 margin-left: 35px;margin-top: 10px">
+                            <div class="row" style="margin-left: 100px; margin-top: 30px; margin-bottom: -100px">
+                                <div class="col-11 margin-left: 100px; margin-top: 10px">
                                     @livewire('cart-dashboard')
+                                </div>
                             </div>
-                        </div>
                             <div class="row" style="margin-left: 28px; margin-right: 35px">
                                 <div class="col-12">
                                     <p style="margin-bottom: 0px">Nama Instansi</p>
@@ -227,22 +232,34 @@
                                             <p style="background-color: lightgrey; margin-bottom: 10px">:</p>
                                             <hr style="border-top: 2px dashed black; margin-top: 0px; margin-bottom: 2px">
                                             <p style="margin-bottom: 02px">:</p>
-                                            <p style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 0px">:</p>
-                                            <p style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 0px">:</p>
+                                            <p
+                                                style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 0px">
+                                                :</p>
+                                            <p
+                                                style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 0px">
+                                                :</p>
                                             <hr style="border-top: 2px dashed black; margin-top: 10px; margin-bottom: 0px">
-                                            <p style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 2px">:</p>
+                                            <p
+                                                style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 2px">
+                                                :</p>
                                             <p style="margin-bottom: 2px">:</p>
-                                            <p style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 0px">:</p>
+                                            <p
+                                                style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 0px">
+                                                :</p>
                                             <p style="margin-bottom: 10px; margin-bottom: 0px">:</p>
                                             <hr style="margin-bottom: 0px; margin-top: 4px">
                                             <p style="margin-bottom: 10px; margin-bottom: 0px; margin-top: 0px">:</p>
                                             <hr style="margin-bottom: 0px; margin-top: 4px">
                                             <p style="margin-bottom: 10px; margin-bottom: 3px; margin-top: 1px">:</p>
-                                            <p style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 0px">:</p>
+                                            <p
+                                                style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 0px">
+                                                :</p>
                                             <p style="margin-bottom: 10px; margin-bottom: 0px; margin-top: 0px">:</p>
                                             <hr style="margin-bottom: 0px; margin-top: 4px">
                                             <p style="margin-bottom: 10px; margin-bottom: 4px; margin-top: 0px">:</p>
-                                            <p style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 0px">:</p>
+                                            <p
+                                                style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 0px">
+                                                :</p>
                                             <p style="margin-bottom: 10px; margin-bottom: 0px; margin-top: 0px">:</p>
                                             <hr style="margin-bottom: 0px; margin-top: 4px">
                                             <p style="margin-bottom: 10px; margin-bottom: 2px; margin-top: 2px">:</p>

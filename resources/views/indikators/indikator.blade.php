@@ -78,17 +78,6 @@
                                         </div> --}}
                                     @endif
                                 </div>
-                            @else
-                                @if (Auth::user()->level == 'admin')
-                                    <div class="col-4">
-                                        <button type="button" class="btn"
-                                            style="margin-left: 40px; background-color: #ad323a">
-                                            <a href="/task/{{ $task->id }}/{{ @$username }}/file" style="color: white">
-                                                Cari File
-                                            </a>
-                                        </button>
-                                    </div>
-                                @endif
                             @endif
                             <div class="row">
                                 <div class="col-9">

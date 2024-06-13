@@ -1,4 +1,3 @@
-sama docker-compose nya di rubah ini ‘services:
     laravel.test:
         build:
             context: ./vendor/laravel/sail/runtimes/8.2

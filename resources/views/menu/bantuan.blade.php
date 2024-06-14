@@ -124,6 +124,9 @@
                                             <td style="10px" scope="row">
                                                 <a style="margin-left: 15px" href="">Perpres Nomor 95 Tahun 2018
                                                     Tentang Sistem Pemerintahan berbasis Elektronik</a>
+                                                    <iframe src="/asset/" width="50%" height="600">
+                                                        This browser does not support PDFs. Please download the PDF to view it: <a href="{{ asset('folder/file_name.pdf') }}">Download PDF</a>
+                                                </iframe>
                                             </td>
                                         </tr>
                                         <tr>
@@ -135,7 +138,7 @@
                                         <tr>
                                             <td style="10px" scope="row">
                                                 <a style="margin-left: 15px"href="">Pedoman Menteri PANRB Nomor 6 Tahun
-                                                    2023</a>
+                                                    2023 Tentang Tata Cara Tauval SPBE</a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -162,10 +165,10 @@
                                             <td style="padding-top: 10px; padding-left: 30px; padding-right: 30px; padding-bottom: 10px"
                                                 scope="row">
                                                 <p style="margin-bottom: 0px">Nomor Kontak :</p>
-                                                <p style="margin-bottom: 0px">Kantor - (021) 7398381 - 89 Ext. 2111 (office
-                                                    hour)</p>
-                                                <p style="margin-bottom: 15px">Email : asdep2balaks@mempan.go.id</p>
-                                                <p style="margin-bottom: 0px">Mekanisme Evaluasi SPBE : </p>
+                                                <p style="margin-bottom: 0px">Kantor - (0351) 462927</p>
+                                                <p style="margin-bottom: 0px">Email : diskominfo@madiunkab.go.id</p>
+                                                <p style="margin-bottom: 15px">Lokasi : JL.Mastrip No. 23 Madiun</p>
+                                                {{-- <p style="margin-bottom: 0px">Mekanisme Evaluasi SPBE : </p>
                                                 <hr style="margin-top: 10px; margin-bottom: 12px">
                                                 <div class="row">
                                                     <div class="col-7">
@@ -220,7 +223,7 @@
                                                     <div class="col-3">
                                                         <p style="margin-bottom: 0px">0897 9664 258</p>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <hr style="margin-top: 12px; margin-bottom: 0px">
                                             </td>
                                         </tr>

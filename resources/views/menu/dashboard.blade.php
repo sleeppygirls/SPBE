@@ -97,7 +97,7 @@
                                         <div class="modal-dialog modal-dialog-scrollable">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Cari Dokumen</h5>
+                                                    {{-- <h5 class="modal-title" id="exampleModalLabel">Cari Dokumen</h5> --}}
                                                     <button type="button" class="btn btn-primary" data-toggle="modal"
                                                         data-target="#exampleModal">
                                                         Cari Dokumen</button>

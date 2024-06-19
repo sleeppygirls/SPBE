@@ -122,33 +122,21 @@
                                     <tbody>
                                         <tr>
                                             <td style="10px" scope="row">
-                                                <a style="margin-left: 15px" href="">Perpres Nomor 95 Tahun 2018
+                                                <a style="margin-left: 15px" href="/asset/perpres.pdf">Perpres Nomor 95 Tahun 2018
                                                     Tentang Sistem Pemerintahan berbasis Elektronik</a>
-                                                    <iframe src="/asset/" width="50%" height="600">
-                                                        This browser does not support PDFs. Please download the PDF to view it: <a href="{{ asset('folder/file_name.pdf') }}">Download PDF</a>
-                                                </iframe>
+
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="10px" scope="row">
-                                                <a style="margin-left: 15px"href="">Permenpanrb Nomor 59 Tahun 2020 Tentang
+                                                <a style="margin-left: 15px"href="/asset/permenpan.pdf">Permenpanrb Nomor 59 Tahun 2020 Tentang
                                                     Pemantauan dan Evaluasi Sistem Pemerintahan Berbasis Elektronik</a>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="10px" scope="row">
-                                                <a style="margin-left: 15px"href="">Pedoman Menteri PANRB Nomor 6 Tahun
+                                                <a style="margin-left: 15px"href="/asset/panrb.pdf">Pedoman Menteri PANRB Nomor 6 Tahun
                                                     2023 Tentang Tata Cara Tauval SPBE</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="10px" scope="row">
-                                                <a style="margin-left: 15px"href="">Paparan Aplikasi Evaluasi SPBE - V1</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="10px" scope="row">
-                                                <a style="margin-left: 15px"href="">Paparan Aplikasi Evaluasi SPBE-V2</a>
                                             </td>
                                         </tr>
                                     </tbody>

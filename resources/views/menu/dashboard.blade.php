@@ -275,7 +275,7 @@
                                                 <hr style="margin-bottom: 30px; margin-top: 0px">
                                             </div>
                                             <div class="col-2" style="padding-left: 0px">
-                                                <p style="background-color: lightgrey; margin-bottom: 10px"></p>
+                                                <p style="background-color: lightgrey; margin-bottom: 10px">.</p>
                                                 <hr
                                                     style="border-top: 2px dashed black; margin-top: 0px; margin-bottom: 2px">
                                                 <p style="margin-bottom: 02px">:</p>

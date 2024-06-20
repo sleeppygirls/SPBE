@@ -24,4 +24,5 @@ jobs:
             ./vendor/bin/sail down
             git pull origin master
             composer install
+            npm install
             ./vendor/bin/sail up -d

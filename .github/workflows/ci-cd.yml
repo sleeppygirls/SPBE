@@ -37,6 +37,8 @@ jobs:
           send "cd $DEPLOY_PATH && git pull origin master && composer install --prefer-dist --no-progress --no-suggest && php artisan migrate --force && php artisan optimize\r"
           send "./vendor/bin/sail down\r"
           send "./vendor/bin/sail up -d\r"
+          send "ls -lia\r"
+          send "pwd\r"
           expect "$ "
           send "exit\r"
           expect eof

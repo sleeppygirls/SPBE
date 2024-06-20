@@ -23,7 +23,7 @@
                                         Penilaian <br> Mandiri</p>
                                 </div>
                                 <hr
-                                    style="height: 2px; width: 77px; background-color: lightgray; margin-left: 5px; margin-top: 39px; margin-right: 0px">
+                                    style="height: 2px; width: 75px; background-color: lightgray; margin-left: 5px; margin-top: 39px; margin-right: 0px">
                                 <div class="3">
                                     <i style="margin-left: 28px; color: white; height: 20px;width: 20px;border-radius: 50%;background-color: gray;"
                                         class="fas fa-circle-2 fa-fw unchecked-icon">2</i>
@@ -32,7 +32,7 @@
                                         Penilaian <br> Dokumen</p>
                                 </div>
                                 <hr
-                                    style="height: 2px; width: 77px; background-color: lightgray; margin-left: 5px; margin-top: 39px; margin-right: 0px">
+                                    style="height: 2px; width: 75px; background-color: lightgray; margin-left: 5px; margin-top: 39px; margin-right: 0px">
                                 <div class="3">
                                     <i style="margin-left: 28px; color: white; height: 20px;width: 20px;border-radius: 50%;background-color: gray;"
                                         class="fas fa-circle-2 fa-fw unchecked-icon">3</i>
@@ -41,7 +41,7 @@
                                         Penilaian <br> Interview</p>
                                 </div>
                                 <hr
-                                    style="height: 2px; width: 77px; background-color: lightgray; margin-left: 5px; margin-top: 39px; margin-right: 0px">
+                                    style="height: 2px; width: 75px; background-color: lightgray; margin-left: 5px; margin-top: 39px; margin-right: 0px">
                                 <div class="3">
                                     <i style="margin-left: 28px; color: white; height: 20px;width: 20px;border-radius: 50%;background-color: gray;"
                                         class="fas fa-circle-2 fa-fw unchecked-icon">4</i>
@@ -50,7 +50,7 @@
                                         Penilaian <br> Visitasi</p>
                                 </div>
                                 <hr
-                                    style="height: 2px; width: 77px; background-color: lightgray; margin-left: 5px; margin-top: 39px; margin-right: 0px">
+                                    style="height: 2px; width: 75px; background-color: lightgray; margin-left: 5px; margin-top: 39px; margin-right: 0px">
                                 <div class="5">
                                     <i style="margin-left: 30px; color: white; height: 20px;width: 20px;border-radius: 50%;background-color: gray;"
                                         class="fas fa-circle-2 fa-fw unchecked-icon">5</i>
@@ -59,7 +59,7 @@
                                         Harmonisasi </p>
                                 </div>
                                 <hr
-                                    style="height: 2px; width: 77px; background-color: lightgray; margin-left: 5px; margin-top: 39px; margin-right: 0px">
+                                    style="height: 2px; width: 75px; background-color: lightgray; margin-left: 5px; margin-top: 39px; margin-right: 0px">
                                 <div class="6">
                                     <i style="margin-left: 10px; color: white; height: 20px;width: 20px;border-radius: 50%;background-color: gray;"
                                         class="fas fa-circle-2 fa-fw unchecked-icon">6</i>
@@ -68,7 +68,7 @@
                                         Final </p>
                                 </div>
                                 <hr
-                                    style="height: 2px; width: 77px; background-color: lightgray; margin-left: 5px; margin-top: 39px; margin-right: 0px">
+                                    style="height: 2px; width: 75px; background-color: lightgray; margin-left: 5px; margin-top: 39px; margin-right: 0px">
                                 <div class="7">
                                     <i style="margin-left: 15px; color: white; height: 20px;width: 20px;border-radius: 50%;background-color: gray;"
                                         class="fas fa-circle-2 fa-fw unchecked-icon">7</i>

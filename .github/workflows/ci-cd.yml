@@ -34,7 +34,7 @@ jobs:
           expect "password:"
           send "$SERVER_PASSWORD\r"
           expect "$ "
-          send "cd $DEPLOY_PATH && git pull origin main && composer install --prefer-dist --no-progress --no-suggest && php artisan migrate --force && php artisan optimize\r"
+          send "cd $DEPLOY_PATH && git pull origin master && composer install --prefer-dist --no-progress --no-suggest && php artisan migrate --force && php artisan optimize\r"
           send "./vendor/bin/sail down\r"
           send "./vendor/bin/sail up -d\r"
           expect "$ "

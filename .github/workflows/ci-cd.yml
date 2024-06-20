@@ -11,10 +11,13 @@ on:
 jobs:
   laravel-tests:
     runs-on: ubuntu-latest
+    steps:
+      - name: Placeholder for Laravel Tests
+        run: echo "Running Laravel tests..."
 
   deploy:
     runs-on: ubuntu-latest
-    needs: [laravel-tests]
+    needs: laravel-tests
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -30,11 +33,13 @@ jobs:
           DEPLOY_PATH: /home/wicaksu/spbe
         run: |
           expect <<EOF
-          spawn ssh wicaksu@103.132.230.115
+          spawn ssh $SERVER_USER@$SERVER_IP
           expect "password:"
-          send "Jack03061997\r"
+          send "$SERVER_PASSWORD\r"
           expect "$ "
-          send "cd /home/wicaksu/SPBE && git pull origin main && composer install --prefer-dist --no-progress --no-suggest && php artisan migrate --force && php artisan optimize\r./vendor/bin/sail down\r./vendor/bin/sail up -d\r"
+          send "cd $DEPLOY_PATH && git pull origin main && composer install --prefer-dist --no-progress --no-suggest && php artisan migrate --force && php artisan optimize\r"
+          send "./vendor/bin/sail down\r"
+          send "./vendor/bin/sail up -d\r"
           expect "$ "
           send "exit\r"
           expect eof

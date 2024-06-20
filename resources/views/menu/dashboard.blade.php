@@ -232,7 +232,7 @@
                                         <p style="margin-bottom: 0px">Nama Instansi</p>
                                         <div class="row">
                                             <div class="col-10" style="padding-right: 0px">
-                                                <p style="background-color: lightgrey; margin-bottom: 10px">xfnjfgn</p>
+                                                <p style="background-color: lightgrey; margin-bottom: 10px"></p>
                                                 <hr
                                                     style="border-top: 2px dashed black; margin-top: 0px; margin-bottom: 2px">
                                                 <p style="margin-bottom: 2px">K/L/D</p>

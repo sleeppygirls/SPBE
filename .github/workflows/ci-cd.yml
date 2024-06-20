@@ -27,7 +27,7 @@ jobs:
           SERVER_USER: wicaksu
           SERVER_IP: 103.132.230.115
           SERVER_PASSWORD: Jack03061997
-          DEPLOY_PATH: /home/wicaksu/spbe
+          DEPLOY_PATH: /home/wicaksu/SPBE
         run: |
           expect <<EOF
           spawn ssh $SERVER_USER@$SERVER_IP

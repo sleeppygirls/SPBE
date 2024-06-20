@@ -70,8 +70,7 @@
                                                             </a>
                                                             <div id="collapseTwo" class="collapse" data-parent="#accordion"
                                                                 style="color: white">
-                                                                Lorem ipsum dolor sit amet, consectetuer adipiscing
-                                                                elit. Aenean commodo ligula eget dolor.
+                                                                Lorem ipsum dolor sit amet, consectetuer adipiscing.
                                                             </div>
                                                         </div>
                                                     </div>

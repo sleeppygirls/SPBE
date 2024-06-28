@@ -15,10 +15,9 @@ class DetailIndikator extends Model
     protected $keyType = 'string';              // merubah type data agar terpanggil
     protected $fillable = [                     // nama kolom yang dapat di edit
         'id',
-        'file',
         'username',
-        'id_indikator',
         'id_task',
+        'id_indikator',
         'capaian',
         'note',
     ];

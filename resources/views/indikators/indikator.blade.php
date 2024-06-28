@@ -129,10 +129,12 @@
                                 </div>
                             @endforeach
 
-                            @if (Auth::user()->level == 'user')
+                            @if (Auth::user()->level == 'user' && Auth::user()->submit == 0)
                                 <form action="{{ url('lihat/task') }}" method="post">
                                     @csrf
                                     <input type="hidden" name="id_task" value="{{ $task->id }}">
+                                    <input type="hidden" name="submitall" value="1">
+                                    <input type="hidden" name="validasi" value="{{ $selesai }}">
                                     <button class="btn btn-success"
                                         style="margin-left: 785px; margin-right: 75px; margin-top: 20px; margin-bottom: 10px"
                                         type="submit">

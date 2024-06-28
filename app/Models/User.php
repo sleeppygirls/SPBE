@@ -23,8 +23,10 @@ class User extends Authenticatable
         'username',
         'password',
         'level',
+        'submit',
         'nama_instansi',
         'pass_view',
+        'id_bagian',
     ];
 
     /**

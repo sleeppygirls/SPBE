@@ -43,7 +43,7 @@ use App\Models\Keterangan;
 */
 
 
-Route::get('/', [AuthController::class, 'dashboard'])->middleware('is.auth');
+// Route::get('/', [AuthController::class, 'dashboard'])->middleware('is.auth');
 
 Route::get('/test', function () {
     return view('test');
@@ -60,8 +60,12 @@ Route::middleware(['is.auth'])->group(function() {
 
     Route::get('logout', [AuthController::class, 'actionLogout']);
 
+    Route::get('/', [AuthController::class, 'dashboard']);
+    Route::post('/', [AuthController::class, 'dashboard']);
+
     Route::resource('penilaian', PenilaianController::class);
     Route::resource('task', TaskController::class);
+    Route::get('task/{task}/copy', [TaskController::class, 'copy']);
     Route::resource('domain', DomainController::class);
     Route::resource('aspek', AspekController::class);
     Route::resource('/indikator', IndikatorController::class);

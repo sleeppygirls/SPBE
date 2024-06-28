@@ -77,17 +77,22 @@
                                                             <div class="d-grid gap-2 col-6 mx-auto"
                                                                 style="margin-top: 35px;">
                                                                 @if (Auth::user()->level == 'user')
-                                                                    <button class="btn btn-primary" type="button"
-                                                                        style="margin-bottom: 10px;"><a
-                                                                            href="/task/{{ $item->id }}"
-                                                                            style="color: white">Kerjakan</a></button>
-                                                                    <form action="{{ url('lihat/task') }}" method="post">
-                                                                        @csrf
-                                                                        <input type="hidden" name="id_task"
-                                                                            value="{{ $item->id }}">
-                                                                        <button class="btn btn-primary"
-                                                                            type="submit">Lihat</button>
-                                                                    </form>
+                                                                    @if (Auth::user()->submit == 0)
+                                                                        <button class="btn btn-primary" type="button"
+                                                                            style="margin-bottom: 10px;"><a
+                                                                                href="/task/{{ $item->id }}"
+                                                                                style="color: white">Kerjakan</a></button>
+                                                                    @endif
+                                                                    @if (Auth::user()->submit == 1)
+                                                                        <form action="{{ url('lihat/task') }}"
+                                                                            method="post">
+                                                                            @csrf
+                                                                            <input type="hidden" name="id_task"
+                                                                                value="{{ $item->id }}">
+                                                                            <button class="btn btn-primary"
+                                                                                type="submit">Lihat</button>
+                                                                        </form>
+                                                                    @endif
                                                                 @else
                                                                     <form action="{{ url('indikator/task') }}"
                                                                         method="post">
@@ -158,4 +163,3 @@
         </div>
     </div>
 @endsection
-

@@ -24,7 +24,7 @@ class TaskController extends Controller
         // ->select(DB::raw('COUNT(bagians.id) as count'))
         // ->pluck('count')
         // ->first();
-        
+
         $tasks = DB::select("SELECT t.*,(SELECT count(*) FROM bagians as b WHERE b.id_task = t.id) as qty FROM tasks as t");
         // dd($tasks);
 
@@ -76,7 +76,7 @@ class TaskController extends Controller
         // Menggunakan json_decode untuk mengubah string JSON menjadi array
         $arrayData = json_decode($stringData, true);
 
-        if(count($arrayData) > 0) {
+        if (count($arrayData) > 0) {
 
             // Mengonversi array menjadi string yang dipisahkan oleh koma
             $commaSeparatedString = implode(", ", $arrayData);
@@ -101,13 +101,23 @@ class TaskController extends Controller
             );
         }
 
+        $totalkerjakan = count($indikators);
+
+        foreach ($indikators as $key => $item) {
+            if ($indikators[$key]->exist != NULL) {
+                $totalkerjakan--;
+            }
+        }
+
+        // dd($totalkerjakan);
         $task = Task::find($task->id);
 
         $data = [
             'indikator' => $indikators,
             "page" => "penilaian",
             'task' => $task,
-            'username' => $user->username
+            'username' => $user->username,
+            'selesai' => $totalkerjakan,
         ];
 
         // dd($data);
@@ -145,9 +155,31 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $task->delete();
-
+        $bagian = Bagian::where('id_task', '=', $task->id);
+        $bagian->delete();
+        
         return redirect('/task')->with([
             'mess' => 'Data Berhasil Dihapus',
         ]);
+    }
+
+    public function copy(Task $task)
+    {
+        $bagians = Bagian::where('id_task', '=', 1)->get();
+        $cekdata = Bagian::where('id_task', '=', $task->id)->first();
+        if ($cekdata) {
+            return back();
+        } else {
+            foreach ($bagians as $key => $value) {
+                $data = $value;
+                $data->id_task = $task->id;
+                $data->id = NULL;
+                $data = @json_decode(json_encode($data), true);
+                Bagian::create($data);
+            }
+            return redirect('/task')->with([
+                'mess' => 'Data Berhasil Dihapus',
+            ]);
+        }
     }
 }

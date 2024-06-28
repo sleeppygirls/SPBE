@@ -52,7 +52,7 @@
                                             <tbody>
                                                 @foreach ($indikators as $index => $indikator)
                                                     <tr>
-                                                        <td>{{ $index + 1 }}</td>
+                                                        <td>{{ $indikator->no }}</td>
                                                         <td>{{ $indikator->domainR->domain ?? 'N/A' }}</td>
                                                         <td>{{ $indikator->aspekR->aspek ?? 'N/A' }}</td>
                                                         <td>{{ $indikator->name }}</td>

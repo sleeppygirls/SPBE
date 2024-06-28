@@ -20,6 +20,7 @@ use App\Http\Requests\UpdateIndikatorRequest;
 use App\Models\Bagian;
 use App\Models\FileData;
 use App\Models\Keterangan;
+use Termwind\Components\Dd;
 
 class IndikatorController extends Controller
 {
@@ -61,6 +62,7 @@ class IndikatorController extends Controller
                 [$req->username],
             );
         }
+        // dd($indikators);
 
         $task = Task::find($req->id_task);
 

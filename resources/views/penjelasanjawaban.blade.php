@@ -155,21 +155,26 @@
                                                     <div style="margin-bottom: 50px" class="card">
                                                         <div class="row">
                                                             <div class="col-10">
-                                                                <p style="margin-top: 40px; padding-left: 45px; margin-bottom: 0px; font-weight: bold">
+                                                                <p
+                                                                    style="margin-top: 40px; padding-left: 45px; margin-bottom: 0px; font-weight: bold">
                                                                     Detail Penjelasan Indikator
                                                                 </p>
                                                             </div>
                                                         </div>
                                                         <div class="row" style="margin-top: 20px; margin-bottom: 20px">
-                                                            <table class="table" style="margin-left: 40px; margin-right: 40px; margin-bottom: 0px">
+                                                            <table class="table"
+                                                                style="margin-left: 40px; margin-right: 40px; margin-bottom: 0px">
                                                                 <tbody>
                                                                     <tr>
                                                                         <td style="width: 250px; color: grey">ID</td>
-                                                                        <td style="color: grey">{{ @$indikator->keterangan->id }}</td>
+                                                                        <td style="color: grey">
+                                                                            {{ @$indikator->keterangan->id }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td style="width: 250px; color: grey">Penjelasan</td>
-                                                                        <td style="color: grey">{{@$indikator->keterangan->name}}</td>
+                                                                        <td style="width: 250px; color: grey">Penjelasan
+                                                                        </td>
+                                                                        <td style="color: grey">
+                                                                            {{ @$indikator->keterangan->name }}</td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -207,7 +212,7 @@
                                                                     </a>
                                                                     <div id="collapse{{ $key + 1 }}"
                                                                         class="collapse" data-parent="#accordion">
-                                                                        <textarea class="teks" name="jawab-{{ $item->id }}" cols="71" rows="1"
+                                                                        <textarea class="teks" id="jawab-{{ $key }}" name="jawab-{{ $item->id }}" cols="71" rows="1"
                                                                             style="resize: none;border-top-color: white;border-right: white;border-left-color: white;"
                                                                             {{ Auth::user()->level == 'admin' ? 'readonly' : '' }}>{{ @$item->d_jawaban }}</textarea>
                                                                     </div>
@@ -224,6 +229,7 @@
                                                                             type="radio"
                                                                             id="customRadio{{ $key + 1 }}"
                                                                             name="pencapaian" value="{{ $key + 1 }}"
+                                                                            onchange="rubahCapaian({{ $key }})"
                                                                             {{ @$detail_indikator->capaian == $key + 1 ? 'checked' : '' }}
                                                                             {{ Auth::user()->level == 'admin' ? 'readonly' : '' }}>
                                                                     @else
@@ -351,3 +357,26 @@
         </script>
     @endif
 @endsection
+
+@section('js')
+    <script>
+        function rubahCapaian(id) {
+            console.log({
+                id
+            });
+
+            for(let i = 0; i < 5; i++) {
+                if(i > id) {
+                    document.getElementById("jawab-" + i).readOnly  = true;
+                    document.getElementById("jawab-" + i).value = '';
+                } else {
+
+                    document.getElementById("jawab-" + i).readOnly  = false;
+                }
+                
+            }
+            
+        }
+    </script>
+@endsection
+

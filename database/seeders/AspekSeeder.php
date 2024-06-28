@@ -16,41 +16,49 @@ class AspekSeeder extends Seeder
         $data = [
             [
                 'aspek' => 'Kebijakan Internal Tata Kelola SPBE',
+                'id_domain' => 1,
                 // 'bobot_a' => 1.30,
                 // 'bobot_aspeka' => 100.00,
             ],
             [
                 'aspek' => 'Perencanaan Strategis SPBE',
+                'id_domain' => 2,
                 // 'bobot_a' => 10.00,
                 // 'bobot_aspeka' => 40.00,
             ],
             [
                 'aspek' => 'Teknologi Informasi dan Komunikasi',
+                'id_domain' => 2,
                 // 'bobot_a' => 10.00,
                 // 'bobot_aspeka' => 40.00,
             ],
             [
                 'aspek' => 'Penyelenggara SPBE',
+                'id_domain' => 2,
                 // 'bobot_a' => 5.00,
                 // 'bobot_aspeka' => 20.00,
             ],
             [
                 'aspek' => 'Penerapan Manajemen SPBE',
+                'id_domain' => 3,
                 // 'bobot_a' => 12.00,
                 // 'bobot_aspeka' => 72.70,
             ],
             [
                 'aspek' => 'Audit TIK',
+                'id_domain' => 3,
                 // 'bobot_a' => 4.50,
                 // 'bobot_aspeka' => 27.30,
             ],
             [
                 'aspek' => 'Layanan Pemerintahan Berbasis Elektronik',
+                'id_domain' => 4,
                 // 'bobot_a' => 27.50,
                 // 'bobot_aspeka' => 60.40,
             ],
             [
                 'aspek' => 'Layanan Publik Berbasis Elektronik',
+                'id_domain' => 4,
                 // 'bobot_a' => 18.00,
                 // 'bobot_aspeka' => 39.60,
             ],

@@ -17,6 +17,7 @@ class Aspek extends Model
     protected $fillable = [                     // nama kolom yang dapat di edit
         'id',
         'aspek',
+        'id_domain',
         // 'bobot_a',
         // 'bobot_aspeka',
     ];

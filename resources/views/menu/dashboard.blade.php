@@ -84,74 +84,105 @@
                     <div style="padding-top: 5px;padding-left: 20px;padding-right: 20px;" class="col-12">
                         <div style="margin-bottom: 50px" class="card">
                             <div class="row">
-                                <div class="col-6 nav-item dropdown">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#exampleModal" style="margin-left: 40px; margin-top: 30px;">
-                                        Cari Dokumen
-                                    </button>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-scrollable">
-                                            <div class="modal-content">
-                                                {{-- <div class="modal-header">
+                                @if (Auth::user()->level == 'admin')
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#exampleModal" style="margin-left: 40px; margin-top: 30px;">
+                                            Cari Dokumen
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable">
+                                                <div class="modal-content">
+                                                    {{-- <div class="modal-header">
                                                     {{-- <h5 class="modal-title" id="exampleModalLabel">Cari Dokumen</h5> --}}
-                                                {{-- <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    {{-- <button type="button" class="btn btn-primary" data-toggle="modal"
                                                         data-target="#exampleModal">
                                                         Cari Dokumen</button> 
                                                     <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div> --}}
-                                                <div class="modal-body">
-                                                    @livewire('cari-dokumen')
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Close</button>
+                                                    <div class="modal-body">
+                                                        @livewire('cari-dokumen')
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <form action="/" method="post">
-                                        @csrf
-                                        <div class="row">
-                                            <div class="col-5">
-                                                <select class="form-control" name="tahun"
-                                                    style="margin-top: 20px; margin-left: 40px; margin-right: 30px; width: 220px">
-                                                    <option {{ $tahunini == '' ? 'selected' : '' }}>
-                                                        Pilih Tahun Evaluasi SPBE
-                                                    </option>
-                                                    @foreach ($data as $item)
-                                                        <option {{ $item->tahun == $tahunini ? 'selected' : '' }}>
-                                                            {{ $item->tahun }}
+                                    <div class="col-12">
+                                        <form action="/" method="post">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-4" style="padding-top: 20px; padding-left: 40px ">
+                                                    <select class="form-control" name="tahun">
+                                                        <option {{ $tahunini == '' ? 'selected' : '' }}>
+                                                            Pilih Tahun Evaluasi SPBE
                                                         </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-5">
-                                                <select class="form-control" name="user_id"
-                                                    style="margin-top: 20px; margin-left: 90px; margin-right: 30px; width: 500px">
-                                                    <option {{ $user_id == '' ? 'selected' : '' }}>
-                                                        Pilih User
-                                                    </option>
-                                                    @foreach ($users as $item)
-                                                        <option value="{{ $item->id }}"
-                                                            {{ $item->nama_instansi == $user_id ? 'selected' : '' }}>
-                                                            {{ $item->nama_instansi }}
+                                                        @foreach ($data as $item)
+                                                            <option value="{{ $item->id }}"
+                                                                {{ $item->id == $tahunini ? 'selected' : '' }}>
+                                                                {{ $item->tahun }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-7" style="padding-top: 20px; padding-left: 10px">
+                                                    <select class="form-control" name="user_id">
+                                                        <option {{ $user_id == '' ? 'selected' : '' }}>
+                                                            Pilih User
                                                         </option>
-                                                    @endforeach
-                                                </select>
+                                                        @foreach ($users as $item)
+                                                            <option value="{{ $item->id }}"
+                                                                {{ $item->id == $user_id ? 'selected' : '' }}>
+                                                                {{ $item->nama_instansi }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-1" style="padding-top: 20px; padding-right: 20px">
+                                                    <button type="submit" class="btn btn-success">
+                                                        Lihat
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div class="col-2">
-                                                <button type="submit" class="btn btn-success"
-                                                    style="margin-top: 20px; margin-left: 420px; margin-right: 30px">
-                                                    Lihat
-                                                </button>
+                                        </form>
+                                    </div>
+                                @else
+                                    <div class="col-12">
+                                        <form action="/" method="post">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <select class="form-control" name="tahun"
+                                                        style="margin-top: 50px; margin-left: 40px ">
+                                                        <option {{ $tahunini == '' ? 'selected' : '' }}>
+                                                            Pilih Tahun Evaluasi SPBE
+                                                        </option>
+                                                        @foreach ($data as $item)
+                                                            <option value="{{ $item->id }}"
+                                                                {{ $item->id == $tahunini ? 'selected' : '' }}>
+                                                                {{ $item->tahun }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-2">
+                                                    <button type="submit" class="btn btn-success"
+                                                        style="margin-top: 50px; margin-left: 100px">
+                                                        Lihat
+                                                    </button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
-                                </div>
+                                        </form>
+                                    </div>
+                                @endif
                                 {{-- <div class="row" style="margin-top: 30px; width: 450px">
                                     <div class="col-7 custom-control custom-radio"
                                         style="text-align: right; padding-right: 20px">
@@ -168,13 +199,14 @@
                                     </div>
                                 </div> --}}
                             </div>
+                            @foreach ($data as $item)
+                                @if ($item->id == $tahunini)
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table"
+                                                style="margin-left: 25px; color:gray; margin-bottom: 0px">
+                                                <tbody>
 
-                            <div class="row">
-                                <div class="col-11">
-                                    <table class="table" style="margin-left: 25px; color:gray; margin-bottom: 0px">
-                                        <tbody>
-                                            @foreach ($data as $item)
-                                                @if ($tahunini == $item->tahun)
                                                     <tr>
                                                         <td style="border-color: white">ID Form</td>
                                                         <td style="border-color: white">F2301</td>
@@ -191,203 +223,113 @@
                                                         <td>Deskripsi</td>
                                                         <td>Evaluasi SPBE {{ $item->tahun }}</td>
                                                     </tr>
-                                        </tbody>
-                                    </table>
-                                    <hr style="margin-top: 0px; margin-left: 25px; width: 895px">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-11">
-                                    <h5 style="font-weight: bold;margin-left: 35px;margin-top: 10px">Hasil Evaluasi
-                                        SPBE
-                                        {{ $item->tahun }}</h5>
-                                </div>
+
+                                                </tbody>
+                                            </table>
+                                            <hr style="margin-top: 0px; margin-left: 25px; width: 895px">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5 style="font-weight: bold;margin-left: 35px;margin-top: 10px">Hasil Evaluasi
+                                                SPBE
+                                                {{ $item->tahun }}</h5>
+                                        </div>
+                                    </div>
                                 @endif
-                                @endforeach
-                            </div>
+                            @endforeach
                             <div class="row" style="margin-left: 100px; margin-top: 30px; margin-bottom: -100px">
                                 <div class="col-11 margin-left: 100px; margin-top: 10px">
                                     @livewire('cart-dashboard')
                                 </div>
                             </div>
                             @if (Auth::user()->level == 'admin')
-                                {{-- <div class="row">
-                                    <div class="col-11">
-                                        <button id="user_pilih"
-                                            style="margin-top: 25px; background-color: brown; color: white; margin-left: 30px"
-                                            type="button" class="btn btn-default" data-toggle="modal"
-                                            data-target="#modal-xl">
-                                            Pilih User
-                                        </button>
-                                    </div>
-                                </div> --}}
                                 <div class="row">
                                     <div class="col-11">
-                                        <h5 style="font-weight: bold;margin-left: 35px;margin-top: 10px">Detail Penilaian
+                                        <h5 style="font-weight: bold;margin-left: 35px;margin-top: 10px">
+                                            Detail Penilaian
                                         </h5>
                                     </div>
                                 </div>
                                 <div class="row" style="margin-left: 28px; margin-right: 35px">
                                     <div class="col-12">
-                                        <p style="margin-bottom: 0px">Nama Instansi</p>
                                         <div class="row">
-                                            <div class="col-10" style="padding-right: 0px">
-                                                <p style="background-color: lightgrey; margin-bottom: 10px">-----</p>
-                                                <hr
-                                                    style="border-top: 2px dashed black; margin-top: 0px; margin-bottom: 2px">
-                                                <p style="margin-bottom: 2px">K/L/D</p>
-                                                <p
-                                                    style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 0px">
-                                                    Indeks
-                                                    SPBE</p>
-                                                <p style="background-color: lightgrey; margin-bottom: 10px">Predikat
-                                                    SPBE</p>
-                                                <p
-                                                    style="background-color: lightgrey; margin-bottom: 10px; border-top: 2px dashed black; margin-bottom: 2px">
-                                                    Domain Kebijakan SPBE</p>
-                                                <p style="margin-bottom: 2px">Kebijakan internal terkait Tata Kelola
-                                                    SPBE</p>
-                                                <p
-                                                    style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 2px">
-                                                    Domain
-                                                    Tata Kelola SPBE</p>
-                                                <p style="margin-bottom: 2px">Perencanaan Strategis SPBE</p>
-                                                <hr style="margin-bottom: 2px; margin-top: 0px">
-                                                <p style="margin-bottom: 2px">Teknologi Informasi dan Komunikasi</p>
-                                                <hr style="margin-bottom: 2px; margin-top: 0px">
-                                                <p style="margin-bottom: 2px">Penyelenggaraan SPBE</p>
-                                                <p
-                                                    style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 2px">
-                                                    Domain
-                                                    Manajemen SPBE</p>
-                                                <p style="margin-bottom: 2px">Penerapan Manajemen SPBE</p>
-                                                <hr style="margin-bottom: 2px; margin-top: 0px">
-                                                <p style="margin-bottom: 2px">Audit TIK</p>
-                                                <p
-                                                    style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 2px">
-                                                    Domain
-                                                    Layanan SPBE</p>
-                                                <p style="margin-bottom: 2px">Layanan Administrasi Pemerintahan
-                                                    Berbasis
-                                                    Elektronik</p>
-                                                <hr style="margin-bottom: 2px; margin-top: 0px">
-                                                <p style="margin-bottom: 2px">Layanan Publik Berbasis Elektronik</p>
-                                                <hr style="margin-bottom: 30px; margin-top: 0px">
-                                            </div>
-                                            <div class="col-2" style="padding-left: 0px">
-                                                <p style="background-color: lightgrey; margin-bottom: 10px">.</p>
-                                                <hr
-                                                    style="border-top: 2px dashed black; margin-top: 0px; margin-bottom: 2px">
-                                                <p style="margin-bottom: 02px">:</p>
-                                                <p
-                                                    style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 0px">
-                                                    :</p>
-                                                <p
-                                                    style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 0px">
-                                                    :</p>
-                                                <hr
-                                                    style="border-top: 2px dashed black; margin-top: 10px; margin-bottom: 0px">
-                                                <p
-                                                    style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 2px">
-                                                    :</p>
-                                                <p style="margin-bottom: 2px">:</p>
-                                                <p
-                                                    style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 0px">
-                                                    :</p>
-                                                <p style="margin-bottom: 10px; margin-bottom: 0px">:</p>
-                                                <hr style="margin-bottom: 0px; margin-top: 4px">
-                                                <p style="margin-bottom: 10px; margin-bottom: 0px; margin-top: 0px">:
-                                                </p>
-                                                <hr style="margin-bottom: 0px; margin-top: 4px">
-                                                <p style="margin-bottom: 10px; margin-bottom: 3px; margin-top: 1px">:
-                                                </p>
-                                                <p
-                                                    style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 0px">
-                                                    :</p>
-                                                <p style="margin-bottom: 10px; margin-bottom: 0px; margin-top: 0px">:
-                                                </p>
-                                                <hr style="margin-bottom: 0px; margin-top: 4px">
-                                                <p style="margin-bottom: 10px; margin-bottom: 4px; margin-top: 0px">:
-                                                </p>
-                                                <p
-                                                    style="background-color: lightgrey; margin-bottom: 10px; margin-bottom: 0px">
-                                                    :</p>
-                                                <p style="margin-bottom: 10px; margin-bottom: 0px; margin-top: 0px">:
-                                                </p>
-                                                <hr style="margin-bottom: 0px; margin-top: 4px">
-                                                <p style="margin-bottom: 10px; margin-bottom: 2px; margin-top: 2px">:
-                                                </p>
-                                                <hr style="margin-bottom: 0px; margin-top: 0px">
-                                            </div>
+                                            <table class="table" style="height: 10px">
+                                                @if (@$user->nama_instansi)
+                                                    <tr>
+                                                        <td>Nama Instansi</td>
+                                                        <td class="text-right">&nbsp; {{ @$user->nama_instansi }}</td>
+                                                    </tr>
+                                                @endif
+                                                <tr>
+                                                    <td style="background-color: lightgrey">
+                                                        {{ @$user->nama_instansi ? 'Indeks Akhir' : 'Indeks SPBE' }}</td>
+                                                    <td class="text-right" style="background-color: lightgrey">
+                                                        {{ @$hasil['index_SPBE'] ?? 0 }}</td>
+                                                </tr>
+                                                <tr>
+                                                    @if (@$user->nama_instansi)
+                                                    @else
+                                                        <td style="background-color: lightgrey">Predikat SPBE</td>
+                                                        <td class="text-right" style="background-color: lightgrey">
+                                                            @if (@$hasil['index_SPBE'] > 0)
+                                                                @if (@$hasil['index_SPBE'] >= 4.2 && @$hasil['index_SPBE'] < 5.0)
+                                                                    Memuaskan
+                                                                @elseif(@$hasil['index_SPBE'] >= 3.5 && @$hasil['index_SPBE'] < 4.2)
+                                                                    Sangat Baik
+                                                                @elseif(@$hasil['index_SPBE'] >= 2.6 && @$hasil['index_SPBE'] < 3.5)
+                                                                    Baik
+                                                                @elseif(@$hasil['index_SPBE'] >= 1.8 && @$hasil['index_SPBE'] < 2.6)
+                                                                    Cukup
+                                                                @elseif(@$hasil['index_SPBE'] < 1.8)
+                                                                    Kurang
+                                                                @endif
+                                                            @endif
+                                                        </td>
+                                                    @endif
+                                                </tr>
+                                                @foreach ($hasil_hitung_per_domain as $domain)
+                                                    <tr style="background-color: grey;">
+                                                        <td>{{ $domain->domain }}</td>
+                                                        <td class="text-right">{{ number_format($domain->nilai ?? 0, 2) }}
+                                                        </td>
+                                                    </tr>
+
+                                                    @foreach ($domain->aspeks as $aspek)
+                                                        <tr>
+                                                            <td>{{ $aspek->aspek }}</td>
+                                                            <td class="text-right">
+                                                                {{ number_format($aspek->nilai ?? 0, 2) }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endforeach
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="row" style="margin-left: 28px; margin-right: 35px">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <table class="table" style="height: 10px">
+                                                <tr>
+                                                    <td>Nama Instansi</td>
+                                                    <td class="text-right">&nbsp; {{ Auth::user()->nama_instansi }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="background-color: lightgrey">Indeks Akhir</td>
+                                                    <td class="text-right" style="background-color: lightgrey">
+                                                        {{ @$tahunini ? $indikators->total_index_akhir : 0 }}</td>
+                                                </tr>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             @endif
-                            {{-- <div class="row" style="margin-left: 25px; margin-right: 30px">
-                                <div class="col-12">
-                                    <table id="example2" class="table table-bordered table-hover">
-                                        <thead style="text-align: center">
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Indikator</th>
-                                                <th>Level</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    {{-- <div class="modal fade" id="modal-xl">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content" style="background-color: rgb(255, 195, 195)">
-                <div class="modal-header">
-                    <h4 class="modal-title">Daftar User</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <table class="table table-bordered" style="background-color: white">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Username</th>
-                                <th>Nama Instansi</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (@$user as $item)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->username }}</td>
-                                    <td>{{ $item->nama_instansi }}</td>
-                                    <td><button
-                                            onclick="pilih_user('{{ $item->id }}','{{ $item->username }}','{{ $item->nama_instansi }}')"
-                                            class="btn btn-primary" type="button">Pilih</button></td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
 @endsection

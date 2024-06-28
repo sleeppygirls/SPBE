@@ -22,4 +22,8 @@ class Domain extends Model
     public function indikator() {
         return $this->hasMany(Indikator::class);
     }
+
+    public function aspek() {
+        return $this->hasMany(Aspek::class, 'id_domain', 'id');
+    }
 }

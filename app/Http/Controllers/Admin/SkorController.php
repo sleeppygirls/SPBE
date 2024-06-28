@@ -43,10 +43,10 @@ class SkorController extends Controller
             foreach ($indikators as $indikator) {
                 $capaian = $indikator->detailIndikator->capaian ?? 0;
                 $indikator->index_akhir = ($indikator->bobot_aspek / 100) * $capaian;
+                $total_bobot_aspek = $indikators->sum('bobot_aspek');
                 $total_index_akhir = $indikators->sum('index_akhir') * $total_bobot_aspek;
                 $total_bobot = $indikators->sum('bobot');
                 $total_tk_final = $indikators->sum('index_akhir');
-                $total_bobot_aspek = $indikators->sum('bobot_aspek');
             }
 
             // Tambahkan total ke koleksi

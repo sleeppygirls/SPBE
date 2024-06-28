@@ -19,6 +19,15 @@ class LihatIndikatorController extends Controller
     public function task(Request $req)
     {
         $user = Auth::user();
+        if(@$req->validasi != 0){
+            return back();
+        }
+
+        if(@$req->submitall == 1){
+            DB::table('users')
+              ->where('id', Auth::user()->id)
+              ->update(['submit' => 1]);
+        };
 
         $bagian = Bagian::where('id_user', $user->id)->first();
 

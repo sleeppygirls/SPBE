@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('username', 190)->unique();
             $table->string('password');
             $table->enum('level', ['superadmin','admin','user']);
+            $table->integer('submit')->default(0);
             $table->string('nama_instansi')->nullable();
             $table->string('pass_view')->nullable();
             $table->integer('id_bagian')->nullable();

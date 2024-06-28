@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('detail_indikators', function (Blueprint $table) {
             $table->id();
-            $table->string('file')->nullable();
             $table->string('username')->nullable();
             $table->integer('id_task')->nullable();
             $table->string('id_indikator')->nullable();

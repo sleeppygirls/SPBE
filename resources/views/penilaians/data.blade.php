@@ -47,7 +47,7 @@
                                                                     {{$item->qty }}
                                                                 </div>
                                                                 <div class="col-2">
-                                                                    <a href="/task/{{ $item->id }}/edit">
+                                                                    <a href="/task/{{ $item->id }}/copy">
                                                                         <button type="button"
                                                                             class="btn btn-success btn-sm">
                                                                             <i class="far fa-copy"></i></button>

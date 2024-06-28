@@ -39,6 +39,8 @@
     </div>
     <!-- ./wrapper -->
 
+    @yield('js')
+
 </body>
 
 </html>

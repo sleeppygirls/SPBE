@@ -17,8 +17,8 @@ class Jawaban extends Model
         'id',
         'd_jawaban',
         'id_penjelasan',
+        'id_task',
         'username',
         'id_indikator',
-        'id_task'
     ];
 }

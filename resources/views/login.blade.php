@@ -39,7 +39,7 @@
                 <form action="/login" class="login100-form validate-form" method="POST">
                     @csrf
                     <span class="login100-form-logo" style="height: 90px; width:90px">
-                        <img style="height: 60px; width:60" src="/asset/logoloading.png" alt="logo garuda">
+                        <img style="height: 60px; width:60" src="/asset/logologin.png" alt="logo kabupaten madiun">
                     </span>
 
                     <span class="login100-form-title p-b-10 p-t-15">

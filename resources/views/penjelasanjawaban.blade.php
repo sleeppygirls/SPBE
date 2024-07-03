@@ -185,6 +185,27 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="col-12">
+                                            @if (@session('mess'))
+                                                <div class="card card-default">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title" style="color: #ad323a; font-weight: ">{{ session('mess') }}</h3>
+                                                        <div class="card-tools">
+                                                            <button type="button" class="btn btn-tool"
+                                                                data-card-widget="collapse">
+                                                                <i class="fas fa-minus"></i>
+                                                            </button>
+                                                            <button type="button" class="btn btn-tool"
+                                                                data-card-widget="remove">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-11">
                                             <table class="table table-sm" style="margin-left: 40px; margin-bottom: 0px">
                                                 <thead>
@@ -199,6 +220,7 @@
                                                         value="{{ $indikator->id }}">
                                                     <input type="hidden" name="id_task" id="id_task"
                                                         value="{{ $task->id }}">
+                                                    {{-- @dd($data); --}}
                                                     @foreach ($data as $key => $item)
                                                         <tr>
                                                             <td style="padding-left: 25px">{{ $key + 1 }}</td>
@@ -212,8 +234,8 @@
                                                                     </a>
                                                                     <div id="collapse{{ $key + 1 }}"
                                                                         class="collapse" data-parent="#accordion">
-                                                                        <textarea class="teks" id="jawab-{{ $key }}" name="jawab-{{ $item->id }}" cols="71" rows="1"
-                                                                            style="resize: none;border-top-color: white;border-right: white;border-left-color: white;"
+                                                                        <textarea class="teks" id="jawab-{{ $key }}" name="jawab-{{ $item->id }}" cols="71"
+                                                                            rows="1" style="resize: none;border-top-color: white;border-right: white;border-left-color: white;"
                                                                             {{ Auth::user()->level == 'admin' ? 'readonly' : '' }}>{{ @$item->d_jawaban }}</textarea>
                                                                     </div>
                                                                 </div>
@@ -365,18 +387,17 @@
                 id
             });
 
-            for(let i = 0; i < 5; i++) {
-                if(i > id) {
-                    document.getElementById("jawab-" + i).readOnly  = true;
+            for (let i = 0; i < 5; i++) {
+                if (i > id) {
+                    document.getElementById("jawab-" + i).readOnly = true;
                     document.getElementById("jawab-" + i).value = '';
                 } else {
 
-                    document.getElementById("jawab-" + i).readOnly  = false;
+                    document.getElementById("jawab-" + i).readOnly = false;
                 }
-                
+
             }
-            
+
         }
     </script>
 @endsection
-

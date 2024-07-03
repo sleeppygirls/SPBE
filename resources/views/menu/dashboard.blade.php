@@ -122,7 +122,7 @@
                                             <div class="row">
                                                 <div class="col-4" style="padding-top: 20px; padding-left: 40px ">
                                                     <select class="form-control" name="tahun">
-                                                        <option {{ $tahunini == '' ? 'selected' : '' }}>
+                                                        <option {{ $tahunini == '' ? 'selected' : '' }} value="kosong">
                                                             Pilih Tahun Evaluasi SPBE
                                                         </option>
                                                         @foreach ($data as $item)
@@ -243,88 +243,126 @@
                                     @livewire('cart-dashboard')
                                 </div>
                             </div>
-                            @if (Auth::user()->level == 'admin')
-                                <div class="row">
-                                    <div class="col-11">
-                                        <h5 style="font-weight: bold;margin-left: 35px;margin-top: 10px">
-                                            Detail Penilaian
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="row" style="margin-left: 28px; margin-right: 35px">
-                                    <div class="col-12">
+                            @if (@$tahunini)
+                                @if (@$tahunini != 'Pilih Tahun Evaluasi SPBE')
+                                    @if (Auth::user()->level == 'admin')
                                         <div class="row">
-                                            <table class="table" style="height: 10px">
-                                                @if (@$user->nama_instansi)
-                                                    <tr>
-                                                        <td>Nama Instansi</td>
-                                                        <td class="text-right">&nbsp; {{ @$user->nama_instansi }}</td>
-                                                    </tr>
-                                                @endif
-                                                <tr>
-                                                    <td style="background-color: lightgrey">
-                                                        {{ @$user->nama_instansi ? 'Indeks Akhir' : 'Indeks SPBE' }}</td>
-                                                    <td class="text-right" style="background-color: lightgrey">
-                                                        {{ @$hasil['index_SPBE'] ?? 0 }}</td>
-                                                </tr>
-                                                <tr>
-                                                    @if (@$user->nama_instansi)
-                                                    @else
-                                                        <td style="background-color: lightgrey">Predikat SPBE</td>
-                                                        <td class="text-right" style="background-color: lightgrey">
-                                                            @if (@$hasil['index_SPBE'] > 0)
-                                                                @if (@$hasil['index_SPBE'] >= 4.2 && @$hasil['index_SPBE'] < 5.0)
-                                                                    Memuaskan
-                                                                @elseif(@$hasil['index_SPBE'] >= 3.5 && @$hasil['index_SPBE'] < 4.2)
-                                                                    Sangat Baik
-                                                                @elseif(@$hasil['index_SPBE'] >= 2.6 && @$hasil['index_SPBE'] < 3.5)
-                                                                    Baik
-                                                                @elseif(@$hasil['index_SPBE'] >= 1.8 && @$hasil['index_SPBE'] < 2.6)
-                                                                    Cukup
-                                                                @elseif(@$hasil['index_SPBE'] < 1.8)
-                                                                    Kurang
-                                                                @endif
-                                                            @endif
-                                                        </td>
-                                                    @endif
-                                                </tr>
-                                                @foreach ($hasil_hitung_per_domain as $domain)
-                                                    <tr style="background-color: grey;">
-                                                        <td>{{ $domain->domain }}</td>
-                                                        <td class="text-right">{{ number_format($domain->nilai ?? 0, 2) }}
-                                                        </td>
-                                                    </tr>
-
-                                                    @foreach ($domain->aspeks as $aspek)
+                                            <div class="col-11">
+                                                <h5 style="font-weight: bold;margin-left: 35px;margin-top: 10px">
+                                                    Detail Penilaian
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-left: 28px; margin-right: 35px">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <table class="table" style="height: 10px">
                                                         <tr>
-                                                            <td>{{ $aspek->aspek }}</td>
-                                                            <td class="text-right">
-                                                                {{ number_format($aspek->nilai ?? 0, 2) }}</td>
+                                                            <td>Nama Instansi</td>
+                                                            <td class="text-right">&nbsp; {{ @$user->nama_instansi }}</td>
                                                         </tr>
-                                                    @endforeach
-                                                @endforeach
-                                            </table>
+                                                        <tr>
+                                                            <td style="background-color: lightgrey">
+                                                                Indeks SPBE</td>
+                                                            <td class="text-right" style="background-color: lightgrey">
+                                                                {{ number_format(@$nilai_index_SPBE ?? 0, 2) }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="background-color: lightgrey">Predikat SPBE</td>
+                                                            <td class="text-right" style="background-color: lightgrey">
+                                                                @if (@$nilai_index_SPBE > 0)
+                                                                    @if (@$nilai_index_SPBE >= 4.2)
+                                                                        Memuaskan
+                                                                    @elseif(@$nilai_index_SPBE >= 3.5)
+                                                                        Sangat Baik
+                                                                    @elseif(@$nilai_index_SPBE >= 2.6)
+                                                                        Baik
+                                                                    @elseif(@$nilai_index_SPBE >= 1.8)
+                                                                        Cukup
+                                                                    @elseif(@$nilai_index_SPBE < 1.8)
+                                                                        Kurang
+                                                                    @endif
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                        {{-- @dd($index_domain); --}}
+                                                        @foreach ($index_domain as $domain)
+                                                            <tr style="background-color: grey;">
+                                                                <td>{{ $domain->domain }}</td>
+                                                                <td class="text-right">
+                                                                    {{ number_format($domain->bobot ?? 0, 2) }}
+                                                                </td>
+                                                            </tr>
+
+                                                            @foreach ($domain->aspeks as $aspek)
+                                                                <tr>
+                                                                    <td>{{ $aspek->aspek }}</td>
+                                                                    <td class="text-right">
+                                                                        {{ number_format($aspek->bobot ?? 0, 2) }}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        @endforeach
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            @else
-                                <div class="row" style="margin-left: 28px; margin-right: 35px">
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <table class="table" style="height: 10px">
-                                                <tr>
-                                                    <td>Nama Instansi</td>
-                                                    <td class="text-right">&nbsp; {{ Auth::user()->nama_instansi }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background-color: lightgrey">Indeks Akhir</td>
-                                                    <td class="text-right" style="background-color: lightgrey">
-                                                        {{ @$tahunini ? $indikators->total_index_akhir : 0 }}</td>
-                                                </tr>
-                                            </table>
+                                    @else
+                                        <div class="row" style="margin-left: 28px; margin-right: 35px">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <table class="table" style="height: 10px">
+                                                        <tr>
+                                                            <td>Nama Instansi</td>
+                                                            <td class="text-right">&nbsp;
+                                                                {{ Auth::user()->nama_instansi }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="background-color: lightgrey">
+                                                                Indeks SPBE</td>
+                                                            <td class="text-right" style="background-color: lightgrey">
+                                                                {{ number_format(@$nilai_index_SPBE ?? 0, 2) }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="background-color: lightgrey">Predikat SPBE</td>
+                                                            <td class="text-right" style="background-color: lightgrey">
+                                                                @if (@$nilai_index_SPBE > 0)
+                                                                    @if (@$nilai_index_SPBE >= 4.2)
+                                                                        Memuaskan
+                                                                    @elseif(@$nilai_index_SPBE >= 3.5)
+                                                                        Sangat Baik
+                                                                    @elseif(@$nilai_index_SPBE >= 2.6)
+                                                                        Baik
+                                                                    @elseif(@$nilai_index_SPBE >= 1.8)
+                                                                        Cukup
+                                                                    @elseif(@$nilai_index_SPBE < 1.8)
+                                                                        Kurang
+                                                                    @endif
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                        @foreach ($index_domain as $domain)
+                                                            <tr style="background-color: grey;">
+                                                                <td>{{ $domain->domain }}</td>
+                                                                <td class="text-right">
+                                                                    {{ number_format($domain->nilai ?? 0, 2) }}
+                                                                </td>
+                                                            </tr>
+
+                                                            @foreach ($domain->aspeks as $aspek)
+                                                                <tr>
+                                                                    <td>{{ $aspek->aspek }}</td>
+                                                                    <td class="text-right">
+                                                                        {{ number_format($aspek->nilai ?? 0, 2) }}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        @endforeach
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    @endif
+                                @endif
                             @endif
                         </div>
                     </div>

@@ -149,6 +149,7 @@ class IndikatorController extends Controller
             ->get()
             ->toArray();
 
+        // dd($jawabans);
         $data = [
             'indikator' => $indikator,
             'page' => 'penilaian',

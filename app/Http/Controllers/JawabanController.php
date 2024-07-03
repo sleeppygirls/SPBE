@@ -38,7 +38,18 @@ class JawabanController extends Controller
      */
     public function store(StoreJawabanRequest $req)
     {
-        // dd($req);
+        $penjelasans = Penjelasan::where('id_indikator', '=', $req->id_indikator)->get();
+        $jumlahjawab = $req->pencapaian;
+        foreach ($penjelasans as $key => $penjelasan) {
+            if ($req->input('jawab-' . $penjelasan->id)) {
+                $jumlahjawab--;
+            }
+        }
+        if ($jumlahjawab!=0) {
+            return back()->with([
+                'mess' => 'Maaf Jawaban Harus Diisi',
+            ]);
+        }
 
         $username = $req->username;
 
@@ -53,8 +64,6 @@ class JawabanController extends Controller
                 'note' => @$req->catatan,
             ],
         );
-
-        $penjelasans = Penjelasan::where('id_indikator', '=', $req->id_indikator)->get();
 
         // dd($penjelasans->all());
 

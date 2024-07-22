@@ -235,7 +235,7 @@
                                                                     <div id="collapse{{ $key + 1 }}"
                                                                         class="collapse" data-parent="#accordion">
                                                                         <textarea class="teks" id="jawab-{{ $key }}" name="jawab-{{ $item->id }}" cols="71"
-                                                                            rows="1" style="resize: none;border-top-color: white;border-right: white;border-left-color: white;"
+                                                                            rows="10" style="border-top-color: white;border-right: white;border-left-color: white; color: rgb(26, 255, 0);"
                                                                             {{ Auth::user()->level == 'admin' ? 'readonly' : '' }}>{{ @$item->d_jawaban }}</textarea>
                                                                     </div>
                                                                 </div>
@@ -275,13 +275,6 @@
                                         </div>
                                     </div>
                                     <hr style="margin-left: 35px; margin-right: 35px; margin-bottom: 0px; margin-top: 0px">
-                                    <div class="row" style="margin-bottom: 30px">
-                                        <div class="col-sm-12 col-md-5" style="padding-top: 5px;">
-                                            <div class="dataTables_info" id="example2_info" role="status"
-                                                aria-live="polite" style="text-align: center; padding-right: 110px">
-                                                Showing 1 to 5 of 5 entries</div>
-                                        </div>
-                                    </div>
                                     <div class="row" style="margin-left: 40px;">
                                         <div class="col-11">
                                             <p style="margin-bottom: 5px; color: lightgrey;">
@@ -322,7 +315,7 @@
                                             <div class="callout callout-danger"
                                                 style="margin-top: 40px; margin-bottom: 40px; padding-bottom: 5px; padding-top: 5px">
                                                 <h5>Catatan</h5>
-                                                <textarea name="catatan" id="catatan" cols="107" rows="3" style="resize: none">{{ @$detail_indikator->note }}</textarea>
+                                                <textarea name="catatan" id="catatan" cols="107" rows="5" style="resize: none">{{ @$detail_indikator->note }}</textarea>
                                             </div>
                                         @else
                                             <div class="callout callout-danger"

@@ -39,26 +39,31 @@ class DocumentUpload extends Component
     {
         $this->isUploading = true;
         $this->validate([
-            'newDocument' => 'required|mimes:pdf|max:102400 ',
+            'newDocument' => 'required|mimes:pdf|max:1073741824', // 1 GB = 1073741824 bytes
             'newDocumentName' => 'required|string|max:255',
         ]);
 
-        $path = $this->newDocument->store('public/documents');
+        try {
+            $path = $this->newDocument->storeAs('public/documents', $this->newDocument->getClientOriginalName(), 'local', ['visibility' => 'public', 'chunkSize' => 1024 * 1024 * 5]); // 5 MB chunk size
 
-        FileData::create([
-            'id_indikator' => $this->id_indikator,
-            'id_task' => $this->id_task,
-            'id_user' => Auth::id(),
-            'name' => $this->newDocumentName,
-            'files' => json_encode([['name' => $this->newDocumentName, 'path' => $path]]),
-        ]);
+            FileData::create([
+                'id_indikator' => $this->id_indikator,
+                'id_task' => $this->id_task,
+                'id_user' => Auth::id(),
+                'name' => $this->newDocumentName,
+                'files' => json_encode([['name' => $this->newDocumentName, 'path' => $path]]),
+            ]);
 
-        $this->loadDocuments();
+            $this->loadDocuments();
 
-        $this->newDocument = null;
-        $this->newDocumentName = null;
+            $this->newDocument = null;
+            $this->newDocumentName = null;
+            session()->flash('message', 'Document berhasil diupload!');
+        } catch (\Throwable $th) {
+            session()->flash('message', 'Document gagal diupload!');
+        }
+
         $this->isUploading = false;
-        session()->flash('message', 'Document successfully uploaded!');
     }
 
     public function removeDocument($id)

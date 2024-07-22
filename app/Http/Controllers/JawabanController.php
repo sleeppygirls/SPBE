@@ -38,50 +38,56 @@ class JawabanController extends Controller
      */
     public function store(StoreJawabanRequest $req)
     {
-        $penjelasans = Penjelasan::where('id_indikator', '=', $req->id_indikator)->get();
-        $jumlahjawab = $req->pencapaian;
-        foreach ($penjelasans as $key => $penjelasan) {
-            if ($req->input('jawab-' . $penjelasan->id)) {
-                $jumlahjawab--;
+        try {
+            $penjelasans = Penjelasan::where('id_indikator', '=', $req->id_indikator)->get();
+            $jumlahjawab = $req->pencapaian;
+            foreach ($penjelasans as $key => $penjelasan) {
+                if ($req->input('jawab-' . $penjelasan->id)) {
+                    $jumlahjawab--;
+                }
             }
-        }
-        if ($jumlahjawab!=0) {
-            return back()->with([
-                'mess' => 'Maaf Jawaban Harus Diisi',
-            ]);
-        }
+            // if ($jumlahjawab < 1) {
+            //     return back()->with([
+            //         'mess' => 'Maaf Jawaban Harus Diisi',
+            //     ]);
+            // }
 
-        $username = $req->username;
+            $username = $req->username;
 
-        DetailIndikator::updateOrCreate(
-            [
-                'id_indikator' => $req->input('id_indikator'),
-                'username' => $username,
-                'id_task' => $req->input('id_task'),
-            ],
-            [
-                'capaian' => $req->pencapaian,
-                'note' => @$req->catatan,
-            ],
-        );
-
-        // dd($penjelasans->all());
-
-        foreach ($penjelasans as $key => $penjelasan) {
-            Jawaban::updateOrCreate(
+            DetailIndikator::updateOrCreate(
                 [
-                    'id_penjelasan' => $penjelasan->id,
+                    'id_indikator' => $req->input('id_indikator'),
                     'username' => $username,
-                    'id_indikator' => $req->id_indikator,
                     'id_task' => $req->input('id_task'),
                 ],
                 [
-                    'd_jawaban' => $req->input('jawab-' . $penjelasan->id),
+                    'capaian' => $req->pencapaian,
+                    'note' => @$req->catatan,
                 ],
             );
-        }
 
-        return redirect('/task/'.$req->id_task);
+            // dd($penjelasans->all());
+
+            foreach ($penjelasans as $key => $penjelasan) {
+                Jawaban::updateOrCreate(
+                    [
+                        'id_penjelasan' => $penjelasan->id,
+                        'username' => $username,
+                        'id_indikator' => $req->id_indikator,
+                        'id_task' => $req->input('id_task'),
+                    ],
+                    [
+                        'd_jawaban' => $req->input('jawab-' . $penjelasan->id),
+                    ],
+                );
+            }
+
+            return redirect('/task/'.$req->id_task);
+        } catch (\Throwable $th) {
+            return back()->with([
+                'mess' => 'Terjadi kesalahan ketika menyimpan jawaban, pastikan jawaban sudah terisi',
+            ]);
+        }
     }
 
     /**

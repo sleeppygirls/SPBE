@@ -39,7 +39,7 @@ class DocumentUpload extends Component
     {
         $this->isUploading = true;
         $this->validate([
-            'newDocument' => 'required|mimes:pdf|max:1073741824', // 1 GB = 1073741824 bytes
+            'newDocument' => 'required|mimes:pdf',
             'newDocumentName' => 'required|string|max:255',
         ]);
 

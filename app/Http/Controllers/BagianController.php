@@ -47,7 +47,7 @@ class BagianController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreBagianRequest $request, User $user)
-    { 
+    {
 
         // dd($user);
         // Mengambil semua data indikator dari database

@@ -19,6 +19,7 @@ class DocumentUpload extends Component
     public $documents = [];
     public $isUploading = false;
 
+
     public function mount($id_indikator, $id_task)
     {
         $this->id_indikator = $id_indikator;

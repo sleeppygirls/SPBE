@@ -235,7 +235,7 @@
                                                                     <div id="collapse{{ $key + 1 }}"
                                                                         class="collapse" data-parent="#accordion">
                                                                         <textarea class="teks" id="jawab-{{ $key }}" name="jawab-{{ $item->id }}" cols="71"
-                                                                            rows="10" style="border-top-color: white;border-right: white;border-left-color: white; color: rgb(26, 255, 0);"
+                                                                            rows="10" style="border-top-color: white;border-right: white;border-left-color: white; color: rgb(64, 64, 64);"
                                                                             {{ Auth::user()->level == 'admin' ? 'readonly' : '' }}>{{ @$item->d_jawaban }}</textarea>
                                                                     </div>
                                                                 </div>

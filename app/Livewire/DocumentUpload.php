@@ -14,8 +14,7 @@ class DocumentUpload extends Component
 
     public $id_indikator;
     public $id_task;
-    public $newDocument;
-    public $newDocumentName;
+    public $newDocuments = [];
     public $documents = [];
     public $isUploading = false;
 
@@ -36,31 +35,32 @@ class DocumentUpload extends Component
                                    ->toArray();
     }
 
-    public function addDocument()
+    public function addDocuments()
     {
         $this->isUploading = true;
         $this->validate([
-            'newDocument' => 'required|mimes:pdf',
+            'newDocuments.*' => 'required|mimes:pdf',
         ]);
 
         try {
-            $originalName = $this->newDocument->getClientOriginalName();
-            $this->newDocumentName = pathinfo($originalName, PATHINFO_FILENAME);
+            foreach ($this->newDocuments as $newDocument) {
+                $originalName = $newDocument->getClientOriginalName();
+                $newDocumentName = pathinfo($originalName, PATHINFO_FILENAME);
 
-            $path = $this->newDocument->storeAs('public/documents', $originalName, 'local', ['visibility' => 'public']);
+                $path = $newDocument->storeAs('public/documents', $originalName, 'local', ['visibility' => 'public']);
 
-            FileData::create([
-                'id_indikator' => $this->id_indikator,
-                'id_task' => $this->id_task,
-                'id_user' => Auth::id(),
-                'name' => $this->newDocumentName,
-                'files' => json_encode([['name' => $this->newDocumentName, 'path' => $path]]),
-            ]);
+                FileData::create([
+                    'id_indikator' => $this->id_indikator,
+                    'id_task' => $this->id_task,
+                    'id_user' => Auth::id(),
+                    'name' => $newDocumentName,
+                    'files' => json_encode([['name' => $newDocumentName, 'path' => $path]]),
+                ]);
+            }
 
             $this->loadDocuments();
 
-            $this->newDocument = null;
-            $this->newDocumentName = null;
+            $this->newDocuments = [];
             session()->flash('message', 'Dokumen berhasil diunggah!');
         } catch (\Throwable $th) {
             session()->flash('message', 'Dokumen gagal diunggah!');

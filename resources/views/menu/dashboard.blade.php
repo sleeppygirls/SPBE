@@ -257,10 +257,13 @@
                                             <div class="col-12">
                                                 <div class="row">
                                                     <table class="table" style="height: 10px">
-                                                        <tr>
-                                                            <td>Nama Instansi</td>
-                                                            <td class="text-right">&nbsp; {{ @$user->nama_instansi }}</td>
-                                                        </tr>
+                                                        @if (@$user->nama_instansi)
+                                                            <tr>
+                                                                <td>Nama Instansi</td>
+                                                                <td class="text-right">&nbsp; {{ @$user->nama_instansi }}
+                                                                </td>
+                                                            </tr>
+                                                        @endif
                                                         <tr>
                                                             <td style="background-color: lightgrey">
                                                                 Indeks SPBE</td>
@@ -286,7 +289,7 @@
                                                             </td>
                                                         </tr>
                                                         {{-- @dd($index_domain); --}}
-                                                        @foreach ($index_domain as $domain)
+                                                        @foreach ($bobot_domain_asli as $domain)
                                                             <tr style="background-color: grey;">
                                                                 <td>{{ $domain->domain }}</td>
                                                                 <td class="text-right">
@@ -341,11 +344,11 @@
                                                                 @endif
                                                             </td>
                                                         </tr>
-                                                        @foreach ($index_domain as $domain)
+                                                        @foreach ($bobot_domain_asli as $domain)
                                                             <tr style="background-color: grey;">
                                                                 <td>{{ $domain->domain }}</td>
                                                                 <td class="text-right">
-                                                                    {{ number_format($domain->nilai ?? 0, 2) }}
+                                                                    {{ number_format($domain->bobot ?? 0, 2) }}
                                                                 </td>
                                                             </tr>
 
@@ -353,7 +356,7 @@
                                                                 <tr>
                                                                     <td>{{ $aspek->aspek }}</td>
                                                                     <td class="text-right">
-                                                                        {{ number_format($aspek->nilai ?? 0, 2) }}</td>
+                                                                        {{ number_format($aspek->bobot ?? 0, 2) }}</td>
                                                                 </tr>
                                                             @endforeach
                                                         @endforeach

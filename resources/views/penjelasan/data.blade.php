@@ -8,8 +8,7 @@
             <div class="container-fluid back">
                 <div class="row">
                     <div class="col-sm-12 mt-3">
-                        <h1 style="color: rgb(255, 252, 224); padding-left: 11px" class="m-0 dashboard fw-bold">Daftar
-                            Penjelasan
+                        <h1 style="color: rgb(255, 252, 224); padding-left: 11px" class="m-0 dashboard fw-bold">Detail
                         </h1>
                     </div>
                     <div style="padding-left: 20px;padding-right: 20px;" class="col-12">

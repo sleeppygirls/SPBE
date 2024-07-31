@@ -16,8 +16,6 @@ class UserController extends Controller
     {
         $user = User::with('bagian')->get();
 
-        // dd($user);
-
         $data = [
             'data' => $user,
             "page" => "user",

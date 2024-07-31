@@ -313,6 +313,7 @@ class AuthController extends Controller
         // query
         $bagian = Bagian::where('id_user', $user_id)->first();
         $domains = Domain::with(['aspek'])->get();
+        $aspeks = Aspek::all();
 
         // default data
         $indikators = collect();
@@ -325,6 +326,38 @@ class AuthController extends Controller
             'index_SPBE' => collect([]),
         ]);
 
+        foreach ($domains as $key => $value) {
+            $hasil['index_domain'][$key] = (object)[];
+        }
+        foreach ($aspeks as $key => $value) {
+            $hasil['index_aspek'][$key] = (object)[];
+        }
+        $hasil['index_SPBE'][0] = (object)[];
+        $hasil['index_SPBE'][0]->bobot = 0;
+        $hasil['index_SPBE'][0]->jumlah = 0;
+        $hasil['index_SPBE'][0]->nilai = 0;
+        // dd($hasil);
+
+        $bobot_domain_asli = collect(
+            DB::select(
+                "SELECT d.id, d.domain, SUM(bobot) bobot  FROM domains d INNER JOIN indikators i ON d.id = i.domain GROUP BY d.id, d.domain",
+            )
+        );
+
+        $bobot_aspek_asli = collect(
+            DB::select(
+                "SELECT a.id, a.aspek, SUM(bobot) bobot, id_domain  FROM aspeks a INNER JOIN indikators i ON a.id = i.aspek GROUP BY a.id, a.aspek, id_domain",
+            )
+        );
+
+        foreach ($bobot_domain_asli as $domain) {
+            $domain->aspeks = $bobot_aspek_asli->filter(function ($a) use ($domain) {
+                return $a->id_domain == $domain->id;
+            });
+        }
+
+        // dd($bobot_domain_asli);
+
 
         if (Auth::user()->level == 'admin') {
             if ($bagian) {
@@ -332,21 +365,82 @@ class AuthController extends Controller
 
                 $username = $user->username;
 
+
                 $index_aspek_collect = collect(
                     DB::select(
-                        "SELECT i.domain id_domain, d.domain, i.aspek id_aspek, a.aspek, SUM(bobot) bobot, sum(i.bobot * di.capaian) jumlah, 1 / SUM(bobot) * sum(i.bobot * di.capaian) AS nilai FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id INNER JOIN aspeks a ON a.id = i.aspek INNER JOIN domains d ON d.id = i.domain WHERE username = ? AND di.id_task = ? GROUP BY i.aspek, i.domain, d.domain, a.aspek",
-                        [$username, $tahunini]
+                        "SELECT 
+                        i.domain id_domain, 
+                        d.domain, 
+                        i.aspek id_aspek, 
+                        a.aspek, 
+                        COALESCE(SUM(i.bobot), 0) AS bobot,
+                        COALESCE(SUM(i.bobot * i.capaian), 0) AS jumlah,
+                        CASE WHEN SUM(i.bobot) = 0 THEN 0 ELSE 1 / SUM(i.bobot) * SUM(i.bobot * COALESCE(i.capaian, 0)) END AS nilai
+                        FROM 
+                        aspeks a
+                        INNER JOIN domains d ON a.id_domain = d.id
+                        LEFT JOIN (
+                            SELECT i.id, i.aspek, i.domain , di.capaian, CASE WHEN di.capaian IS NULL THEN 0 ELSE SUM(bobot) END AS bobot
+                            FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id AND di.id_task = ? AND username = ?
+                            GROUP BY i.id, i.aspek, i.domain , di.capaian
+                        )
+                        i ON a.id = i.aspek AND d.id = i.domain
+                        GROUP BY 
+                        i.aspek, i.domain, d.domain, a.aspek
+                        ORDER BY
+                        a.id,
+                        d.domain",
+                        [$tahunini, $username]
                     )
                 );
 
+                // $index_aspek_collect = collect(
+                //     DB::select(
+                //         "SELECT i.domain id_domain, d.domain, i.aspek id_aspek, a.aspek, SUM(bobot) bobot, sum(i.bobot * di.capaian) jumlah, 1 / SUM(bobot) * sum(i.bobot * di.capaian) AS nilai FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id INNER JOIN aspeks a ON a.id = i.aspek INNER JOIN domains d ON d.id = i.domain WHERE username = ? AND di.id_task = ? GROUP BY i.aspek, i.domain, d.domain, a.aspek",
+                //         [$username, $tahunini]
+                //     )
+                // );
+
                 $index_domain_collect = collect(
                     DB::select(
-                        "SELECT id_domain, domain, SUM(bobot) bobot, sum(bobot * nilai) AS jumlah, 1 / SUM(bobot) * SUM(bobot * nilai) AS nilai FROM (
-                        SELECT i.domain id_domain, d.domain, i.aspek id_aspek, a.aspek, SUM(bobot) bobot, sum(i.bobot * di.capaian) jumlah, 1 / SUM(bobot) * sum(i.bobot * di.capaian) AS nilai FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id INNER JOIN aspeks a ON a.id = i.aspek INNER JOIN domains d ON d.id = i.domain WHERE username = ? AND di.id_task = ? GROUP BY i.aspek, i.domain, d.domain, a.aspek
+                        "SELECT 
+                        id_domain, domain, SUM(bobot) bobot, sum(bobot * nilai) AS jumlah, 1 / SUM(bobot) * SUM(bobot * nilai) AS nilai FROM 
+                        (
+                        SELECT 
+                        i.domain id_domain, 
+                        d.domain, 
+                        i.aspek id_aspek, 
+                        a.aspek, 
+                        COALESCE(SUM(i.bobot), 0) AS bobot,
+                        COALESCE(SUM(i.bobot * i.capaian), 0) AS jumlah,
+                        CASE WHEN SUM(i.bobot) = 0 THEN 0 ELSE 1 / SUM(i.bobot) * SUM(i.bobot * COALESCE(i.capaian, 0)) END AS nilai
+                        FROM 
+                        aspeks a
+                        INNER JOIN domains d ON a.id_domain = d.id
+                        LEFT JOIN (
+                            SELECT i.id, i.aspek, i.domain , di.capaian, CASE WHEN di.capaian IS NULL THEN 0 ELSE SUM(bobot) END AS bobot
+                            FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id AND di.id_task = ? AND username = ?
+                            GROUP BY i.id, i.aspek, i.domain , di.capaian
+                        )
+                        i ON a.id = i.aspek AND d.id = i.domain
+                        GROUP BY 
+                        i.aspek, i.domain, d.domain, a.aspek
+                        ORDER BY
+                        a.id,
+                        d.domain
                         ) index_aspek GROUP BY id_domain, domain",
-                        [$username, $tahunini]
+                        [$tahunini, $username]
                     )
                 );
+
+                // $index_domain_collect = collect(
+                //     DB::select(
+                //         "SELECT id_domain, domain, SUM(bobot) bobot, sum(bobot * nilai) AS jumlah, 1 / SUM(bobot) * SUM(bobot * nilai) AS nilai FROM (
+                //         SELECT i.domain id_domain, d.domain, i.aspek id_aspek, a.aspek, SUM(bobot) bobot, sum(i.bobot * di.capaian) jumlah, 1 / SUM(bobot) * sum(i.bobot * di.capaian) AS nilai FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id INNER JOIN aspeks a ON a.id = i.aspek INNER JOIN domains d ON d.id = i.domain WHERE username = ? AND di.id_task = ? GROUP BY i.aspek, i.domain, d.domain, a.aspek
+                //         ) index_aspek GROUP BY id_domain, domain",
+                //         [$username, $tahunini]
+                //     )
+                // );
 
                 $index_SPBE_collect = collect(
                     DB::select(
@@ -378,25 +472,93 @@ class AuthController extends Controller
 
                 $index_aspek_collect = collect(
                     DB::select(
-                        "SELECT i.domain id_domain, d.domain, i.aspek id_aspek, a.aspek, SUM(bobot) bobot, sum(i.bobot * di.capaian) jumlah, 1 / SUM(bobot) * sum(i.bobot * di.capaian) AS nilai FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id INNER JOIN aspeks a ON a.id = i.aspek INNER JOIN domains d ON d.id = i.domain WHERE di.id_task = ? GROUP BY i.aspek, i.domain, d.domain, a.aspek",
+                        "SELECT 
+                        i.domain id_domain, 
+                        d.domain, 
+                        i.aspek id_aspek, 
+                        a.aspek, 
+                        COALESCE(SUM(i.bobot), 0) AS bobot,
+                        COALESCE(SUM(i.bobot * i.capaian), 0) AS jumlah,
+                        CASE WHEN SUM(i.bobot) = 0 THEN 0 ELSE 1 / SUM(i.bobot) * SUM(i.bobot * COALESCE(i.capaian, 0)) END AS nilai
+                        FROM 
+                        aspeks a
+                        INNER JOIN domains d ON a.id_domain = d.id
+                        LEFT JOIN (
+                            SELECT i.id, i.aspek, i.domain , di.capaian, CASE WHEN di.capaian IS NULL THEN 0 ELSE SUM(bobot) END AS bobot
+                            FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id AND di.id_task = ?
+                            GROUP BY i.id, i.aspek, i.domain , di.capaian
+                        )
+                        i ON a.id = i.aspek AND d.id = i.domain
+                        GROUP BY 
+                        i.aspek, i.domain, d.domain, a.aspek
+                        ORDER BY
+                        a.id,
+                        d.domain",
                         [$tahunini]
                     )
                 );
 
+                // $index_aspek_collect = collect(
+                //     DB::select(
+                //         "SELECT i.domain id_domain, d.domain, i.aspek id_aspek, a.aspek, SUM(bobot) bobot, sum(i.bobot * di.capaian) jumlah, 1 / SUM(bobot) * sum(i.bobot * di.capaian) AS nilai 
+                //         FROM 
+                //         indikators i 
+                //         LEFT JOIN detail_indikators di ON di.id_indikator = i.id 
+                //         INNER JOIN aspeks a ON a.id = i.aspek 
+                //         INNER JOIN domains d ON d.id = i.domain 
+                //         WHERE di.id_task = ? 
+                //         GROUP BY 
+                //         i.aspek, i.domain, d.domain, a.aspek",
+                //         [$tahunini]
+                //     )
+                // );
+
                 $index_domain_collect = collect(
                     DB::select(
-                        "SELECT id_domain, domain, SUM(bobot) bobot, sum(bobot * nilai) AS jumlah, 1 / SUM(bobot) * SUM(bobot * nilai) AS nilai FROM (
-                        SELECT i.domain id_domain, d.domain, i.aspek id_aspek, a.aspek, SUM(bobot) bobot, sum(i.bobot * di.capaian) jumlah, 1 / SUM(bobot) * sum(i.bobot * di.capaian) AS nilai FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id INNER JOIN aspeks a ON a.id = i.aspek INNER JOIN domains d ON d.id = i.domain WHERE di.id_task = ? GROUP BY i.aspek, i.domain, d.domain, a.aspek
+                        "SELECT 
+                        id_domain, domain, SUM(bobot) bobot, sum(bobot * nilai) AS jumlah, 1 / SUM(bobot) * SUM(bobot * nilai) AS nilai FROM 
+                        (
+                        SELECT 
+                        i.domain id_domain, 
+                        d.domain, 
+                        i.aspek id_aspek, 
+                        a.aspek, 
+                        COALESCE(SUM(i.bobot), 0) AS bobot,
+                        COALESCE(SUM(i.bobot * i.capaian), 0) AS jumlah,
+                        CASE WHEN SUM(i.bobot) = 0 THEN 0 ELSE 1 / SUM(i.bobot) * SUM(i.bobot * COALESCE(i.capaian, 0)) END AS nilai
+                        FROM 
+                        aspeks a
+                        INNER JOIN domains d ON a.id_domain = d.id
+                        LEFT JOIN (
+                            SELECT i.id, i.aspek, i.domain , di.capaian, CASE WHEN di.capaian IS NULL THEN 0 ELSE SUM(bobot) END AS bobot
+                            FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id AND di.id_task = ?
+                            GROUP BY i.id, i.aspek, i.domain , di.capaian
+                        )
+                        i ON a.id = i.aspek AND d.id = i.domain
+                        GROUP BY 
+                        i.aspek, i.domain, d.domain, a.aspek
+                        ORDER BY
+                        a.id,
+                        d.domain
                         ) index_aspek GROUP BY id_domain, domain",
                         [$tahunini]
                     )
                 );
 
+                // $index_domain_collect = collect(
+                //     DB::select(
+                //         "SELECT id_domain, domain, SUM(bobot) bobot, sum(bobot * nilai) AS jumlah, 1 / SUM(bobot) * SUM(bobot * nilai) AS nilai FROM (
+                //         SELECT i.domain id_domain, d.domain, i.aspek id_aspek, a.aspek, SUM(bobot) bobot, sum(i.bobot * di.capaian) jumlah, 1 / SUM(bobot) * sum(i.bobot * di.capaian) AS nilai FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id INNER JOIN aspeks a ON a.id = i.aspek INNER JOIN domains d ON d.id = i.domain WHERE di.id_task = ? GROUP BY i.aspek, i.domain, d.domain, a.aspek
+                //         ) index_aspek GROUP BY id_domain, domain",
+                //         [$tahunini]
+                //     )
+                // );
+
                 $index_SPBE_collect = collect(
                     DB::select(
-                        "SELECT sum(bobot) bobot, sum(bobot * nilai) jumlah, 1 / SUM(bobot) * SUM(bobot * nilai) nilai FROM (
-                        SELECT id_domain, domain, SUM(bobot) bobot, sum(bobot * nilai) AS jumlah, 1 / SUM(bobot) * SUM(bobot * nilai) AS nilai FROM (
-                        SELECT i.domain id_domain, d.domain, i.aspek id_aspek, a.aspek, SUM(bobot) bobot, sum(i.bobot * di.capaian) jumlah, 1 / SUM(bobot) * sum(i.bobot * di.capaian) AS nilai FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id INNER JOIN aspeks a ON a.id = i.aspek INNER JOIN domains d ON d.id = i.domain WHERE di.id_task = ? GROUP BY i.aspek, i.domain, d.domain, a.aspek
+                        "SELECT SUM(bobot) bobot, SUM(bobot * nilai) jumlah, 1 / SUM(bobot) * SUM(bobot * nilai) nilai FROM (
+                        SELECT id_domain, domain, SUM(bobot) bobot, SUM(bobot * nilai) AS jumlah, 1 / SUM(bobot) * SUM(bobot * nilai) AS nilai FROM (
+                        SELECT i.domain id_domain, d.domain, i.aspek id_aspek, a.aspek, SUM(bobot) bobot, SUM(i.bobot * di.capaian) jumlah, 1 / SUM(bobot) * SUM(i.bobot * di.capaian) AS nilai FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id INNER JOIN aspeks a ON a.id = i.aspek INNER JOIN domains d ON d.id = i.domain WHERE di.id_task = ? GROUP BY i.aspek, i.domain, d.domain, a.aspek
                         ) index_aspek GROUP BY id_domain, domain
                         ) index_domain",
                         [$tahunini]
@@ -421,20 +583,81 @@ class AuthController extends Controller
         } else {
             // -- User: Data Pertahun User Logged
             $username = Auth::user()->username;
+            $id_user = Auth::user()->id;
+
+            // $index_aspek_collect = collect(
+            //     DB::select(
+            //         "SELECT i.domain id_domain, d.domain, i.aspek id_aspek, a.aspek, SUM(bobot) bobot, sum(i.bobot * di.capaian) jumlah, 1 / SUM(bobot) * sum(i.bobot * di.capaian) AS nilai FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id INNER JOIN aspeks a ON a.id = i.aspek INNER JOIN domains d ON d.id = i.domain WHERE username = ? AND di.id_task = ? GROUP BY i.aspek, i.domain, d.domain, a.aspek",
+            //         [$username, $tahunini]
+            //     )
+            // );
 
             $index_aspek_collect = collect(
                 DB::select(
-                    "SELECT i.domain id_domain, d.domain, i.aspek id_aspek, a.aspek, SUM(bobot) bobot, sum(i.bobot * di.capaian) jumlah, 1 / SUM(bobot) * sum(i.bobot * di.capaian) AS nilai FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id INNER JOIN aspeks a ON a.id = i.aspek INNER JOIN domains d ON d.id = i.domain WHERE username = ? AND di.id_task = ? GROUP BY i.aspek, i.domain, d.domain, a.aspek",
-                    [$username, $tahunini]
+                    "SELECT 
+                    i.domain id_domain, 
+                    d.domain, 
+                    i.aspek id_aspek, 
+                    a.aspek, 
+                    COALESCE(SUM(i.bobot), 0) AS bobot,
+                    COALESCE(SUM(i.bobot * i.capaian), 0) AS jumlah,
+                    CASE WHEN SUM(i.bobot) = 0 THEN 0 ELSE 1 / SUM(i.bobot) * SUM(i.bobot * COALESCE(i.capaian, 0)) END AS nilai
+                    FROM
+                    aspeks a
+                    INNER JOIN domains d ON a.id_domain = d.id
+                    LEFT JOIN (
+                        SELECT i.id, i.aspek, i.domain , di.capaian, CASE WHEN di.capaian IS NULL THEN 0 ELSE SUM(bobot) END AS bobot
+                        FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id AND di.id_task = ? AND username = ?
+                        GROUP BY i.id, i.aspek, i.domain , di.capaian
+                    )
+                    i ON a.id = i.aspek AND d.id = i.domain
+                    GROUP BY 
+                    i.aspek, i.domain, d.domain, a.aspek
+                    ORDER BY
+                    a.id,
+                    d.domain",
+                    [$tahunini, $username]
                 )
             );
 
+            // $index_domain_collect = collect(
+            //     DB::select(
+            //         "SELECT id_domain, domain, SUM(bobot) bobot, sum(bobot * nilai) AS jumlah, 1 / SUM(bobot) * SUM(bobot * nilai) AS nilai FROM (
+            //         SELECT i.domain id_domain, d.domain, i.aspek id_aspek, a.aspek, SUM(bobot) bobot, sum(i.bobot * di.capaian) jumlah, 1 / SUM(bobot) * sum(i.bobot * di.capaian) AS nilai FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id INNER JOIN aspeks a ON a.id = i.aspek INNER JOIN domains d ON d.id = i.domain WHERE username = ? AND di.id_task = ? GROUP BY i.aspek, i.domain, d.domain, a.aspek
+            //         ) index_aspek GROUP BY id_domain, domain",
+            //         [$username, $tahunini]
+            //     )
+            // );
+
             $index_domain_collect = collect(
                 DB::select(
-                    "SELECT id_domain, domain, SUM(bobot) bobot, sum(bobot * nilai) AS jumlah, 1 / SUM(bobot) * SUM(bobot * nilai) AS nilai FROM (
-                    SELECT i.domain id_domain, d.domain, i.aspek id_aspek, a.aspek, SUM(bobot) bobot, sum(i.bobot * di.capaian) jumlah, 1 / SUM(bobot) * sum(i.bobot * di.capaian) AS nilai FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id INNER JOIN aspeks a ON a.id = i.aspek INNER JOIN domains d ON d.id = i.domain WHERE username = ? AND di.id_task = ? GROUP BY i.aspek, i.domain, d.domain, a.aspek
+                    "SELECT 
+                    id_domain, domain, SUM(bobot) bobot, sum(bobot * nilai) AS jumlah, 1 / SUM(bobot) * SUM(bobot * nilai) AS nilai FROM 
+                    (
+                    SELECT 
+                    i.domain id_domain, 
+                    d.domain, 
+                    i.aspek id_aspek, 
+                    a.aspek, 
+                    COALESCE(SUM(i.bobot), 0) AS bobot,
+                    COALESCE(SUM(i.bobot * i.capaian), 0) AS jumlah,
+                    CASE WHEN SUM(i.bobot) = 0 THEN 0 ELSE 1 / SUM(i.bobot) * SUM(i.bobot * COALESCE(i.capaian, 0)) END AS nilai
+                    FROM 
+                    aspeks a
+                    INNER JOIN domains d ON a.id_domain = d.id
+                    LEFT JOIN (
+                        SELECT i.id, i.aspek, i.domain , di.capaian, CASE WHEN di.capaian IS NULL THEN 0 ELSE SUM(bobot) END AS bobot
+                        FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id AND di.id_task = ? AND username = ?
+                        GROUP BY i.id, i.aspek, i.domain , di.capaian
+                    )
+                    i ON a.id = i.aspek AND d.id = i.domain
+                    GROUP BY 
+                    i.aspek, i.domain, d.domain, a.aspek
+                    ORDER BY
+                    a.id,
+                    d.domain
                     ) index_aspek GROUP BY id_domain, domain",
-                    [$username, $tahunini]
+                    [$tahunini, $username]
                 )
             );
 
@@ -442,12 +665,20 @@ class AuthController extends Controller
                 DB::select(
                     "SELECT sum(bobot) bobot, sum(bobot * nilai) jumlah, 1 / SUM(bobot) * SUM(bobot * nilai) nilai FROM (
                     SELECT id_domain, domain, SUM(bobot) bobot, sum(bobot * nilai) AS jumlah, 1 / SUM(bobot) * SUM(bobot * nilai) AS nilai FROM (
-                    SELECT i.domain id_domain, d.domain, i.aspek id_aspek, a.aspek, SUM(bobot) bobot, sum(i.bobot * di.capaian) jumlah, 1 / SUM(bobot) * sum(i.bobot * di.capaian) AS nilai FROM indikators i LEFT JOIN detail_indikators di ON di.id_indikator = i.id INNER JOIN aspeks a ON a.id = i.aspek INNER JOIN domains d ON d.id = i.domain WHERE username = ? AND di.id_task = ? GROUP BY i.aspek, i.domain, d.domain, a.aspek
+                    SELECT i.domain id_domain, d.domain, i.aspek id_aspek, a.aspek, SUM(bobot) bobot, sum(i.bobot * di.capaian) jumlah, 1 / SUM(bobot) * sum(i.bobot * di.capaian) AS nilai 
+                    FROM 
+                    indikators i 
+                    INNER JOIN detail_indikators di ON di.id_indikator = i.id
+                    INNER JOIN aspeks a ON a.id = i.aspek
+                    INNER JOIN domains d ON d.id = i.domain
+                    WHERE username = ? AND di.id_task = ? 
+                    GROUP BY i.aspek, i.domain, d.domain, a.aspek
                     ) index_aspek GROUP BY id_domain, domain
                     ) index_domain",
                     [$username, $tahunini]
                 )
             );
+            // dd($index_SPBE_collect);
 
             foreach ($index_domain_collect as $domain) {
                 $domain->aspeks = $index_aspek_collect->filter(function ($a) use ($domain) {
@@ -461,6 +692,7 @@ class AuthController extends Controller
                 'index_domain' => $index_domain_collect,
                 'index_SPBE' => $index_SPBE_collect,
             ]);
+            // dd($hasil);
             // dd("ini User");
         }
 
@@ -478,9 +710,13 @@ class AuthController extends Controller
             'domains' => $domains,
             'index_aspek' => $hasil['index_aspek'],
             'index_domain' => $hasil['index_domain'],
-            'index_SPBE' => $index_SPBE,
+            // 'index_SPBE' => $index_SPBE,
             'nilai_index_SPBE' => @$hasil['index_SPBE'][0]->nilai ?? 0,
+            'bobot_domain_asli' => $bobot_domain_asli,
         ];
+        // dd([
+        //     'data' => $data,
+        // ]);
 
         return view("menu.dashboard", $data);
     }

@@ -18,6 +18,10 @@ class LihatIndikatorController extends Controller
 {
     public function task(Request $req)
     {
+        // dd($req);
+
+        $id_task = $req->input('id_task');
+
         $user = Auth::user();
         if(@$req->validasi != 0){
             return back();
@@ -44,20 +48,22 @@ class LihatIndikatorController extends Controller
 
             $indikators = DB::select(
                 "SELECT i.*, d.id exist FROM indikators i LEFT JOIN 
-                (SELECT * FROM detail_indikators d WHERE username = ?) 
+                (SELECT * FROM detail_indikators d WHERE username = ? AND id_task = ?) 
                 d ON i.id = d.id_indikator WHERE i.id IN ( $commaSeparatedString ) order by i.no asc",
                 [
                     $user->username,
+                    $id_task,
                 ]
             );
         } else {
 
             $indikators = DB::select(
                 "SELECT i.*, d.id exist FROM indikators i LEFT JOIN 
-                (SELECT * FROM detail_indikators d WHERE username = ?) 
+                (SELECT * FROM detail_indikators d WHERE username = ? AND id_task = ?) 
                 d ON i.id = d.id_indikator order by i.no asc",
                 [
                     $user->username,
+                    $id_task,
                 ]
             );
         }

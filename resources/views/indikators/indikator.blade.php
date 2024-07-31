@@ -63,7 +63,7 @@
                                         <div class="col-4">
                                             <button type="button" class="btn"
                                                 style="margin-left: 40px; background-color: #ad323a">
-                                                <a href="/skors" style="color: white">
+                                                <a href="task/{{$task->id}}/skors" style="color: white">
                                                     Lihat Skor Index
                                                 </a>
                                             </button>
@@ -117,6 +117,7 @@
                                         <p style="margin-bottom: 0px">{{ @$item->name }}</p>
                                     </div>
                                     <div class="col-3">
+                                        {{-- @dd($item->exist); --}}
                                         <button type="button"
                                             class="ml-5 btn btn-{{ $item->exist != null ? 'danger' : 'primary' }}"
                                             style="padding-top: 0px;padding-bottom: 0px; margin-left: 20px">
@@ -129,7 +130,7 @@
                                 </div>
                             @endforeach
 
-                            @if (Auth::user()->level == 'user' && Auth::user()->submit == 0)
+                            {{-- @if (Auth::user()->level == 'user' && Auth::user()->submit == 0)
                                 <form action="{{ url('lihat/task') }}" method="post">
                                     @csrf
                                     <input type="hidden" name="id_task" value="{{ $task->id }}">
@@ -140,14 +141,14 @@
                                         type="submit">
                                         Submit All
                                     </button>
-                                </form>
+                                </form> --}}
                                 {{-- <button type="button" class="btn btn-success"
                                     style="margin-left: 785px; margin-right: 75px; margin-top: 20px; ">
                                     <a href="/task/{{ $task->id }}" style="color: white">
                                         Submit All
                                     </a>
                                 </button> --}}
-                            @endif
+                            {{-- @endif --}}
                             {{-- <div class="row" style="margin-bottom: 50px">
                                 <div class="col-sm-12 col-md-5" style="padding-top: 20px;">
                                     <div class="dataTables_info" id="example2_info" role="status" aria-live="polite"

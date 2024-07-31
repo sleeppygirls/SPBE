@@ -1,11 +1,5 @@
 <div>
     <div class="form-group">
-        <label for="documentName">Document Name</label>
-        <input type="text" class="form-control" id="documentName" wire:model="newDocumentName">
-        @error('newDocumentName') <span class="text-danger">{{ $message }}</span> @enderror
-    </div>
-
-    <div class="form-group">
         <label for="documentFile">Document File</label>
         <input type="file" class="form-control-file" id="documentFile" wire:model="newDocument">
         @error('newDocument') <span class="text-danger">{{ $message }}</span> @enderror

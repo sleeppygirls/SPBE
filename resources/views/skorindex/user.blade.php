@@ -59,24 +59,12 @@
                                                         <td>{{ $indikator->bobot }}</td>
                                                         <td>{{ $indikator->bobot_aspek }}</td>
                                                         <td>{{ $indikator->detailIndikator->capaian ?? 0 }}</td>
-                                                        <td>{{ $indikator->index_akhir }}</td>
+                                                        <td>{{ number_format($indikator->index_akhir ?? 0, 2) }}</td>
                                                     </tr>
                                                 @endforeach
                                                 <tr>
                                                     <td colspan="7">Total Index Akhir</td>
-                                                    <td>{{ $indikators->total_index_akhir }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="7">Total Bobot(%)</td>
-                                                    <td>{{ $indikators->total_bobot }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="7">Total Tk Final Adj</td>
-                                                    <td>{{ $indikators->total_tk_final }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="7">Total Bobot Aspek(%)</td>
-                                                    <td>{{ $indikators->total_bobot_aspek }}</td>
+                                                    <td>{{ number_format(@$indikators->nilai ?? 0, 2) }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>

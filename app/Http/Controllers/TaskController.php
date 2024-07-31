@@ -64,6 +64,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
+        // dd($task);
         $user = Auth::user();
 
         $bagian = Bagian::where('id_user', $user->id)->where('id_task', $task->id)->first();
@@ -80,28 +81,33 @@ class TaskController extends Controller
 
             // Mengonversi array menjadi string yang dipisahkan oleh koma
             $commaSeparatedString = implode(", ", $arrayData);
+            // dd($commaSeparatedString);
 
             $indikators = DB::select(
                 "SELECT i.*, d.id exist FROM indikators i LEFT JOIN 
-                (SELECT * FROM detail_indikators d WHERE username = ?) 
+                (SELECT * FROM detail_indikators d WHERE username = ? AND id_task = ?) 
                 d ON i.id = d.id_indikator WHERE i.id IN ( $commaSeparatedString ) order by i.no asc",
                 [
                     $user->username,
+                    $task->id,
                 ]
             );
+            // dd($indikators);
         } else {
 
             $indikators = DB::select(
                 "SELECT i.*, d.id exist FROM indikators i LEFT JOIN 
-                (SELECT * FROM detail_indikators d WHERE username = ?) 
+                (SELECT * FROM detail_indikators d WHERE username = ? AND id_task = ?) 
                 d ON i.id = d.id_indikator order by i.no asc",
                 [
                     $user->username,
+                    $task->id,
                 ]
             );
         }
 
         $totalkerjakan = count($indikators);
+        // dd($indikators);
 
         foreach ($indikators as $key => $item) {
             if ($indikators[$key]->exist != NULL) {
@@ -111,7 +117,7 @@ class TaskController extends Controller
 
         // dd($totalkerjakan);
         $task = Task::find($task->id);
-
+        // dd($indikators);
         $data = [
             'indikator' => $indikators,
             "page" => "penilaian",

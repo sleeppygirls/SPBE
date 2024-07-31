@@ -41,11 +41,13 @@ class DocumentUpload extends Component
         $this->isUploading = true;
         $this->validate([
             'newDocument' => 'required|mimes:pdf',
-            'newDocumentName' => 'required|string|max:255',
         ]);
 
         try {
-            $path = $this->newDocument->storeAs('public/documents', $this->newDocument->getClientOriginalName(), 'local', ['visibility' => 'public', 'chunkSize' => 1024 * 1024 * 5]); // 5 MB chunk size
+            $originalName = $this->newDocument->getClientOriginalName();
+            $this->newDocumentName = pathinfo($originalName, PATHINFO_FILENAME);
+
+            $path = $this->newDocument->storeAs('public/documents', $originalName, 'local', ['visibility' => 'public']);
 
             FileData::create([
                 'id_indikator' => $this->id_indikator,
@@ -59,9 +61,9 @@ class DocumentUpload extends Component
 
             $this->newDocument = null;
             $this->newDocumentName = null;
-            session()->flash('message', 'Document berhasil diupload!');
+            session()->flash('message', 'Dokumen berhasil diunggah!');
         } catch (\Throwable $th) {
-            session()->flash('message', 'Document gagal diupload!');
+            session()->flash('message', 'Dokumen gagal diunggah!');
         }
 
         $this->isUploading = false;

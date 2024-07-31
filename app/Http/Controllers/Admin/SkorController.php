@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Skor;
+use App\Models\Task;
 use App\Models\User;
 use App\Http\Requests\StoreSkorRequest;
 use App\Http\Requests\UpdateSkorRequest;
@@ -15,7 +15,7 @@ class SkorController extends Controller
 {
     /**
      * Display a listing of the resource.
-     */ public function index(User $user)
+     */ public function index(User $user, Task $task)
     {
         $indikators = collect();
         $bagian = Bagian::where('id_user', $user->id)->first();
@@ -26,13 +26,15 @@ class SkorController extends Controller
             $indikators = Indikator::with([
                 'domainR',
                 'aspekR',
-                'detailIndikator' => function ($query) use ($username) {
-                    $query->where('username', $username);
-                },
+                'detailIndikator' => function ($query) use ($username, $task) {
+                        $query->where('username', $username)->where('id_task', $task->id);
+                    },
             ])
                 ->whereIn('id', $indikatorIds)
                 ->get();
 
+
+            // dd($indikators);
             // Inisialisasi total
             $total_index_akhir = 0;
             $total_bobot = 0;
@@ -42,19 +44,27 @@ class SkorController extends Controller
             // Loop melalui indikator dan lakukan perhitungan
             foreach ($indikators as $indikator) {
                 $capaian = $indikator->detailIndikator->capaian ?? 0;
+                $indikator->capaian = $capaian;
                 $indikator->index_akhir = ($indikator->bobot_aspek / 100) * $capaian;
+                $indikator->nibi = $capaian * $indikator->bobot;
                 $total_bobot_aspek = $indikators->sum('bobot_aspek');
                 $total_index_akhir = $indikators->sum('index_akhir') * $total_bobot_aspek;
                 $total_bobot = $indikators->sum('bobot');
                 $total_tk_final = $indikators->sum('index_akhir');
             }
+            
 
             // Tambahkan total ke koleksi
             $indikators->total_index_akhir = $total_index_akhir;
             $indikators->total_bobot = $total_bobot;
             $indikators->total_tk_final = $total_tk_final;
             $indikators->total_bobot_aspek = $total_bobot_aspek;
+
+            $indikators->nibi = $indikators->sum('nibi');
+            $indikators->nilai = 1/$total_bobot * $indikators->nibi;
+            // dd($indikators); 
         }
+        
         $data = [
             'user' => $user,
             'page' => 'penilaian',
@@ -84,7 +94,7 @@ class SkorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Skor $skor)
+    public function show( $skor)
     {
         //
     }
@@ -92,7 +102,7 @@ class SkorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Skor $skor)
+    public function edit( $skor)
     {
         //
     }
@@ -100,7 +110,7 @@ class SkorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSkorRequest $request, Skor $skor)
+    public function update(UpdateSkorRequest $request,  $skor)
     {
         //
     }
@@ -108,7 +118,7 @@ class SkorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Skor $skor)
+    public function destroy( $skor)
     {
         //
     }

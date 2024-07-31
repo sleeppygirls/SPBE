@@ -73,7 +73,8 @@ Route::middleware(['is.auth'])->group(function() {
     Route::resource('jawaban', JawabanController::class);
     Route::resource('bantuan', BantuanController::class);
     Route::resource('profil', ProfilController::class);
-    Route::resource('skors', SkorController::class);
+    Route::resource('/task/{task}/skors', SkorController::class);
+    Route::resource('/indikator/task/{task}/skors', SkorController::class);
     Route::resource('users', UserController::class);
     Route::resource('users/{user}/bagians', BagianController::class);
     Route::resource('task/{task}/{username}/file', FileDataController::class);
@@ -82,7 +83,7 @@ Route::middleware(['is.auth'])->group(function() {
     Route::resource('/adm/indikator', IndikatorAdminController::class);
     Route::resource('/adm/indikator/{indikator}/penjelasan', PenjelasanAdminController::class);
     // Route::resource('/adm/indikator/{indikator}/keterangan', KeteranganAdminController::class);
-    Route::resource('/adm/users/{user}/skor', SkorAspekAdminController::class);
+    Route::resource('/adm/users/{user}/task/{task}/skor', SkorAspekAdminController::class);
 
     // custom uri
     Route::get('task/{task}/indikator/{indikator}/{username}', [IndikatorController::class, 'show']);

@@ -37,7 +37,7 @@
                                                             <a class="d-block w-100" data-toggle="collapse"
                                                                 href="#collapseOne">
                                                                 <p class=" w-100" style="color: white; margin-bottom: 0px">
-                                                                    Bagaimanacara mendapatkan aku (username dan password)
+                                                                    Bagaimanacara mendapatkan akun (username dan password)
                                                                     aplikasimonev.spbe?</p>
                                                             </a>
                                                             <div id="collapseOne" class="collapse" data-parent="#accordion"

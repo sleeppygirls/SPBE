@@ -26,18 +26,18 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach (@$user as $item)
+                                                @foreach (@$user as $i => $item)
                                                     <tr>
-                                                        <td style="width: 40px">{{ $loop->iteration }}</td>
+                                                        <td style="width: 40px">{{ $i + 1 }}</td>
                                                         <td>{{ $item->nama_instansi }}</td>
                                                         <td style="text-align: center">{{ $item->username }}</td>
                                                         <td style="width: 150px">
                                                             <div class="row">
                                                                 <div class="col-8">
-                                                                    {{ $item->total_index_akhir }}
+                                                                    {{ number_format(@$item->nilai ?? 0, 2) }}
                                                                 </div>
                                                                 <div class="col-4">
-                                                                    <a href="/adm/users/{{ $item->id }}/skor">
+                                                                    <a href="/adm/users/{{ $item->id }}/task/{{ $task->id }}/skor">
                                                                         <button type="button"
                                                                             class="btn btn-success btn-sm">
                                                                             <i class="fas fa-eye fa-fw">

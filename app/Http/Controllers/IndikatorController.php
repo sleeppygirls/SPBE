@@ -29,6 +29,8 @@ class IndikatorController extends Controller
      */
     public function task(Request $req)
     {
+        // dd($req);
+        $task = $req->id_task;
         $username = $req->input('username');
         if (!$username) {
             return redirect()->back();
@@ -50,16 +52,22 @@ class IndikatorController extends Controller
 
             $indikators = DB::select(
                 "SELECT i.*, d.id exist FROM indikators i LEFT JOIN
-                (SELECT * FROM detail_indikators d WHERE username = ?)
+                (SELECT * FROM detail_indikators d WHERE username = ? AND id_task = ?)
                 d ON i.id = d.id_indikator WHERE i.id IN ( $commaSeparatedString ) order by i.no asc",
-                [$user->username],
+                 [
+                    $user->username,
+                    $task,
+                ],
             );
         } else {
             $indikators = DB::select(
                 "SELECT i.*, d.id exist FROM indikators i LEFT JOIN
-                (SELECT * FROM detail_indikators d WHERE username = ?)
+                (SELECT * FROM detail_indikators d WHERE username = ? AND id_task = ? )
                 d ON i.id = d.id_indikator order by i.no asc",
-                [$req->username],
+                [
+                    $user->username,
+                    $task,
+                ],
             );
         }
         // dd($indikators);
@@ -127,6 +135,8 @@ class IndikatorController extends Controller
      */
     public function show(Task $task, Indikator $indikator, $username)
     {
+        // dd($task);
+
         if (Auth::user()->level == 'admin') {
             $user = User::where('username', '=', $username)->first();
         } else {
@@ -134,10 +144,11 @@ class IndikatorController extends Controller
         }
         $keterangan = Keterangan::where('id', '=', $indikator->id_keterangan);
 
-        $jawabans = DB::select('SELECT p.id, p.text, p.id_indikator, j.d_jawaban FROM penjelasans p LEFT JOIN (SELECT * FROM jawabans i WHERE i.username = ?) j ON j.id_penjelasan = p.id WHERE p.id_indikator = ?', [$user->username, $indikator->id]);
+        $jawabans = DB::select('SELECT p.id, p.text, p.id_indikator, j.d_jawaban FROM penjelasans p LEFT JOIN (SELECT * FROM jawabans i WHERE i.username = ? AND id_task = ?) j ON j.id_penjelasan = p.id WHERE p.id_indikator = ? ', [$user->username, $task->id, $indikator->id]);
 
         $detail_indikator = DetailIndikator::where('username', $user->username)
             ->where('id_indikator', $indikator->id)
+            ->where('id_task', $task->id)
             ->first();
 
         $domain = Domain::where('id', $indikator->domain)->first();

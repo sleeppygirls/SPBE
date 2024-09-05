@@ -138,6 +138,12 @@
                                                     2023 Tentang Tata Cara Tauval SPBE</a>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td style="10px" scope="row">
+                                                <a style="margin-left: 15px"href="/asset/panrb2024.pdf">Pedoman Menteri PANRB Nomor 6 Tahun
+                                                    2024 Tentang Tata Cara Tauval SPBE</a>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

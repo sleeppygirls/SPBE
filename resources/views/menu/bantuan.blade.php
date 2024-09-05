@@ -121,27 +121,27 @@
                                     <tbody>
                                         <tr>
                                             <td style="10px" scope="row">
-                                                <a style="margin-left: 15px" href="/asset/perpres.pdf">Perpres Nomor 95 Tahun 2018
+                                                <a style="margin-left: 15px" target="_blank" href="/asset/perpres.pdf">Perpres Nomor 95 Tahun 2018
                                                     Tentang Sistem Pemerintahan berbasis Elektronik</a>
 
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="10px" scope="row">
-                                                <a style="margin-left: 15px"href="/asset/permenpan.pdf">Permenpanrb Nomor 59 Tahun 2020 Tentang
+                                                <a style="margin-left: 15px"  target="_blank" href="/asset/permenpan.pdf">Permenpanrb Nomor 59 Tahun 2020 Tentang
                                                     Pemantauan dan Evaluasi Sistem Pemerintahan Berbasis Elektronik</a>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="10px" scope="row">
-                                                <a style="margin-left: 15px"href="/asset/panrb.pdf">Pedoman Menteri PANRB Nomor 6 Tahun
+                                                <a style="margin-left: 15px"  target="_blank" href="/asset/panrb.pdf">Pedoman Menteri PANRB Nomor 6 Tahun
                                                     2023 Tentang Tata Cara Tauval SPBE</a>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="10px" scope="row">
-                                                <a style="margin-left: 15px"href="/asset/panrb2024.pdf">Pedoman Menteri PANRB Nomor 6 Tahun
-                                                    2024 Tentang Tata Cara Tauval SPBE</a>
+                                                <a style="margin-left: 15px"  target="_blank" href="/asset/panrb2024.pdf">Pedoman Menteri PANRB Nomor 3 Tahun
+                                                    2024 Tentang Tata Cara Pemantauan dan Evaluasi Sistem Pemerintahan Berbasis Elektronik</a>
                                             </td>
                                         </tr>
                                     </tbody>
